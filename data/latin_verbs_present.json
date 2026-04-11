@@ -1,0 +1,228 @@
+{
+  "slug": "latin_verbs_present",
+  "name": "Latin \u2014 Pr\u00e9sent de l'indicatif",
+  "description": "18 verbes latins courants, conjugu\u00e9s au pr\u00e9sent de l'indicatif actif.",
+  "source_language": "Fran\u00e7ais",
+  "target_language": "Latin",
+  "canonical_label": "Infinitif latin",
+  "canonical_prompt": "Comment dit-on \"{source}\" en latin\u00a0?",
+  "form_prompt": "\"{source}\" \u2014 {label}",
+  "words": [
+    {
+      "source": "aimer",
+      "canonical": "amare",
+      "forms": [
+        {"label": "1re pers. du singulier", "value": "amo"},
+        {"label": "2e pers. du singulier",  "value": "amas"},
+        {"label": "3e pers. du singulier",  "value": "amat"},
+        {"label": "1re pers. du pluriel",   "value": "amamus"},
+        {"label": "2e pers. du pluriel",    "value": "amatis"},
+        {"label": "3e pers. du pluriel",    "value": "amant"}
+      ]
+    },
+    {
+      "source": "\u00e9couter",
+      "canonical": "audire",
+      "forms": [
+        {"label": "1re pers. du singulier", "value": "audio"},
+        {"label": "2e pers. du singulier",  "value": "audis"},
+        {"label": "3e pers. du singulier",  "value": "audit"},
+        {"label": "1re pers. du pluriel",   "value": "audimus"},
+        {"label": "2e pers. du pluriel",    "value": "auditis"},
+        {"label": "3e pers. du pluriel",    "value": "audiunt"}
+      ]
+    },
+    {
+      "source": "prendre",
+      "canonical": "capere",
+      "forms": [
+        {"label": "1re pers. du singulier", "value": "capio"},
+        {"label": "2e pers. du singulier",  "value": "capis"},
+        {"label": "3e pers. du singulier",  "value": "capit"},
+        {"label": "1re pers. du pluriel",   "value": "capimus"},
+        {"label": "2e pers. du pluriel",    "value": "capitis"},
+        {"label": "3e pers. du pluriel",    "value": "capiunt"}
+      ]
+    },
+    {
+      "source": "devoir",
+      "canonical": "debere",
+      "forms": [
+        {"label": "1re pers. du singulier", "value": "debeo"},
+        {"label": "2e pers. du singulier",  "value": "debes"},
+        {"label": "3e pers. du singulier",  "value": "debet"},
+        {"label": "1re pers. du pluriel",   "value": "debemus"},
+        {"label": "2e pers. du pluriel",    "value": "debetis"},
+        {"label": "3e pers. du pluriel",    "value": "debent"}
+      ]
+    },
+    {
+      "source": "d\u00e9truire",
+      "canonical": "delere",
+      "forms": [
+        {"label": "1re pers. du singulier", "value": "deleo"},
+        {"label": "2e pers. du singulier",  "value": "deles"},
+        {"label": "3e pers. du singulier",  "value": "delet"},
+        {"label": "1re pers. du pluriel",   "value": "delemus"},
+        {"label": "2e pers. du pluriel",    "value": "deletis"},
+        {"label": "3e pers. du pluriel",    "value": "delent"}
+      ]
+    },
+    {
+      "source": "dire",
+      "canonical": "dicere",
+      "forms": [
+        {"label": "1re pers. du singulier", "value": "dico"},
+        {"label": "2e pers. du singulier",  "value": "dicis"},
+        {"label": "3e pers. du singulier",  "value": "dicit"},
+        {"label": "1re pers. du pluriel",   "value": "dicimus"},
+        {"label": "2e pers. du pluriel",    "value": "dicitis"},
+        {"label": "3e pers. du pluriel",    "value": "dicunt"}
+      ]
+    },
+    {
+      "source": "donner",
+      "canonical": "dare",
+      "forms": [
+        {"label": "1re pers. du singulier", "value": "do"},
+        {"label": "2e pers. du singulier",  "value": "das"},
+        {"label": "3e pers. du singulier",  "value": "dat"},
+        {"label": "1re pers. du pluriel",   "value": "damus"},
+        {"label": "2e pers. du pluriel",    "value": "datis"},
+        {"label": "3e pers. du pluriel",    "value": "dant"}
+      ]
+    },
+    {
+      "source": "conduire",
+      "canonical": "ducere",
+      "forms": [
+        {"label": "1re pers. du singulier", "value": "duco"},
+        {"label": "2e pers. du singulier",  "value": "ducis"},
+        {"label": "3e pers. du singulier",  "value": "ducit"},
+        {"label": "1re pers. du pluriel",   "value": "ducimus"},
+        {"label": "2e pers. du pluriel",    "value": "ducitis"},
+        {"label": "3e pers. du pluriel",    "value": "ducunt"}
+      ]
+    },
+    {
+      "source": "faire",
+      "canonical": "facere",
+      "forms": [
+        {"label": "1re pers. du singulier", "value": "facio"},
+        {"label": "2e pers. du singulier",  "value": "facis"},
+        {"label": "3e pers. du singulier",  "value": "facit"},
+        {"label": "1re pers. du pluriel",   "value": "facimus"},
+        {"label": "2e pers. du pluriel",    "value": "facitis"},
+        {"label": "3e pers. du pluriel",    "value": "faciunt"}
+      ]
+    },
+    {
+      "source": "avoir",
+      "canonical": "habere",
+      "forms": [
+        {"label": "1re pers. du singulier", "value": "habeo"},
+        {"label": "2e pers. du singulier",  "value": "habes"},
+        {"label": "3e pers. du singulier",  "value": "habet"},
+        {"label": "1re pers. du pluriel",   "value": "habemus"},
+        {"label": "2e pers. du pluriel",    "value": "habetis"},
+        {"label": "3e pers. du pluriel",    "value": "habent"}
+      ]
+    },
+    {
+      "source": "envoyer",
+      "canonical": "mittere",
+      "forms": [
+        {"label": "1re pers. du singulier", "value": "mitto"},
+        {"label": "2e pers. du singulier",  "value": "mittis"},
+        {"label": "3e pers. du singulier",  "value": "mittit"},
+        {"label": "1re pers. du pluriel",   "value": "mittimus"},
+        {"label": "2e pers. du pluriel",    "value": "mittitis"},
+        {"label": "3e pers. du pluriel",    "value": "mittunt"}
+      ]
+    },
+    {
+      "source": "avertir",
+      "canonical": "monere",
+      "forms": [
+        {"label": "1re pers. du singulier", "value": "moneo"},
+        {"label": "2e pers. du singulier",  "value": "mones"},
+        {"label": "3e pers. du singulier",  "value": "monet"},
+        {"label": "1re pers. du pluriel",   "value": "monemus"},
+        {"label": "2e pers. du pluriel",    "value": "monetis"},
+        {"label": "3e pers. du pluriel",    "value": "monent"}
+      ]
+    },
+    {
+      "source": "savoir",
+      "canonical": "scire",
+      "forms": [
+        {"label": "1re pers. du singulier", "value": "scio"},
+        {"label": "2e pers. du singulier",  "value": "scis"},
+        {"label": "3e pers. du singulier",  "value": "scit"},
+        {"label": "1re pers. du pluriel",   "value": "scimus"},
+        {"label": "2e pers. du pluriel",    "value": "scitis"},
+        {"label": "3e pers. du pluriel",    "value": "sciunt"}
+      ]
+    },
+    {
+      "source": "\u00e9crire",
+      "canonical": "scribere",
+      "forms": [
+        {"label": "1re pers. du singulier", "value": "scribo"},
+        {"label": "2e pers. du singulier",  "value": "scribis"},
+        {"label": "3e pers. du singulier",  "value": "scribit"},
+        {"label": "1re pers. du pluriel",   "value": "scribimus"},
+        {"label": "2e pers. du pluriel",    "value": "scribitis"},
+        {"label": "3e pers. du pluriel",    "value": "scribunt"}
+      ]
+    },
+    {
+      "source": "regarder",
+      "canonical": "spectare",
+      "forms": [
+        {"label": "1re pers. du singulier", "value": "specto"},
+        {"label": "2e pers. du singulier",  "value": "spectas"},
+        {"label": "3e pers. du singulier",  "value": "spectat"},
+        {"label": "1re pers. du pluriel",   "value": "spectamus"},
+        {"label": "2e pers. du pluriel",    "value": "spectatis"},
+        {"label": "3e pers. du pluriel",    "value": "spectant"}
+      ]
+    },
+    {
+      "source": "\u00eatre",
+      "canonical": "esse",
+      "forms": [
+        {"label": "1re pers. du singulier", "value": "sum"},
+        {"label": "2e pers. du singulier",  "value": "es"},
+        {"label": "3e pers. du singulier",  "value": "est"},
+        {"label": "1re pers. du pluriel",   "value": "sumus"},
+        {"label": "2e pers. du pluriel",    "value": "estis"},
+        {"label": "3e pers. du pluriel",    "value": "sunt"}
+      ]
+    },
+    {
+      "source": "craindre",
+      "canonical": "timere",
+      "forms": [
+        {"label": "1re pers. du singulier", "value": "timeo"},
+        {"label": "2e pers. du singulier",  "value": "times"},
+        {"label": "3e pers. du singulier",  "value": "timet"},
+        {"label": "1re pers. du pluriel",   "value": "timemus"},
+        {"label": "2e pers. du pluriel",    "value": "timetis"},
+        {"label": "3e pers. du pluriel",    "value": "timent"}
+      ]
+    },
+    {
+      "source": "appeler",
+      "canonical": "vocare",
+      "forms": [
+        {"label": "1re pers. du singulier", "value": "voco"},
+        {"label": "2e pers. du singulier",  "value": "vocas"},
+        {"label": "3e pers. du singulier",  "value": "vocat"},
+        {"label": "1re pers. du pluriel",   "value": "vocamus"},
+        {"label": "2e pers. du pluriel",    "value": "vocatis"},
+        {"label": "3e pers. du pluriel",    "value": "vocant"}
+      ]
+    }
+  ]
+}
