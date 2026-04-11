@@ -371,6 +371,58 @@ def get_questions_for_exercise(
 
 
 # ---------------------------------------------------------------------------
+# English irregular-verb question builder
+# ---------------------------------------------------------------------------
+
+def get_english_questions_for_exercise(
+    exercise_id: int,
+    enabled_word_ids: Optional[list] = None,
+    db_path: Path = _DB_PATH,
+) -> list:
+    """
+    Build the question pool for an English irregular-verbs exercise.
+    Each word produces one question dict with all three forms:
+      source        : French prompt shown to the student
+      base          : expected base form (e.g. "go")
+      preterit      : expected preterit (e.g. "went")
+      past_participle: expected past participle (e.g. "gone")
+      type          : "english_irregular"
+
+    Relies on the JSON seed having exactly three forms per word with labels
+    "base verbale", "prétérit", and "participe passé".
+    """
+    with _connect(db_path) as conn:
+        words = conn.execute(
+            "SELECT id, source FROM words WHERE exercise_id = ? ORDER BY rowid",
+            (exercise_id,),
+        ).fetchall()
+
+    enabled_set = set(enabled_word_ids) if enabled_word_ids is not None else None
+
+    questions = []
+    for word in words:
+        word_id = word["id"]
+        if enabled_set is not None and word_id not in enabled_set:
+            continue
+
+        with _connect(db_path) as conn2:
+            forms = conn2.execute(
+                "SELECT label, value FROM forms WHERE word_id = ?", (word_id,)
+            ).fetchall()
+
+        forms_dict = {f["label"]: f["value"] for f in forms}
+        questions.append({
+            "type": "english_irregular",
+            "source": word["source"],
+            "base": forms_dict.get("base verbale", ""),
+            "preterit": forms_dict.get("prétérit", ""),
+            "past_participle": forms_dict.get("participe passé", ""),
+        })
+
+    return questions
+
+
+# ---------------------------------------------------------------------------
 # Session queries
 # ---------------------------------------------------------------------------
 
