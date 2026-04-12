@@ -200,6 +200,14 @@ class ExerciseSelectionScreen(tk.Frame):
             font=self.BTN_FONT,
             bg="#4a6a9c", fg="white", activebackground="#3a5a8c",
             command=self._choose_english, pady=22,
+        ).pack(fill="x", pady=(0, 18))
+
+        tk.Button(
+            self,
+            text="Anglais - Phrases à trous",
+            font=self.BTN_FONT,
+            bg="#7a4a9c", fg="white", activebackground="#6a3a8c",
+            command=self._choose_fill_blank, pady=22,
         ).pack(fill="x")
 
         tk.Button(
@@ -227,6 +235,17 @@ class ExerciseSelectionScreen(tk.Frame):
             return
         app_state["exercise"] = exercise
         self.app.show_frame("VerbSelectionScreen")
+
+    def _choose_fill_blank(self) -> None:
+        exercise = db.get_exercise_by_slug("english_fill_blanks")
+        if exercise is None:
+            messagebox.showerror("Erreur", "Exercice introuvable. Vérifie les fichiers data/.")
+            return
+        app_state["exercise"] = exercise
+        all_q = db.get_fill_blank_questions(exercise["id"])
+        random.shuffle(all_q)
+        app_state["questions"] = all_q[:SESSION_LENGTH]
+        self.app.show_frame("QuizScreen")
 
 
 # ---------------------------------------------------------------------------

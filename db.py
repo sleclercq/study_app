@@ -423,6 +423,39 @@ def get_english_questions_for_exercise(
 
 
 # ---------------------------------------------------------------------------
+# Fill-in-the-blank question builder
+# ---------------------------------------------------------------------------
+
+def get_fill_blank_questions(
+    exercise_id: int,
+    db_path: Path = _DB_PATH,
+) -> list:
+    """
+    Build the question pool for a fill-in-the-blank exercise.
+    Each sentence is stored as a word row: source = sentence text, canonical = answer.
+
+    Returns a list of dicts compatible with QuizScreen:
+      type   : "fill_blank"
+      prompt : the full sentence with _____ and verb hint in parentheses
+      answer : the expected irregular form (e.g. "bought")
+    """
+    with _connect(db_path) as conn:
+        words = conn.execute(
+            "SELECT source, canonical FROM words WHERE exercise_id = ? ORDER BY rowid",
+            (exercise_id,),
+        ).fetchall()
+
+    return [
+        {
+            "type": "fill_blank",
+            "prompt": word["source"],
+            "answer": word["canonical"],
+        }
+        for word in words
+    ]
+
+
+# ---------------------------------------------------------------------------
 # Session queries
 # ---------------------------------------------------------------------------
 
