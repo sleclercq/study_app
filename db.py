@@ -173,6 +173,30 @@ _MIGRATIONS: list[str] = [
     );
     DELETE FROM exercises WHERE slug = 'accord_participe_passe';
     """,
+    # -----------------------------------------------------------------------
+    # Migration 4 - purge and re-seed accord_participe_passe: bank expanded
+    # from 100 to 200 sentences. avoir_cod_avant now weighted at 80/200 (40%)
+    # to reflect the pedagogical focus of the lesson.
+    # -----------------------------------------------------------------------
+    """
+    DELETE FROM player_word_prefs WHERE word_id IN (
+        SELECT id FROM words WHERE exercise_id IN (
+            SELECT id FROM exercises WHERE slug = 'accord_participe_passe'
+        )
+    );
+    DELETE FROM sessions WHERE exercise_id IN (
+        SELECT id FROM exercises WHERE slug = 'accord_participe_passe'
+    );
+    DELETE FROM forms WHERE word_id IN (
+        SELECT id FROM words WHERE exercise_id IN (
+            SELECT id FROM exercises WHERE slug = 'accord_participe_passe'
+        )
+    );
+    DELETE FROM words WHERE exercise_id IN (
+        SELECT id FROM exercises WHERE slug = 'accord_participe_passe'
+    );
+    DELETE FROM exercises WHERE slug = 'accord_participe_passe';
+    """,
 ]
 
 

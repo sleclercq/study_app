@@ -80,24 +80,44 @@
     "",
     "  Étape 3 : relancer l'appli. Le bootstrap applique la migration puis re-seed.",
     "",
-    "BANQUE ACTUELLE : 100 phrases",
-    "  sans_auxiliaire  : 25",
-    "  avec_etre        : 25",
-    "  avoir_cod_apres  : 25",
-    "  avoir_cod_avant  : 25",
-    "  SESSION_LENGTH = 20 → tirage aléatoire parmi les 100."
+    "BANQUE ACTUELLE : 200 phrases",
+    "  sans_auxiliaire  : 40",
+    "  avec_etre        : 40",
+    "  avoir_cod_apres  : 40",
+    "  avoir_cod_avant  : 80",
+    "  SESSION_LENGTH = 20 → tirage aléatoire parmi les 200.",
+    "",
+    "BIAIS PEDAGOGIQUE VOULU : avoir_cod_avant est le cas principal de la leçon.",
+    "  Lors de chaque ajout de phrases, respecter la distribution suivante :",
+    "    avoir_cod_avant  : 55 % des nouvelles phrases",
+    "    sans_auxiliaire  : 15 % des nouvelles phrases",
+    "    avec_etre        : 15 % des nouvelles phrases",
+    "    avoir_cod_apres  : 15 % des nouvelles phrases",
+    "  Varier les structures avoir_cod_avant :",
+    "    - pronom personnel 'les' + masc. plur. (antécédent dislocté ou pronom relatif)",
+    "    - pronom personnel 'les' + fém. plur.",
+    "    - pronom relatif 'que' (antécédent masc./fém., sing./plur.)",
+    "    - déterminant interrogatif quel/quelle/quels/quelles + nom",
+    "  ATTENTION : les pronoms 'le' et 'la' devant l'auxiliaire avoir s'élident toujours",
+    "  en 'l\\'' (ex. 'l\\'a', 'l\\'ont') — le tokeniseur ne peut pas les séparer.",
+    "  Utiliser UNIQUEMENT 'les' comme pronom COD avec avoir."
   ],
   "slug": "accord_participe_passe",
   "name": "Français - Accord du participe passé",
   "words": [
-
     {
       "_comment": "sans_auxiliaire — blessée s'accorde avec 'la princesse' (fém. sing.)",
       "source": "La princesse _____ (blesser) reprit son chemin.",
       "canonical": "blessée",
       "forms": [
-        {"label": "__case__", "value": "sans_auxiliaire"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -105,8 +125,14 @@
       "source": "Les guerriers _____ (vaincre) rentrèrent chez eux.",
       "canonical": "vaincus",
       "forms": [
-        {"label": "__case__", "value": "sans_auxiliaire"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -114,8 +140,14 @@
       "source": "La lettre _____ (recevoir) hier était très importante.",
       "canonical": "reçue",
       "forms": [
-        {"label": "__case__", "value": "sans_auxiliaire"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -123,8 +155,14 @@
       "source": "Des fleurs _____ (cueillir) ornaient la table.",
       "canonical": "cueillies",
       "forms": [
-        {"label": "__case__", "value": "sans_auxiliaire"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -132,8 +170,14 @@
       "source": "Le livre _____ (finir) traînait sur la table.",
       "canonical": "fini",
       "forms": [
-        {"label": "__case__", "value": "sans_auxiliaire"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -141,8 +185,14 @@
       "source": "La porte _____ (fermer) était verrouillée.",
       "canonical": "fermée",
       "forms": [
-        {"label": "__case__", "value": "sans_auxiliaire"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -150,8 +200,14 @@
       "source": "Les devoirs _____ (corriger) étaient parfaits.",
       "canonical": "corrigés",
       "forms": [
-        {"label": "__case__", "value": "sans_auxiliaire"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -159,8 +215,14 @@
       "source": "Les roses _____ (faner) jonchaient le sol.",
       "canonical": "fanées",
       "forms": [
-        {"label": "__case__", "value": "sans_auxiliaire"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -168,8 +230,14 @@
       "source": "Le vase _____ (casser) était irréparable.",
       "canonical": "cassé",
       "forms": [
-        {"label": "__case__", "value": "sans_auxiliaire"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -177,8 +245,14 @@
       "source": "La fenêtre _____ (ouvrir) laissait entrer le vent.",
       "canonical": "ouverte",
       "forms": [
-        {"label": "__case__", "value": "sans_auxiliaire"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -186,8 +260,14 @@
       "source": "Les enfants _____ (fatiguer) s'endormirent vite.",
       "canonical": "fatigués",
       "forms": [
-        {"label": "__case__", "value": "sans_auxiliaire"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -195,8 +275,14 @@
       "source": "La tarte _____ (brûler) sentait mauvais.",
       "canonical": "brûlée",
       "forms": [
-        {"label": "__case__", "value": "sans_auxiliaire"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -204,8 +290,14 @@
       "source": "Le mur _____ (peindre) séchait au soleil.",
       "canonical": "peint",
       "forms": [
-        {"label": "__case__", "value": "sans_auxiliaire"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -213,8 +305,14 @@
       "source": "Les guerrières _____ (capturer) furent libérées le lendemain.",
       "canonical": "capturées",
       "forms": [
-        {"label": "__case__", "value": "sans_auxiliaire"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -222,8 +320,14 @@
       "source": "Le repas _____ (préparer) sentait très bon.",
       "canonical": "préparé",
       "forms": [
-        {"label": "__case__", "value": "sans_auxiliaire"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -231,8 +335,14 @@
       "source": "La chanson _____ (apprendre) par cœur était belle.",
       "canonical": "apprise",
       "forms": [
-        {"label": "__case__", "value": "sans_auxiliaire"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -240,8 +350,14 @@
       "source": "Les exercices _____ (faire) étaient soigneusement rangés.",
       "canonical": "faits",
       "forms": [
-        {"label": "__case__", "value": "sans_auxiliaire"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -249,8 +365,14 @@
       "source": "La lettre _____ (écrire) attendait sur le bureau.",
       "canonical": "écrite",
       "forms": [
-        {"label": "__case__", "value": "sans_auxiliaire"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -258,8 +380,14 @@
       "source": "Le château _____ (construire) au Moyen Âge est magnifique.",
       "canonical": "construit",
       "forms": [
-        {"label": "__case__", "value": "sans_auxiliaire"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -267,8 +395,14 @@
       "source": "Les photos _____ (prendre) pendant les vacances sont jolies.",
       "canonical": "prises",
       "forms": [
-        {"label": "__case__", "value": "sans_auxiliaire"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -276,8 +410,14 @@
       "source": "La robe _____ (coudre) par ma grand-mère est précieuse.",
       "canonical": "cousue",
       "forms": [
-        {"label": "__case__", "value": "sans_auxiliaire"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -285,8 +425,14 @@
       "source": "Les bouteilles _____ (vider) traînaient partout.",
       "canonical": "vidées",
       "forms": [
-        {"label": "__case__", "value": "sans_auxiliaire"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -294,8 +440,14 @@
       "source": "Le gâteau _____ (décorer) avec soin était magnifique.",
       "canonical": "décoré",
       "forms": [
-        {"label": "__case__", "value": "sans_auxiliaire"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -303,8 +455,14 @@
       "source": "La voiture _____ (réparer) démarre enfin.",
       "canonical": "réparée",
       "forms": [
-        {"label": "__case__", "value": "sans_auxiliaire"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -312,18 +470,29 @@
       "source": "Les clés _____ (perdre) ont été retrouvées.",
       "canonical": "perdues",
       "forms": [
-        {"label": "__case__", "value": "sans_auxiliaire"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
-
     {
       "_comment": "avec_etre — parti s'accorde avec le sujet 'Silence' (masc. sing. dans le roman)",
       "source": "Silence est _____ (partir) au combat à l'aube.",
       "canonical": "parti",
       "forms": [
-        {"label": "__case__", "value": "avec_etre"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -331,8 +500,14 @@
       "source": "Nous sommes _____ (aller) au cinéma dimanche dernier.",
       "canonical": "allés",
       "forms": [
-        {"label": "__case__", "value": "avec_etre"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -340,8 +515,14 @@
       "source": "La princesse est _____ (tomber) de son cheval.",
       "canonical": "tombée",
       "forms": [
-        {"label": "__case__", "value": "avec_etre"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -349,8 +530,14 @@
       "source": "Les guerrières sont _____ (arriver) au château.",
       "canonical": "arrivées",
       "forms": [
-        {"label": "__case__", "value": "avec_etre"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -358,8 +545,14 @@
       "source": "Marie et Sophie sont _____ (rentrer) tard hier soir.",
       "canonical": "rentrées",
       "forms": [
-        {"label": "__case__", "value": "avec_etre"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -367,8 +560,14 @@
       "source": "Emma est _____ (arriver) en retard.",
       "canonical": "arrivée",
       "forms": [
-        {"label": "__case__", "value": "avec_etre"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -376,8 +575,14 @@
       "source": "Les garçons sont _____ (sortir) sans permission.",
       "canonical": "sortis",
       "forms": [
-        {"label": "__case__", "value": "avec_etre"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -385,8 +590,14 @@
       "source": "Les filles sont _____ (partir) en voyage scolaire.",
       "canonical": "parties",
       "forms": [
-        {"label": "__case__", "value": "avec_etre"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -394,8 +605,14 @@
       "source": "Le chien est _____ (mourir) à un âge avancé.",
       "canonical": "mort",
       "forms": [
-        {"label": "__case__", "value": "avec_etre"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -403,8 +620,14 @@
       "source": "La reine est _____ (naître) au printemps.",
       "canonical": "née",
       "forms": [
-        {"label": "__case__", "value": "avec_etre"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -412,8 +635,14 @@
       "source": "Nous sommes _____ (venir) vous rendre visite.",
       "canonical": "venus",
       "forms": [
-        {"label": "__case__", "value": "avec_etre"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -421,8 +650,14 @@
       "source": "Tom et Léa sont _____ (monter) au sommet.",
       "canonical": "montés",
       "forms": [
-        {"label": "__case__", "value": "avec_etre"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -430,8 +665,14 @@
       "source": "La guerrière s'est _____ (blesser) au combat.",
       "canonical": "blessée",
       "forms": [
-        {"label": "__case__", "value": "avec_etre"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -439,8 +680,14 @@
       "source": "Les soldats se sont _____ (battre) courageusement.",
       "canonical": "battus",
       "forms": [
-        {"label": "__case__", "value": "avec_etre"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -448,8 +695,14 @@
       "source": "Pierre est _____ (tomber) dans l'escalier.",
       "canonical": "tombé",
       "forms": [
-        {"label": "__case__", "value": "avec_etre"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -457,8 +710,14 @@
       "source": "Mes sœurs sont _____ (revenir) de Paris.",
       "canonical": "revenues",
       "forms": [
-        {"label": "__case__", "value": "avec_etre"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -466,8 +725,14 @@
       "source": "Le prince est _____ (devenir) roi.",
       "canonical": "devenu",
       "forms": [
-        {"label": "__case__", "value": "avec_etre"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -475,8 +740,14 @@
       "source": "Sophie s'est _____ (lever) très tôt ce matin.",
       "canonical": "levée",
       "forms": [
-        {"label": "__case__", "value": "avec_etre"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -484,8 +755,14 @@
       "source": "Les élèves sont _____ (rester) après la classe.",
       "canonical": "restés",
       "forms": [
-        {"label": "__case__", "value": "avec_etre"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -493,8 +770,14 @@
       "source": "La neige est _____ (tomber) toute la nuit.",
       "canonical": "tombée",
       "forms": [
-        {"label": "__case__", "value": "avec_etre"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -502,8 +785,14 @@
       "source": "Les voyageurs sont _____ (descendre) du train.",
       "canonical": "descendus",
       "forms": [
-        {"label": "__case__", "value": "avec_etre"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -511,8 +800,14 @@
       "source": "Nous sommes _____ (passer) par le parc.",
       "canonical": "passés",
       "forms": [
-        {"label": "__case__", "value": "avec_etre"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -520,8 +815,14 @@
       "source": "Les touristes sont _____ (entrer) dans le musée.",
       "canonical": "entrés",
       "forms": [
-        {"label": "__case__", "value": "avec_etre"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -529,8 +830,14 @@
       "source": "Théo s'est _____ (tromper) dans son calcul.",
       "canonical": "trompé",
       "forms": [
-        {"label": "__case__", "value": "avec_etre"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -538,18 +845,29 @@
       "source": "Lola s'est _____ (réveiller) en retard.",
       "canonical": "réveillée",
       "forms": [
-        {"label": "__case__", "value": "avec_etre"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
-
     {
       "_comment": "avoir_cod_apres — COD 'son combat' est après 'a' → pas d'accord",
       "source": "Silence a _____ (perdre) son combat.",
       "canonical": "perdu",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_apres"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -557,8 +875,14 @@
       "source": "Les chevaliers ont _____ (mener) leurs combats avec courage.",
       "canonical": "mené",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_apres"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -566,8 +890,14 @@
       "source": "Les parents ont _____ (acheter) un cadeau pour leur fille.",
       "canonical": "acheté",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_apres"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -575,8 +905,14 @@
       "source": "Marie a _____ (lire) un livre intéressant.",
       "canonical": "lu",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_apres"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -584,8 +920,14 @@
       "source": "Le roi a _____ (donner) un ordre à ses soldats.",
       "canonical": "donné",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_apres"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -593,8 +935,14 @@
       "source": "La fée a _____ (préparer) un repas pour ce soir.",
       "canonical": "préparé",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_apres"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -602,8 +950,14 @@
       "source": "Par son courage, Silence lui a _____ (redonner) confiance.",
       "canonical": "redonné",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_apres"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -611,8 +965,14 @@
       "source": "Nous avons _____ (construire) une cabane dans la forêt.",
       "canonical": "construit",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_apres"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -620,8 +980,14 @@
       "source": "Paul a _____ (écrire) une lettre à sa mère.",
       "canonical": "écrit",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_apres"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -629,8 +995,14 @@
       "source": "Les enfants ont _____ (manger) tous les gâteaux.",
       "canonical": "mangé",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_apres"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -638,8 +1010,14 @@
       "source": "Le professeur a _____ (expliquer) la règle.",
       "canonical": "expliqué",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_apres"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -647,8 +1025,14 @@
       "source": "Nous avons _____ (regarder) un film policier.",
       "canonical": "regardé",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_apres"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -656,8 +1040,14 @@
       "source": "Ma sœur a _____ (choisir) une belle robe.",
       "canonical": "choisi",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_apres"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -665,8 +1055,14 @@
       "source": "Les élèves ont _____ (finir) leurs exercices.",
       "canonical": "fini",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_apres"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -674,8 +1070,14 @@
       "source": "Le roi a _____ (décider) une trêve.",
       "canonical": "décidé",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_apres"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -683,8 +1085,14 @@
       "source": "Tu as _____ (oublier) ton cahier à l'école.",
       "canonical": "oublié",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_apres"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -692,8 +1100,14 @@
       "source": "Elle a _____ (recevoir) un cadeau surprise.",
       "canonical": "reçu",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_apres"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -701,8 +1115,14 @@
       "source": "Les guerriers ont _____ (défendre) leur ville.",
       "canonical": "défendu",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_apres"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -710,8 +1130,14 @@
       "source": "Pierre a _____ (traduire) ce poème en latin.",
       "canonical": "traduit",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_apres"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -719,8 +1145,14 @@
       "source": "Ils ont _____ (vendre) leur voiture.",
       "canonical": "vendu",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_apres"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -728,8 +1160,14 @@
       "source": "Vous avez _____ (peindre) le salon en bleu.",
       "canonical": "peint",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_apres"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -737,8 +1175,14 @@
       "source": "J'ai _____ (entendre) une belle chanson à la radio.",
       "canonical": "entendu",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_apres"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -746,8 +1190,14 @@
       "source": "Le roi lui a _____ (promettre) une récompense.",
       "canonical": "promis",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_apres"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -755,8 +1205,14 @@
       "source": "Nous avons _____ (attendre) le bus pendant une heure.",
       "canonical": "attendu",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_apres"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
     {
@@ -764,18 +1220,29 @@
       "source": "Les soldats ont _____ (traverser) la rivière.",
       "canonical": "traversé",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_apres"},
-        {"label": "__cod__",  "value": ""}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     },
-
     {
       "_comment": "avoir_cod_avant — pronom personnel 'les' (masc. plur.) avant 'a' → arrêtés",
       "source": "Les suspects, la police les a _____ (arrêter).",
       "canonical": "arrêtés",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_avant"},
-        {"label": "__cod__",  "value": "les"}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "les"
+        }
       ]
     },
     {
@@ -783,8 +1250,14 @@
       "source": "Quelle robe Marie a-t-elle _____ (choisir) ?",
       "canonical": "choisie",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_avant"},
-        {"label": "__cod__",  "value": "Quelle robe"}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "Quelle robe"
+        }
       ]
     },
     {
@@ -792,8 +1265,14 @@
       "source": "La lettre que Paul a _____ (écrire) est très belle.",
       "canonical": "écrite",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_avant"},
-        {"label": "__cod__",  "value": "que"}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "que"
+        }
       ]
     },
     {
@@ -801,8 +1280,14 @@
       "source": "Ces fleurs, je les ai _____ (cueillir) ce matin.",
       "canonical": "cueillies",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_avant"},
-        {"label": "__cod__",  "value": "les"}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "les"
+        }
       ]
     },
     {
@@ -810,8 +1295,14 @@
       "source": "Quelles victoires les chevaliers ont-ils _____ (remporter) ?",
       "canonical": "remportées",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_avant"},
-        {"label": "__cod__",  "value": "Quelles victoires"}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "Quelles victoires"
+        }
       ]
     },
     {
@@ -819,8 +1310,14 @@
       "source": "Ces règles, le professeur les a _____ (expliquer) clairement.",
       "canonical": "expliquées",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_avant"},
-        {"label": "__cod__",  "value": "les"}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "les"
+        }
       ]
     },
     {
@@ -828,8 +1325,14 @@
       "source": "Quelles bagues Sophie a-t-elle _____ (essayer) ?",
       "canonical": "essayées",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_avant"},
-        {"label": "__cod__",  "value": "Quelles bagues"}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "Quelles bagues"
+        }
       ]
     },
     {
@@ -837,8 +1340,14 @@
       "source": "Les livres que j'ai _____ (lire) cet été étaient passionnants.",
       "canonical": "lus",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_avant"},
-        {"label": "__cod__",  "value": "que"}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "que"
+        }
       ]
     },
     {
@@ -846,8 +1355,14 @@
       "source": "La pomme que j'ai _____ (manger) était délicieuse.",
       "canonical": "mangée",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_avant"},
-        {"label": "__cod__",  "value": "que"}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "que"
+        }
       ]
     },
     {
@@ -855,8 +1370,14 @@
       "source": "Voilà les photos que j'ai _____ (prendre) pendant les vacances.",
       "canonical": "prises",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_avant"},
-        {"label": "__cod__",  "value": "que"}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "que"
+        }
       ]
     },
     {
@@ -864,8 +1385,14 @@
       "source": "Ces exercices, le professeur les a _____ (corriger).",
       "canonical": "corrigés",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_avant"},
-        {"label": "__cod__",  "value": "les"}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "les"
+        }
       ]
     },
     {
@@ -873,8 +1400,14 @@
       "source": "Les soldats, le roi les a _____ (envoyer) au combat.",
       "canonical": "envoyés",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_avant"},
-        {"label": "__cod__",  "value": "les"}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "les"
+        }
       ]
     },
     {
@@ -882,8 +1415,14 @@
       "source": "Ces gâteaux, nous les avons _____ (manger) hier soir.",
       "canonical": "mangés",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_avant"},
-        {"label": "__cod__",  "value": "les"}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "les"
+        }
       ]
     },
     {
@@ -891,8 +1430,14 @@
       "source": "Ces chanteuses, tout le monde les a _____ (applaudir).",
       "canonical": "applaudies",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_avant"},
-        {"label": "__cod__",  "value": "les"}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "les"
+        }
       ]
     },
     {
@@ -900,8 +1445,14 @@
       "source": "La chanson que tu as _____ (chanter) était magnifique.",
       "canonical": "chantée",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_avant"},
-        {"label": "__cod__",  "value": "que"}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "que"
+        }
       ]
     },
     {
@@ -909,8 +1460,14 @@
       "source": "Les devoirs que j'ai _____ (rendre) étaient bien faits.",
       "canonical": "rendus",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_avant"},
-        {"label": "__cod__",  "value": "que"}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "que"
+        }
       ]
     },
     {
@@ -918,8 +1475,14 @@
       "source": "Le dessin que Léa a _____ (faire) est très beau.",
       "canonical": "fait",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_avant"},
-        {"label": "__cod__",  "value": "que"}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "que"
+        }
       ]
     },
     {
@@ -927,8 +1490,14 @@
       "source": "La robe que Sophie a _____ (confectionner) est magnifique.",
       "canonical": "confectionnée",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_avant"},
-        {"label": "__cod__",  "value": "que"}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "que"
+        }
       ]
     },
     {
@@ -936,8 +1505,14 @@
       "source": "Le film que nous avons _____ (voir) était effrayant.",
       "canonical": "vu",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_avant"},
-        {"label": "__cod__",  "value": "que"}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "que"
+        }
       ]
     },
     {
@@ -945,8 +1520,14 @@
       "source": "Les erreurs que tu as _____ (faire) sont corrigées.",
       "canonical": "faites",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_avant"},
-        {"label": "__cod__",  "value": "que"}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "que"
+        }
       ]
     },
     {
@@ -954,8 +1535,14 @@
       "source": "Le château que les architectes ont _____ (construire) est immense.",
       "canonical": "construit",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_avant"},
-        {"label": "__cod__",  "value": "que"}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "que"
+        }
       ]
     },
     {
@@ -963,8 +1550,14 @@
       "source": "Quel livre as-tu _____ (choisir) ?",
       "canonical": "choisi",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_avant"},
-        {"label": "__cod__",  "value": "Quel livre"}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "Quel livre"
+        }
       ]
     },
     {
@@ -972,8 +1565,14 @@
       "source": "Quelle recette a-t-elle _____ (inventer) ?",
       "canonical": "inventée",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_avant"},
-        {"label": "__cod__",  "value": "Quelle recette"}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "Quelle recette"
+        }
       ]
     },
     {
@@ -981,8 +1580,14 @@
       "source": "Quels films avez-vous _____ (regarder) ce week-end ?",
       "canonical": "regardés",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_avant"},
-        {"label": "__cod__",  "value": "Quels films"}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "Quels films"
+        }
       ]
     },
     {
@@ -990,8 +1595,1514 @@
       "source": "Quelles erreurs as-tu _____ (commettre) ?",
       "canonical": "commises",
       "forms": [
-        {"label": "__case__", "value": "avoir_cod_avant"},
-        {"label": "__cod__",  "value": "Quelles erreurs"}
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "Quelles erreurs"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom personnel 'les' (masc. plur. = ces colis) avant 'a' → déposés",
+      "source": "Ces colis, le livreur les a _____ (déposer).",
+      "canonical": "déposés",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "les"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom personnel 'les' (masc. plur. = ces tableaux) avant 'a' → exposés",
+      "source": "Ces tableaux, le musée les a _____ (exposer).",
+      "canonical": "exposés",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "les"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom personnel 'les' (masc. plur. = les enfants) avant 'a' → félicités",
+      "source": "Les enfants, la maîtresse les a _____ (féliciter).",
+      "canonical": "félicités",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "les"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom personnel 'les' (masc. plur. = ces billets) avant 'a' → perdus",
+      "source": "Ces billets, Sophie les a _____ (perdre).",
+      "canonical": "perdus",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "les"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom personnel 'les' (masc. plur. = les animaux) avant 'a' → soignés",
+      "source": "Les animaux blessés, le vétérinaire les a _____ (soigner).",
+      "canonical": "soignés",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "les"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom personnel 'les' (masc. plur. = ces jouets) avant 'ont' → cassés",
+      "source": "Ces jouets, les enfants les ont _____ (casser).",
+      "canonical": "cassés",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "les"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom personnel 'les' (masc. plur. = les prisonniers) avant 'a' → libérés",
+      "source": "Les prisonniers, le roi les a _____ (libérer).",
+      "canonical": "libérés",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "les"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom personnel 'les' (masc. plur. = ces élèves) avant 'a' → convoqués",
+      "source": "Ces élèves, le directeur les a _____ (convoquer).",
+      "canonical": "convoqués",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "les"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom personnel 'les' (masc. plur. = ces résultats) avant 'a' → analysés",
+      "source": "Ces résultats, le jury les a _____ (analyser).",
+      "canonical": "analysés",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "les"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom personnel 'les' (masc. plur. = ces soldats) avant 'a' → récompensés",
+      "source": "Ces soldats, le général les a _____ (récompenser).",
+      "canonical": "récompensés",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "les"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom personnel 'les' (masc. plur. = ces cadeaux) avant 'ont' → déballés",
+      "source": "Ces cadeaux, les enfants les ont _____ (déballer).",
+      "canonical": "déballés",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "les"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom personnel 'les' (masc. plur. = ces arbres) avant 'a' → taillés",
+      "source": "Ces arbres, le jardinier les a _____ (tailler).",
+      "canonical": "taillés",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "les"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom personnel 'les' (fém. plur. = ces lettres) avant 'a' → postées",
+      "source": "Ces lettres, Marie les a _____ (poster).",
+      "canonical": "postées",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "les"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom personnel 'les' (fém. plur. = ces pommes) avant 'as' → épluchées",
+      "source": "Ces pommes, tu les as _____ (éplucher).",
+      "canonical": "épluchées",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "les"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom personnel 'les' (fém. plur. = les robes) avant 'a' → cousues",
+      "source": "Les robes, la couturière les a _____ (coudre).",
+      "canonical": "cousues",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "les"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom personnel 'les' (fém. plur. = ces erreurs) avant 'a' → soulignées",
+      "source": "Ces erreurs, le professeur les a _____ (souligner).",
+      "canonical": "soulignées",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "les"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom personnel 'les' (fém. plur. = ces notes) avant 'a' → vérifiées",
+      "source": "Ces notes, Emma les a _____ (vérifier).",
+      "canonical": "vérifiées",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "les"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom personnel 'les' (fém. plur. = ces histoires) avant 'ont' → adorées",
+      "source": "Ces histoires, les enfants les ont _____ (adorer).",
+      "canonical": "adorées",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "les"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom personnel 'les' (fém. plur. = ces questions) avant 'a' → posées",
+      "source": "Ces questions, la maîtresse les a _____ (poser).",
+      "canonical": "posées",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "les"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom personnel 'les' (fém. plur. = ces pièces) avant 'a' → remplacées",
+      "source": "Ces pièces défectueuses, le mécanicien les a _____ (remplacer).",
+      "canonical": "remplacées",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "les"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom personnel 'les' (fém. plur. = ces tasses) avant 'a' → lavées",
+      "source": "Ces tasses, Lola les a _____ (laver).",
+      "canonical": "lavées",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "les"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom personnel 'les' (fém. plur. = ces affiches) avant 'ont' → préparées",
+      "source": "Ces affiches, les écoliers les ont _____ (préparer).",
+      "canonical": "préparées",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "les"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom personnel 'les' (fém. plur. = ces recettes) avant 'a' → notées",
+      "source": "Ces recettes, ma mère les a _____ (noter).",
+      "canonical": "notées",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "les"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom personnel 'les' (fém. plur. = ces malles) avant 'ont' → portées",
+      "source": "Ces malles, les déménageurs les ont _____ (porter).",
+      "canonical": "portées",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "les"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom personnel 'les' (fém. plur. = ces victoires) avant 'ont' → célébrées",
+      "source": "Ces victoires, les supporters les ont _____ (célébrer).",
+      "canonical": "célébrées",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "les"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom relatif 'que' (antécédent 'le gâteau', masc. sing.) avant 'a' → préparé",
+      "source": "Le gâteau que grand-mère a _____ (préparer) était délicieux.",
+      "canonical": "préparé",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "que"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom relatif 'que' (antécédent 'le poème', masc. sing.) avant 'a' → écrit",
+      "source": "Le poème que Tom a _____ (écrire) était très émouvant.",
+      "canonical": "écrit",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "que"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom relatif 'que' (antécédent 'le tableau', masc. sing.) avant 'a' → peint",
+      "source": "Le tableau que Picasso a _____ (peindre) est célèbre.",
+      "canonical": "peint",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "que"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom relatif 'que' (antécédent 'le discours', masc. sing.) avant 'a' → prononcé",
+      "source": "Le discours que le maire a _____ (prononcer) a ému tout le monde.",
+      "canonical": "prononcé",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "que"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom relatif 'que' (antécédent 'le pont', masc. sing.) avant 'ont' → bâti",
+      "source": "Le pont que les ingénieurs ont _____ (bâtir) est très solide.",
+      "canonical": "bâti",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "que"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom relatif 'que' (antécédent 'le cheval', masc. sing.) avant 'a' → dressé",
+      "source": "Le cheval que Léa a _____ (dresser) est devenu docile.",
+      "canonical": "dressé",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "que"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom relatif 'que' (antécédent 'la pièce', fém. sing.) avant 'avons' → vue",
+      "source": "La pièce que nous avons _____ (voir) hier soir était magnifique.",
+      "canonical": "vue",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "que"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom relatif 'que' (antécédent 'la réponse', fém. sing.) avant 'a' → donnée",
+      "source": "La réponse que Marie a _____ (donner) était correcte.",
+      "canonical": "donnée",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "que"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom relatif 'que' (antécédent 'la promesse', fém. sing.) avant 'a' → faite",
+      "source": "La promesse que le roi a _____ (faire) n'a pas été tenue.",
+      "canonical": "faite",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "que"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom relatif 'que' (antécédent 'la leçon', fém. sing.) avant 'a' → expliquée",
+      "source": "La leçon que la maîtresse a _____ (expliquer) était très claire.",
+      "canonical": "expliquée",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "que"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom relatif 'que' (antécédent 'la voiture', fém. sing.) avant 'ont' → achetée",
+      "source": "La voiture que mes parents ont _____ (acheter) est rouge.",
+      "canonical": "achetée",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "que"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom relatif 'que' (antécédent 'la ville', fém. sing.) avant 'ont' → défendue",
+      "source": "La ville que les soldats ont _____ (défendre) est enfin libre.",
+      "canonical": "défendue",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "que"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom relatif 'que' (antécédent 'la surprise', fém. sing.) avant 'ont' → organisée",
+      "source": "La surprise que ses amis ont _____ (organiser) était superbe.",
+      "canonical": "organisée",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "que"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom relatif 'que' (antécédent 'les résultats', masc. plur.) avant 'ont' → obtenus",
+      "source": "Les résultats que les élèves ont _____ (obtenir) sont excellents.",
+      "canonical": "obtenus",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "que"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom relatif 'que' (antécédent 'les cadeaux', masc. plur.) avant 'a' → offerts",
+      "source": "Les cadeaux que sa famille a _____ (offrir) étaient magnifiques.",
+      "canonical": "offerts",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "que"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom relatif 'que' (antécédent 'les articles', masc. plur.) avant 'a' → rédigés",
+      "source": "Les articles que Tom a _____ (rédiger) sont très clairs.",
+      "canonical": "rédigés",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "que"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom relatif 'que' (antécédent 'les mots', masc. plur.) avant 'a' → écrits",
+      "source": "Les mots que le professeur a _____ (écrire) au tableau étaient lisibles.",
+      "canonical": "écrits",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "que"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom relatif 'que' (antécédent 'les fleurs', fém. plur.) avant 'a' → choisies",
+      "source": "Les fleurs que Marie a _____ (choisir) sont très belles.",
+      "canonical": "choisies",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "que"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom relatif 'que' (antécédent 'les recettes', fém. plur.) avant 'a' → transmises",
+      "source": "Les recettes que ma grand-mère a _____ (transmettre) sont précieuses.",
+      "canonical": "transmises",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "que"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom relatif 'que' (antécédent 'les lettres', fém. plur.) avant 'as' → envoyées",
+      "source": "Les lettres que tu as _____ (envoyer) sont bien arrivées.",
+      "canonical": "envoyées",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "que"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom relatif 'que' (antécédent 'les questions', fém. plur.) avant 'ont' → posées",
+      "source": "Les questions que les élèves ont _____ (poser) étaient pertinentes.",
+      "canonical": "posées",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "que"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — déterminant interrogatif 'Quel dessin' (masc. sing.) avant 'as-tu' → terminé",
+      "source": "Quel dessin as-tu _____ (terminer) en premier ?",
+      "canonical": "terminé",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "Quel dessin"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — déterminant interrogatif 'Quel résultat' (masc. sing.) avant 'avez-vous' → obtenu",
+      "source": "Quel résultat avez-vous _____ (obtenir) ?",
+      "canonical": "obtenu",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "Quel résultat"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — déterminant interrogatif 'Quel effort' (masc. sing.) avant 'a-t-il' → fourni",
+      "source": "Quel effort Luc a-t-il _____ (fournir) ?",
+      "canonical": "fourni",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "Quel effort"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — déterminant interrogatif 'Quelle récompense' (fém. sing.) avant 'a-t-il' → promise",
+      "source": "Quelle récompense le roi a-t-il _____ (promettre) ?",
+      "canonical": "promise",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "Quelle récompense"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — déterminant interrogatif 'Quelle surprise' (fém. sing.) avant 'ont-ils' → préparée",
+      "source": "Quelle surprise tes amis ont-ils _____ (préparer) ?",
+      "canonical": "préparée",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "Quelle surprise"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — déterminant interrogatif 'Quelle faute' (fém. sing.) avant 'as-tu' → remarquée",
+      "source": "Quelle faute as-tu _____ (remarquer) ?",
+      "canonical": "remarquée",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "Quelle faute"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — déterminant interrogatif 'Quels pays' (masc. plur.) avant 'avez-vous' → visités",
+      "source": "Quels pays avez-vous _____ (visiter) cet été ?",
+      "canonical": "visités",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "Quels pays"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — déterminant interrogatif 'Quels arguments' (masc. plur.) avant 'ont-ils' → présentés",
+      "source": "Quels arguments ont-ils _____ (présenter) ?",
+      "canonical": "présentés",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "Quels arguments"
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — déterminant interrogatif 'Quelles décisions' (fém. plur.) avant 'a-t-il' → prises",
+      "source": "Quelles décisions le directeur a-t-il _____ (prendre) ?",
+      "canonical": "prises",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_avant"
+        },
+        {
+          "label": "__cod__",
+          "value": "Quelles décisions"
+        }
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — tracé s'accorde avec 'le chemin' (masc. sing.)",
+      "source": "Le chemin _____ (tracer) par les explorateurs était dangereux.",
+      "canonical": "tracé",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — peintes s'accorde avec 'les portes' (fém. plur.)",
+      "source": "Les portes _____ (peindre) en rouge étaient impressionnantes.",
+      "canonical": "peintes",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — fondée s'accorde avec 'la ville' (fém. sing.)",
+      "source": "La ville _____ (fonder) par les Romains est magnifique.",
+      "canonical": "fondée",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — agités s'accorde avec 'les drapeaux' (masc. plur.)",
+      "source": "Les drapeaux _____ (agiter) ondoyaient dans le vent.",
+      "canonical": "agités",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — récolté s'accorde avec 'le miel' (masc. sing.)",
+      "source": "Le miel _____ (récolter) ce matin est délicieux.",
+      "canonical": "récolté",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — tissée s'accorde avec 'la tapisserie' (fém. sing.)",
+      "source": "La tapisserie _____ (tisser) par ma mère est superbe.",
+      "canonical": "tissée",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — blessés s'accorde avec 'les soldats' (masc. plur.)",
+      "source": "Les soldats _____ (blesser) furent soignés immédiatement.",
+      "canonical": "blessés",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — bâti s'accorde avec 'le pont' (masc. sing.)",
+      "source": "Le pont _____ (bâtir) en pierre est très ancien.",
+      "canonical": "bâti",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — lavés s'accorde avec 'les habits' (masc. plur.)",
+      "source": "Les habits _____ (laver) séchaient sur le fil.",
+      "canonical": "lavés",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — gagnée s'accorde avec 'la médaille' (fém. sing.)",
+      "source": "La médaille _____ (gagner) brillait dans la lumière.",
+      "canonical": "gagnée",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — déchirées s'accorde avec 'les pages' (fém. plur.)",
+      "source": "Les pages _____ (déchirer) jonchaient le plancher.",
+      "canonical": "déchirées",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — semé s'accorde avec 'le champ' (masc. sing.)",
+      "source": "Le champ _____ (semer) par les paysans était immense.",
+      "canonical": "semé",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — brisées s'accorde avec 'les fenêtres' (fém. plur.)",
+      "source": "Les fenêtres _____ (briser) laissaient entrer le vent.",
+      "canonical": "brisées",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — sculptée s'accorde avec 'la statue' (fém. sing.)",
+      "source": "La statue _____ (sculpter) par l'artiste était magnifique.",
+      "canonical": "sculptée",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — appris s'accorde avec 'les vers' (masc. plur.)",
+      "source": "Les vers _____ (apprendre) par cœur résonnaient dans sa tête.",
+      "canonical": "appris",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "sans_auxiliaire"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "avec_etre — repartis s'accorde avec le sujet 'les voyageurs' (masc. plur.)",
+      "source": "Les voyageurs sont _____ (repartir) le lendemain matin.",
+      "canonical": "repartis",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "avec_etre — morte s'accorde avec le sujet 'la reine' (fém. sing.)",
+      "source": "La reine est _____ (mourir) d'un mal mystérieux.",
+      "canonical": "morte",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "avec_etre pronominal — réconciliées s'accorde avec le sujet 'les deux amies' (fém. plur.)",
+      "source": "Les deux amies se sont _____ (réconcilier).",
+      "canonical": "réconciliées",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "avec_etre — né s'accorde avec le sujet 'Léo' (masc. sing.)",
+      "source": "Léo est _____ (naître) en hiver.",
+      "canonical": "né",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "avec_etre — retournés s'accorde avec le sujet 'les étudiants' (masc. plur.)",
+      "source": "Les étudiants sont _____ (retourner) dans leur pays.",
+      "canonical": "retournés",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "avec_etre — venue s'accorde avec le sujet 'ma petite sœur' (fém. sing.)",
+      "source": "Ma petite sœur est _____ (venir) me chercher.",
+      "canonical": "venue",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "avec_etre pronominal — perdus s'accorde avec le sujet 'les enfants' (masc. plur.)",
+      "source": "Les enfants se sont _____ (perdre) dans la forêt.",
+      "canonical": "perdus",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "avec_etre — descendue s'accorde avec le sujet 'la cavalière' (fém. sing.)",
+      "source": "La cavalière est _____ (descendre) de son cheval.",
+      "canonical": "descendue",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "avec_etre — tombées s'accorde avec le sujet 'les feuilles' (fém. plur.)",
+      "source": "Les feuilles sont _____ (tomber) en automne.",
+      "canonical": "tombées",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "avec_etre — sorti s'accorde avec le sujet 'mon père' (masc. sing.)",
+      "source": "Mon père est _____ (sortir) de l'hôpital.",
+      "canonical": "sorti",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "avec_etre — repartie s'accorde avec le sujet 'la marchande' (fém. sing.)",
+      "source": "La marchande est _____ (repartir) les bras chargés.",
+      "canonical": "repartie",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "avec_etre pronominal — évadés s'accorde avec le sujet 'les prisonniers' (masc. plur.)",
+      "source": "Les prisonniers se sont _____ (évader).",
+      "canonical": "évadés",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "avec_etre pronominal — endormie s'accorde avec le sujet 'Lucie' (fém. sing.)",
+      "source": "Lucie s'est _____ (endormir) dans le train.",
+      "canonical": "endormie",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "avec_etre pronominal — trompés s'accorde avec le sujet 'nous' (masc. plur. par défaut)",
+      "source": "Nous nous sommes _____ (tromper) de chemin.",
+      "canonical": "trompés",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "avec_etre pronominal — battues s'accorde avec le sujet 'les championnes' (fém. plur.)",
+      "source": "Les championnes se sont _____ (battre) avec courage.",
+      "canonical": "battues",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avec_etre"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'son armure' est après 'a' → pas d'accord",
+      "source": "Le chevalier a _____ (porter) son armure toute la journée.",
+      "canonical": "porté",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'une grande émotion' est après 'avons' → pas d'accord",
+      "source": "Nous avons _____ (ressentir) une grande émotion.",
+      "canonical": "ressenti",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'une belle fresque' est après 'ont' → pas d'accord",
+      "source": "Les artistes ont _____ (créer) une belle fresque.",
+      "canonical": "créé",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'toutes tes affaires' est après 'as' → pas d'accord",
+      "source": "Tu as _____ (apporter) toutes tes affaires.",
+      "canonical": "apporté",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'une belle solution' est après 'a' → pas d'accord",
+      "source": "Léa a _____ (trouver) une belle solution.",
+      "canonical": "trouvé",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'la route' est après 'ont' → pas d'accord",
+      "source": "Les ouvriers ont _____ (réparer) la route.",
+      "canonical": "réparé",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'le tournoi' est après 'a' → pas d'accord",
+      "source": "Julien a _____ (gagner) le tournoi.",
+      "canonical": "gagné",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'une cabane' est après 'ont' → pas d'accord",
+      "source": "Les enfants ont _____ (fabriquer) une cabane.",
+      "canonical": "fabriqué",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'une fête surprise' est après 'a' → pas d'accord",
+      "source": "Elle a _____ (organiser) une fête surprise.",
+      "canonical": "organisé",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'les copies' est après 'a' → pas d'accord",
+      "source": "Le professeur a _____ (noter) les copies.",
+      "canonical": "noté",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'un trésor' est après 'avons' → pas d'accord",
+      "source": "Nous avons _____ (découvrir) un trésor.",
+      "canonical": "découvert",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'les monuments' est après 'avez' → pas d'accord",
+      "source": "Vous avez _____ (photographier) les monuments.",
+      "canonical": "photographié",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'des rosiers' est après 'a' → pas d'accord",
+      "source": "Le jardinier a _____ (planter) des rosiers.",
+      "canonical": "planté",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — PIEGE : 'leur' devant le verbe = COI, COD 'une leçon' après → pas d'accord",
+      "source": "La professeure leur a _____ (enseigner) une leçon.",
+      "canonical": "enseigné",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'un plat délicieux' est après 'a' → pas d'accord",
+      "source": "Le chef a _____ (cuisiner) un plat délicieux.",
+      "canonical": "cuisiné",
+      "forms": [
+        {
+          "label": "__case__",
+          "value": "avoir_cod_apres"
+        },
+        {
+          "label": "__cod__",
+          "value": ""
+        }
       ]
     }
   ]

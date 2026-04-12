@@ -1065,7 +1065,6 @@ class AccordPPScreen(tk.Frame):
             pp_row, textvariable=self._pp_var, font=self.ENTRY_FONT, width=18
         )
         self._pp_entry.pack(side="left")
-        self._pp_entry.bind("<Return>", lambda e: self._submit())
 
         # COD identification section — shown only for avoir_cod_avant questions.
         # Not packed initially; inserted before the submit button when needed.
