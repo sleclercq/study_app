@@ -1,0 +1,998 @@
+{
+  "_notes": [
+    "=== ACCORD DU PARTICIPE PASSE — GUIDE DE MAINTENANCE ===",
+    "",
+    "FORMAT : chaque entrée dans 'words' est une phrase à compléter.",
+    "  source    : phrase avec _____ pour le blanc et (infinitif) comme indice visible",
+    "  canonical : forme attendue du participe passé (la réponse correcte)",
+    "  _comment  : explication grammaticale (ignoré par le code, pour la maintenance)",
+    "  forms     : deux métadonnées obligatoires :",
+    "    {label: '__case__',  value: <identifiant_cas>}",
+    "    {label: '__cod__',   value: <texte_du_COD_ou_chaine_vide>}",
+    "",
+    "CAS GRAMMATICAUX (__case__) — quatre valeurs possibles :",
+    "",
+    "  sans_auxiliaire",
+    "    Le ppé est employé seul, sans auxiliaire.",
+    "    Il s'accorde COMME UN ADJECTIF avec le nom qu'il qualifie.",
+    "    Exemples : 'la reine blessée', 'des guerriers vaincus'.",
+    "    __cod__ doit être vide.",
+    "",
+    "  avec_etre",
+    "    Le ppé est employé avec l'auxiliaire ÊTRE.",
+    "    Il s'accorde TOUJOURS avec le SUJET (genre + nombre).",
+    "    __cod__ doit être vide.",
+    "",
+    "  avoir_cod_apres",
+    "    Le ppé est employé avec l'auxiliaire AVOIR.",
+    "    Le COD est placé APRES le verbe → PAS D'ACCORD.",
+    "    Attention : 'lui/leur' devant le verbe = COI, pas COD → pas d'accord non plus.",
+    "    __cod__ doit être vide.",
+    "",
+    "  avoir_cod_avant",
+    "    Le ppé est employé avec l'auxiliaire AVOIR.",
+    "    Le COD est placé AVANT le verbe → ACCORD avec le COD (genre + nombre du COD).",
+    "    Le COD avant le verbe peut être :",
+    "      - un pronom personnel complément : le, la, les, l'",
+    "      - le pronom relatif : que (antécédent = le nom avant la relative)",
+    "      - un déterminant interrogatif + nom : quel/quelle/quels/quelles + nom",
+    "    __cod__ DOIT contenir le texte exact du COD tel qu'il apparaît dans la phrase,",
+    "    sans ponctuation parasite (virgule, point, etc.). RESPECTER LA CASSE :",
+    "    la comparaison est sensible à la casse pour distinguer 'Les' (article en début",
+    "    de phrase) de 'les' (pronom COD en milieu de phrase). Règle pratique :",
+    "      - COD = premier mot de la phrase → prendre la majuscule (ex: 'Quelles victoires')",
+    "      - COD = pronom mid-phrase       → minuscule (ex: 'les', 'que')",
+    "    Le joueur devra cliquer sur ce(s) mot(s) dans la phrase affichée.",
+    "",
+    "REGLES DU TOKENISEUR (à connaître pour rédiger des phrases) :",
+    "  - La phrase est découpée mot par mot (séparateur = espace).",
+    "  - Tokens non-cliquables (grisés) : _____ et tout token commençant par '('.",
+    "  - Ponctuation seule ('?', '.') → token vide après strip → non-cliquable automatique.",
+    "  - Ponctuation COLLEE à un mot ('victoires,' ou 'belle.') → token cliquable, la",
+    "    ponctuation est retirée pour la comparaison ('victoires,' → raw 'victoires').",
+    "  - PIEGE 'l\\'' ELIDEE : si le pronom COD est collé à l'auxiliaire ('l\\'a', 'l\\'ont'),",
+    "    le tokeniseur ne peut pas les séparer en deux tokens. EVITER ce type de phrase",
+    "    ou reformuler (ex: remplacer 'le professeur l\\'a écrite' par",
+    "    'le professeur les a expliquées' avec un COD non-élidé).",
+    "",
+    "SCORING (AccordPPScreen) :",
+    "  - PP correct, cas simple (sans_aux / avec_etre / avoir_cod_apres) : 1.0",
+    "  - PP correct + COD bien identifié (avoir_cod_avant)               : 1.0",
+    "  - PP correct + COD raté           (avoir_cod_avant)               : 0.5",
+    "  - PP faux (quel que soit le cas)                                  : 0.0",
+    "  - Une seule tentative par phrase (pas d'indice, pas de rééssai).",
+    "",
+    "POUR AJOUTER DES PHRASES — PROCEDURE OBLIGATOIRE :",
+    "  ATTENTION : le seed est idempotent. Une fois l'exercice présent en base,",
+    "  les nouvelles phrases du JSON ne sont PAS automatiquement importées.",
+    "  Toute modification du JSON (ajout, correction) nécessite une migration.",
+    "",
+    "  Étape 1 : modifier ce fichier JSON (ajouter/corriger dans 'words').",
+    "    - Chaque entrée doit avoir : source, canonical, _comment, et les deux forms.",
+    "    - Ne pas ajouter de dicts sans clé 'source' dans le tableau words (le seed planterait).",
+    "    - Bien choisir __case__ et renseigner __cod__ (voir règles ci-dessus).",
+    "    - Mettre à jour le compteur 'BANQUE ACTUELLE' dans ces notes.",
+    "",
+    "  Étape 2 : ajouter une migration dans db.py (_MIGRATIONS list).",
+    "    - Copier le bloc de la Migration 2 (purge de l'exercice) en l'ajoutant à la fin.",
+    "    - La migration supprime les anciennes données ; le seed les recréera au démarrage.",
+    "    - Ne jamais modifier une migration déjà appliquée (elle ne se rejoue pas).",
+    "",
+    "  Étape 3 : relancer l'appli. Le bootstrap applique la migration puis re-seed.",
+    "",
+    "BANQUE ACTUELLE : 100 phrases",
+    "  sans_auxiliaire  : 25",
+    "  avec_etre        : 25",
+    "  avoir_cod_apres  : 25",
+    "  avoir_cod_avant  : 25",
+    "  SESSION_LENGTH = 20 → tirage aléatoire parmi les 100."
+  ],
+  "slug": "accord_participe_passe",
+  "name": "Français - Accord du participe passé",
+  "words": [
+
+    {
+      "_comment": "sans_auxiliaire — blessée s'accorde avec 'la princesse' (fém. sing.)",
+      "source": "La princesse _____ (blesser) reprit son chemin.",
+      "canonical": "blessée",
+      "forms": [
+        {"label": "__case__", "value": "sans_auxiliaire"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — vaincus s'accorde avec 'les guerriers' (masc. plur.)",
+      "source": "Les guerriers _____ (vaincre) rentrèrent chez eux.",
+      "canonical": "vaincus",
+      "forms": [
+        {"label": "__case__", "value": "sans_auxiliaire"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — reçue s'accorde avec 'la lettre' (fém. sing.)",
+      "source": "La lettre _____ (recevoir) hier était très importante.",
+      "canonical": "reçue",
+      "forms": [
+        {"label": "__case__", "value": "sans_auxiliaire"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — cueillies s'accorde avec 'des fleurs' (fém. plur.)",
+      "source": "Des fleurs _____ (cueillir) ornaient la table.",
+      "canonical": "cueillies",
+      "forms": [
+        {"label": "__case__", "value": "sans_auxiliaire"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — fini s'accorde avec 'le livre' (masc. sing.)",
+      "source": "Le livre _____ (finir) traînait sur la table.",
+      "canonical": "fini",
+      "forms": [
+        {"label": "__case__", "value": "sans_auxiliaire"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — fermée s'accorde avec 'la porte' (fém. sing.)",
+      "source": "La porte _____ (fermer) était verrouillée.",
+      "canonical": "fermée",
+      "forms": [
+        {"label": "__case__", "value": "sans_auxiliaire"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — corrigés s'accorde avec 'les devoirs' (masc. plur.)",
+      "source": "Les devoirs _____ (corriger) étaient parfaits.",
+      "canonical": "corrigés",
+      "forms": [
+        {"label": "__case__", "value": "sans_auxiliaire"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — fanées s'accorde avec 'les roses' (fém. plur.)",
+      "source": "Les roses _____ (faner) jonchaient le sol.",
+      "canonical": "fanées",
+      "forms": [
+        {"label": "__case__", "value": "sans_auxiliaire"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — cassé s'accorde avec 'le vase' (masc. sing.)",
+      "source": "Le vase _____ (casser) était irréparable.",
+      "canonical": "cassé",
+      "forms": [
+        {"label": "__case__", "value": "sans_auxiliaire"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — ouverte s'accorde avec 'la fenêtre' (fém. sing.)",
+      "source": "La fenêtre _____ (ouvrir) laissait entrer le vent.",
+      "canonical": "ouverte",
+      "forms": [
+        {"label": "__case__", "value": "sans_auxiliaire"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — fatigués s'accorde avec 'les enfants' (masc. plur.)",
+      "source": "Les enfants _____ (fatiguer) s'endormirent vite.",
+      "canonical": "fatigués",
+      "forms": [
+        {"label": "__case__", "value": "sans_auxiliaire"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — brûlée s'accorde avec 'la tarte' (fém. sing.)",
+      "source": "La tarte _____ (brûler) sentait mauvais.",
+      "canonical": "brûlée",
+      "forms": [
+        {"label": "__case__", "value": "sans_auxiliaire"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — peint s'accorde avec 'le mur' (masc. sing.)",
+      "source": "Le mur _____ (peindre) séchait au soleil.",
+      "canonical": "peint",
+      "forms": [
+        {"label": "__case__", "value": "sans_auxiliaire"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — capturées s'accorde avec 'les guerrières' (fém. plur.)",
+      "source": "Les guerrières _____ (capturer) furent libérées le lendemain.",
+      "canonical": "capturées",
+      "forms": [
+        {"label": "__case__", "value": "sans_auxiliaire"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — préparé s'accorde avec 'le repas' (masc. sing.)",
+      "source": "Le repas _____ (préparer) sentait très bon.",
+      "canonical": "préparé",
+      "forms": [
+        {"label": "__case__", "value": "sans_auxiliaire"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — apprise s'accorde avec 'la chanson' (fém. sing.)",
+      "source": "La chanson _____ (apprendre) par cœur était belle.",
+      "canonical": "apprise",
+      "forms": [
+        {"label": "__case__", "value": "sans_auxiliaire"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — faits s'accorde avec 'les exercices' (masc. plur.)",
+      "source": "Les exercices _____ (faire) étaient soigneusement rangés.",
+      "canonical": "faits",
+      "forms": [
+        {"label": "__case__", "value": "sans_auxiliaire"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — écrite s'accorde avec 'la lettre' (fém. sing.)",
+      "source": "La lettre _____ (écrire) attendait sur le bureau.",
+      "canonical": "écrite",
+      "forms": [
+        {"label": "__case__", "value": "sans_auxiliaire"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — construit s'accorde avec 'le château' (masc. sing.)",
+      "source": "Le château _____ (construire) au Moyen Âge est magnifique.",
+      "canonical": "construit",
+      "forms": [
+        {"label": "__case__", "value": "sans_auxiliaire"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — prises s'accorde avec 'les photos' (fém. plur.)",
+      "source": "Les photos _____ (prendre) pendant les vacances sont jolies.",
+      "canonical": "prises",
+      "forms": [
+        {"label": "__case__", "value": "sans_auxiliaire"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — cousue s'accorde avec 'la robe' (fém. sing.)",
+      "source": "La robe _____ (coudre) par ma grand-mère est précieuse.",
+      "canonical": "cousue",
+      "forms": [
+        {"label": "__case__", "value": "sans_auxiliaire"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — vidées s'accorde avec 'les bouteilles' (fém. plur.)",
+      "source": "Les bouteilles _____ (vider) traînaient partout.",
+      "canonical": "vidées",
+      "forms": [
+        {"label": "__case__", "value": "sans_auxiliaire"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — décoré s'accorde avec 'le gâteau' (masc. sing.)",
+      "source": "Le gâteau _____ (décorer) avec soin était magnifique.",
+      "canonical": "décoré",
+      "forms": [
+        {"label": "__case__", "value": "sans_auxiliaire"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — réparée s'accorde avec 'la voiture' (fém. sing.)",
+      "source": "La voiture _____ (réparer) démarre enfin.",
+      "canonical": "réparée",
+      "forms": [
+        {"label": "__case__", "value": "sans_auxiliaire"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "sans_auxiliaire — perdues s'accorde avec 'les clés' (fém. plur.)",
+      "source": "Les clés _____ (perdre) ont été retrouvées.",
+      "canonical": "perdues",
+      "forms": [
+        {"label": "__case__", "value": "sans_auxiliaire"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+
+    {
+      "_comment": "avec_etre — parti s'accorde avec le sujet 'Silence' (masc. sing. dans le roman)",
+      "source": "Silence est _____ (partir) au combat à l'aube.",
+      "canonical": "parti",
+      "forms": [
+        {"label": "__case__", "value": "avec_etre"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avec_etre — allés s'accorde avec le sujet 'nous' (masc. plur. par défaut)",
+      "source": "Nous sommes _____ (aller) au cinéma dimanche dernier.",
+      "canonical": "allés",
+      "forms": [
+        {"label": "__case__", "value": "avec_etre"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avec_etre — tombée s'accorde avec le sujet 'la princesse' (fém. sing.)",
+      "source": "La princesse est _____ (tomber) de son cheval.",
+      "canonical": "tombée",
+      "forms": [
+        {"label": "__case__", "value": "avec_etre"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avec_etre — arrivées s'accorde avec le sujet 'les guerrières' (fém. plur.)",
+      "source": "Les guerrières sont _____ (arriver) au château.",
+      "canonical": "arrivées",
+      "forms": [
+        {"label": "__case__", "value": "avec_etre"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avec_etre — rentrées s'accorde avec le sujet 'Marie et Sophie' (fém. plur.)",
+      "source": "Marie et Sophie sont _____ (rentrer) tard hier soir.",
+      "canonical": "rentrées",
+      "forms": [
+        {"label": "__case__", "value": "avec_etre"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avec_etre — arrivée s'accorde avec le sujet 'Emma' (fém. sing.)",
+      "source": "Emma est _____ (arriver) en retard.",
+      "canonical": "arrivée",
+      "forms": [
+        {"label": "__case__", "value": "avec_etre"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avec_etre — sortis s'accorde avec le sujet 'les garçons' (masc. plur.)",
+      "source": "Les garçons sont _____ (sortir) sans permission.",
+      "canonical": "sortis",
+      "forms": [
+        {"label": "__case__", "value": "avec_etre"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avec_etre — parties s'accorde avec le sujet 'les filles' (fém. plur.)",
+      "source": "Les filles sont _____ (partir) en voyage scolaire.",
+      "canonical": "parties",
+      "forms": [
+        {"label": "__case__", "value": "avec_etre"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avec_etre — mort s'accorde avec le sujet 'le chien' (masc. sing.)",
+      "source": "Le chien est _____ (mourir) à un âge avancé.",
+      "canonical": "mort",
+      "forms": [
+        {"label": "__case__", "value": "avec_etre"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avec_etre — née s'accorde avec le sujet 'la reine' (fém. sing.)",
+      "source": "La reine est _____ (naître) au printemps.",
+      "canonical": "née",
+      "forms": [
+        {"label": "__case__", "value": "avec_etre"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avec_etre — venus s'accorde avec le sujet 'nous' (masc. plur. par défaut)",
+      "source": "Nous sommes _____ (venir) vous rendre visite.",
+      "canonical": "venus",
+      "forms": [
+        {"label": "__case__", "value": "avec_etre"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avec_etre — montés s'accorde avec le sujet 'Tom et Léa' (masc. plur. mixte)",
+      "source": "Tom et Léa sont _____ (monter) au sommet.",
+      "canonical": "montés",
+      "forms": [
+        {"label": "__case__", "value": "avec_etre"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avec_etre pronominal — blessée s'accorde avec le sujet 'la guerrière' (fém. sing.)",
+      "source": "La guerrière s'est _____ (blesser) au combat.",
+      "canonical": "blessée",
+      "forms": [
+        {"label": "__case__", "value": "avec_etre"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avec_etre pronominal — battus s'accorde avec le sujet 'les soldats' (masc. plur.)",
+      "source": "Les soldats se sont _____ (battre) courageusement.",
+      "canonical": "battus",
+      "forms": [
+        {"label": "__case__", "value": "avec_etre"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avec_etre — tombé s'accorde avec le sujet 'Pierre' (masc. sing.)",
+      "source": "Pierre est _____ (tomber) dans l'escalier.",
+      "canonical": "tombé",
+      "forms": [
+        {"label": "__case__", "value": "avec_etre"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avec_etre — revenues s'accorde avec le sujet 'mes sœurs' (fém. plur.)",
+      "source": "Mes sœurs sont _____ (revenir) de Paris.",
+      "canonical": "revenues",
+      "forms": [
+        {"label": "__case__", "value": "avec_etre"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avec_etre — devenu s'accorde avec le sujet 'le prince' (masc. sing.)",
+      "source": "Le prince est _____ (devenir) roi.",
+      "canonical": "devenu",
+      "forms": [
+        {"label": "__case__", "value": "avec_etre"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avec_etre pronominal — levée s'accorde avec le sujet 'Sophie' (fém. sing.)",
+      "source": "Sophie s'est _____ (lever) très tôt ce matin.",
+      "canonical": "levée",
+      "forms": [
+        {"label": "__case__", "value": "avec_etre"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avec_etre — restés s'accorde avec le sujet 'les élèves' (masc. plur.)",
+      "source": "Les élèves sont _____ (rester) après la classe.",
+      "canonical": "restés",
+      "forms": [
+        {"label": "__case__", "value": "avec_etre"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avec_etre — tombée s'accorde avec le sujet 'la neige' (fém. sing.)",
+      "source": "La neige est _____ (tomber) toute la nuit.",
+      "canonical": "tombée",
+      "forms": [
+        {"label": "__case__", "value": "avec_etre"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avec_etre — descendus s'accorde avec le sujet 'les voyageurs' (masc. plur.)",
+      "source": "Les voyageurs sont _____ (descendre) du train.",
+      "canonical": "descendus",
+      "forms": [
+        {"label": "__case__", "value": "avec_etre"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avec_etre — passés s'accorde avec le sujet 'nous' (masc. plur. par défaut)",
+      "source": "Nous sommes _____ (passer) par le parc.",
+      "canonical": "passés",
+      "forms": [
+        {"label": "__case__", "value": "avec_etre"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avec_etre — entrés s'accorde avec le sujet 'les touristes' (masc. plur.)",
+      "source": "Les touristes sont _____ (entrer) dans le musée.",
+      "canonical": "entrés",
+      "forms": [
+        {"label": "__case__", "value": "avec_etre"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avec_etre pronominal — trompé s'accorde avec le sujet 'Théo' (masc. sing.)",
+      "source": "Théo s'est _____ (tromper) dans son calcul.",
+      "canonical": "trompé",
+      "forms": [
+        {"label": "__case__", "value": "avec_etre"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avec_etre pronominal — réveillée s'accorde avec le sujet 'Lola' (fém. sing.)",
+      "source": "Lola s'est _____ (réveiller) en retard.",
+      "canonical": "réveillée",
+      "forms": [
+        {"label": "__case__", "value": "avec_etre"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+
+    {
+      "_comment": "avoir_cod_apres — COD 'son combat' est après 'a' → pas d'accord",
+      "source": "Silence a _____ (perdre) son combat.",
+      "canonical": "perdu",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_apres"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'leurs combats' est après 'ont' → pas d'accord",
+      "source": "Les chevaliers ont _____ (mener) leurs combats avec courage.",
+      "canonical": "mené",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_apres"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'un cadeau' est après 'ont' → pas d'accord",
+      "source": "Les parents ont _____ (acheter) un cadeau pour leur fille.",
+      "canonical": "acheté",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_apres"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'un livre' est après 'a' → pas d'accord",
+      "source": "Marie a _____ (lire) un livre intéressant.",
+      "canonical": "lu",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_apres"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'un ordre' est après 'a' → pas d'accord",
+      "source": "Le roi a _____ (donner) un ordre à ses soldats.",
+      "canonical": "donné",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_apres"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'un repas' est après 'a' → pas d'accord",
+      "source": "La fée a _____ (préparer) un repas pour ce soir.",
+      "canonical": "préparé",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_apres"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — PIEGE : 'lui' devant le verbe = COI (pas COD) → pas d'accord",
+      "source": "Par son courage, Silence lui a _____ (redonner) confiance.",
+      "canonical": "redonné",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_apres"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'une cabane' est après 'avons' → pas d'accord",
+      "source": "Nous avons _____ (construire) une cabane dans la forêt.",
+      "canonical": "construit",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_apres"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'une lettre' est après 'a' → pas d'accord",
+      "source": "Paul a _____ (écrire) une lettre à sa mère.",
+      "canonical": "écrit",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_apres"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'tous les gâteaux' est après 'ont' → pas d'accord",
+      "source": "Les enfants ont _____ (manger) tous les gâteaux.",
+      "canonical": "mangé",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_apres"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'la règle' est après 'a' → pas d'accord",
+      "source": "Le professeur a _____ (expliquer) la règle.",
+      "canonical": "expliqué",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_apres"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'un film policier' est après 'avons' → pas d'accord",
+      "source": "Nous avons _____ (regarder) un film policier.",
+      "canonical": "regardé",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_apres"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'une belle robe' est après 'a' → pas d'accord",
+      "source": "Ma sœur a _____ (choisir) une belle robe.",
+      "canonical": "choisi",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_apres"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'leurs exercices' est après 'ont' → pas d'accord",
+      "source": "Les élèves ont _____ (finir) leurs exercices.",
+      "canonical": "fini",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_apres"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'une trêve' est après 'a' → pas d'accord",
+      "source": "Le roi a _____ (décider) une trêve.",
+      "canonical": "décidé",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_apres"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'ton cahier' est après 'as' → pas d'accord",
+      "source": "Tu as _____ (oublier) ton cahier à l'école.",
+      "canonical": "oublié",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_apres"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'un cadeau surprise' est après 'a' → pas d'accord",
+      "source": "Elle a _____ (recevoir) un cadeau surprise.",
+      "canonical": "reçu",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_apres"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'leur ville' est après 'ont' → pas d'accord",
+      "source": "Les guerriers ont _____ (défendre) leur ville.",
+      "canonical": "défendu",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_apres"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'ce poème en latin' est après 'a' → pas d'accord",
+      "source": "Pierre a _____ (traduire) ce poème en latin.",
+      "canonical": "traduit",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_apres"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'leur voiture' est après 'ont' → pas d'accord",
+      "source": "Ils ont _____ (vendre) leur voiture.",
+      "canonical": "vendu",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_apres"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'le salon en bleu' est après 'avez' → pas d'accord",
+      "source": "Vous avez _____ (peindre) le salon en bleu.",
+      "canonical": "peint",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_apres"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'une belle chanson' est après 'ai' → pas d'accord",
+      "source": "J'ai _____ (entendre) une belle chanson à la radio.",
+      "canonical": "entendu",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_apres"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — PIEGE : 'lui' devant = COI, COD 'une récompense' après → pas d'accord",
+      "source": "Le roi lui a _____ (promettre) une récompense.",
+      "canonical": "promis",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_apres"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'le bus pendant une heure' est après 'avons' → pas d'accord",
+      "source": "Nous avons _____ (attendre) le bus pendant une heure.",
+      "canonical": "attendu",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_apres"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_apres — COD 'la rivière' est après 'ont' → pas d'accord",
+      "source": "Les soldats ont _____ (traverser) la rivière.",
+      "canonical": "traversé",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_apres"},
+        {"label": "__cod__",  "value": ""}
+      ]
+    },
+
+    {
+      "_comment": "avoir_cod_avant — pronom personnel 'les' (masc. plur.) avant 'a' → arrêtés",
+      "source": "Les suspects, la police les a _____ (arrêter).",
+      "canonical": "arrêtés",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_avant"},
+        {"label": "__cod__",  "value": "les"}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — déterminant interrogatif 'Quelle robe' (fém. sing.) avant 'a-t-elle' → choisie",
+      "source": "Quelle robe Marie a-t-elle _____ (choisir) ?",
+      "canonical": "choisie",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_avant"},
+        {"label": "__cod__",  "value": "Quelle robe"}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom relatif 'que' (antécédent 'la lettre', fém. sing.) avant 'a' → écrite",
+      "source": "La lettre que Paul a _____ (écrire) est très belle.",
+      "canonical": "écrite",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_avant"},
+        {"label": "__cod__",  "value": "que"}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom personnel 'les' (fém. plur. = 'ces fleurs') avant 'ai' → cueillies",
+      "source": "Ces fleurs, je les ai _____ (cueillir) ce matin.",
+      "canonical": "cueillies",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_avant"},
+        {"label": "__cod__",  "value": "les"}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — déterminant interrogatif 'Quelles victoires' (fém. plur.) avant 'ont-ils' → remportées",
+      "source": "Quelles victoires les chevaliers ont-ils _____ (remporter) ?",
+      "canonical": "remportées",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_avant"},
+        {"label": "__cod__",  "value": "Quelles victoires"}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom personnel 'les' (fém. plur. = 'ces règles') avant 'a' → expliquées",
+      "source": "Ces règles, le professeur les a _____ (expliquer) clairement.",
+      "canonical": "expliquées",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_avant"},
+        {"label": "__cod__",  "value": "les"}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — déterminant interrogatif 'Quelles bagues' (fém. plur.) avant 'a-t-elle' → essayées",
+      "source": "Quelles bagues Sophie a-t-elle _____ (essayer) ?",
+      "canonical": "essayées",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_avant"},
+        {"label": "__cod__",  "value": "Quelles bagues"}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom relatif 'que' (antécédent 'les livres', masc. plur.) avant 'ai' → lus",
+      "source": "Les livres que j'ai _____ (lire) cet été étaient passionnants.",
+      "canonical": "lus",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_avant"},
+        {"label": "__cod__",  "value": "que"}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom relatif 'que' (antécédent 'la pomme', fém. sing.) avant 'ai' → mangée",
+      "source": "La pomme que j'ai _____ (manger) était délicieuse.",
+      "canonical": "mangée",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_avant"},
+        {"label": "__cod__",  "value": "que"}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom relatif 'que' (antécédent 'les photos', fém. plur.) avant 'ai' → prises",
+      "source": "Voilà les photos que j'ai _____ (prendre) pendant les vacances.",
+      "canonical": "prises",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_avant"},
+        {"label": "__cod__",  "value": "que"}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom personnel 'les' (masc. plur. = 'ces exercices') avant 'a' → corrigés",
+      "source": "Ces exercices, le professeur les a _____ (corriger).",
+      "canonical": "corrigés",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_avant"},
+        {"label": "__cod__",  "value": "les"}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom personnel 'les' (masc. plur. = 'les soldats') avant 'a' → envoyés",
+      "source": "Les soldats, le roi les a _____ (envoyer) au combat.",
+      "canonical": "envoyés",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_avant"},
+        {"label": "__cod__",  "value": "les"}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom personnel 'les' (masc. plur. = 'ces gâteaux') avant 'avons' → mangés",
+      "source": "Ces gâteaux, nous les avons _____ (manger) hier soir.",
+      "canonical": "mangés",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_avant"},
+        {"label": "__cod__",  "value": "les"}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom personnel 'les' (fém. plur. = 'ces chanteuses') avant 'a' → applaudies",
+      "source": "Ces chanteuses, tout le monde les a _____ (applaudir).",
+      "canonical": "applaudies",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_avant"},
+        {"label": "__cod__",  "value": "les"}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom relatif 'que' (antécédent 'la chanson', fém. sing.) avant 'as' → chantée",
+      "source": "La chanson que tu as _____ (chanter) était magnifique.",
+      "canonical": "chantée",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_avant"},
+        {"label": "__cod__",  "value": "que"}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom relatif 'que' (antécédent 'les devoirs', masc. plur.) avant 'ai' → rendus",
+      "source": "Les devoirs que j'ai _____ (rendre) étaient bien faits.",
+      "canonical": "rendus",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_avant"},
+        {"label": "__cod__",  "value": "que"}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom relatif 'que' (antécédent 'le dessin', masc. sing.) avant 'a' → fait",
+      "source": "Le dessin que Léa a _____ (faire) est très beau.",
+      "canonical": "fait",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_avant"},
+        {"label": "__cod__",  "value": "que"}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom relatif 'que' (antécédent 'la robe', fém. sing.) avant 'a' → confectionnée",
+      "source": "La robe que Sophie a _____ (confectionner) est magnifique.",
+      "canonical": "confectionnée",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_avant"},
+        {"label": "__cod__",  "value": "que"}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom relatif 'que' (antécédent 'le film', masc. sing.) avant 'avons' → vu",
+      "source": "Le film que nous avons _____ (voir) était effrayant.",
+      "canonical": "vu",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_avant"},
+        {"label": "__cod__",  "value": "que"}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom relatif 'que' (antécédent 'les erreurs', fém. plur.) avant 'as' → faites",
+      "source": "Les erreurs que tu as _____ (faire) sont corrigées.",
+      "canonical": "faites",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_avant"},
+        {"label": "__cod__",  "value": "que"}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — pronom relatif 'que' (antécédent 'le château', masc. sing.) avant 'ont' → construit",
+      "source": "Le château que les architectes ont _____ (construire) est immense.",
+      "canonical": "construit",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_avant"},
+        {"label": "__cod__",  "value": "que"}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — déterminant interrogatif 'Quel livre' (masc. sing.) avant 'as-tu' → choisi",
+      "source": "Quel livre as-tu _____ (choisir) ?",
+      "canonical": "choisi",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_avant"},
+        {"label": "__cod__",  "value": "Quel livre"}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — déterminant interrogatif 'Quelle recette' (fém. sing.) avant 'a-t-elle' → inventée",
+      "source": "Quelle recette a-t-elle _____ (inventer) ?",
+      "canonical": "inventée",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_avant"},
+        {"label": "__cod__",  "value": "Quelle recette"}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — déterminant interrogatif 'Quels films' (masc. plur.) avant 'avez-vous' → regardés",
+      "source": "Quels films avez-vous _____ (regarder) ce week-end ?",
+      "canonical": "regardés",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_avant"},
+        {"label": "__cod__",  "value": "Quels films"}
+      ]
+    },
+    {
+      "_comment": "avoir_cod_avant — déterminant interrogatif 'Quelles erreurs' (fém. plur.) avant 'as-tu' → commises",
+      "source": "Quelles erreurs as-tu _____ (commettre) ?",
+      "canonical": "commises",
+      "forms": [
+        {"label": "__case__", "value": "avoir_cod_avant"},
+        {"label": "__cod__",  "value": "Quelles erreurs"}
+      ]
+    }
+  ]
+}

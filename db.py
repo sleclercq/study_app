@@ -43,80 +43,185 @@ def _connect(db_path: Path = _DB_PATH) -> sqlite3.Connection:
     return conn
 
 
+# ---------------------------------------------------------------------------
+# Migration system
+# ---------------------------------------------------------------------------
+#
+# Each entry in _MIGRATIONS is a SQL script (string) that upgrades the schema
+# from the previous version to that version.  The index (0-based) + 1 is the
+# target version number, so _MIGRATIONS[0] brings a blank DB to version 1,
+# _MIGRATIONS[1] brings version 1 to version 2, etc.
+#
+# Rules for adding future migrations:
+#   1. Append a new string to _MIGRATIONS - never edit existing entries.
+#   2. Use ALTER TABLE / CREATE TABLE / CREATE INDEX - never DROP unless you
+#      are 100% sure the column/table is unused.
+#   3. Keep each migration idempotent where possible (IF NOT EXISTS, etc.).
+#   4. The user_version pragma is updated automatically after each script runs.
+#
+# Schema version is stored in SQLite's built-in PRAGMA user_version (integer).
+# A value of 0 means "never versioned" (either a brand-new file or a DB
+# created before this migration system was introduced).
+
+_MIGRATIONS: list[str] = [
+    # -----------------------------------------------------------------------
+    # Migration 1 - initial schema (all tables that existed before versioning)
+    # -----------------------------------------------------------------------
+    """
+    CREATE TABLE IF NOT EXISTS exercises (
+        id   INTEGER PRIMARY KEY AUTOINCREMENT,
+        slug TEXT UNIQUE NOT NULL,
+        name TEXT NOT NULL
+    );
+
+    -- Each word in an exercise.
+    -- source    = the prompt shown (e.g. the French word "aimer")
+    -- canonical = the primary correct answer (e.g. the Latin infinitive "amare")
+    --             For exercises without a canonical (e.g. pure conjugation drills),
+    --             set canonical = '' and omit infinitive questions in quiz logic.
+    CREATE TABLE IF NOT EXISTS words (
+        id          INTEGER PRIMARY KEY AUTOINCREMENT,
+        exercise_id INTEGER NOT NULL REFERENCES exercises(id),
+        source      TEXT NOT NULL,
+        canonical   TEXT NOT NULL
+    );
+
+    -- Conjugated / declined / irregular forms of a word.
+    -- label = the label shown to the student (e.g. "1re pers. du singulier")
+    -- value = the expected answer (e.g. "amo")
+    -- To add a new form type (e.g. "genitif", "passe simple"), just insert rows here;
+    -- no schema change required.
+    CREATE TABLE IF NOT EXISTS forms (
+        id      INTEGER PRIMARY KEY AUTOINCREMENT,
+        word_id INTEGER NOT NULL REFERENCES words(id),
+        label   TEXT NOT NULL,
+        value   TEXT NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS players (
+        id   INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT UNIQUE NOT NULL
+    );
+
+    -- score is REAL (float) to store fractional points (1.0 / 0.5 / 0.25 per attempt).
+    -- total is the number of questions in the session (may be < SESSION_LENGTH
+    -- if the player deselected many verbs).
+    CREATE TABLE IF NOT EXISTS sessions (
+        id          INTEGER PRIMARY KEY AUTOINCREMENT,
+        player_id   INTEGER NOT NULL REFERENCES players(id),
+        exercise_id INTEGER NOT NULL REFERENCES exercises(id),
+        played_at   DATETIME DEFAULT CURRENT_TIMESTAMP,
+        score       REAL NOT NULL,
+        total       INTEGER NOT NULL
+    );
+
+    -- Per-player word enable/disable preferences for each exercise.
+    -- A missing row means "enabled" (default = all words active).
+    -- enabled = 1 (active) or 0 (skipped by this player).
+    CREATE TABLE IF NOT EXISTS player_word_prefs (
+        player_id INTEGER NOT NULL REFERENCES players(id),
+        word_id   INTEGER NOT NULL REFERENCES words(id),
+        enabled   INTEGER NOT NULL DEFAULT 1,
+        PRIMARY KEY (player_id, word_id)
+    );
+    """,
+    # -----------------------------------------------------------------------
+    # Migration 2 - purge the accord_participe_passe exercise seeded in its
+    # first (incomplete) format so it is re-seeded on next startup from the
+    # new JSON that stores __case__ / __cod__ metadata in the forms table.
+    # Safe: the exercise was brand-new and had no player sessions yet.
+    # -----------------------------------------------------------------------
+    """
+    DELETE FROM player_word_prefs WHERE word_id IN (
+        SELECT id FROM words WHERE exercise_id IN (
+            SELECT id FROM exercises WHERE slug = 'accord_participe_passe'
+        )
+    );
+    DELETE FROM sessions WHERE exercise_id IN (
+        SELECT id FROM exercises WHERE slug = 'accord_participe_passe'
+    );
+    DELETE FROM forms WHERE word_id IN (
+        SELECT id FROM words WHERE exercise_id IN (
+            SELECT id FROM exercises WHERE slug = 'accord_participe_passe'
+        )
+    );
+    DELETE FROM words WHERE exercise_id IN (
+        SELECT id FROM exercises WHERE slug = 'accord_participe_passe'
+    );
+    DELETE FROM exercises WHERE slug = 'accord_participe_passe';
+    """,
+    # -----------------------------------------------------------------------
+    # Migration 3 - purge and re-seed accord_participe_passe again: bank
+    # expanded from 27 to 100 sentences (25 per grammatical case).
+    # -----------------------------------------------------------------------
+    """
+    DELETE FROM player_word_prefs WHERE word_id IN (
+        SELECT id FROM words WHERE exercise_id IN (
+            SELECT id FROM exercises WHERE slug = 'accord_participe_passe'
+        )
+    );
+    DELETE FROM sessions WHERE exercise_id IN (
+        SELECT id FROM exercises WHERE slug = 'accord_participe_passe'
+    );
+    DELETE FROM forms WHERE word_id IN (
+        SELECT id FROM words WHERE exercise_id IN (
+            SELECT id FROM exercises WHERE slug = 'accord_participe_passe'
+        )
+    );
+    DELETE FROM words WHERE exercise_id IN (
+        SELECT id FROM exercises WHERE slug = 'accord_participe_passe'
+    );
+    DELETE FROM exercises WHERE slug = 'accord_participe_passe';
+    """,
+]
+
+
+def _apply_migrations(db_path: Path = _DB_PATH) -> None:
+    """
+    Apply any pending schema migrations to the database.
+
+    Uses SQLite's built-in PRAGMA user_version to track which migrations have
+    already been applied.  Safe to call on every startup - it is a no-op when
+    the DB is already at the latest version.
+
+    Handles legacy databases (created before this system was introduced) by
+    detecting existing tables and stamping them at version 1 without re-running
+    the DDL.
+    """
+    conn = sqlite3.connect(str(db_path))
+    try:
+        current_version = conn.execute("PRAGMA user_version").fetchone()[0]
+
+        if current_version == 0:
+            # Check whether the DB already contains our tables (legacy DB created
+            # before the migration system existed).  If so, mark it as version 1
+            # without re-running migration 1 (all tables already exist).
+            row = conn.execute(
+                "SELECT 1 FROM sqlite_master WHERE type='table' AND name='exercises'"
+            ).fetchone()
+            if row is not None:
+                conn.execute(f"PRAGMA user_version = {len(_MIGRATIONS)}")
+                conn.commit()
+                return
+
+        target_version = len(_MIGRATIONS)
+        if current_version >= target_version:
+            return  # Already up to date.
+
+        for i in range(current_version, target_version):
+            version = i + 1
+            # executescript issues an implicit COMMIT before running, so each
+            # migration runs in its own transaction.
+            conn.executescript(_MIGRATIONS[i])
+            conn.execute(f"PRAGMA user_version = {version}")
+            conn.commit()
+    finally:
+        conn.close()
+
+
 def init_db(db_path: Path = _DB_PATH) -> None:
-    """
-    Create all tables if they don't exist yet. Safe to call on every startup.
-
-    Table purposes:
-      exercises  - metadata for each exercise set (slug matches JSON filename)
-      words      - one entry per source word in an exercise
-      forms      - conjugated/declined/irregular forms of a word
-                   label = human-readable name shown to the student (e.g. "1re pers. du sing.")
-                   value = expected answer (e.g. "amo")
-      players    - named players (children), unique by name
-      sessions   - completed quiz sessions; score is REAL to allow 0.5 half-points
-    """
-    with _connect(db_path) as conn:
-        conn.executescript("""
-            CREATE TABLE IF NOT EXISTS exercises (
-                id   INTEGER PRIMARY KEY AUTOINCREMENT,
-                slug TEXT UNIQUE NOT NULL,
-                name TEXT NOT NULL
-            );
-
-            -- Each word in an exercise.
-            -- source    = the prompt shown (e.g. the French word "aimer")
-            -- canonical = the primary correct answer (e.g. the Latin infinitive "amare")
-            --             For exercises without a canonical (e.g. pure conjugation drills),
-            --             set canonical = '' and omit infinitive questions in quiz logic.
-            CREATE TABLE IF NOT EXISTS words (
-                id          INTEGER PRIMARY KEY AUTOINCREMENT,
-                exercise_id INTEGER NOT NULL REFERENCES exercises(id),
-                source      TEXT NOT NULL,
-                canonical   TEXT NOT NULL
-            );
-
-            -- Conjugated / declined / irregular forms of a word.
-            -- label = the label shown to the student (e.g. "1re pers. du singulier")
-            -- value = the expected answer (e.g. "amo")
-            -- To add a new form type (e.g. "génitif", "passé simple"), just insert rows here;
-            -- no schema change required.
-            CREATE TABLE IF NOT EXISTS forms (
-                id      INTEGER PRIMARY KEY AUTOINCREMENT,
-                word_id INTEGER NOT NULL REFERENCES words(id),
-                label   TEXT NOT NULL,
-                value   TEXT NOT NULL
-            );
-
-            CREATE TABLE IF NOT EXISTS players (
-                id   INTEGER PRIMARY KEY AUTOINCREMENT,
-                name TEXT UNIQUE NOT NULL
-            );
-
-            -- score is REAL (float) to store fractional points (1.0 / 0.5 / 0.25 per attempt).
-            -- total is the number of questions in the session (may be < SESSION_LENGTH
-            -- if the player deselected many verbs).
-            CREATE TABLE IF NOT EXISTS sessions (
-                id          INTEGER PRIMARY KEY AUTOINCREMENT,
-                player_id   INTEGER NOT NULL REFERENCES players(id),
-                exercise_id INTEGER NOT NULL REFERENCES exercises(id),
-                played_at   DATETIME DEFAULT CURRENT_TIMESTAMP,
-                score       REAL NOT NULL,
-                total       INTEGER NOT NULL
-            );
-
-            -- Per-player word enable/disable preferences for each exercise.
-            -- A missing row means "enabled" (default = all words active).
-            -- enabled = 1 (active) or 0 (skipped by this player).
-            -- To add per-exercise preferences for other content types, add a
-            -- form_id column here and a separate table if needed.
-            CREATE TABLE IF NOT EXISTS player_word_prefs (
-                player_id INTEGER NOT NULL REFERENCES players(id),
-                word_id   INTEGER NOT NULL REFERENCES words(id),
-                enabled   INTEGER NOT NULL DEFAULT 1,
-                PRIMARY KEY (player_id, word_id)
-            );
-        """)
+    """Apply all pending schema migrations.  Safe to call on every startup."""
+    _apply_migrations(db_path)
 
 
 def seed_exercises(db_path: Path = _DB_PATH, data_dir: Path = _DATA_DIR) -> None:
@@ -453,6 +558,60 @@ def get_fill_blank_questions(
         }
         for word in words
     ]
+
+
+# ---------------------------------------------------------------------------
+# Accord du participe passé question builder
+# ---------------------------------------------------------------------------
+
+def get_accord_pp_questions(
+    exercise_id: int,
+    db_path: Path = _DB_PATH,
+) -> list:
+    """
+    Build the question pool for the 'accord du participe passé' exercise.
+
+    Each sentence (stored as a word row) produces one question dict:
+      type       : "accord_pp"
+      prompt     : full sentence with _____ blank and (infinitif) hint
+      answer     : expected past participle (canonical field)
+      case       : grammatical case — one of:
+                     "sans_auxiliaire"  ppé without auxiliary → agrees like adjective
+                     "avec_etre"        ppé with ÊTRE → agrees with subject
+                     "avoir_cod_apres"  ppé with AVOIR, COD after verb → no agreement
+                     "avoir_cod_avant"  ppé with AVOIR, COD before verb → agrees with COD
+      cod        : text of the COD to identify (avoir_cod_avant only, else "")
+                   Matches the exact token(s) the student must click in the sentence.
+
+    Grammar metadata is stored in the forms table under special labels:
+      __case__ → the case identifier string
+      __cod__  → the COD text (empty for cases other than avoir_cod_avant)
+    """
+    with _connect(db_path) as conn:
+        words = conn.execute(
+            "SELECT id, source, canonical FROM words "
+            "WHERE exercise_id = ? ORDER BY rowid",
+            (exercise_id,),
+        ).fetchall()
+
+    questions = []
+    for word in words:
+        word_id = word["id"]
+        with _connect(db_path) as conn2:
+            forms = conn2.execute(
+                "SELECT label, value FROM forms WHERE word_id = ?", (word_id,)
+            ).fetchall()
+
+        meta = {f["label"]: f["value"] for f in forms}
+        questions.append({
+            "type":   "accord_pp",
+            "prompt": word["source"],
+            "answer": word["canonical"],
+            "case":   meta.get("__case__", ""),
+            "cod":    meta.get("__cod__",  ""),
+        })
+
+    return questions
 
 
 # ---------------------------------------------------------------------------

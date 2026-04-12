@@ -59,6 +59,7 @@ class App(tk.Tk):
             VerbSelectionScreen,
             QuizScreen,
             EnglishQuizScreen,
+            AccordPPScreen,
             ResultsScreen,
         ):
             frame = FrameClass(parent=container, app=self)
@@ -208,6 +209,14 @@ class ExerciseSelectionScreen(tk.Frame):
             font=self.BTN_FONT,
             bg="#7a4a9c", fg="white", activebackground="#6a3a8c",
             command=self._choose_fill_blank, pady=22,
+        ).pack(fill="x", pady=(0, 18))
+
+        tk.Button(
+            self,
+            text="Français - Accord du participe passé",
+            font=self.BTN_FONT,
+            bg="#9c4a4a", fg="white", activebackground="#8c3a3a",
+            command=self._choose_accord_pp, pady=22,
         ).pack(fill="x")
 
         tk.Button(
@@ -246,6 +255,17 @@ class ExerciseSelectionScreen(tk.Frame):
         random.shuffle(all_q)
         app_state["questions"] = all_q[:SESSION_LENGTH]
         self.app.show_frame("QuizScreen")
+
+    def _choose_accord_pp(self) -> None:
+        exercise = db.get_exercise_by_slug("accord_participe_passe")
+        if exercise is None:
+            messagebox.showerror("Erreur", "Exercice introuvable. Vérifie les fichiers data/.")
+            return
+        app_state["exercise"] = exercise
+        all_q = db.get_accord_pp_questions(exercise["id"])
+        random.shuffle(all_q)
+        app_state["questions"] = all_q[:SESSION_LENGTH]
+        self.app.show_frame("AccordPPScreen")
 
 
 # ---------------------------------------------------------------------------
@@ -933,7 +953,454 @@ class EnglishQuizScreen(tk.Frame):
 
 
 # ---------------------------------------------------------------------------
-# Screen 6: Results
+# Screen 6: Accord du participe passé (French grammar)
+# ---------------------------------------------------------------------------
+
+class AccordPPScreen(tk.Frame):
+    """
+    Quiz screen for 'Accord du participe passé'.
+
+    Four grammatical cases are tested (source: data/accord_participe_passe.json):
+      sans_auxiliaire : ppé without auxiliary — agrees like an adjective with
+                        the noun it qualifies.
+      avec_etre       : ppé with auxiliary ÊTRE — always agrees with the subject.
+      avoir_cod_apres : ppé with AVOIR, COD placed AFTER the verb → no agreement.
+      avoir_cod_avant : ppé with AVOIR, COD placed BEFORE the verb → agreement
+                        with the COD. The COD may be a personal pronoun (le/la/les),
+                        the relative pronoun (que), or an interrogative determiner
+                        + noun (quel/quelle/quels/quelles + noun).
+
+    Exercise rules:
+      - ONE attempt per sentence — no hints, no retries.
+      - For avoir_cod_avant questions the student must ALSO identify the COD
+        by clicking on the word(s) in the sentence before submitting.
+      - After submission, colour-coded feedback shows:
+          green  = correct answer / correctly selected COD word
+          red    = wrong answer / wrongly selected word
+          gold   = expected COD word that was missed
+        The grammatical case explanation is always displayed.
+
+    Scoring (per sentence):
+      PP wrong                                        → 0.0
+      PP correct, avoir_cod_avant, COD wrong          → 0.5
+      PP correct + COD correct (or non-avant case)    → 1.0
+    """
+
+    BG         = "#f5f0e8"
+    TITLE_FONT = ("Helvetica", 15, "bold")
+    LABEL_FONT = ("Helvetica", 13)
+    ENTRY_FONT = ("Helvetica", 14)
+    SMALL_FONT = ("Helvetica", 11)
+    TOKEN_FONT = ("Helvetica", 12)
+    BTN_FONT   = ("Helvetica", 13, "bold")
+
+    # Explanations shown to the student after each submission
+    CASE_LABELS = {
+        "sans_auxiliaire": (
+            "Cas : sans auxiliaire — le participe passé s'accorde comme "
+            "un adjectif avec le nom qu'il qualifie."
+        ),
+        "avec_etre": (
+            "Cas : auxiliaire ÊTRE — le participe passé s'accorde toujours "
+            "avec le sujet."
+        ),
+        "avoir_cod_apres": (
+            "Cas : auxiliaire AVOIR — le COD est placé après le verbe : "
+            "pas d'accord."
+        ),
+        "avoir_cod_avant": (
+            "Cas : auxiliaire AVOIR — le COD est placé avant le verbe : "
+            "le participe passé s'accorde avec le COD."
+        ),
+    }
+
+    # Punctuation stripped when normalising tokens for COD comparison
+    _STRIP = ".,;:!?\"'»«()"
+
+    def __init__(self, parent, app):
+        super().__init__(parent, bg=self.BG)
+        self.app = app
+        self._questions:       list  = []
+        self._idx:             int   = 0
+        self._score:           float = 0.0
+        self._submitted:       bool  = False
+        self._selected_tokens: set   = set()   # indices of clicked tokens
+        self._token_labels:    list  = []       # (widget|None, raw_text, is_selectable)
+        self._build_ui()
+
+    # ------------------------------------------------------------------
+    # UI construction (called once at startup)
+    # ------------------------------------------------------------------
+
+    def _build_ui(self) -> None:
+        self.configure(padx=30, pady=14)
+
+        tk.Label(
+            self,
+            text="Français — Accord du participe passé",
+            font=self.TITLE_FONT, bg=self.BG, fg="#3a2a0a",
+        ).pack(pady=(0, 4))
+
+        self._counter_lbl = tk.Label(
+            self, text="", font=self.SMALL_FONT, bg=self.BG, fg="#666"
+        )
+        self._counter_lbl.pack()
+
+        tk.Frame(self, bg="#ccc", height=1).pack(fill="x", pady=(6, 8))
+
+        # Sentence display
+        self._sentence_lbl = tk.Label(
+            self, text="", font=self.LABEL_FONT,
+            bg=self.BG, wraplength=560, justify="left",
+        )
+        self._sentence_lbl.pack(pady=(0, 10), fill="x")
+
+        # Participe passé input row
+        pp_row = tk.Frame(self, bg=self.BG)
+        pp_row.pack(fill="x", pady=(0, 6))
+        tk.Label(pp_row, text="Participe passé :", font=self.LABEL_FONT,
+                  bg=self.BG).pack(side="left", padx=(0, 8))
+        self._pp_var   = tk.StringVar()
+        self._pp_entry = tk.Entry(
+            pp_row, textvariable=self._pp_var, font=self.ENTRY_FONT, width=18
+        )
+        self._pp_entry.pack(side="left")
+        self._pp_entry.bind("<Return>", lambda e: self._submit())
+
+        # COD identification section — shown only for avoir_cod_avant questions.
+        # Not packed initially; inserted before the submit button when needed.
+        self._cod_section = tk.Frame(self, bg=self.BG)
+        tk.Label(
+            self._cod_section,
+            text="Identifie le COD — clique sur le ou les mots :",
+            font=self.LABEL_FONT, bg=self.BG,
+        ).pack(anchor="w")
+        # Inner frame that will hold the Text widget (re-created per question)
+        self._cod_text_frame = tk.Frame(self._cod_section, bg=self.BG)
+        self._cod_text_frame.pack(fill="x", pady=(4, 0))
+
+        # Submit button (always packed initially; hidden after submission)
+        self._submit_btn = tk.Button(
+            self, text="Valider", font=self.BTN_FONT,
+            bg="#4a7c59", fg="white", activebackground="#3a6349",
+            command=self._submit, pady=6,
+        )
+        self._submit_btn.pack(fill="x", pady=(6, 0))
+
+        # Feedback widgets — NOT packed initially; appear after submission
+        self._feedback_lbl = tk.Label(
+            self, text="", font=self.LABEL_FONT,
+            bg=self.BG, wraplength=560, justify="left",
+        )
+        self._case_lbl = tk.Label(
+            self, text="", font=self.SMALL_FONT,
+            bg=self.BG, wraplength=560, justify="left", fg="#555",
+        )
+        self._next_btn = tk.Button(
+            self, text="Phrase suivante →", font=self.BTN_FONT,
+            bg="#4a6a9c", fg="white", activebackground="#3a5a8c",
+            command=self._next_question, pady=6,
+        )
+
+    # ------------------------------------------------------------------
+    # Screen lifecycle
+    # ------------------------------------------------------------------
+
+    def on_show(self) -> None:
+        self._questions = list(app_state.get("questions", []))
+        self._idx   = 0
+        self._score = 0.0
+
+        root = self.winfo_toplevel()
+        root.bind("<Return>", self._on_enter)
+        root.bind("<space>",  self._on_space)
+
+        self._load_question()
+
+    def _on_enter(self, _event=None) -> None:
+        if self._submitted:
+            self._next_question()
+        else:
+            self._submit()
+
+    def _on_space(self, _event=None) -> None:
+        if self._submitted:
+            self._next_question()
+
+    # ------------------------------------------------------------------
+    # Question loading / navigation
+    # ------------------------------------------------------------------
+
+    def _load_question(self) -> None:
+        q = self._questions[self._idx]
+        self._submitted       = False
+        self._selected_tokens = set()
+        self._token_labels    = []
+
+        self._counter_lbl.config(
+            text=f"Question {self._idx + 1} / {len(self._questions)}"
+        )
+        self._sentence_lbl.config(text=q["prompt"])
+
+        # Reset entry
+        self._pp_var.set("")
+        self._pp_entry.config(state="normal", bg="white")
+        self._pp_entry.focus_set()
+
+        # Show submit, hide feedback / next (must happen before cod_section
+        # is packed, because cod_section uses before=_submit_btn)
+        self._submit_btn.pack(fill="x", pady=(6, 0))
+        self._feedback_lbl.pack_forget()
+        self._case_lbl.pack_forget()
+        self._next_btn.pack_forget()
+
+        # Show or hide COD section depending on the grammatical case
+        if q["case"] == "avoir_cod_avant":
+            self._cod_section.pack(fill="x", pady=(0, 6), before=self._submit_btn)
+            self._display_cod_tokens(q["prompt"])
+        else:
+            self._cod_section.pack_forget()
+
+    def _next_question(self) -> None:
+        self._idx += 1
+        if self._idx >= len(self._questions):
+            self._end_session()
+        else:
+            self._load_question()
+
+    def _end_session(self) -> None:
+        root = self.winfo_toplevel()
+        root.unbind("<Return>")
+        root.unbind("<space>")
+
+        player   = app_state["player"]
+        exercise = app_state["exercise"]
+        total    = len(self._questions)
+        db.save_session(
+            player_id=player["id"],
+            exercise_id=exercise["id"],
+            score=self._score,
+            total=total,
+        )
+        app_state["last_score"] = self._score
+        app_state["last_total"] = total
+        self.app.show_frame("ResultsScreen")
+
+    # ------------------------------------------------------------------
+    # COD token display (avoir_cod_avant questions only)
+    # ------------------------------------------------------------------
+
+    def _tokenize(self, sentence: str) -> list:
+        """
+        Split sentence into (display_text, raw_text, is_selectable) tuples.
+
+        Non-selectable tokens (displayed greyed-out, not clickable):
+          - the blank placeholder: any token containing '_____'
+          - the verb hint: any token starting with '('
+          - standalone punctuation marks whose raw text is empty after stripping
+            (e.g. a lone '?' or '.' that ends up as an empty string after strip)
+
+        raw_text: token with surrounding punctuation stripped, CASE PRESERVED.
+        Case is intentionally preserved so that 'Les' (article, sentence-start)
+        and 'les' (pronoun, mid-sentence) are treated as distinct clickable targets.
+        The COD stored in the JSON also preserves the exact case as it appears
+        in the sentence, so comparison is case-sensitive after stripping.
+        """
+        result = []
+        for word in sentence.split():
+            is_blank = "_____" in word
+            is_hint  = word.startswith("(")
+            raw = word.strip(self._STRIP) if (not is_blank and not is_hint) else word
+            # Mark as non-selectable if raw is empty (standalone '?', '.', etc.)
+            selectable = not is_blank and not is_hint and bool(raw)
+            result.append((word, raw, selectable))
+        return result
+
+    def _display_cod_tokens(self, sentence: str) -> None:
+        """
+        Populate the COD token area with clickable word-labels.
+
+        A read-only Text widget is used as a wrapping flow container so that
+        tokens reflow correctly when the sentence is long.
+        Selectable tokens appear as raised label-buttons (neutral beige).
+        Non-selectable tokens (blank, hint) are rendered as greyed text.
+        """
+        # Clear any previous content
+        for w in self._cod_text_frame.winfo_children():
+            w.destroy()
+        self._token_labels    = []
+        self._selected_tokens = set()
+
+        txt = tk.Text(
+            self._cod_text_frame,
+            wrap="word", height=2,
+            bg=self.BG, relief="flat",
+            state="normal",
+        )
+        txt.tag_configure("hint", foreground="#aaa")
+        txt.pack(fill="x")
+
+        tokens = self._tokenize(sentence)
+        for i, (display, raw, selectable) in enumerate(tokens):
+            if selectable:
+                lbl = tk.Label(
+                    txt, text=display,
+                    font=self.TOKEN_FONT,
+                    bg="#ddd8c8", relief="solid", borderwidth=1,
+                    padx=4, pady=2, cursor="hand2",
+                )
+                lbl.bind(
+                    "<Button-1>",
+                    lambda e, idx=i, lb=lbl: self._toggle_token(idx, lb),
+                )
+                txt.window_create("end", window=lbl)
+            else:
+                lbl = None
+                txt.insert("end", display, "hint")
+            txt.insert("end", " ")
+            self._token_labels.append((lbl, raw, selectable))
+
+        txt.config(state="disabled")
+
+    def _toggle_token(self, idx: int, label: tk.Label) -> None:
+        """Toggle the selected state of a clickable token."""
+        if self._submitted:
+            return
+        if idx in self._selected_tokens:
+            self._selected_tokens.discard(idx)
+            label.config(bg="#ddd8c8")
+        else:
+            self._selected_tokens.add(idx)
+            label.config(bg="#90EE90")
+
+    def _get_selected_cod(self) -> str:
+        """Return the raw text of selected tokens joined in sentence order."""
+        indices = sorted(
+            i for i in self._selected_tokens
+            if i < len(self._token_labels) and self._token_labels[i][2]
+        )
+        return " ".join(self._token_labels[i][1] for i in indices)
+
+    @staticmethod
+    def _normalize(text: str) -> str:
+        """Lowercase and strip punctuation — used for participe passé comparison."""
+        return " ".join(w.strip(".,;:!?\"'»«()-").lower() for w in text.split())
+
+    @staticmethod
+    def _strip_punct(text: str) -> str:
+        """Strip punctuation but PRESERVE CASE — used for COD comparison.
+
+        Case must be preserved so that 'Les' (article at sentence start) and
+        'les' (pronoun mid-sentence) are NOT treated as the same COD candidate.
+        The cod field in the JSON is stored with its exact sentence capitalisation.
+        """
+        return " ".join(w.strip(".,;:!?\"'»«()-") for w in text.split())
+
+    # ------------------------------------------------------------------
+    # Submission and feedback
+    # ------------------------------------------------------------------
+
+    def _submit(self) -> None:
+        if self._submitted:
+            return
+        self._submitted = True
+        self._pp_entry.config(state="disabled")
+
+        q          = self._questions[self._idx]
+        typed_pp   = self._pp_var.get().strip()
+        correct_pp = q["answer"]
+        pp_ok      = self._normalize(typed_pp) == self._normalize(correct_pp)
+
+        # COD check applies only to avoir_cod_avant questions
+        cod_ok       = True
+        selected_cod = ""
+        if q["case"] == "avoir_cod_avant":
+            selected_cod = self._get_selected_cod()
+            # COD comparison is case-sensitive (strip punct, keep case) so that
+            # 'Les' (article) and 'les' (pronoun) are correctly distinguished.
+            cod_ok = self._strip_punct(selected_cod) == self._strip_punct(q["cod"])
+            self._color_cod_tokens(q["cod"])
+
+        # Scoring:
+        #   PP wrong                                       → 0.0
+        #   PP correct + avoir_cod_avant + COD wrong       → 0.5
+        #   PP correct + COD correct (or non-avant case)   → 1.0
+        if not pp_ok:
+            question_score = 0.0
+        elif q["case"] == "avoir_cod_avant" and not cod_ok:
+            question_score = 0.5
+        else:
+            question_score = 1.0
+        self._score += question_score
+
+        # PP feedback line
+        if pp_ok:
+            pp_line = f"\u2713  Participe passé : {correct_pp}"
+            self._pp_entry.config(bg="#c8f0c8")
+        else:
+            pp_line = (
+                f"\u2717  Participe passé : {typed_pp or '(vide)'}  \u2192  {correct_pp}"
+            )
+            self._pp_entry.config(bg="#f0c8c8")
+
+        lines = [pp_line]
+
+        # COD feedback line (avoir_cod_avant only)
+        if q["case"] == "avoir_cod_avant":
+            if cod_ok:
+                lines.append(f"\u2713  COD identifié : \u00ab {q['cod']} \u00bb")
+            else:
+                shown = (
+                    f"\u00ab {selected_cod} \u00bb"
+                    if selected_cod else "(aucun sélectionné)"
+                )
+                lines.append(
+                    f"\u2717  COD : {shown}  \u2192  \u00ab {q['cod']} \u00bb"
+                )
+
+        overall_ok = pp_ok and cod_ok
+        self._feedback_lbl.config(
+            text="\n".join(lines),
+            fg="#1a6a1a" if overall_ok else "#8a1a1a",
+        )
+        self._feedback_lbl.pack(pady=(8, 2), fill="x")
+
+        self._case_lbl.config(text=self.CASE_LABELS.get(q["case"], ""))
+        self._case_lbl.pack(fill="x", pady=(0, 4))
+
+        # Replace submit button with next/results button
+        self._submit_btn.pack_forget()
+        is_last = self._idx + 1 >= len(self._questions)
+        self._next_btn.config(
+            text="Voir les résultats \u25b6" if is_last else "Phrase suivante \u2192"
+        )
+        self._next_btn.pack(fill="x")
+
+    def _color_cod_tokens(self, expected_cod: str) -> None:
+        """
+        Colour each selectable token after submission:
+          green (#90EE90) : selected AND part of the expected COD
+          red   (#f0a0a0) : selected but NOT part of the expected COD
+          gold  (#FFD700) : NOT selected but IS part of the expected COD (missed)
+          default         : neither selected nor expected (no change)
+        """
+        # Use case-sensitive word set so 'Les' (article) ≠ 'les' (pronoun)
+        expected_words = {self._strip_punct(w) for w in expected_cod.split()}
+        for i, (lbl, raw, selectable) in enumerate(self._token_labels):
+            if lbl is None or not selectable:
+                continue
+            is_selected = i in self._selected_tokens
+            is_expected = self._strip_punct(raw) in expected_words
+            if is_selected and is_expected:
+                lbl.config(bg="#90EE90")
+            elif is_selected and not is_expected:
+                lbl.config(bg="#f0a0a0")
+            elif not is_selected and is_expected:
+                lbl.config(bg="#FFD700")
+
+
+# ---------------------------------------------------------------------------
+# Screen 7: Results
 # ---------------------------------------------------------------------------
 
 class ResultsScreen(tk.Frame):
@@ -1080,7 +1547,20 @@ class ResultsScreen(tk.Frame):
                      bg=row_bg, width=12, anchor="w").pack(side="left")
 
     def _replay(self) -> None:
-        self.app.show_frame("VerbSelectionScreen")
+        exercise = app_state.get("exercise", {})
+        slug = exercise.get("slug", "")
+        if slug == "accord_participe_passe":
+            all_q = db.get_accord_pp_questions(exercise["id"])
+            random.shuffle(all_q)
+            app_state["questions"] = all_q[:SESSION_LENGTH]
+            self.app.show_frame("AccordPPScreen")
+        elif slug == "english_fill_blanks":
+            all_q = db.get_fill_blank_questions(exercise["id"])
+            random.shuffle(all_q)
+            app_state["questions"] = all_q[:SESSION_LENGTH]
+            self.app.show_frame("QuizScreen")
+        else:
+            self.app.show_frame("VerbSelectionScreen")
 
 
 # ---------------------------------------------------------------------------
