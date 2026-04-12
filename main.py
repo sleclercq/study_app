@@ -629,11 +629,22 @@ class EnglishQuizScreen(tk.Frame):
     Each question shows a French word; the student must fill in the three
     English forms simultaneously (base verbale, prétérit, participe passé).
 
-    Attempt and reveal rules:
-      - Attempt 1 wrong: base verbale field is revealed (pre-filled, locked in blue).
-      - Attempt 2 wrong: prétérit field is revealed.
-      - Attempt 3 wrong: all fields revealed; score = 0.
-      - Correct on attempt 1: +1.0 / attempt 2: +0.5 / attempt 3: +0.25.
+    Scoring - per field, averaged over three fields:
+      Each field is scored independently based on when the student first typed it
+      correctly. Fields pre-filled by the system (blue) score 0.
+        - Student correct on attempt 1: 1.0 pts for that field
+        - Student correct on attempt 2: 0.5 pts
+        - Student correct on attempt 3: 0.25 pts
+        - System-revealed:              0 pts
+      Question score = sum(field scores) / 3.  Max = 1.0.
+      Anchors: all three by student on attempt 1 = 1.0; all three on attempt 2 = 0.5;
+               all three on attempt 3 = 0.25.
+
+    Reveal rules:
+      - Fields the student gets right are locked green immediately.
+      - On each wrong attempt (attempts 1 and 2): the first still-wrong field is
+        revealed in blue (pre-filled, locked). Focus moves to the next editable field.
+      - Attempt 3 wrong: all remaining wrong fields revealed; no further credit.
 
     Keyboard shortcuts:
       Enter  - submit or continue (same as QuizScreen)
@@ -664,6 +675,8 @@ class EnglishQuizScreen(tk.Frame):
         self._attempts: int = 0
         self._score: float = 0.0
         self._answered: bool = False
+        self._field_scores: list = [None, None, None]   # per-field pts: 1.0/0.5/0.25 or None
+        self._field_revealed: list = [False, False, False]  # True = system-revealed, no credit
 
         self._build_ui()
 
@@ -752,6 +765,8 @@ class EnglishQuizScreen(tk.Frame):
     def _load_question(self) -> None:
         self._attempts = 0
         self._answered = False
+        self._field_scores = [None, None, None]
+        self._field_revealed = [False, False, False]
         q = self._questions[self._q_index]
 
         total = len(self._questions)
@@ -794,29 +809,47 @@ class EnglishQuizScreen(tk.Frame):
             return
 
         q = self._questions[self._q_index]
-        base_ok = self._normalize(self._base_var.get()) == self._normalize(q["base"])
-        pret_ok = self._normalize(self._pret_var.get()) == self._normalize(q["preterit"])
-        pp_ok   = self._normalize(self._pp_var.get())   == self._normalize(q["past_participle"])
-        all_ok  = base_ok and pret_ok and pp_ok
-
         self._attempts += 1
 
-        if all_ok:
+        attempt_pts = {1: 1.0, 2: 0.5, 3: 0.25}.get(self._attempts, 0.0)
+
+        entries = [self._base_entry, self._pret_entry, self._pp_entry]
+        vars_   = [self._base_var,   self._pret_var,   self._pp_var]
+        values  = [q["base"],        q["preterit"],     q["past_participle"]]
+
+        ok = [
+            self._normalize(vars_[i].get()) == self._normalize(values[i])
+            for i in range(3)
+        ]
+
+        # Lock each newly-correct field in green and record its score.
+        for i in range(3):
+            if ok[i] and self._field_scores[i] is None and not self._field_revealed[i]:
+                self._field_scores[i] = attempt_pts
+                self._lock_correct(entries[i])
+
+        all_done = all(ok)  # every field has the right value (student or system)
+
+        if all_done:
+            q_score = sum(s for s in self._field_scores if s is not None) / 3
+            self._score += q_score
             if self._attempts == 1:
-                points, msg = 1.0, "Excellent !"
+                msg = "Excellent !"
             elif self._attempts == 2:
-                points, msg = 0.5, "Bien rattrapé !"
+                msg = "Bien rattrapé !"
             else:
-                points, msg = 0.25, "Bien joué !"
-            self._score += points
+                msg = "Bien joué !"
             self._feedback_label.config(text=f"\u2713  {msg}", fg=self.COLOR_CORRECT)
             self._show_continue()
 
         elif self._attempts >= 3:
-            # Reveal everything, score stays 0 for this question.
-            self._reveal(self._base_entry, self._base_var, q["base"])
-            self._reveal(self._pret_entry, self._pret_var, q["preterit"])
-            self._reveal(self._pp_entry,   self._pp_var,   q["past_participle"])
+            # Reveal all remaining wrong fields; no further credit.
+            q_score = sum(s for s in self._field_scores if s is not None) / 3
+            self._score += q_score
+            for i in range(3):
+                if not ok[i]:
+                    self._field_revealed[i] = True
+                    self._reveal(entries[i], vars_[i], values[i])
             self._feedback_label.config(
                 text="\u2717  Pas cette fois\u2026", fg=self.COLOR_WRONG
             )
@@ -829,24 +862,34 @@ class EnglishQuizScreen(tk.Frame):
                 text=f"\u2717  Pas tout à fait\u2026 encore {remaining} {s}.",
                 fg=self.COLOR_WRONG,
             )
-            if self._attempts == 1:
-                # Reveal base verbale; move focus to prétérit.
-                self._reveal(self._base_entry, self._base_var, q["base"])
-                self._pret_entry.focus_set()
-                self._pret_entry.select_range(0, "end")
-            elif self._attempts == 2:
-                # Reveal prétérit; move focus to participe passé.
-                self._reveal(self._pret_entry, self._pret_var, q["preterit"])
-                self._pp_entry.focus_set()
-                self._pp_entry.select_range(0, "end")
+            # Reveal the first still-wrong field; focus on next still-editable field.
+            revealed_one = False
+            for i in range(3):
+                if not ok[i] and not self._field_revealed[i]:
+                    if not revealed_one:
+                        self._field_revealed[i] = True
+                        self._reveal(entries[i], vars_[i], values[i])
+                        revealed_one = True
+                    else:
+                        entries[i].focus_set()
+                        entries[i].select_range(0, "end")
+                        break
 
     def _reveal(self, entry: tk.Entry, var: tk.StringVar, value: str) -> None:
-        """Pre-fill a field with the correct answer and lock it (blue style)."""
+        """Pre-fill a field with the correct answer and lock it (blue - system revealed)."""
         var.set(value)
         entry.config(
             state="disabled",
             disabledforeground=self.COLOR_REVEAL,
             disabledbackground=self.COLOR_REVEAL_BG,
+        )
+
+    def _lock_correct(self, entry: tk.Entry) -> None:
+        """Lock a field the student entered correctly (green - student earned it)."""
+        entry.config(
+            state="disabled",
+            disabledforeground="#1a7a2a",
+            disabledbackground="#d4f0d4",
         )
 
     def _show_continue(self) -> None:
