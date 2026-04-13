@@ -126,7 +126,7 @@ class PlayerScreen(tk.Frame):
 
         self._start_btn = tk.Button(
             self, text="Commencer  ▶", font=("Helvetica", 15, "bold"),
-            bg="#4a7c59", fg="white", activebackground="#3a6349",
+            bg="#4a7c59", fg="black", activebackground="#3a6349",
             state="disabled", command=self._start, pady=8,
         )
         self._start_btn.pack(fill="x")
@@ -191,7 +191,7 @@ class ExerciseSelectionScreen(tk.Frame):
             self,
             text="Verbes Latins\n(Présent de l'indicatif)",
             font=self.BTN_FONT,
-            bg="#4a7c59", fg="white", activebackground="#3a6349",
+            bg="#4a7c59", fg="black", activebackground="#3a6349",
             command=self._choose_latin, pady=22,
         ).pack(fill="x", pady=(0, 18))
 
@@ -199,7 +199,7 @@ class ExerciseSelectionScreen(tk.Frame):
             self,
             text="Verbes Anglais irréguliers",
             font=self.BTN_FONT,
-            bg="#4a6a9c", fg="white", activebackground="#3a5a8c",
+            bg="#4a6a9c", fg="black", activebackground="#3a5a8c",
             command=self._choose_english, pady=22,
         ).pack(fill="x", pady=(0, 18))
 
@@ -207,7 +207,7 @@ class ExerciseSelectionScreen(tk.Frame):
             self,
             text="Anglais - Phrases à trous",
             font=self.BTN_FONT,
-            bg="#7a4a9c", fg="white", activebackground="#6a3a8c",
+            bg="#7a4a9c", fg="black", activebackground="#6a3a8c",
             command=self._choose_fill_blank, pady=22,
         ).pack(fill="x", pady=(0, 18))
 
@@ -215,7 +215,7 @@ class ExerciseSelectionScreen(tk.Frame):
             self,
             text="Français - Accord du participe passé",
             font=self.BTN_FONT,
-            bg="#9c4a4a", fg="white", activebackground="#8c3a3a",
+            bg="#9c4a4a", fg="black", activebackground="#8c3a3a",
             command=self._choose_accord_pp, pady=22,
         ).pack(fill="x")
 
@@ -330,7 +330,7 @@ class VerbSelectionScreen(tk.Frame):
 
         self._start_btn = tk.Button(
             btn_row, text="Commencer  ▶", font=("Helvetica", 14, "bold"),
-            bg="#4a7c59", fg="white", activebackground="#3a6349",
+            bg="#4a7c59", fg="black", activebackground="#3a6349",
             command=self._start, pady=6,
         )
         self._start_btn.pack(side="left", expand=True, fill="x")
@@ -499,7 +499,7 @@ class QuizScreen(tk.Frame):
 
         self._continue_btn = tk.Button(
             self, text="Continuer  →", font=self.CONTINUE_FONT,
-            bg="#4a7c59", fg="white", activebackground="#3a6349",
+            bg="#4a7c59", fg="black", activebackground="#3a6349",
             command=self._next_question, pady=6,
         )
         self._continue_btn.pack(fill="x", pady=(16, 0))
@@ -763,7 +763,7 @@ class EnglishQuizScreen(tk.Frame):
         # Continue
         self._continue_btn = tk.Button(
             self, text="Continuer  →", font=self.CONTINUE_FONT,
-            bg="#4a6a9c", fg="white", activebackground="#3a5a8c",
+            bg="#4a6a9c", fg="black", activebackground="#3a5a8c",
             command=self._next_question, pady=6,
         )
         self._continue_btn.pack(fill="x", pady=(10, 0))
@@ -1081,7 +1081,7 @@ class AccordPPScreen(tk.Frame):
         # Submit button (always packed initially; hidden after submission)
         self._submit_btn = tk.Button(
             self, text="Valider", font=self.BTN_FONT,
-            bg="#4a7c59", fg="white", activebackground="#3a6349",
+            bg="#4a7c59", fg="black", activebackground="#3a6349",
             command=self._submit, pady=6,
         )
         self._submit_btn.pack(fill="x", pady=(6, 0))
@@ -1097,7 +1097,7 @@ class AccordPPScreen(tk.Frame):
         )
         self._next_btn = tk.Button(
             self, text="Phrase suivante →", font=self.BTN_FONT,
-            bg="#4a6a9c", fg="white", activebackground="#3a5a8c",
+            bg="#4a6a9c", fg="black", activebackground="#3a5a8c",
             command=self._next_question, pady=6,
         )
 
@@ -1478,7 +1478,7 @@ class ResultsScreen(tk.Frame):
 
         tk.Button(
             btn_row, text="Rejouer", font=self.BTN_FONT,
-            bg="#4a7c59", fg="white", command=self._replay,
+            bg="#4a7c59", fg="black", command=self._replay,
         ).pack(side="left", padx=(0, 6), expand=True, fill="x")
 
         tk.Button(
