@@ -1,0 +1,90 @@
+{
+  "slug": "french_verbs_modes",
+  "name": "Français — Conjugaison (dire, pouvoir, voir)",
+  "description": "Conjugaison de dire, pouvoir et voir au conditionnel présent, indicatif présent, impératif présent et subjonctif présent.",
+  "source_language": "Français",
+  "target_language": "Français",
+  "canonical_label": "",
+  "canonical_prompt": "",
+  "form_prompt": "\"{source}\" — {label}",
+  "words": [
+    {
+      "source": "dire",
+      "canonical": "",
+      "forms": [
+        {"label": "conditionnel présent - 1re pers. du sing.", "value": "dirais"},
+        {"label": "conditionnel présent - 2e pers. du sing.",  "value": "dirais"},
+        {"label": "conditionnel présent - 3e pers. du sing.",  "value": "dirait"},
+        {"label": "conditionnel présent - 1re pers. du plur.", "value": "dirions"},
+        {"label": "conditionnel présent - 2e pers. du plur.",  "value": "diriez"},
+        {"label": "conditionnel présent - 3e pers. du plur.",  "value": "diraient"},
+        {"label": "indicatif présent - 1re pers. du sing.",    "value": "dis"},
+        {"label": "indicatif présent - 2e pers. du sing.",     "value": "dis"},
+        {"label": "indicatif présent - 3e pers. du sing.",     "value": "dit"},
+        {"label": "indicatif présent - 1re pers. du plur.",    "value": "disons"},
+        {"label": "indicatif présent - 2e pers. du plur.",     "value": "dites"},
+        {"label": "indicatif présent - 3e pers. du plur.",     "value": "disent"},
+        {"label": "impératif présent - 2e pers. du sing.",     "value": "dis"},
+        {"label": "impératif présent - 1re pers. du plur.",    "value": "disons"},
+        {"label": "impératif présent - 2e pers. du plur.",     "value": "dites"},
+        {"label": "subjonctif présent - 1re pers. du sing.",   "value": "dise"},
+        {"label": "subjonctif présent - 2e pers. du sing.",    "value": "dises"},
+        {"label": "subjonctif présent - 3e pers. du sing.",    "value": "dise"},
+        {"label": "subjonctif présent - 1re pers. du plur.",   "value": "disions"},
+        {"label": "subjonctif présent - 2e pers. du plur.",    "value": "disiez"},
+        {"label": "subjonctif présent - 3e pers. du plur.",    "value": "disent"}
+      ]
+    },
+    {
+      "source": "pouvoir",
+      "canonical": "",
+      "forms": [
+        {"label": "conditionnel présent - 1re pers. du sing.", "value": "pourrais"},
+        {"label": "conditionnel présent - 2e pers. du sing.",  "value": "pourrais"},
+        {"label": "conditionnel présent - 3e pers. du sing.",  "value": "pourrait"},
+        {"label": "conditionnel présent - 1re pers. du plur.", "value": "pourrions"},
+        {"label": "conditionnel présent - 2e pers. du plur.",  "value": "pourriez"},
+        {"label": "conditionnel présent - 3e pers. du plur.",  "value": "pourraient"},
+        {"label": "indicatif présent - 1re pers. du sing.",    "value": "peux"},
+        {"label": "indicatif présent - 2e pers. du sing.",     "value": "peux"},
+        {"label": "indicatif présent - 3e pers. du sing.",     "value": "peut"},
+        {"label": "indicatif présent - 1re pers. du plur.",    "value": "pouvons"},
+        {"label": "indicatif présent - 2e pers. du plur.",     "value": "pouvez"},
+        {"label": "indicatif présent - 3e pers. du plur.",     "value": "peuvent"},
+        {"label": "subjonctif présent - 1re pers. du sing.",   "value": "puisse"},
+        {"label": "subjonctif présent - 2e pers. du sing.",    "value": "puisses"},
+        {"label": "subjonctif présent - 3e pers. du sing.",    "value": "puisse"},
+        {"label": "subjonctif présent - 1re pers. du plur.",   "value": "puissions"},
+        {"label": "subjonctif présent - 2e pers. du plur.",    "value": "puissiez"},
+        {"label": "subjonctif présent - 3e pers. du plur.",    "value": "puissent"}
+      ]
+    },
+    {
+      "source": "voir",
+      "canonical": "",
+      "forms": [
+        {"label": "conditionnel présent - 1re pers. du sing.", "value": "verrais"},
+        {"label": "conditionnel présent - 2e pers. du sing.",  "value": "verrais"},
+        {"label": "conditionnel présent - 3e pers. du sing.",  "value": "verrait"},
+        {"label": "conditionnel présent - 1re pers. du plur.", "value": "verrions"},
+        {"label": "conditionnel présent - 2e pers. du plur.",  "value": "verriez"},
+        {"label": "conditionnel présent - 3e pers. du plur.",  "value": "verraient"},
+        {"label": "indicatif présent - 1re pers. du sing.",    "value": "vois"},
+        {"label": "indicatif présent - 2e pers. du sing.",     "value": "vois"},
+        {"label": "indicatif présent - 3e pers. du sing.",     "value": "voit"},
+        {"label": "indicatif présent - 1re pers. du plur.",    "value": "voyons"},
+        {"label": "indicatif présent - 2e pers. du plur.",     "value": "voyez"},
+        {"label": "indicatif présent - 3e pers. du plur.",     "value": "voient"},
+        {"label": "impératif présent - 2e pers. du sing.",     "value": "vois"},
+        {"label": "impératif présent - 1re pers. du plur.",    "value": "voyons"},
+        {"label": "impératif présent - 2e pers. du plur.",     "value": "voyez"},
+        {"label": "subjonctif présent - 1re pers. du sing.",   "value": "voie"},
+        {"label": "subjonctif présent - 2e pers. du sing.",    "value": "voies"},
+        {"label": "subjonctif présent - 3e pers. du sing.",    "value": "voie"},
+        {"label": "subjonctif présent - 1re pers. du plur.",   "value": "voyions"},
+        {"label": "subjonctif présent - 2e pers. du plur.",    "value": "voyiez"},
+        {"label": "subjonctif présent - 3e pers. du plur.",    "value": "voient"}
+      ]
+    }
+  ]
+}

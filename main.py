@@ -33,7 +33,7 @@ class App(tk.Tk):
         super().__init__()
         self.title("Révision Verbes")
         self.resizable(False, False)
-        self._center_window(width=640, height=520)
+        self._center_window(width=640, height=620)
 
         self._frames: dict = {}
         self.build_frames()
@@ -217,6 +217,14 @@ class ExerciseSelectionScreen(tk.Frame):
             font=self.BTN_FONT,
             bg="#9c4a4a", fg="black", activebackground="#8c3a3a",
             command=self._choose_accord_pp, pady=22,
+        ).pack(fill="x", pady=(0, 18))
+
+        tk.Button(
+            self,
+            text="Français - Conjugaison\n(dire, pouvoir, voir)",
+            font=self.BTN_FONT,
+            bg="#9c4a4a", fg="black", activebackground="#8c3a3a",
+            command=self._choose_french_verbs, pady=22,
         ).pack(fill="x")
 
         tk.Button(
@@ -266,6 +274,14 @@ class ExerciseSelectionScreen(tk.Frame):
         random.shuffle(all_q)
         app_state["questions"] = all_q[:SESSION_LENGTH]
         self.app.show_frame("AccordPPScreen")
+
+    def _choose_french_verbs(self) -> None:
+        exercise = db.get_exercise_by_slug("french_verbs_modes")
+        if exercise is None:
+            messagebox.showerror("Erreur", "Exercice introuvable. Vérifie les fichiers data/.")
+            return
+        app_state["exercise"] = exercise
+        self.app.show_frame("VerbSelectionScreen")
 
 
 # ---------------------------------------------------------------------------
