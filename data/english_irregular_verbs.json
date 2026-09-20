@@ -1,156 +1,557 @@
 {
   "slug": "english_irregular_verbs",
   "name": "Anglais - Verbes irréguliers",
+  "level": "5e",
+  "kind": "triple",
+  "sort_order": 20,
+  "color": "#4a6a9c",
+  "button_label": "Verbes Anglais irréguliers",
+  "source_language": "Français",
+  "target_language": "Anglais",
+  "source_lang_code": "fr",
+  "target_lang_code": "",
+  "canonical_prompt": "",
+  "form_prompt": "",
   "words": [
-    {"source": "être", "canonical": "", "forms": [
-      {"label": "base verbale", "value": "be"},
-      {"label": "prétérit", "value": "was/were"},
-      {"label": "participe passé", "value": "been"}
-    ]},
-    {"source": "devenir", "canonical": "", "forms": [
-      {"label": "base verbale", "value": "become"},
-      {"label": "prétérit", "value": "became"},
-      {"label": "participe passé", "value": "become"}
-    ]},
-    {"source": "commencer", "canonical": "", "forms": [
-      {"label": "base verbale", "value": "begin"},
-      {"label": "prétérit", "value": "began"},
-      {"label": "participe passé", "value": "begun"}
-    ]},
-    {"source": "casser", "canonical": "", "forms": [
-      {"label": "base verbale", "value": "break"},
-      {"label": "prétérit", "value": "broke"},
-      {"label": "participe passé", "value": "broken"}
-    ]},
-    {"source": "apporter", "canonical": "", "forms": [
-      {"label": "base verbale", "value": "bring"},
-      {"label": "prétérit", "value": "brought"},
-      {"label": "participe passé", "value": "brought"}
-    ]},
-    {"source": "construire", "canonical": "", "forms": [
-      {"label": "base verbale", "value": "build"},
-      {"label": "prétérit", "value": "built"},
-      {"label": "participe passé", "value": "built"}
-    ]},
-    {"source": "acheter", "canonical": "", "forms": [
-      {"label": "base verbale", "value": "buy"},
-      {"label": "prétérit", "value": "bought"},
-      {"label": "participe passé", "value": "bought"}
-    ]},
-    {"source": "venir", "canonical": "", "forms": [
-      {"label": "base verbale", "value": "come"},
-      {"label": "prétérit", "value": "came"},
-      {"label": "participe passé", "value": "come"}
-    ]},
-    {"source": "faire", "canonical": "", "forms": [
-      {"label": "base verbale", "value": "do"},
-      {"label": "prétérit", "value": "did"},
-      {"label": "participe passé", "value": "done"}
-    ]},
-    {"source": "boire", "canonical": "", "forms": [
-      {"label": "base verbale", "value": "drink"},
-      {"label": "prétérit", "value": "drank"},
-      {"label": "participe passé", "value": "drunk"}
-    ]},
-    {"source": "manger", "canonical": "", "forms": [
-      {"label": "base verbale", "value": "eat"},
-      {"label": "prétérit", "value": "ate"},
-      {"label": "participe passé", "value": "eaten"}
-    ]},
-    {"source": "trouver", "canonical": "", "forms": [
-      {"label": "base verbale", "value": "find"},
-      {"label": "prétérit", "value": "found"},
-      {"label": "participe passé", "value": "found"}
-    ]},
-    {"source": "obtenir", "canonical": "", "forms": [
-      {"label": "base verbale", "value": "get"},
-      {"label": "prétérit", "value": "got"},
-      {"label": "participe passé", "value": "got/gotten"}
-    ]},
-    {"source": "donner", "canonical": "", "forms": [
-      {"label": "base verbale", "value": "give"},
-      {"label": "prétérit", "value": "gave"},
-      {"label": "participe passé", "value": "given"}
-    ]},
-    {"source": "aller", "canonical": "", "forms": [
-      {"label": "base verbale", "value": "go"},
-      {"label": "prétérit", "value": "went"},
-      {"label": "participe passé", "value": "gone"}
-    ]},
-    {"source": "avoir", "canonical": "", "forms": [
-      {"label": "base verbale", "value": "have"},
-      {"label": "prétérit", "value": "had"},
-      {"label": "participe passé", "value": "had"}
-    ]},
-    {"source": "savoir / connaître", "canonical": "", "forms": [
-      {"label": "base verbale", "value": "know"},
-      {"label": "prétérit", "value": "knew"},
-      {"label": "participe passé", "value": "known"}
-    ]},
-    {"source": "faire / fabriquer", "canonical": "", "forms": [
-      {"label": "base verbale", "value": "make"},
-      {"label": "prétérit", "value": "made"},
-      {"label": "participe passé", "value": "made"}
-    ]},
-    {"source": "rencontrer", "canonical": "", "forms": [
-      {"label": "base verbale", "value": "meet"},
-      {"label": "prétérit", "value": "met"},
-      {"label": "participe passé", "value": "met"}
-    ]},
-    {"source": "mettre", "canonical": "", "forms": [
-      {"label": "base verbale", "value": "put"},
-      {"label": "prétérit", "value": "put"},
-      {"label": "participe passé", "value": "put"}
-    ]},
-    {"source": "lire", "canonical": "", "forms": [
-      {"label": "base verbale", "value": "read"},
-      {"label": "prétérit", "value": "read"},
-      {"label": "participe passé", "value": "read"}
-    ]},
-    {"source": "courir", "canonical": "", "forms": [
-      {"label": "base verbale", "value": "run"},
-      {"label": "prétérit", "value": "ran"},
-      {"label": "participe passé", "value": "run"}
-    ]},
-    {"source": "dire", "canonical": "", "forms": [
-      {"label": "base verbale", "value": "say"},
-      {"label": "prétérit", "value": "said"},
-      {"label": "participe passé", "value": "said"}
-    ]},
-    {"source": "voir", "canonical": "", "forms": [
-      {"label": "base verbale", "value": "see"},
-      {"label": "prétérit", "value": "saw"},
-      {"label": "participe passé", "value": "seen"}
-    ]},
-    {"source": "prendre", "canonical": "", "forms": [
-      {"label": "base verbale", "value": "take"},
-      {"label": "prétérit", "value": "took"},
-      {"label": "participe passé", "value": "taken"}
-    ]},
-    {"source": "dire / raconter", "canonical": "", "forms": [
-      {"label": "base verbale", "value": "tell"},
-      {"label": "prétérit", "value": "told"},
-      {"label": "participe passé", "value": "told"}
-    ]},
-    {"source": "penser", "canonical": "", "forms": [
-      {"label": "base verbale", "value": "think"},
-      {"label": "prétérit", "value": "thought"},
-      {"label": "participe passé", "value": "thought"}
-    ]},
-    {"source": "comprendre", "canonical": "", "forms": [
-      {"label": "base verbale", "value": "understand"},
-      {"label": "prétérit", "value": "understood"},
-      {"label": "participe passé", "value": "understood"}
-    ]},
-    {"source": "porter (vêtement)", "canonical": "", "forms": [
-      {"label": "base verbale", "value": "wear"},
-      {"label": "prétérit", "value": "wore"},
-      {"label": "participe passé", "value": "worn"}
-    ]},
-    {"source": "écrire", "canonical": "", "forms": [
-      {"label": "base verbale", "value": "write"},
-      {"label": "prétérit", "value": "wrote"},
-      {"label": "participe passé", "value": "written"}
-    ]}
+    {
+      "source": "être",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "be"
+        },
+        {
+          "label": "prétérit",
+          "value": "was/were"
+        },
+        {
+          "label": "participe passé",
+          "value": "been"
+        }
+      ]
+    },
+    {
+      "source": "devenir",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "become"
+        },
+        {
+          "label": "prétérit",
+          "value": "became"
+        },
+        {
+          "label": "participe passé",
+          "value": "become"
+        }
+      ]
+    },
+    {
+      "source": "commencer",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "begin"
+        },
+        {
+          "label": "prétérit",
+          "value": "began"
+        },
+        {
+          "label": "participe passé",
+          "value": "begun"
+        }
+      ]
+    },
+    {
+      "source": "casser",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "break"
+        },
+        {
+          "label": "prétérit",
+          "value": "broke"
+        },
+        {
+          "label": "participe passé",
+          "value": "broken"
+        }
+      ]
+    },
+    {
+      "source": "apporter",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "bring"
+        },
+        {
+          "label": "prétérit",
+          "value": "brought"
+        },
+        {
+          "label": "participe passé",
+          "value": "brought"
+        }
+      ]
+    },
+    {
+      "source": "construire",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "build"
+        },
+        {
+          "label": "prétérit",
+          "value": "built"
+        },
+        {
+          "label": "participe passé",
+          "value": "built"
+        }
+      ]
+    },
+    {
+      "source": "acheter",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "buy"
+        },
+        {
+          "label": "prétérit",
+          "value": "bought"
+        },
+        {
+          "label": "participe passé",
+          "value": "bought"
+        }
+      ]
+    },
+    {
+      "source": "venir",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "come"
+        },
+        {
+          "label": "prétérit",
+          "value": "came"
+        },
+        {
+          "label": "participe passé",
+          "value": "come"
+        }
+      ]
+    },
+    {
+      "source": "faire",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "do"
+        },
+        {
+          "label": "prétérit",
+          "value": "did"
+        },
+        {
+          "label": "participe passé",
+          "value": "done"
+        }
+      ]
+    },
+    {
+      "source": "boire",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "drink"
+        },
+        {
+          "label": "prétérit",
+          "value": "drank"
+        },
+        {
+          "label": "participe passé",
+          "value": "drunk"
+        }
+      ]
+    },
+    {
+      "source": "manger",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "eat"
+        },
+        {
+          "label": "prétérit",
+          "value": "ate"
+        },
+        {
+          "label": "participe passé",
+          "value": "eaten"
+        }
+      ]
+    },
+    {
+      "source": "trouver",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "find"
+        },
+        {
+          "label": "prétérit",
+          "value": "found"
+        },
+        {
+          "label": "participe passé",
+          "value": "found"
+        }
+      ]
+    },
+    {
+      "source": "obtenir",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "get"
+        },
+        {
+          "label": "prétérit",
+          "value": "got"
+        },
+        {
+          "label": "participe passé",
+          "value": "got/gotten"
+        }
+      ]
+    },
+    {
+      "source": "donner",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "give"
+        },
+        {
+          "label": "prétérit",
+          "value": "gave"
+        },
+        {
+          "label": "participe passé",
+          "value": "given"
+        }
+      ]
+    },
+    {
+      "source": "aller",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "go"
+        },
+        {
+          "label": "prétérit",
+          "value": "went"
+        },
+        {
+          "label": "participe passé",
+          "value": "gone"
+        }
+      ]
+    },
+    {
+      "source": "avoir",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "have"
+        },
+        {
+          "label": "prétérit",
+          "value": "had"
+        },
+        {
+          "label": "participe passé",
+          "value": "had"
+        }
+      ]
+    },
+    {
+      "source": "savoir / connaître",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "know"
+        },
+        {
+          "label": "prétérit",
+          "value": "knew"
+        },
+        {
+          "label": "participe passé",
+          "value": "known"
+        }
+      ]
+    },
+    {
+      "source": "faire / fabriquer",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "make"
+        },
+        {
+          "label": "prétérit",
+          "value": "made"
+        },
+        {
+          "label": "participe passé",
+          "value": "made"
+        }
+      ]
+    },
+    {
+      "source": "rencontrer",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "meet"
+        },
+        {
+          "label": "prétérit",
+          "value": "met"
+        },
+        {
+          "label": "participe passé",
+          "value": "met"
+        }
+      ]
+    },
+    {
+      "source": "mettre",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "put"
+        },
+        {
+          "label": "prétérit",
+          "value": "put"
+        },
+        {
+          "label": "participe passé",
+          "value": "put"
+        }
+      ]
+    },
+    {
+      "source": "lire",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "read"
+        },
+        {
+          "label": "prétérit",
+          "value": "read"
+        },
+        {
+          "label": "participe passé",
+          "value": "read"
+        }
+      ]
+    },
+    {
+      "source": "courir",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "run"
+        },
+        {
+          "label": "prétérit",
+          "value": "ran"
+        },
+        {
+          "label": "participe passé",
+          "value": "run"
+        }
+      ]
+    },
+    {
+      "source": "dire",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "say"
+        },
+        {
+          "label": "prétérit",
+          "value": "said"
+        },
+        {
+          "label": "participe passé",
+          "value": "said"
+        }
+      ]
+    },
+    {
+      "source": "voir",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "see"
+        },
+        {
+          "label": "prétérit",
+          "value": "saw"
+        },
+        {
+          "label": "participe passé",
+          "value": "seen"
+        }
+      ]
+    },
+    {
+      "source": "prendre",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "take"
+        },
+        {
+          "label": "prétérit",
+          "value": "took"
+        },
+        {
+          "label": "participe passé",
+          "value": "taken"
+        }
+      ]
+    },
+    {
+      "source": "dire / raconter",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "tell"
+        },
+        {
+          "label": "prétérit",
+          "value": "told"
+        },
+        {
+          "label": "participe passé",
+          "value": "told"
+        }
+      ]
+    },
+    {
+      "source": "penser",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "think"
+        },
+        {
+          "label": "prétérit",
+          "value": "thought"
+        },
+        {
+          "label": "participe passé",
+          "value": "thought"
+        }
+      ]
+    },
+    {
+      "source": "comprendre",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "understand"
+        },
+        {
+          "label": "prétérit",
+          "value": "understood"
+        },
+        {
+          "label": "participe passé",
+          "value": "understood"
+        }
+      ]
+    },
+    {
+      "source": "porter (vêtement)",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "wear"
+        },
+        {
+          "label": "prétérit",
+          "value": "wore"
+        },
+        {
+          "label": "participe passé",
+          "value": "worn"
+        }
+      ]
+    },
+    {
+      "source": "écrire",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "write"
+        },
+        {
+          "label": "prétérit",
+          "value": "wrote"
+        },
+        {
+          "label": "participe passé",
+          "value": "written"
+        }
+      ]
+    }
   ]
 }

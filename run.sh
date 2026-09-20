@@ -1,5 +1,5 @@
 #!/bin/bash
-# Launcher for the Latin revision app.
+# Launcher for the revision app.
 # Finds python3.13 with tkinter support on both Apple Silicon (/opt/homebrew)
 # and Intel Macs (/usr/local). Install dependency with: brew install python-tk@3.13
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"

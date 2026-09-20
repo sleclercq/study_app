@@ -104,6 +104,17 @@
   ],
   "slug": "accord_participe_passe",
   "name": "Français - Accord du participe passé",
+  "level": "5e",
+  "kind": "accord_pp",
+  "sort_order": 40,
+  "color": "#9c4a4a",
+  "button_label": "Français - Accord du participe passé",
+  "source_language": "Français",
+  "target_language": "Français",
+  "source_lang_code": "fr",
+  "target_lang_code": "fr",
+  "canonical_prompt": "",
+  "form_prompt": "",
   "words": [
     {
       "_comment": "sans_auxiliaire — blessée s'accorde avec 'la princesse' (fém. sing.)",

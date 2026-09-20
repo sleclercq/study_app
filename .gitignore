@@ -223,3 +223,11 @@ CLAUDE.md
 .DS_Store
 brief.md
 
+# Photos des cours et des carnets (sources des exercices) : gardees en local,
+# hors de git (volume, et ce sont des pages de cahier des enfants).
+data/_sources/**/*.HEIC
+data/_sources/**/*.heic
+data/_sources/**/*.jpg
+data/_sources/**/*.jpeg
+data/_sources/**/*.png
+data/_sources/**/*.pdf

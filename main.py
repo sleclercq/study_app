@@ -4,16 +4,22 @@ main.py - Entry point and full UI for the revision app.
 Run with:  python main.py   (or ./run.sh)
 
 Navigation flow:
-  PlayerScreen -> ExerciseSelectionScreen -> VerbSelectionScreen -> QuizScreen        -> ResultsScreen
-                                                                 -> EnglishQuizScreen  -> ResultsScreen
+  PlayerScreen -> ExerciseSelectionScreen -> VerbSelectionScreen -+-> QuizScreen        -> ResultsScreen
+                                                                 +-> EnglishQuizScreen -> ResultsScreen
+                                          |                      +-> DirectionScreen   -> QuizScreen -> ResultsScreen
+                                          +-> (no selection) -----> QuizScreen / AccordPPScreen -> ResultsScreen
+
+Which of those paths an exercise takes is decided by its `kind`, read from the
+database (and ultimately from its JSON file in data/) - see _KINDS below.
+Nothing about a given exercise is hardcoded in this file any more.
 """
 
-import re
 import tkinter as tk
 from tkinter import messagebox
 import random
 from datetime import datetime
 
+import answers
 import db
 
 # ---------------------------------------------------------------------------
@@ -23,6 +29,164 @@ app_state: dict = {}
 
 SESSION_LENGTH = 20
 
+# School year being revised right now. Its exercises open the menu; previous
+# years are grouped underneath as "Révisions". Bump this every September.
+CURRENT_LEVEL = "4e"
+
+
+# ---------------------------------------------------------------------------
+# Exercise kinds: what a session looks like for each family of exercise
+# ---------------------------------------------------------------------------
+#
+#   select    : show VerbSelectionScreen first (pick the words / themes)
+#   direction : ask which way round to translate (DirectionScreen)
+#   screen    : the screen that runs the questions
+#   build     : (exercise, enabled_word_ids, direction) -> list of questions
+#
+# Adding an exercise family = one entry here + a builder in db.py. Adding an
+# exercise of an existing family = a JSON file in data/, nothing else.
+
+_KINDS: dict = {
+    # French -> Latin infinitive + conjugated forms, one answer field.
+    "forms": {
+        "select": True, "direction": False, "screen": "QuizScreen",
+        "build": lambda ex, ids, d: db.get_questions_for_exercise(ex["id"], enabled_word_ids=ids),
+    },
+    # English irregular verbs: three fields at once.
+    "triple": {
+        "select": True, "direction": False, "screen": "EnglishQuizScreen",
+        "build": lambda ex, ids, d: db.get_english_questions_for_exercise(ex["id"], enabled_word_ids=ids),
+    },
+    # Vocabulary list, translated either way.
+    "vocab": {
+        "select": True, "direction": True, "screen": "QuizScreen",
+        "build": lambda ex, ids, d: db.get_vocab_questions(ex["id"], enabled_word_ids=ids, direction=d),
+    },
+    # A bank of sentences with a blank: no per-word selection, random draw.
+    "sentences": {
+        "select": False, "direction": False, "screen": "QuizScreen",
+        "build": lambda ex, ids, d: db.get_fill_blank_questions(ex["id"]),
+    },
+    # Accord du participe passé: its own screen (click the COD, then answer).
+    "accord_pp": {
+        "select": False, "direction": False, "screen": "AccordPPScreen",
+        "build": lambda ex, ids, d: db.get_accord_pp_questions(ex["id"]),
+    },
+}
+
+
+# ---------------------------------------------------------------------------
+# What counts as a correct answer, explained to the child
+# ---------------------------------------------------------------------------
+#
+# answers.py is tolerant on some spellings and strict on others. A child cannot
+# guess where that line sits, and "j'avais écrit la bonne réponse" is how they
+# lose confidence in the app - so the rules are written on screen, in the
+# language of the expected answer. Keyed by the *_lang_code of the exercise.
+
+_ANSWER_RULES: dict = {
+    "de": ("ä ö ü ß : tu peux taper ae oe ue ss (für = fuer, mais fur est faux).\n"
+           "L'article fait partie de la réponse : der Tisch, pas Tisch."),
+    "fr": ("Les accents ne sont pas obligatoires (fenetre = fenêtre),\n"
+           "l'article non plus (fenêtre = la fenêtre)."),
+}
+
+
+def answer_rules(lang: str) -> str:
+    """The typing rules for answers in that language, "" when there is nothing to say."""
+    return _ANSWER_RULES.get(lang, "")
+
+
+def kind_spec(exercise: dict) -> dict:
+    """The _KINDS entry of an exercise, falling back to the plain "forms" flow."""
+    return _KINDS.get(exercise.get("kind", ""), _KINDS["forms"])
+
+
+def open_exercise(app, exercise: dict) -> None:
+    """Menu click: go to the selection screen, or straight into the questions."""
+    app_state["exercise"] = exercise
+    app_state.pop("enabled_word_ids", None)
+    if kind_spec(exercise)["select"]:
+        app.show_frame("VerbSelectionScreen")
+    else:
+        start_session(app, exercise)
+
+
+def start_session(app, exercise: dict, enabled_word_ids=None,
+                  direction: str = db.DIRECTION_MIXED) -> None:
+    """
+    Draw up to SESSION_LENGTH questions and hand them to the right screen.
+
+    Single entry point for starting a series - used by the menu, by the
+    selection screen, by the direction chooser and by "Rejouer", so all four
+    behave the same.
+    """
+    questions = kind_spec(exercise)["build"](exercise, enabled_word_ids, direction)
+    if not questions:
+        messagebox.showwarning(
+            "Rien à réviser",
+            "Aucune question pour cette sélection. Coche au moins un mot.",
+        )
+        return
+
+    random.shuffle(questions)
+    app_state["questions"] = questions[:SESSION_LENGTH]
+    app_state["enabled_word_ids"] = enabled_word_ids
+    app_state["direction"] = direction
+    app.show_frame(kind_spec(exercise)["screen"])
+
+
+# ---------------------------------------------------------------------------
+# Small shared UI helpers
+# ---------------------------------------------------------------------------
+
+def make_scroll_area(parent, bg: str, height: int):
+    """
+    A bordered, vertically scrollable area (used by three screens).
+
+    Returns (outer, inner, bind_wheel):
+      outer      - frame to pack into the screen
+      inner      - frame to put the content in
+      bind_wheel - call it from the screen's on_show() so the wheel scrolls THIS
+                   area; the binding is global to the window, so the screen
+                   being shown claims it.
+    """
+    outer = tk.Frame(parent, bg=bg, bd=1, relief="groove")
+    canvas = tk.Canvas(outer, bg=bg, highlightthickness=0, height=height)
+    scrollbar = tk.Scrollbar(outer, orient="vertical", command=canvas.yview)
+    canvas.configure(yscrollcommand=scrollbar.set)
+    scrollbar.pack(side="right", fill="y")
+    canvas.pack(side="left", fill="both", expand=True)
+
+    inner = tk.Frame(canvas, bg=bg)
+    window = canvas.create_window((0, 0), window=inner, anchor="nw")
+    canvas.bind("<Configure>", lambda e: canvas.itemconfig(window, width=e.width))
+    inner.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
+
+    def _on_wheel(event):
+        # macOS reports small deltas (+/-1 per notch), Windows/X11 multiples of
+        # 120. Dividing by 120 unconditionally - as this app used to - meant no
+        # scrolling at all on a Mac, which a 258-word list makes unbearable.
+        step = event.delta
+        if abs(step) >= 120:
+            step = step / 120
+        step = int(step) or (1 if step > 0 else -1)
+        canvas.yview_scroll(-step, "units")
+
+    def bind_wheel():
+        canvas.bind_all("<MouseWheel>", _on_wheel)
+
+    return outer, inner, bind_wheel
+
+
+def darken(hex_color: str, factor: float = 0.82) -> str:
+    """Darker shade of a #rrggbb colour, for a button's pressed state."""
+    try:
+        r, g, b = (int(hex_color[i:i + 2], 16) for i in (1, 3, 5))
+    except (ValueError, IndexError):
+        return hex_color
+    return "#%02x%02x%02x" % tuple(min(255, int(c * factor)) for c in (r, g, b))
+
 
 # ---------------------------------------------------------------------------
 # App shell
@@ -31,7 +195,7 @@ SESSION_LENGTH = 20
 class App(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.title("Révision Verbes")
+        self.title("Révisions")
         self.resizable(False, False)
         self._center_window(width=640, height=620)
 
@@ -57,6 +221,7 @@ class App(tk.Tk):
             PlayerScreen,
             ExerciseSelectionScreen,
             VerbSelectionScreen,
+            DirectionScreen,
             QuizScreen,
             EnglishQuizScreen,
             AccordPPScreen,
@@ -92,7 +257,7 @@ class PlayerScreen(tk.Frame):
     def _build_ui(self) -> None:
         self.configure(padx=40, pady=30)
 
-        tk.Label(self, text="Révision Verbes", font=self.TITLE_FONT,
+        tk.Label(self, text="Révisions", font=self.TITLE_FONT,
                  bg=self.BG, fg="#3a2a0a").pack(pady=(0, 20))
 
         tk.Label(self, text="Choisis ton prénom :", font=self.LABEL_FONT,
@@ -170,10 +335,20 @@ class PlayerScreen(tk.Frame):
 # ---------------------------------------------------------------------------
 
 class ExerciseSelectionScreen(tk.Frame):
-    BG         = "#f5f0e8"
-    TITLE_FONT = ("Helvetica", 18, "bold")
-    BTN_FONT   = ("Helvetica", 14, "bold")
-    BACK_FONT  = ("Helvetica", 12)
+    """
+    The menu, built entirely from the database (db.list_exercises).
+
+    Exercises are grouped by school level: the current year first, older years
+    below under "Révisions de 5e". Label, colour and position all come from the
+    exercise's JSON file, so adding an exercise never means editing this screen.
+    """
+
+    BG            = "#f5f0e8"
+    TITLE_FONT    = ("Helvetica", 18, "bold")
+    SECTION_FONT  = ("Helvetica", 12, "bold")
+    BTN_FONT      = ("Helvetica", 14, "bold")   # exercises of the current year
+    REVISION_FONT = ("Helvetica", 12, "bold")   # previous years, kept compact
+    BACK_FONT     = ("Helvetica", 12)
 
     def __init__(self, parent, app):
         super().__init__(parent, bg=self.BG)
@@ -181,107 +356,77 @@ class ExerciseSelectionScreen(tk.Frame):
         self._build_ui()
 
     def _build_ui(self) -> None:
-        self.configure(padx=60, pady=30)
+        self.configure(padx=40, pady=20)
 
         self._title = tk.Label(self, text="", font=self.TITLE_FONT,
                                bg=self.BG, fg="#3a2a0a")
-        self._title.pack(pady=(0, 36))
+        self._title.pack(pady=(0, 14))
 
-        tk.Button(
-            self,
-            text="Verbes Latins\n(Présent de l'indicatif)",
-            font=self.BTN_FONT,
-            bg="#4a7c59", fg="black", activebackground="#3a6349",
-            command=self._choose_latin, pady=22,
-        ).pack(fill="x", pady=(0, 18))
-
-        tk.Button(
-            self,
-            text="Verbes Anglais irréguliers",
-            font=self.BTN_FONT,
-            bg="#4a6a9c", fg="black", activebackground="#3a5a8c",
-            command=self._choose_english, pady=22,
-        ).pack(fill="x", pady=(0, 18))
-
-        tk.Button(
-            self,
-            text="Anglais - Phrases à trous",
-            font=self.BTN_FONT,
-            bg="#7a4a9c", fg="black", activebackground="#6a3a8c",
-            command=self._choose_fill_blank, pady=22,
-        ).pack(fill="x", pady=(0, 18))
-
-        tk.Button(
-            self,
-            text="Français - Accord du participe passé",
-            font=self.BTN_FONT,
-            bg="#9c4a4a", fg="black", activebackground="#8c3a3a",
-            command=self._choose_accord_pp, pady=22,
-        ).pack(fill="x", pady=(0, 18))
-
-        tk.Button(
-            self,
-            text="Français - Conjugaison\n(dire, pouvoir, voir)",
-            font=self.BTN_FONT,
-            bg="#9c4a4a", fg="black", activebackground="#8c3a3a",
-            command=self._choose_french_verbs, pady=22,
-        ).pack(fill="x")
+        outer, self._menu, self._bind_wheel = make_scroll_area(self, self.BG, height=470)
+        outer.pack(fill="both", expand=True, pady=(0, 10))
 
         tk.Button(
             self, text="← Retour", font=self.BACK_FONT,
             command=lambda: self.app.show_frame("PlayerScreen"),
-        ).pack(pady=(30, 0))
+        ).pack()
+
+    @staticmethod
+    def _level_sort_key(level: str):
+        """Current year first, then the other years newest to oldest, rest last."""
+        if level == CURRENT_LEVEL:
+            return (0, "")
+        if not level:
+            return (2, "")
+        return (1, level)   # "4e" < "5e" < "6e" = most recent first
+
+    @staticmethod
+    def _level_heading(level: str) -> str:
+        if not level:
+            return "Autres exercices"
+        if level == CURRENT_LEVEL:
+            return f"Programme de {level}"
+        return f"Révisions de {level}"
 
     def on_show(self) -> None:
         player = app_state.get("player", {})
-        name = player.get("name", "")
-        self._title.config(text=f"Bonjour {name} ! Quel exercice ?")
+        self._title.config(text=f"Bonjour {player.get('name', '')} ! Quel exercice ?")
 
-    def _choose_latin(self) -> None:
-        exercise = db.get_exercise_by_slug("latin_verbs_present")
-        if exercise is None:
-            messagebox.showerror("Erreur", "Exercice introuvable. Vérifie les fichiers data/.")
-            return
-        app_state["exercise"] = exercise
-        self.app.show_frame("VerbSelectionScreen")
+        for widget in self._menu.winfo_children():
+            widget.destroy()
 
-    def _choose_english(self) -> None:
-        exercise = db.get_exercise_by_slug("english_irregular_verbs")
-        if exercise is None:
-            messagebox.showerror("Erreur", "Exercice introuvable. Vérifie les fichiers data/.")
+        exercises = db.list_exercises()
+        if not exercises:
+            tk.Label(self._menu, text="Aucun exercice. Vérifie les fichiers data/.",
+                     font=self.BTN_FONT, bg=self.BG, fg="#b22222").pack(pady=20)
             return
-        app_state["exercise"] = exercise
-        self.app.show_frame("VerbSelectionScreen")
 
-    def _choose_fill_blank(self) -> None:
-        exercise = db.get_exercise_by_slug("english_fill_blanks")
-        if exercise is None:
-            messagebox.showerror("Erreur", "Exercice introuvable. Vérifie les fichiers data/.")
-            return
-        app_state["exercise"] = exercise
-        all_q = db.get_fill_blank_questions(exercise["id"])
-        random.shuffle(all_q)
-        app_state["questions"] = all_q[:SESSION_LENGTH]
-        self.app.show_frame("QuizScreen")
+        by_level: dict = {}
+        for exercise in exercises:
+            by_level.setdefault(exercise.get("level", ""), []).append(exercise)
 
-    def _choose_accord_pp(self) -> None:
-        exercise = db.get_exercise_by_slug("accord_participe_passe")
-        if exercise is None:
-            messagebox.showerror("Erreur", "Exercice introuvable. Vérifie les fichiers data/.")
-            return
-        app_state["exercise"] = exercise
-        all_q = db.get_accord_pp_questions(exercise["id"])
-        random.shuffle(all_q)
-        app_state["questions"] = all_q[:SESSION_LENGTH]
-        self.app.show_frame("AccordPPScreen")
+        for level in sorted(by_level, key=self._level_sort_key):
+            tk.Label(
+                self._menu, text=self._level_heading(level), font=self.SECTION_FONT,
+                bg=self.BG, fg="#8a7a5a", anchor="w",
+            ).pack(fill="x", padx=6, pady=(8, 2))
 
-    def _choose_french_verbs(self) -> None:
-        exercise = db.get_exercise_by_slug("french_verbs_modes")
-        if exercise is None:
-            messagebox.showerror("Erreur", "Exercice introuvable. Vérifie les fichiers data/.")
-            return
-        app_state["exercise"] = exercise
-        self.app.show_frame("VerbSelectionScreen")
+            # This year's exercises get the big buttons; older years are listed
+            # underneath in a compact form - still one click away, but visibly
+            # secondary, and the whole menu fits without scrolling.
+            current = (level == CURRENT_LEVEL)
+            for exercise in by_level[level]:
+                color = exercise.get("color") or "#4a7c59"
+                label = exercise.get("button_label") or exercise["name"]
+                tk.Button(
+                    self._menu,
+                    text=label if current else label.replace("\n", " "),
+                    font=self.BTN_FONT if current else self.REVISION_FONT,
+                    bg=color, fg="black", activebackground=darken(color),
+                    pady=11 if current else 6,
+                    command=lambda e=exercise: open_exercise(self.app, e),
+                ).pack(fill="x", padx=6, pady=(0, 7 if current else 4))
+
+        self._bind_wheel()
 
 
 # ---------------------------------------------------------------------------
@@ -289,46 +434,39 @@ class ExerciseSelectionScreen(tk.Frame):
 # ---------------------------------------------------------------------------
 
 class VerbSelectionScreen(tk.Frame):
-    BG        = "#f5f0e8"
-    TITLE_FONT= ("Helvetica", 16, "bold")
-    VERB_FONT = ("Helvetica", 13)
-    BTN_FONT  = ("Helvetica", 13)
+    """
+    Pick what to revise: one checkbox per word, saved per player.
+
+    When the exercise groups its words by theme (a vocabulary list), each theme
+    gets a header checkbox that ticks or unticks the whole block - that is how
+    you revise only "Lektion 3" the evening before a test.
+    """
+
+    BG          = "#f5f0e8"
+    TITLE_FONT  = ("Helvetica", 16, "bold")
+    THEME_FONT  = ("Helvetica", 12, "bold")
+    VERB_FONT   = ("Helvetica", 13)
+    COUNT_FONT  = ("Helvetica", 11)
+    BTN_FONT    = ("Helvetica", 13)
 
     def __init__(self, parent, app):
         super().__init__(parent, bg=self.BG)
         self.app = app
-        self._checks: dict = {}
+        self._checks: dict = {}        # word_id -> BooleanVar
+        self._theme_vars: dict = {}    # theme   -> BooleanVar (header checkbox)
+        self._theme_words: dict = {}   # theme   -> [word_id, ...]
+        self._grid_row: int = 0        # next free row in the checkbox grid
         self._build_ui()
 
     def _build_ui(self) -> None:
         self.configure(padx=30, pady=16)
 
-        tk.Label(self, text="Choisir les verbes à réviser",
-                 font=self.TITLE_FONT, bg=self.BG, fg="#3a2a0a").pack(pady=(0, 8))
+        self._title = tk.Label(self, text="", font=self.TITLE_FONT,
+                               bg=self.BG, fg="#3a2a0a")
+        self._title.pack(pady=(0, 8))
 
-        outer = tk.Frame(self, bg=self.BG, bd=1, relief="groove")
+        outer, self._cb_frame, self._bind_wheel = make_scroll_area(self, self.BG, height=300)
         outer.pack(fill="both", expand=True, pady=(0, 8))
-
-        canvas = tk.Canvas(outer, bg=self.BG, highlightthickness=0, height=280)
-        sb = tk.Scrollbar(outer, orient="vertical", command=canvas.yview)
-        canvas.configure(yscrollcommand=sb.set)
-        sb.pack(side="right", fill="y")
-        canvas.pack(side="left", fill="both", expand=True)
-
-        self._cb_frame = tk.Frame(canvas, bg=self.BG)
-        self._cb_win = canvas.create_window((0, 0), window=self._cb_frame, anchor="nw")
-
-        def _on_canvas_resize(event):
-            canvas.itemconfig(self._cb_win, width=event.width)
-        canvas.bind("<Configure>", _on_canvas_resize)
-
-        def _on_inner_resize(event):
-            canvas.configure(scrollregion=canvas.bbox("all"))
-        self._cb_frame.bind("<Configure>", _on_inner_resize)
-
-        def _on_wheel(event):
-            canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
-        canvas.bind_all("<MouseWheel>", _on_wheel)
 
         sel_row = tk.Frame(self, bg=self.BG)
         sel_row.pack(fill="x", pady=(0, 8))
@@ -336,6 +474,9 @@ class VerbSelectionScreen(tk.Frame):
                   command=self._check_all).pack(side="left", padx=(0, 8))
         tk.Button(sel_row, text="Tout décocher", font=self.BTN_FONT,
                   command=self._uncheck_all).pack(side="left")
+        self._count_label = tk.Label(sel_row, text="", font=self.COUNT_FONT,
+                                     bg=self.BG, fg="#666")
+        self._count_label.pack(side="right")
 
         btn_row = tk.Frame(self, bg=self.BG)
         btn_row.pack(fill="x")
@@ -357,68 +498,210 @@ class VerbSelectionScreen(tk.Frame):
         if not player or not exercise:
             return
 
-        for w in self._cb_frame.winfo_children():
-            w.destroy()
+        for widget in self._cb_frame.winfo_children():
+            widget.destroy()
         self._checks.clear()
+        self._theme_vars.clear()
+        self._theme_words.clear()
+        self._grid_row = 0
 
         prefs = db.get_word_prefs(player["id"], exercise["id"])
+        is_vocab = exercise.get("kind") == "vocab"
+        self._title.config(
+            text="Choisir les mots à réviser" if is_vocab
+            else "Choisir les verbes à réviser"
+        )
 
-        for i, pref in enumerate(prefs):
-            var = tk.BooleanVar(value=pref["enabled"])
-            self._checks[pref["word_id"]] = var
+        # Group in seed order; "" is the single group for ungrouped exercises.
+        groups: dict = {}
+        for pref in prefs:
+            groups.setdefault(pref.get("theme", ""), []).append(pref)
 
-            col = i % 2
-            row = i // 2
-            cb = tk.Checkbutton(
-                self._cb_frame, text=pref["source"],
-                variable=var, font=self.VERB_FONT,
-                bg=self.BG, anchor="w",
-                command=self._update_start_btn,
-            )
-            cb.grid(row=row, column=col, sticky="w", padx=12, pady=2)
+        for theme, words in groups.items():
+            if theme:
+                self._add_theme_header(theme, words)
+            self._add_words(words)
 
         self._cb_frame.columnconfigure(0, weight=1)
         self._cb_frame.columnconfigure(1, weight=1)
+        self._bind_wheel()
+        self._update_start_btn()
+
+    def _add_theme_header(self, theme: str, words: list) -> None:
+        """Bold checkbox that ticks/unticks every word of the theme."""
+        self._theme_words[theme] = [w["word_id"] for w in words]
+        var = tk.BooleanVar(value=all(w["enabled"] for w in words))
+        self._theme_vars[theme] = var
+
+        header = tk.Frame(self._cb_frame, bg=self.BG)
+        header.grid(row=self._grid_row, column=0, columnspan=2,
+                    sticky="ew", pady=(10, 2))
+        self._grid_row += 1
+        tk.Checkbutton(
+            header, text=theme, variable=var, font=self.THEME_FONT,
+            bg=self.BG, fg="#6a5a3a", anchor="w",
+            command=lambda t=theme: self._toggle_theme(t),
+        ).pack(side="left", padx=(6, 0))
+
+    def _add_words(self, words: list) -> None:
+        """Two columns of word checkboxes, appended under the current row."""
+        first_row = self._grid_row
+        for i, pref in enumerate(words):
+            var = tk.BooleanVar(value=pref["enabled"])
+            self._checks[pref["word_id"]] = var
+            tk.Checkbutton(
+                self._cb_frame, text=pref["source"], variable=var,
+                font=self.VERB_FONT, bg=self.BG, anchor="w",
+                command=self._on_word_toggled,
+            ).grid(row=first_row + i // 2, column=i % 2, sticky="w", padx=12, pady=2)
+        self._grid_row = first_row + (len(words) + 1) // 2
+
+    def _toggle_theme(self, theme: str) -> None:
+        wanted = self._theme_vars[theme].get()
+        for word_id in self._theme_words[theme]:
+            self._checks[word_id].set(wanted)
+        self._update_start_btn()
+
+    def _on_word_toggled(self) -> None:
+        """Keep each theme header in sync with the words underneath it."""
+        for theme, word_ids in self._theme_words.items():
+            self._theme_vars[theme].set(all(self._checks[w].get() for w in word_ids))
         self._update_start_btn()
 
     def _update_start_btn(self) -> None:
-        any_checked = any(v.get() for v in self._checks.values())
-        self._start_btn.config(state="normal" if any_checked else "disabled")
+        selected = sum(1 for v in self._checks.values() if v.get())
+        total = len(self._checks)
+        self._count_label.config(text=f"{selected} / {total} sélectionnés")
+        self._start_btn.config(state="normal" if selected else "disabled")
+
+    def _set_all(self, value: bool) -> None:
+        for var in self._checks.values():
+            var.set(value)
+        for var in self._theme_vars.values():
+            var.set(value)
+        self._update_start_btn()
 
     def _check_all(self) -> None:
-        for v in self._checks.values():
-            v.set(True)
-        self._update_start_btn()
+        self._set_all(True)
 
     def _uncheck_all(self) -> None:
-        for v in self._checks.values():
-            v.set(False)
-        self._update_start_btn()
+        self._set_all(False)
 
     def _start(self) -> None:
         player = app_state["player"]
         exercise = app_state["exercise"]
 
-        prefs = {wid: var.get() for wid, var in self._checks.items()}
+        prefs = {word_id: var.get() for word_id, var in self._checks.items()}
         db.save_word_prefs(player["id"], prefs)
 
-        enabled_ids = [wid for wid, enabled in prefs.items() if enabled]
+        enabled_ids = [word_id for word_id, enabled in prefs.items() if enabled]
         app_state["enabled_word_ids"] = enabled_ids
 
-        if exercise["slug"] == "english_irregular_verbs":
-            all_q = db.get_english_questions_for_exercise(
-                exercise["id"], enabled_word_ids=enabled_ids
-            )
-            random.shuffle(all_q)
-            app_state["questions"] = all_q[:SESSION_LENGTH]
-            self.app.show_frame("EnglishQuizScreen")
+        if kind_spec(exercise)["direction"]:
+            self.app.show_frame("DirectionScreen")
         else:
-            all_q = db.get_questions_for_exercise(
-                exercise["id"], enabled_word_ids=enabled_ids
+            start_session(self.app, exercise, enabled_ids)
+
+
+# ---------------------------------------------------------------------------
+# Screen 3b: Direction of translation (vocabulary only)
+# ---------------------------------------------------------------------------
+
+class DirectionScreen(tk.Frame):
+    """
+    "Dans quel sens ?", asked once before a vocabulary series.
+
+    Producing the foreign word (Français -> Allemand) and recognising it
+    (Allemand -> Français) are two different skills, and the hard one is
+    production. Letting the child choose means they can drill the one they are
+    weak at instead of always meeting half the questions they already know.
+    The languages are read from the exercise, so this screen works as-is for a
+    future Spanish or English list.
+    """
+
+    BG              = "#f5f0e8"
+    TITLE_FONT      = ("Helvetica", 18, "bold")
+    BTN_FONT        = ("Helvetica", 15, "bold")
+    SUB_FONT        = ("Helvetica", 11)
+    RULES_TITLE_FONT= ("Helvetica", 11, "bold")
+    RULES_FONT      = ("Helvetica", 11)
+    BACK_FONT       = ("Helvetica", 12)
+
+    def __init__(self, parent, app):
+        super().__init__(parent, bg=self.BG)
+        self.app = app
+        self._buttons: list = []
+        self._build_ui()
+
+    def _build_ui(self) -> None:
+        self.configure(padx=60, pady=30)
+
+        tk.Label(self, text="Dans quel sens ?", font=self.TITLE_FONT,
+                 bg=self.BG, fg="#3a2a0a").pack(pady=(10, 6))
+        self._subtitle = tk.Label(self, text="", font=self.SUB_FONT,
+                                  bg=self.BG, fg="#666")
+        self._subtitle.pack(pady=(0, 20))
+
+        for direction, color in (
+            (db.DIRECTION_FORWARD, "#8a6a2a"),
+            (db.DIRECTION_REVERSE, "#4a6a9c"),
+            (db.DIRECTION_MIXED,   "#4a7c59"),
+        ):
+            button = tk.Button(
+                self, text="", font=self.BTN_FONT,
+                bg=color, fg="black", activebackground=darken(color), pady=14,
+                command=lambda d=direction: self._start(d),
             )
-            random.shuffle(all_q)
-            app_state["questions"] = all_q[:SESSION_LENGTH]
-            self.app.show_frame("QuizScreen")
+            button.pack(fill="x", pady=(0, 12))
+            self._buttons.append((direction, button))
+
+        # Same rules as the footer of the quiz, but read calmly before starting.
+        self._rules_frame = tk.Frame(self, bg="#ece5d8", bd=1, relief="flat")
+        self._rules_frame.pack(fill="x", pady=(6, 0))
+        tk.Label(self._rules_frame, text="Comment écrire tes réponses",
+                 font=self.RULES_TITLE_FONT, bg="#ece5d8", fg="#6a5a3a",
+                 anchor="w").pack(fill="x", padx=12, pady=(8, 2))
+        self._rules_label = tk.Label(
+            self._rules_frame, text="", font=self.RULES_FONT, bg="#ece5d8",
+            fg="#5a4a2a", justify="left", anchor="w",
+        )
+        self._rules_label.pack(fill="x", padx=12, pady=(0, 10))
+
+        tk.Button(
+            self, text="← Retour", font=self.BACK_FONT,
+            command=lambda: self.app.show_frame("VerbSelectionScreen"),
+        ).pack(pady=(14, 0))
+
+    def on_show(self) -> None:
+        exercise = app_state.get("exercise", {})
+        source = exercise.get("source_language") or "Français"
+        target = exercise.get("target_language") or "Langue étrangère"
+
+        selected = len(app_state.get("enabled_word_ids") or [])
+        self._subtitle.config(text=f"{selected} mots sélectionnés")
+
+        labels = {
+            db.DIRECTION_FORWARD: f"{source}  →  {target}",
+            db.DIRECTION_REVERSE: f"{target}  →  {source}",
+            db.DIRECTION_MIXED:   "Les deux mélangés",
+        }
+        for direction, button in self._buttons:
+            button.config(text=labels[direction])
+
+        # Both directions are reachable from here, including in "mixed", so both
+        # sets of rules are shown - the child reads them once before starting.
+        rules = [answer_rules(exercise.get("target_lang_code", "")),
+                 answer_rules(exercise.get("source_lang_code", ""))]
+        text = "\n".join(r for r in rules if r)
+        self._rules_label.config(text=text)
+        if text:
+            self._rules_frame.pack(fill="x", pady=(6, 0))
+        else:
+            self._rules_frame.pack_forget()
+
+    def _start(self, direction: str) -> None:
+        start_session(self.app, app_state["exercise"],
+                      app_state.get("enabled_word_ids"), direction)
 
 
 # ---------------------------------------------------------------------------
@@ -453,12 +736,14 @@ class QuizScreen(tk.Frame):
     HINT_FONT     = ("Helvetica", 12, "italic")
     BTN_FONT      = ("Helvetica", 13)
     CONTINUE_FONT = ("Helvetica", 13, "bold")
+    RULES_FONT    = ("Helvetica", 10)
 
     COLOR_CORRECT = "#1a7a2a"
     COLOR_WRONG   = "#b22222"
     COLOR_HINT    = "#7a5500"
     COLOR_REVEAL  = "#1a4a8a"
     COLOR_NEUTRAL = "#3a2a0a"
+    COLOR_RULES   = "#8a7a5a"
 
     def __init__(self, parent, app):
         super().__init__(parent, bg=self.BG)
@@ -521,18 +806,44 @@ class QuizScreen(tk.Frame):
         self._continue_btn.pack(fill="x", pady=(16, 0))
         self._continue_btn.pack_forget()
 
+        # Pinned to the bottom: the typing rules for the language being answered
+        # in. Empty (and invisible) for Latin, English and French exercises,
+        # which are compared strictly and have nothing to explain.
+        self._rules_label = tk.Label(
+            self, text="", font=self.RULES_FONT, bg=self.BG, fg=self.COLOR_RULES,
+            justify="center",
+        )
+        self._rules_label.pack(side="bottom", pady=(10, 0))
+
     def on_show(self) -> None:
         self._questions = app_state.get("questions", [])
         self._q_index = 0
         self._score = 0.0
         player = app_state.get("player", {})
-        self._player_label.config(text=f"Joueur : {player.get('name', '')}")
+        self._player_label.config(
+            text=f"Joueur : {player.get('name', '')}{self._direction_suffix()}"
+        )
 
         root = self.winfo_toplevel()
         root.bind("<Return>", self._on_enter)
         root.bind("<space>", self._on_space)
 
         self._load_question()
+
+    @staticmethod
+    def _direction_suffix() -> str:
+        """" · Français → Allemand" for a one-way vocabulary series, else ""."""
+        exercise = app_state.get("exercise", {})
+        direction = app_state.get("direction", db.DIRECTION_MIXED)
+        if exercise.get("kind") != "vocab":
+            return ""
+        source = exercise.get("source_language", "")
+        target = exercise.get("target_language", "")
+        if direction == db.DIRECTION_FORWARD:
+            return f"   ·   {source} → {target}"
+        if direction == db.DIRECTION_REVERSE:
+            return f"   ·   {target} → {source}"
+        return "   ·   les deux sens"
 
     def _load_question(self) -> None:
         self._attempts = 0
@@ -544,6 +855,8 @@ class QuizScreen(tk.Frame):
         self._prompt_label.config(text=q["prompt"], fg=self.COLOR_NEUTRAL)
         self._feedback_label.config(text="")
         self._hint_label.config(text="")
+        # In a mixed series the language changes from one question to the next.
+        self._rules_label.config(text=answer_rules(q.get("answer_lang", "")))
 
         self._entry.config(state="normal")
         self._submit_btn.config(state="normal")
@@ -566,14 +879,17 @@ class QuizScreen(tk.Frame):
             return
 
         raw = self._answer_var.get()
-        answer = raw.strip().lower()
         q = self._questions[self._q_index]
-        correct_lower = q["answer"].strip().lower()
         correct_display = q["answer"].strip()
+        # Vocabulary questions carry every accepted answer and the language of
+        # the expected one; the older exercises carry neither and keep the
+        # strict comparison they always had (see answers.py).
+        accepted = q.get("accepted") or [correct_display]
+        lang = q.get("answer_lang", "")
 
         self._attempts += 1
 
-        if answer == correct_lower:
+        if answers.matches(raw, accepted, lang):
             if self._attempts == 1:
                 points, msg = 1.0, "Excellent !"
             elif self._attempts == 2:
@@ -602,12 +918,7 @@ class QuizScreen(tk.Frame):
                 fg=self.COLOR_WRONG,
             )
 
-            n = len(correct_display)
-            if self._attempts == 1:
-                hint_len = 2
-            else:
-                hint_len = (n - 1) if n <= 4 else 4
-            hint = correct_display[:hint_len]
+            hint = answers.hint_prefix(correct_display, self._attempts, lang)
             self._hint_label.config(
                 text=f"Indice : {hint}\u2026",
                 fg=self.COLOR_HINT,
@@ -1465,29 +1776,9 @@ class ResultsScreen(tk.Frame):
         tk.Label(self, text="Historique de tes resultats :",
                  font=("Helvetica", 12, "bold"), bg=self.BG).pack(anchor="w")
 
-        hist_outer = tk.Frame(self, bg=self.BG, bd=1, relief="groove")
+        hist_outer, self._hist_inner, self._bind_wheel = make_scroll_area(
+            self, self.BG, height=140)
         hist_outer.pack(fill="x", pady=(4, 10))
-
-        canvas = tk.Canvas(hist_outer, bg=self.BG, highlightthickness=0, height=140)
-        sb = tk.Scrollbar(hist_outer, orient="vertical", command=canvas.yview)
-        canvas.configure(yscrollcommand=sb.set)
-        sb.pack(side="right", fill="y")
-        canvas.pack(side="left", fill="both", expand=True)
-
-        self._hist_inner = tk.Frame(canvas, bg=self.BG)
-        self._hist_win = canvas.create_window((0, 0), window=self._hist_inner, anchor="nw")
-
-        def _on_canvas_resize(event):
-            canvas.itemconfig(self._hist_win, width=event.width)
-        canvas.bind("<Configure>", _on_canvas_resize)
-
-        def _on_inner_resize(event):
-            canvas.configure(scrollregion=canvas.bbox("all"))
-        self._hist_inner.bind("<Configure>", _on_inner_resize)
-
-        def _on_wheel(event):
-            canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
-        canvas.bind_all("<MouseWheel>", _on_wheel)
 
         btn_row = tk.Frame(self, bg=self.BG)
         btn_row.pack(fill="x", pady=(0, 4))
@@ -1519,6 +1810,7 @@ class ResultsScreen(tk.Frame):
         self._msg_label.config(text=msg)
 
         self._populate_history()
+        self._bind_wheel()
 
     def _populate_history(self) -> None:
         for w in self._hist_inner.winfo_children():
@@ -1562,20 +1854,28 @@ class ResultsScreen(tk.Frame):
                      bg=row_bg, width=12, anchor="w").pack(side="left")
 
     def _replay(self) -> None:
+        """
+        Play the same exercise again.
+
+        Exercises whose words are picked by hand (Latin, English verbs) go back
+        to that screen. The others - sentence banks, and vocabulary, which also
+        remembers the direction just played - redraw a fresh series right away,
+        which is the one-click "encore" a child expects.
+        """
         exercise = app_state.get("exercise", {})
-        slug = exercise.get("slug", "")
-        if slug == "accord_participe_passe":
-            all_q = db.get_accord_pp_questions(exercise["id"])
-            random.shuffle(all_q)
-            app_state["questions"] = all_q[:SESSION_LENGTH]
-            self.app.show_frame("AccordPPScreen")
-        elif slug == "english_fill_blanks":
-            all_q = db.get_fill_blank_questions(exercise["id"])
-            random.shuffle(all_q)
-            app_state["questions"] = all_q[:SESSION_LENGTH]
-            self.app.show_frame("QuizScreen")
-        else:
+        if not exercise:
+            self.app.show_frame("ExerciseSelectionScreen")
+            return
+
+        spec = kind_spec(exercise)
+        if spec["select"] and not spec["direction"]:
             self.app.show_frame("VerbSelectionScreen")
+        else:
+            start_session(
+                self.app, exercise,
+                app_state.get("enabled_word_ids"),
+                app_state.get("direction", db.DIRECTION_MIXED),
+            )
 
 
 # ---------------------------------------------------------------------------

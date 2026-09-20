@@ -1,0 +1,655 @@
+{
+  "_notes": [
+    "=== ALLEMAND, VOCABULAIRE DU CARNET - GUIDE DE MAINTENANCE ===",
+    "",
+    "Transcription des carnets de vocabulaire des jumeaux (photos du 20/09/2026,",
+    "rangées dans data/_sources/4e/). C'est la liste du cours : c'est elle qui sert",
+    "pour les contrôles. La liste generique est dans allemand_base.json.",
+    "",
+    "Le champ _carnet n'est pas lu par l'application, il documente l'origine :",
+    "  les deux = present dans les deux carnets",
+    "  jumeau1  = seulement photos IMG_5787 a IMG_5790",
+    "  jumeau2  = seulement photos IMG_5791 a IMG_5794",
+    "Tout est conserve, meme ce qui n'est que dans un seul carnet.",
+    "",
+    "CHOIX DE TRANSCRIPTION",
+    "  - Les noms de sport sont attendus sans article (Tennis, Fußball), comme dans",
+    "    les carnets, mais la forme avec article est acceptee via alt_target.",
+    "  - Les noms communs gardent l'article obligatoire (der Verein, die Mannschaft).",
+    "  - Quand les deux carnets donnent une traduction francaise differente, la plus",
+    "    juste devient la reponse et l'autre est acceptee via alt_source.",
+    "",
+    "AJOUTER UNE LECON : ajouter les mots a la fin avec un nouveau theme, relancer.",
+    "Seuls les mots nouveaux sont inseres, l'historique est conserve."
+  ],
+  "slug": "allemand_carnet",
+  "name": "Allemand - Vocabulaire du carnet",
+  "level": "4e",
+  "kind": "vocab",
+  "sort_order": 10,
+  "color": "#8a6a2a",
+  "button_label": "Allemand - Vocabulaire du carnet\n(le cours, français ⇄ allemand)",
+  "description": "Transcription des carnets de vocabulaire des jumeaux, 4e LV2, chapitre sport.",
+  "source_language": "Français",
+  "target_language": "Allemand",
+  "source_lang_code": "fr",
+  "target_lang_code": "de",
+  "canonical_prompt": "Traduis en allemand : « {source} »",
+  "reverse_prompt": "Traduis en français : « {canonical} »",
+  "form_prompt": "« {source} » - {label}",
+  "words": [
+    {
+      "theme": "Sportarten - Les sports",
+      "source": "le tennis",
+      "canonical": "Tennis",
+      "_carnet": "les deux",
+      "alt_target": [
+        "das Tennis"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Sportarten - Les sports",
+      "source": "le football",
+      "canonical": "Fußball",
+      "_carnet": "les deux",
+      "alt_source": [
+        "le foot"
+      ],
+      "alt_target": [
+        "der Fußball"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Sportarten - Les sports",
+      "source": "le handball",
+      "canonical": "Handball",
+      "_carnet": "les deux",
+      "alt_target": [
+        "der Handball"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Sportarten - Les sports",
+      "source": "les échecs",
+      "canonical": "Schach",
+      "_carnet": "les deux",
+      "alt_target": [
+        "das Schach"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Sportarten - Les sports",
+      "source": "le volley-ball",
+      "canonical": "Volleyball",
+      "_carnet": "les deux",
+      "alt_source": [
+        "le volley"
+      ],
+      "alt_target": [
+        "der Volleyball"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Sportarten - Les sports",
+      "source": "le water-polo",
+      "canonical": "Wasserball",
+      "_carnet": "les deux",
+      "alt_source": [
+        "le waterpolo"
+      ],
+      "alt_target": [
+        "der Wasserball"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Sportarten - Les sports",
+      "source": "le hip-hop",
+      "canonical": "Hip-Hop",
+      "_carnet": "les deux",
+      "alt_target": [
+        "der Hip-Hop"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Sportarten - Les sports",
+      "source": "la gymnastique",
+      "canonical": "Gymnastik",
+      "_carnet": "les deux",
+      "alt_target": [
+        "die Gymnastik",
+        "Turnen"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Sportarten - Les sports",
+      "source": "l'athlétisme",
+      "canonical": "Leichtathletik",
+      "_carnet": "les deux",
+      "alt_target": [
+        "die Leichtathletik"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Sportarten - Les sports",
+      "source": "le judo",
+      "canonical": "Judo",
+      "_carnet": "les deux",
+      "alt_target": [
+        "das Judo"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Sportarten - Les sports",
+      "source": "le triathlon",
+      "canonical": "Triathlon",
+      "_carnet": "les deux",
+      "alt_target": [
+        "der Triathlon"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Sportarten - Les sports",
+      "source": "la natation",
+      "canonical": "Schwimmen",
+      "_carnet": "les deux",
+      "alt_source": [
+        "nager"
+      ],
+      "alt_target": [
+        "das Schwimmen"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Sportarten - Les sports",
+      "source": "les jeux vidéo",
+      "canonical": "Gaming",
+      "_carnet": "les deux",
+      "alt_source": [
+        "le jeu vidéo"
+      ],
+      "alt_target": [
+        "das Gaming"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Sportarten - Les sports",
+      "source": "la gym (aux agrès)",
+      "canonical": "Turnen",
+      "_carnet": "jumeau1",
+      "alt_source": [
+        "la gymnastique",
+        "la gym"
+      ],
+      "alt_target": [
+        "das Turnen"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Sportarten - Les sports",
+      "source": "le jogging",
+      "canonical": "Joggen",
+      "_carnet": "jumeau1",
+      "alt_target": [
+        "das Joggen"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Sportarten - Les sports",
+      "source": "le bowling",
+      "canonical": "Kegeln",
+      "_carnet": "jumeau1",
+      "alt_target": [
+        "das Kegeln"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Sportarten - Les sports",
+      "source": "je joue",
+      "canonical": "ich spiele",
+      "_carnet": "jumeau1",
+      "alt_target": [
+        "spiele"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Sportarten - Les sports",
+      "source": "j'aime",
+      "canonical": "ich mag",
+      "_carnet": "jumeau1",
+      "alt_target": [
+        "ich liebe",
+        "mag",
+        "liebe"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Sportarten - Les sports",
+      "source": "je fais",
+      "canonical": "ich mache",
+      "_carnet": "jumeau1",
+      "alt_target": [
+        "mache"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Sportvereine - Le club de sport",
+      "source": "le membre (d'équipe)",
+      "canonical": "das Mitglied",
+      "_carnet": "les deux",
+      "alt_source": [
+        "le membre"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Sportvereine - Le club de sport",
+      "source": "l'entraînement",
+      "canonical": "das Training",
+      "_carnet": "les deux",
+      "alt_source": [
+        "la formation"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Sportvereine - Le club de sport",
+      "source": "l'entraîneur",
+      "canonical": "der Trainer",
+      "_carnet": "les deux",
+      "forms": []
+    },
+    {
+      "theme": "Sportvereine - Le club de sport",
+      "source": "l'entraîneuse",
+      "canonical": "die Trainerin",
+      "_carnet": "jumeau1",
+      "alt_source": [
+        "l'entraîneur"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Sportvereine - Le club de sport",
+      "source": "profiter de (savourer)",
+      "canonical": "genießen",
+      "_carnet": "les deux",
+      "alt_source": [
+        "savourer",
+        "profiter"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Sportvereine - Le club de sport",
+      "source": "profiter du sport",
+      "canonical": "Sport genießen",
+      "_carnet": "jumeau1",
+      "forms": []
+    },
+    {
+      "theme": "Sportvereine - Le club de sport",
+      "source": "s'amuser ensemble",
+      "canonical": "zusammen Spaß haben",
+      "_carnet": "les deux",
+      "forms": []
+    },
+    {
+      "theme": "Sportvereine - Le club de sport",
+      "source": "perdre",
+      "canonical": "verlieren",
+      "_carnet": "les deux",
+      "alt_source": [
+        "perdre ensemble"
+      ],
+      "alt_target": [
+        "und verlieren"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Sportvereine - Le club de sport",
+      "source": "une deuxième famille",
+      "canonical": "eine zweite Familie",
+      "_carnet": "les deux",
+      "forms": []
+    },
+    {
+      "theme": "Sportvereine - Le club de sport",
+      "source": "se faire de nouveaux amis",
+      "canonical": "neue Freunde finden",
+      "_carnet": "les deux",
+      "alt_source": [
+        "trouver de nouveaux amis"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Sportvereine - Le club de sport",
+      "source": "seul",
+      "canonical": "allein",
+      "_carnet": "jumeau1",
+      "forms": []
+    },
+    {
+      "theme": "Sportvereine - Le club de sport",
+      "source": "dans l'équipe",
+      "canonical": "im Team",
+      "_carnet": "jumeau1",
+      "forms": []
+    },
+    {
+      "theme": "Sportvereine - Le club de sport",
+      "source": "tout le monde est le bienvenu",
+      "canonical": "jeder ist willkommen",
+      "_carnet": "les deux",
+      "alt_source": [
+        "tout le monde est bienvenu"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Sportvereine - Le club de sport",
+      "source": "l'association",
+      "canonical": "der Verein",
+      "_carnet": "les deux",
+      "alt_source": [
+        "le club",
+        "l'union"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Sportvereine - Le club de sport",
+      "source": "le club de sport",
+      "canonical": "der Sportverein",
+      "_carnet": "les deux",
+      "alt_source": [
+        "le club sportif"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Sportvereine - Le club de sport",
+      "source": "le club de gym",
+      "canonical": "der Turnverein",
+      "_carnet": "les deux",
+      "alt_source": [
+        "le club de gymnastique"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Fit im Verein - Rester en forme",
+      "source": "actif",
+      "canonical": "aktiv",
+      "_carnet": "jumeau2",
+      "forms": []
+    },
+    {
+      "theme": "Fit im Verein - Rester en forme",
+      "source": "être sportif",
+      "canonical": "sportlich sein",
+      "_carnet": "les deux",
+      "alt_source": [
+        "être actif et sportif"
+      ],
+      "alt_target": [
+        "aktiv, sportlich sein"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Fit im Verein - Rester en forme",
+      "source": "rester en forme et jeune",
+      "canonical": "fit und jung bleiben",
+      "_carnet": "les deux",
+      "forms": []
+    },
+    {
+      "theme": "Fit im Verein - Rester en forme",
+      "source": "souvent",
+      "canonical": "oft",
+      "_carnet": "jumeau2",
+      "forms": []
+    },
+    {
+      "theme": "Fit im Verein - Rester en forme",
+      "source": "s'entraîner souvent",
+      "canonical": "oft trainieren",
+      "_carnet": "jumeau1",
+      "forms": []
+    },
+    {
+      "theme": "Fit im Verein - Rester en forme",
+      "source": "s'entraîner peu",
+      "canonical": "wenig trainieren",
+      "_carnet": "les deux",
+      "forms": []
+    },
+    {
+      "theme": "Fit im Verein - Rester en forme",
+      "source": "faire des progrès",
+      "canonical": "Fortschritte machen",
+      "_carnet": "les deux",
+      "forms": []
+    },
+    {
+      "theme": "Fit im Verein - Rester en forme",
+      "source": "s'améliorer",
+      "canonical": "sich verbessern",
+      "_carnet": "jumeau2",
+      "alt_target": [
+        "verbessern"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Fit im Verein - Rester en forme",
+      "source": "faire du sport régulièrement",
+      "canonical": "regelmäßig Sport treiben",
+      "_carnet": "les deux",
+      "forms": []
+    },
+    {
+      "theme": "Sportveranstaltungen - Les événements sportifs",
+      "source": "l'athlète",
+      "canonical": "der Sportler",
+      "_carnet": "jumeau1",
+      "alt_source": [
+        "le sportif"
+      ],
+      "alt_target": [
+        "die Sportlerin"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Sportveranstaltungen - Les événements sportifs",
+      "source": "le participant",
+      "canonical": "der Teilnehmer",
+      "_carnet": "jumeau1",
+      "alt_target": [
+        "die Teilnehmerin"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Sportveranstaltungen - Les événements sportifs",
+      "source": "l'équipe",
+      "canonical": "die Mannschaft",
+      "_carnet": "jumeau1",
+      "forms": []
+    },
+    {
+      "theme": "Sportveranstaltungen - Les événements sportifs",
+      "source": "le spectateur",
+      "canonical": "der Zuschauer",
+      "_carnet": "jumeau1",
+      "alt_target": [
+        "die Zuschauerin"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Sportveranstaltungen - Les événements sportifs",
+      "source": "l'ambiance",
+      "canonical": "die Stimmung",
+      "_carnet": "jumeau1",
+      "alt_source": [
+        "l'humeur"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Orte und Wörter - Lieux et mots divers",
+      "source": "l'artiste",
+      "canonical": "der Künstler",
+      "_carnet": "jumeau2",
+      "alt_target": [
+        "die Künstlerin"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Orte und Wörter - Lieux et mots divers",
+      "source": "la capitale",
+      "canonical": "die Hauptstadt",
+      "_carnet": "jumeau2",
+      "forms": []
+    },
+    {
+      "theme": "Orte und Wörter - Lieux et mots divers",
+      "source": "le foyer",
+      "canonical": "der Haushalt",
+      "_carnet": "les deux",
+      "alt_source": [
+        "le ménage",
+        "la maison"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Orte und Wörter - Lieux et mots divers",
+      "source": "la raquette",
+      "canonical": "der Schläger",
+      "_carnet": "jumeau2",
+      "forms": []
+    },
+    {
+      "theme": "Orte und Wörter - Lieux et mots divers",
+      "source": "le stade",
+      "canonical": "das Stadion",
+      "_carnet": "jumeau2",
+      "forms": []
+    },
+    {
+      "theme": "Orte und Wörter - Lieux et mots divers",
+      "source": "le gymnase",
+      "canonical": "die Sporthalle",
+      "_carnet": "jumeau2",
+      "alt_source": [
+        "la salle de sport"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Orte und Wörter - Lieux et mots divers",
+      "source": "la matière (scolaire)",
+      "canonical": "das Schulfach",
+      "_carnet": "jumeau1",
+      "alt_source": [
+        "la matière"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Orte und Wörter - Lieux et mots divers",
+      "source": "connaître",
+      "canonical": "kennen",
+      "_carnet": "jumeau1",
+      "forms": []
+    },
+    {
+      "theme": "Orte und Wörter - Lieux et mots divers",
+      "source": "nommer",
+      "canonical": "nennen",
+      "_carnet": "jumeau1",
+      "alt_source": [
+        "appeler"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Orte und Wörter - Lieux et mots divers",
+      "source": "dire",
+      "canonical": "sagen",
+      "_carnet": "jumeau1",
+      "forms": []
+    },
+    {
+      "theme": "Orte und Wörter - Lieux et mots divers",
+      "source": "écrire",
+      "canonical": "schreiben",
+      "_carnet": "jumeau1",
+      "forms": []
+    },
+    {
+      "theme": "Orte und Wörter - Lieux et mots divers",
+      "source": "réuni",
+      "canonical": "vereint",
+      "_carnet": "jumeau1",
+      "alt_source": [
+        "réunie",
+        "uni"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Fragewörter - Les mots interrogatifs",
+      "source": "où",
+      "canonical": "wo",
+      "_carnet": "les deux",
+      "forms": []
+    },
+    {
+      "theme": "Fragewörter - Les mots interrogatifs",
+      "source": "qui",
+      "canonical": "wer",
+      "_carnet": "les deux",
+      "forms": []
+    },
+    {
+      "theme": "Fragewörter - Les mots interrogatifs",
+      "source": "quoi",
+      "canonical": "was",
+      "_carnet": "les deux",
+      "forms": []
+    },
+    {
+      "theme": "Fragewörter - Les mots interrogatifs",
+      "source": "comment",
+      "canonical": "wie",
+      "_carnet": "les deux",
+      "forms": []
+    }
+  ]
+}

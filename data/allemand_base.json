@@ -1,0 +1,1746 @@
+{
+  "_notes": [
+    "=== ALLEMAND, VOCABULAIRE DE BASE - GUIDE DE MAINTENANCE ===",
+    "",
+    "Liste generique 4e LV2 (famille, ecole, maison, ville...), ecrite pour que",
+    "l'appli soit utilisable avant d'avoir le carnet. Elle NE remplace PAS le cours :",
+    "le vocabulaire du prof est dans allemand_carnet.json, exercice separe pour que",
+    "les series de 20 questions ne melangent pas les deux et que les scores restent",
+    "comparables d'une revision a l'autre.",
+    "",
+    "Memes regles que le carnet : article obligatoire pour les noms, alt_source /",
+    "alt_target pour les synonymes, un theme = un bloc cochable d'un clic.",
+    "Ajouter des mots a la fin du fichier, relancer, rien d'autre a faire."
+  ],
+  "slug": "allemand_base",
+  "name": "Allemand - Vocabulaire de base",
+  "level": "4e",
+  "kind": "vocab",
+  "sort_order": 20,
+  "color": "#7a7a4a",
+  "button_label": "Allemand - Vocabulaire de base\n(thèmes courants, en plus du cours)",
+  "description": "Liste thématique 4e LV2 générale, en complément du carnet de cours (allemand_carnet.json).",
+  "source_language": "Français",
+  "target_language": "Allemand",
+  "source_lang_code": "fr",
+  "target_lang_code": "de",
+  "canonical_prompt": "Traduis en allemand : « {source} »",
+  "reverse_prompt": "Traduis en français : « {canonical} »",
+  "form_prompt": "« {source} » - {label}",
+  "words": [
+    {
+      "theme": "Die Familie - La famille",
+      "source": "la famille",
+      "canonical": "die Familie",
+      "forms": []
+    },
+    {
+      "theme": "Die Familie - La famille",
+      "source": "le père",
+      "canonical": "der Vater",
+      "alt_source": [
+        "le papa"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Die Familie - La famille",
+      "source": "la mère",
+      "canonical": "die Mutter",
+      "alt_source": [
+        "la maman"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Die Familie - La famille",
+      "source": "les parents",
+      "canonical": "die Eltern",
+      "forms": []
+    },
+    {
+      "theme": "Die Familie - La famille",
+      "source": "le fils",
+      "canonical": "der Sohn",
+      "forms": []
+    },
+    {
+      "theme": "Die Familie - La famille",
+      "source": "la fille (de quelqu'un)",
+      "canonical": "die Tochter",
+      "alt_source": [
+        "la fille"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Die Familie - La famille",
+      "source": "la jeune fille",
+      "canonical": "das Mädchen",
+      "alt_source": [
+        "la fille"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Die Familie - La famille",
+      "source": "le garçon",
+      "canonical": "der Junge",
+      "forms": []
+    },
+    {
+      "theme": "Die Familie - La famille",
+      "source": "le frère",
+      "canonical": "der Bruder",
+      "forms": []
+    },
+    {
+      "theme": "Die Familie - La famille",
+      "source": "la sœur",
+      "canonical": "die Schwester",
+      "alt_source": [
+        "la soeur"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Die Familie - La famille",
+      "source": "les frères et sœurs",
+      "canonical": "die Geschwister",
+      "alt_source": [
+        "les freres et soeurs"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Die Familie - La famille",
+      "source": "le grand-père",
+      "canonical": "der Großvater",
+      "alt_source": [
+        "le papi"
+      ],
+      "alt_target": [
+        "der Opa"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Die Familie - La famille",
+      "source": "la grand-mère",
+      "canonical": "die Großmutter",
+      "alt_source": [
+        "la mamie"
+      ],
+      "alt_target": [
+        "die Oma"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Die Familie - La famille",
+      "source": "l'enfant",
+      "canonical": "das Kind",
+      "forms": []
+    },
+    {
+      "theme": "Die Familie - La famille",
+      "source": "l'oncle",
+      "canonical": "der Onkel",
+      "forms": []
+    },
+    {
+      "theme": "Die Familie - La famille",
+      "source": "la tante",
+      "canonical": "die Tante",
+      "forms": []
+    },
+    {
+      "theme": "Die Familie - La famille",
+      "source": "le cousin",
+      "canonical": "der Cousin",
+      "forms": []
+    },
+    {
+      "theme": "Die Familie - La famille",
+      "source": "la cousine",
+      "canonical": "die Cousine",
+      "forms": []
+    },
+    {
+      "theme": "Die Schule - L'école",
+      "source": "l'école",
+      "canonical": "die Schule",
+      "forms": []
+    },
+    {
+      "theme": "Die Schule - L'école",
+      "source": "le lycée",
+      "canonical": "das Gymnasium",
+      "forms": []
+    },
+    {
+      "theme": "Die Schule - L'école",
+      "source": "la classe",
+      "canonical": "die Klasse",
+      "forms": []
+    },
+    {
+      "theme": "Die Schule - L'école",
+      "source": "le cours",
+      "canonical": "der Unterricht",
+      "forms": []
+    },
+    {
+      "theme": "Die Schule - L'école",
+      "source": "le professeur",
+      "canonical": "der Lehrer",
+      "alt_source": [
+        "le prof"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Die Schule - L'école",
+      "source": "la professeure",
+      "canonical": "die Lehrerin",
+      "alt_source": [
+        "la prof"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Die Schule - L'école",
+      "source": "l'élève (garçon)",
+      "canonical": "der Schüler",
+      "alt_source": [
+        "l'élève"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Die Schule - L'école",
+      "source": "l'élève (fille)",
+      "canonical": "die Schülerin",
+      "alt_source": [
+        "l'élève"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Die Schule - L'école",
+      "source": "la matière",
+      "canonical": "das Fach",
+      "forms": []
+    },
+    {
+      "theme": "Die Schule - L'école",
+      "source": "l'emploi du temps",
+      "canonical": "der Stundenplan",
+      "forms": []
+    },
+    {
+      "theme": "Die Schule - L'école",
+      "source": "le cahier",
+      "canonical": "das Heft",
+      "forms": []
+    },
+    {
+      "theme": "Die Schule - L'école",
+      "source": "le livre",
+      "canonical": "das Buch",
+      "forms": []
+    },
+    {
+      "theme": "Die Schule - L'école",
+      "source": "le stylo",
+      "canonical": "der Kugelschreiber",
+      "alt_target": [
+        "der Kuli"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Die Schule - L'école",
+      "source": "le crayon",
+      "canonical": "der Bleistift",
+      "forms": []
+    },
+    {
+      "theme": "Die Schule - L'école",
+      "source": "la trousse",
+      "canonical": "das Federmäppchen",
+      "alt_target": [
+        "die Federtasche"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Die Schule - L'école",
+      "source": "le sac à dos",
+      "canonical": "der Rucksack",
+      "forms": []
+    },
+    {
+      "theme": "Die Schule - L'école",
+      "source": "les devoirs",
+      "canonical": "die Hausaufgaben",
+      "forms": []
+    },
+    {
+      "theme": "Die Schule - L'école",
+      "source": "la note",
+      "canonical": "die Note",
+      "forms": []
+    },
+    {
+      "theme": "Die Schule - L'école",
+      "source": "le contrôle",
+      "canonical": "die Klassenarbeit",
+      "alt_target": [
+        "der Test"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Die Schule - L'école",
+      "source": "la récréation",
+      "canonical": "die Pause",
+      "forms": []
+    },
+    {
+      "theme": "Die Schule - L'école",
+      "source": "la cour de récréation",
+      "canonical": "der Schulhof",
+      "forms": []
+    },
+    {
+      "theme": "Die Schule - L'école",
+      "source": "apprendre",
+      "canonical": "lernen",
+      "forms": []
+    },
+    {
+      "theme": "Wichtige Verben - Les verbes essentiels",
+      "source": "être",
+      "canonical": "sein",
+      "forms": []
+    },
+    {
+      "theme": "Wichtige Verben - Les verbes essentiels",
+      "source": "avoir",
+      "canonical": "haben",
+      "forms": []
+    },
+    {
+      "theme": "Wichtige Verben - Les verbes essentiels",
+      "source": "faire",
+      "canonical": "machen",
+      "forms": []
+    },
+    {
+      "theme": "Wichtige Verben - Les verbes essentiels",
+      "source": "aller",
+      "canonical": "gehen",
+      "forms": []
+    },
+    {
+      "theme": "Wichtige Verben - Les verbes essentiels",
+      "source": "venir",
+      "canonical": "kommen",
+      "forms": []
+    },
+    {
+      "theme": "Wichtige Verben - Les verbes essentiels",
+      "source": "dire",
+      "canonical": "sagen",
+      "forms": []
+    },
+    {
+      "theme": "Wichtige Verben - Les verbes essentiels",
+      "source": "voir",
+      "canonical": "sehen",
+      "forms": []
+    },
+    {
+      "theme": "Wichtige Verben - Les verbes essentiels",
+      "source": "savoir",
+      "canonical": "wissen",
+      "forms": []
+    },
+    {
+      "theme": "Wichtige Verben - Les verbes essentiels",
+      "source": "pouvoir",
+      "canonical": "können",
+      "forms": []
+    },
+    {
+      "theme": "Wichtige Verben - Les verbes essentiels",
+      "source": "vouloir",
+      "canonical": "wollen",
+      "forms": []
+    },
+    {
+      "theme": "Wichtige Verben - Les verbes essentiels",
+      "source": "devoir",
+      "canonical": "müssen",
+      "forms": []
+    },
+    {
+      "theme": "Wichtige Verben - Les verbes essentiels",
+      "source": "aimer bien",
+      "canonical": "mögen",
+      "forms": []
+    },
+    {
+      "theme": "Wichtige Verben - Les verbes essentiels",
+      "source": "manger",
+      "canonical": "essen",
+      "forms": []
+    },
+    {
+      "theme": "Wichtige Verben - Les verbes essentiels",
+      "source": "boire",
+      "canonical": "trinken",
+      "forms": []
+    },
+    {
+      "theme": "Wichtige Verben - Les verbes essentiels",
+      "source": "parler",
+      "canonical": "sprechen",
+      "forms": []
+    },
+    {
+      "theme": "Wichtige Verben - Les verbes essentiels",
+      "source": "écrire",
+      "canonical": "schreiben",
+      "forms": []
+    },
+    {
+      "theme": "Wichtige Verben - Les verbes essentiels",
+      "source": "lire",
+      "canonical": "lesen",
+      "forms": []
+    },
+    {
+      "theme": "Wichtige Verben - Les verbes essentiels",
+      "source": "jouer",
+      "canonical": "spielen",
+      "forms": []
+    },
+    {
+      "theme": "Wichtige Verben - Les verbes essentiels",
+      "source": "travailler",
+      "canonical": "arbeiten",
+      "forms": []
+    },
+    {
+      "theme": "Wichtige Verben - Les verbes essentiels",
+      "source": "acheter",
+      "canonical": "kaufen",
+      "forms": []
+    },
+    {
+      "theme": "Wichtige Verben - Les verbes essentiels",
+      "source": "aider",
+      "canonical": "helfen",
+      "forms": []
+    },
+    {
+      "theme": "Wichtige Verben - Les verbes essentiels",
+      "source": "trouver",
+      "canonical": "finden",
+      "forms": []
+    },
+    {
+      "theme": "Wichtige Verben - Les verbes essentiels",
+      "source": "donner",
+      "canonical": "geben",
+      "forms": []
+    },
+    {
+      "theme": "Wichtige Verben - Les verbes essentiels",
+      "source": "prendre",
+      "canonical": "nehmen",
+      "forms": []
+    },
+    {
+      "theme": "Wichtige Verben - Les verbes essentiels",
+      "source": "rester",
+      "canonical": "bleiben",
+      "forms": []
+    },
+    {
+      "theme": "Wichtige Verben - Les verbes essentiels",
+      "source": "dormir",
+      "canonical": "schlafen",
+      "forms": []
+    },
+    {
+      "theme": "Wichtige Verben - Les verbes essentiels",
+      "source": "habiter",
+      "canonical": "wohnen",
+      "forms": []
+    },
+    {
+      "theme": "Wichtige Verben - Les verbes essentiels",
+      "source": "entendre",
+      "canonical": "hören",
+      "alt_source": [
+        "écouter"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Wichtige Verben - Les verbes essentiels",
+      "source": "regarder",
+      "canonical": "schauen",
+      "alt_target": [
+        "gucken"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Wichtige Verben - Les verbes essentiels",
+      "source": "attendre",
+      "canonical": "warten",
+      "forms": []
+    },
+    {
+      "theme": "Wichtige Verben - Les verbes essentiels",
+      "source": "courir",
+      "canonical": "laufen",
+      "alt_target": [
+        "rennen"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Wichtige Verben - Les verbes essentiels",
+      "source": "penser",
+      "canonical": "denken",
+      "forms": []
+    },
+    {
+      "theme": "Der Alltag - La vie quotidienne",
+      "source": "se lever",
+      "canonical": "aufstehen",
+      "forms": []
+    },
+    {
+      "theme": "Der Alltag - La vie quotidienne",
+      "source": "se laver",
+      "canonical": "sich waschen",
+      "forms": []
+    },
+    {
+      "theme": "Der Alltag - La vie quotidienne",
+      "source": "s'habiller",
+      "canonical": "sich anziehen",
+      "forms": []
+    },
+    {
+      "theme": "Der Alltag - La vie quotidienne",
+      "source": "le petit-déjeuner",
+      "canonical": "das Frühstück",
+      "forms": []
+    },
+    {
+      "theme": "Der Alltag - La vie quotidienne",
+      "source": "le déjeuner",
+      "canonical": "das Mittagessen",
+      "forms": []
+    },
+    {
+      "theme": "Der Alltag - La vie quotidienne",
+      "source": "le dîner",
+      "canonical": "das Abendessen",
+      "forms": []
+    },
+    {
+      "theme": "Der Alltag - La vie quotidienne",
+      "source": "aller au lit",
+      "canonical": "ins Bett gehen",
+      "alt_source": [
+        "se coucher"
+      ],
+      "alt_target": [
+        "schlafen gehen"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Der Alltag - La vie quotidienne",
+      "source": "le matin",
+      "canonical": "der Morgen",
+      "forms": []
+    },
+    {
+      "theme": "Der Alltag - La vie quotidienne",
+      "source": "le midi",
+      "canonical": "der Mittag",
+      "forms": []
+    },
+    {
+      "theme": "Der Alltag - La vie quotidienne",
+      "source": "l'après-midi",
+      "canonical": "der Nachmittag",
+      "forms": []
+    },
+    {
+      "theme": "Der Alltag - La vie quotidienne",
+      "source": "le soir",
+      "canonical": "der Abend",
+      "forms": []
+    },
+    {
+      "theme": "Der Alltag - La vie quotidienne",
+      "source": "la nuit",
+      "canonical": "die Nacht",
+      "forms": []
+    },
+    {
+      "theme": "Der Alltag - La vie quotidienne",
+      "source": "tôt",
+      "canonical": "früh",
+      "forms": []
+    },
+    {
+      "theme": "Der Alltag - La vie quotidienne",
+      "source": "tard",
+      "canonical": "spät",
+      "forms": []
+    },
+    {
+      "theme": "Der Alltag - La vie quotidienne",
+      "source": "tous les jours",
+      "canonical": "jeden Tag",
+      "forms": []
+    },
+    {
+      "theme": "Der Alltag - La vie quotidienne",
+      "source": "d'abord",
+      "canonical": "zuerst",
+      "forms": []
+    },
+    {
+      "theme": "Der Alltag - La vie quotidienne",
+      "source": "ensuite",
+      "canonical": "dann",
+      "forms": []
+    },
+    {
+      "theme": "Der Alltag - La vie quotidienne",
+      "source": "après",
+      "canonical": "danach",
+      "forms": []
+    },
+    {
+      "theme": "Die Freizeit - Les loisirs",
+      "source": "le temps libre",
+      "canonical": "die Freizeit",
+      "alt_source": [
+        "les loisirs"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Die Freizeit - Les loisirs",
+      "source": "le sport",
+      "canonical": "der Sport",
+      "forms": []
+    },
+    {
+      "theme": "Die Freizeit - Les loisirs",
+      "source": "le football",
+      "canonical": "der Fußball",
+      "alt_source": [
+        "le foot"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Die Freizeit - Les loisirs",
+      "source": "nager",
+      "canonical": "schwimmen",
+      "forms": []
+    },
+    {
+      "theme": "Die Freizeit - Les loisirs",
+      "source": "la piscine",
+      "canonical": "das Schwimmbad",
+      "forms": []
+    },
+    {
+      "theme": "Die Freizeit - Les loisirs",
+      "source": "la musique",
+      "canonical": "die Musik",
+      "forms": []
+    },
+    {
+      "theme": "Die Freizeit - Les loisirs",
+      "source": "le film",
+      "canonical": "der Film",
+      "forms": []
+    },
+    {
+      "theme": "Die Freizeit - Les loisirs",
+      "source": "le cinéma",
+      "canonical": "das Kino",
+      "forms": []
+    },
+    {
+      "theme": "Die Freizeit - Les loisirs",
+      "source": "le jeu vidéo",
+      "canonical": "das Videospiel",
+      "forms": []
+    },
+    {
+      "theme": "Die Freizeit - Les loisirs",
+      "source": "l'ordinateur",
+      "canonical": "der Computer",
+      "forms": []
+    },
+    {
+      "theme": "Die Freizeit - Les loisirs",
+      "source": "le téléphone portable",
+      "canonical": "das Handy",
+      "alt_source": [
+        "le portable"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Die Freizeit - Les loisirs",
+      "source": "le vélo",
+      "canonical": "das Fahrrad",
+      "forms": []
+    },
+    {
+      "theme": "Die Freizeit - Les loisirs",
+      "source": "faire du vélo",
+      "canonical": "Rad fahren",
+      "alt_target": [
+        "Fahrrad fahren"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Die Freizeit - Les loisirs",
+      "source": "l'ami",
+      "canonical": "der Freund",
+      "alt_source": [
+        "le copain"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Die Freizeit - Les loisirs",
+      "source": "l'amie",
+      "canonical": "die Freundin",
+      "alt_source": [
+        "la copine"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Die Freizeit - Les loisirs",
+      "source": "la fête",
+      "canonical": "das Fest",
+      "alt_target": [
+        "die Party"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Die Freizeit - Les loisirs",
+      "source": "danser",
+      "canonical": "tanzen",
+      "forms": []
+    },
+    {
+      "theme": "Die Freizeit - Les loisirs",
+      "source": "chanter",
+      "canonical": "singen",
+      "forms": []
+    },
+    {
+      "theme": "Die Freizeit - Les loisirs",
+      "source": "dessiner",
+      "canonical": "zeichnen",
+      "forms": []
+    },
+    {
+      "theme": "Das Essen - La nourriture",
+      "source": "le repas",
+      "canonical": "das Essen",
+      "forms": []
+    },
+    {
+      "theme": "Das Essen - La nourriture",
+      "source": "le pain",
+      "canonical": "das Brot",
+      "forms": []
+    },
+    {
+      "theme": "Das Essen - La nourriture",
+      "source": "le petit pain",
+      "canonical": "das Brötchen",
+      "forms": []
+    },
+    {
+      "theme": "Das Essen - La nourriture",
+      "source": "le beurre",
+      "canonical": "die Butter",
+      "forms": []
+    },
+    {
+      "theme": "Das Essen - La nourriture",
+      "source": "le fromage",
+      "canonical": "der Käse",
+      "forms": []
+    },
+    {
+      "theme": "Das Essen - La nourriture",
+      "source": "le lait",
+      "canonical": "die Milch",
+      "forms": []
+    },
+    {
+      "theme": "Das Essen - La nourriture",
+      "source": "l'eau",
+      "canonical": "das Wasser",
+      "forms": []
+    },
+    {
+      "theme": "Das Essen - La nourriture",
+      "source": "le jus de fruits",
+      "canonical": "der Saft",
+      "alt_source": [
+        "le jus"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Das Essen - La nourriture",
+      "source": "la pomme",
+      "canonical": "der Apfel",
+      "forms": []
+    },
+    {
+      "theme": "Das Essen - La nourriture",
+      "source": "la banane",
+      "canonical": "die Banane",
+      "forms": []
+    },
+    {
+      "theme": "Das Essen - La nourriture",
+      "source": "le gâteau",
+      "canonical": "der Kuchen",
+      "forms": []
+    },
+    {
+      "theme": "Das Essen - La nourriture",
+      "source": "la viande",
+      "canonical": "das Fleisch",
+      "forms": []
+    },
+    {
+      "theme": "Das Essen - La nourriture",
+      "source": "le poisson",
+      "canonical": "der Fisch",
+      "forms": []
+    },
+    {
+      "theme": "Das Essen - La nourriture",
+      "source": "les légumes",
+      "canonical": "das Gemüse",
+      "forms": []
+    },
+    {
+      "theme": "Das Essen - La nourriture",
+      "source": "les fruits",
+      "canonical": "das Obst",
+      "forms": []
+    },
+    {
+      "theme": "Das Essen - La nourriture",
+      "source": "le sucre",
+      "canonical": "der Zucker",
+      "forms": []
+    },
+    {
+      "theme": "Das Essen - La nourriture",
+      "source": "le sel",
+      "canonical": "das Salz",
+      "forms": []
+    },
+    {
+      "theme": "Das Essen - La nourriture",
+      "source": "avoir faim",
+      "canonical": "Hunger haben",
+      "forms": []
+    },
+    {
+      "theme": "Das Essen - La nourriture",
+      "source": "avoir soif",
+      "canonical": "Durst haben",
+      "forms": []
+    },
+    {
+      "theme": "Das Essen - La nourriture",
+      "source": "délicieux",
+      "canonical": "lecker",
+      "alt_source": [
+        "bon"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Die Stadt - La ville",
+      "source": "la ville",
+      "canonical": "die Stadt",
+      "forms": []
+    },
+    {
+      "theme": "Die Stadt - La ville",
+      "source": "le village",
+      "canonical": "das Dorf",
+      "forms": []
+    },
+    {
+      "theme": "Die Stadt - La ville",
+      "source": "la rue",
+      "canonical": "die Straße",
+      "forms": []
+    },
+    {
+      "theme": "Die Stadt - La ville",
+      "source": "la place",
+      "canonical": "der Platz",
+      "forms": []
+    },
+    {
+      "theme": "Die Stadt - La ville",
+      "source": "le quartier",
+      "canonical": "das Viertel",
+      "forms": []
+    },
+    {
+      "theme": "Die Stadt - La ville",
+      "source": "la gare",
+      "canonical": "der Bahnhof",
+      "forms": []
+    },
+    {
+      "theme": "Die Stadt - La ville",
+      "source": "l'arrêt (de bus)",
+      "canonical": "die Haltestelle",
+      "alt_source": [
+        "l'arrêt"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Die Stadt - La ville",
+      "source": "le magasin",
+      "canonical": "das Geschäft",
+      "alt_target": [
+        "der Laden"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Die Stadt - La ville",
+      "source": "le supermarché",
+      "canonical": "der Supermarkt",
+      "forms": []
+    },
+    {
+      "theme": "Die Stadt - La ville",
+      "source": "la boulangerie",
+      "canonical": "die Bäckerei",
+      "forms": []
+    },
+    {
+      "theme": "Die Stadt - La ville",
+      "source": "le marché",
+      "canonical": "der Markt",
+      "forms": []
+    },
+    {
+      "theme": "Die Stadt - La ville",
+      "source": "l'église",
+      "canonical": "die Kirche",
+      "forms": []
+    },
+    {
+      "theme": "Die Stadt - La ville",
+      "source": "le musée",
+      "canonical": "das Museum",
+      "forms": []
+    },
+    {
+      "theme": "Die Stadt - La ville",
+      "source": "le parc",
+      "canonical": "der Park",
+      "forms": []
+    },
+    {
+      "theme": "Die Stadt - La ville",
+      "source": "la poste",
+      "canonical": "die Post",
+      "forms": []
+    },
+    {
+      "theme": "Die Stadt - La ville",
+      "source": "la pharmacie",
+      "canonical": "die Apotheke",
+      "forms": []
+    },
+    {
+      "theme": "Die Stadt - La ville",
+      "source": "le restaurant",
+      "canonical": "das Restaurant",
+      "forms": []
+    },
+    {
+      "theme": "Die Stadt - La ville",
+      "source": "le pont",
+      "canonical": "die Brücke",
+      "forms": []
+    },
+    {
+      "theme": "Die Stadt - La ville",
+      "source": "à gauche",
+      "canonical": "links",
+      "forms": []
+    },
+    {
+      "theme": "Die Stadt - La ville",
+      "source": "à droite",
+      "canonical": "rechts",
+      "forms": []
+    },
+    {
+      "theme": "Die Stadt - La ville",
+      "source": "tout droit",
+      "canonical": "geradeaus",
+      "forms": []
+    },
+    {
+      "theme": "Das Haus - La maison",
+      "source": "la maison",
+      "canonical": "das Haus",
+      "forms": []
+    },
+    {
+      "theme": "Das Haus - La maison",
+      "source": "l'appartement",
+      "canonical": "die Wohnung",
+      "forms": []
+    },
+    {
+      "theme": "Das Haus - La maison",
+      "source": "la chambre",
+      "canonical": "das Zimmer",
+      "alt_source": [
+        "la pièce"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Das Haus - La maison",
+      "source": "la cuisine",
+      "canonical": "die Küche",
+      "forms": []
+    },
+    {
+      "theme": "Das Haus - La maison",
+      "source": "la salle de bains",
+      "canonical": "das Badezimmer",
+      "alt_target": [
+        "das Bad"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Das Haus - La maison",
+      "source": "le salon",
+      "canonical": "das Wohnzimmer",
+      "forms": []
+    },
+    {
+      "theme": "Das Haus - La maison",
+      "source": "le jardin",
+      "canonical": "der Garten",
+      "forms": []
+    },
+    {
+      "theme": "Das Haus - La maison",
+      "source": "la porte",
+      "canonical": "die Tür",
+      "forms": []
+    },
+    {
+      "theme": "Das Haus - La maison",
+      "source": "la fenêtre",
+      "canonical": "das Fenster",
+      "forms": []
+    },
+    {
+      "theme": "Das Haus - La maison",
+      "source": "la table",
+      "canonical": "der Tisch",
+      "forms": []
+    },
+    {
+      "theme": "Das Haus - La maison",
+      "source": "la chaise",
+      "canonical": "der Stuhl",
+      "forms": []
+    },
+    {
+      "theme": "Das Haus - La maison",
+      "source": "le lit",
+      "canonical": "das Bett",
+      "forms": []
+    },
+    {
+      "theme": "Das Haus - La maison",
+      "source": "l'armoire",
+      "canonical": "der Schrank",
+      "forms": []
+    },
+    {
+      "theme": "Das Haus - La maison",
+      "source": "la lampe",
+      "canonical": "die Lampe",
+      "forms": []
+    },
+    {
+      "theme": "Das Haus - La maison",
+      "source": "l'escalier",
+      "canonical": "die Treppe",
+      "forms": []
+    },
+    {
+      "theme": "Das Haus - La maison",
+      "source": "la clé",
+      "canonical": "der Schlüssel",
+      "forms": []
+    },
+    {
+      "theme": "Das Haus - La maison",
+      "source": "le mur",
+      "canonical": "die Wand",
+      "forms": []
+    },
+    {
+      "theme": "Kleidung und Körper - Vêtements et corps",
+      "source": "les vêtements",
+      "canonical": "die Kleidung",
+      "forms": []
+    },
+    {
+      "theme": "Kleidung und Körper - Vêtements et corps",
+      "source": "le pantalon",
+      "canonical": "die Hose",
+      "forms": []
+    },
+    {
+      "theme": "Kleidung und Körper - Vêtements et corps",
+      "source": "la chemise",
+      "canonical": "das Hemd",
+      "forms": []
+    },
+    {
+      "theme": "Kleidung und Körper - Vêtements et corps",
+      "source": "le tee-shirt",
+      "canonical": "das T-Shirt",
+      "forms": []
+    },
+    {
+      "theme": "Kleidung und Körper - Vêtements et corps",
+      "source": "la robe",
+      "canonical": "das Kleid",
+      "forms": []
+    },
+    {
+      "theme": "Kleidung und Körper - Vêtements et corps",
+      "source": "la jupe",
+      "canonical": "der Rock",
+      "forms": []
+    },
+    {
+      "theme": "Kleidung und Körper - Vêtements et corps",
+      "source": "la veste",
+      "canonical": "die Jacke",
+      "forms": []
+    },
+    {
+      "theme": "Kleidung und Körper - Vêtements et corps",
+      "source": "le manteau",
+      "canonical": "der Mantel",
+      "forms": []
+    },
+    {
+      "theme": "Kleidung und Körper - Vêtements et corps",
+      "source": "les chaussures",
+      "canonical": "die Schuhe",
+      "forms": []
+    },
+    {
+      "theme": "Kleidung und Körper - Vêtements et corps",
+      "source": "la tête",
+      "canonical": "der Kopf",
+      "forms": []
+    },
+    {
+      "theme": "Kleidung und Körper - Vêtements et corps",
+      "source": "la main",
+      "canonical": "die Hand",
+      "forms": []
+    },
+    {
+      "theme": "Kleidung und Körper - Vêtements et corps",
+      "source": "le pied",
+      "canonical": "der Fuß",
+      "forms": []
+    },
+    {
+      "theme": "Kleidung und Körper - Vêtements et corps",
+      "source": "l'œil",
+      "canonical": "das Auge",
+      "alt_source": [
+        "l'oeil"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Kleidung und Körper - Vêtements et corps",
+      "source": "les yeux",
+      "canonical": "die Augen",
+      "forms": []
+    },
+    {
+      "theme": "Kleidung und Körper - Vêtements et corps",
+      "source": "le bras",
+      "canonical": "der Arm",
+      "forms": []
+    },
+    {
+      "theme": "Kleidung und Körper - Vêtements et corps",
+      "source": "la jambe",
+      "canonical": "das Bein",
+      "forms": []
+    },
+    {
+      "theme": "Kleidung und Körper - Vêtements et corps",
+      "source": "le ventre",
+      "canonical": "der Bauch",
+      "forms": []
+    },
+    {
+      "theme": "Kleidung und Körper - Vêtements et corps",
+      "source": "le dos",
+      "canonical": "der Rücken",
+      "forms": []
+    },
+    {
+      "theme": "Kleidung und Körper - Vêtements et corps",
+      "source": "les cheveux",
+      "canonical": "die Haare",
+      "forms": []
+    },
+    {
+      "theme": "Die Zeit - Le temps qui passe",
+      "source": "lundi",
+      "canonical": "Montag",
+      "alt_target": [
+        "der Montag"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Die Zeit - Le temps qui passe",
+      "source": "mardi",
+      "canonical": "Dienstag",
+      "alt_target": [
+        "der Dienstag"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Die Zeit - Le temps qui passe",
+      "source": "mercredi",
+      "canonical": "Mittwoch",
+      "alt_target": [
+        "der Mittwoch"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Die Zeit - Le temps qui passe",
+      "source": "jeudi",
+      "canonical": "Donnerstag",
+      "alt_target": [
+        "der Donnerstag"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Die Zeit - Le temps qui passe",
+      "source": "vendredi",
+      "canonical": "Freitag",
+      "alt_target": [
+        "der Freitag"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Die Zeit - Le temps qui passe",
+      "source": "samedi",
+      "canonical": "Samstag",
+      "alt_target": [
+        "der Samstag",
+        "Sonnabend"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Die Zeit - Le temps qui passe",
+      "source": "dimanche",
+      "canonical": "Sonntag",
+      "alt_target": [
+        "der Sonntag"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Die Zeit - Le temps qui passe",
+      "source": "le jour",
+      "canonical": "der Tag",
+      "forms": []
+    },
+    {
+      "theme": "Die Zeit - Le temps qui passe",
+      "source": "la semaine",
+      "canonical": "die Woche",
+      "forms": []
+    },
+    {
+      "theme": "Die Zeit - Le temps qui passe",
+      "source": "le mois",
+      "canonical": "der Monat",
+      "forms": []
+    },
+    {
+      "theme": "Die Zeit - Le temps qui passe",
+      "source": "l'année",
+      "canonical": "das Jahr",
+      "alt_source": [
+        "l'an"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Die Zeit - Le temps qui passe",
+      "source": "le week-end",
+      "canonical": "das Wochenende",
+      "forms": []
+    },
+    {
+      "theme": "Die Zeit - Le temps qui passe",
+      "source": "aujourd'hui",
+      "canonical": "heute",
+      "forms": []
+    },
+    {
+      "theme": "Die Zeit - Le temps qui passe",
+      "source": "demain",
+      "canonical": "morgen",
+      "forms": []
+    },
+    {
+      "theme": "Die Zeit - Le temps qui passe",
+      "source": "hier",
+      "canonical": "gestern",
+      "forms": []
+    },
+    {
+      "theme": "Die Zeit - Le temps qui passe",
+      "source": "maintenant",
+      "canonical": "jetzt",
+      "forms": []
+    },
+    {
+      "theme": "Die Zeit - Le temps qui passe",
+      "source": "toujours",
+      "canonical": "immer",
+      "forms": []
+    },
+    {
+      "theme": "Die Zeit - Le temps qui passe",
+      "source": "souvent",
+      "canonical": "oft",
+      "forms": []
+    },
+    {
+      "theme": "Die Zeit - Le temps qui passe",
+      "source": "parfois",
+      "canonical": "manchmal",
+      "alt_source": [
+        "quelquefois"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Die Zeit - Le temps qui passe",
+      "source": "jamais",
+      "canonical": "nie",
+      "forms": []
+    },
+    {
+      "theme": "Die Zeit - Le temps qui passe",
+      "source": "le printemps",
+      "canonical": "der Frühling",
+      "forms": []
+    },
+    {
+      "theme": "Die Zeit - Le temps qui passe",
+      "source": "l'été",
+      "canonical": "der Sommer",
+      "forms": []
+    },
+    {
+      "theme": "Die Zeit - Le temps qui passe",
+      "source": "l'automne",
+      "canonical": "der Herbst",
+      "forms": []
+    },
+    {
+      "theme": "Die Zeit - Le temps qui passe",
+      "source": "l'hiver",
+      "canonical": "der Winter",
+      "forms": []
+    },
+    {
+      "theme": "Ferien und Wetter - Vacances et météo",
+      "source": "les vacances",
+      "canonical": "die Ferien",
+      "forms": []
+    },
+    {
+      "theme": "Ferien und Wetter - Vacances et météo",
+      "source": "le voyage",
+      "canonical": "die Reise",
+      "forms": []
+    },
+    {
+      "theme": "Ferien und Wetter - Vacances et météo",
+      "source": "voyager",
+      "canonical": "reisen",
+      "forms": []
+    },
+    {
+      "theme": "Ferien und Wetter - Vacances et météo",
+      "source": "la valise",
+      "canonical": "der Koffer",
+      "forms": []
+    },
+    {
+      "theme": "Ferien und Wetter - Vacances et météo",
+      "source": "l'hôtel",
+      "canonical": "das Hotel",
+      "forms": []
+    },
+    {
+      "theme": "Ferien und Wetter - Vacances et météo",
+      "source": "la mer",
+      "canonical": "das Meer",
+      "alt_target": [
+        "die See"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Ferien und Wetter - Vacances et météo",
+      "source": "la plage",
+      "canonical": "der Strand",
+      "forms": []
+    },
+    {
+      "theme": "Ferien und Wetter - Vacances et météo",
+      "source": "la montagne",
+      "canonical": "der Berg",
+      "forms": []
+    },
+    {
+      "theme": "Ferien und Wetter - Vacances et météo",
+      "source": "le pays",
+      "canonical": "das Land",
+      "forms": []
+    },
+    {
+      "theme": "Ferien und Wetter - Vacances et météo",
+      "source": "l'Allemagne",
+      "canonical": "Deutschland",
+      "forms": []
+    },
+    {
+      "theme": "Ferien und Wetter - Vacances et météo",
+      "source": "la France",
+      "canonical": "Frankreich",
+      "forms": []
+    },
+    {
+      "theme": "Ferien und Wetter - Vacances et météo",
+      "source": "le temps (météo)",
+      "canonical": "das Wetter",
+      "alt_source": [
+        "le temps"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Ferien und Wetter - Vacances et météo",
+      "source": "le soleil",
+      "canonical": "die Sonne",
+      "forms": []
+    },
+    {
+      "theme": "Ferien und Wetter - Vacances et météo",
+      "source": "la pluie",
+      "canonical": "der Regen",
+      "forms": []
+    },
+    {
+      "theme": "Ferien und Wetter - Vacances et météo",
+      "source": "la neige",
+      "canonical": "der Schnee",
+      "forms": []
+    },
+    {
+      "theme": "Ferien und Wetter - Vacances et météo",
+      "source": "le vent",
+      "canonical": "der Wind",
+      "forms": []
+    },
+    {
+      "theme": "Ferien und Wetter - Vacances et météo",
+      "source": "il pleut",
+      "canonical": "es regnet",
+      "forms": []
+    },
+    {
+      "theme": "Ferien und Wetter - Vacances et météo",
+      "source": "il fait chaud",
+      "canonical": "es ist warm",
+      "alt_target": [
+        "es ist heiß"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Ferien und Wetter - Vacances et météo",
+      "source": "il fait froid",
+      "canonical": "es ist kalt",
+      "forms": []
+    },
+    {
+      "theme": "Adjektive und kleine Wörter - Adjectifs et mots-outils",
+      "source": "grand",
+      "canonical": "groß",
+      "forms": []
+    },
+    {
+      "theme": "Adjektive und kleine Wörter - Adjectifs et mots-outils",
+      "source": "petit",
+      "canonical": "klein",
+      "forms": []
+    },
+    {
+      "theme": "Adjektive und kleine Wörter - Adjectifs et mots-outils",
+      "source": "vieux",
+      "canonical": "alt",
+      "forms": []
+    },
+    {
+      "theme": "Adjektive und kleine Wörter - Adjectifs et mots-outils",
+      "source": "jeune",
+      "canonical": "jung",
+      "forms": []
+    },
+    {
+      "theme": "Adjektive und kleine Wörter - Adjectifs et mots-outils",
+      "source": "nouveau",
+      "canonical": "neu",
+      "forms": []
+    },
+    {
+      "theme": "Adjektive und kleine Wörter - Adjectifs et mots-outils",
+      "source": "beau",
+      "canonical": "schön",
+      "alt_source": [
+        "joli"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Adjektive und kleine Wörter - Adjectifs et mots-outils",
+      "source": "gentil",
+      "canonical": "nett",
+      "forms": []
+    },
+    {
+      "theme": "Adjektive und kleine Wörter - Adjectifs et mots-outils",
+      "source": "content",
+      "canonical": "zufrieden",
+      "forms": []
+    },
+    {
+      "theme": "Adjektive und kleine Wörter - Adjectifs et mots-outils",
+      "source": "fatigué",
+      "canonical": "müde",
+      "forms": []
+    },
+    {
+      "theme": "Adjektive und kleine Wörter - Adjectifs et mots-outils",
+      "source": "difficile",
+      "canonical": "schwer",
+      "alt_target": [
+        "schwierig"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Adjektive und kleine Wörter - Adjectifs et mots-outils",
+      "source": "facile",
+      "canonical": "einfach",
+      "alt_target": [
+        "leicht"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Adjektive und kleine Wörter - Adjectifs et mots-outils",
+      "source": "intéressant",
+      "canonical": "interessant",
+      "forms": []
+    },
+    {
+      "theme": "Adjektive und kleine Wörter - Adjectifs et mots-outils",
+      "source": "drôle",
+      "canonical": "lustig",
+      "alt_source": [
+        "amusant"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Adjektive und kleine Wörter - Adjectifs et mots-outils",
+      "source": "rapide",
+      "canonical": "schnell",
+      "alt_source": [
+        "vite"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Adjektive und kleine Wörter - Adjectifs et mots-outils",
+      "source": "lent",
+      "canonical": "langsam",
+      "forms": []
+    },
+    {
+      "theme": "Adjektive und kleine Wörter - Adjectifs et mots-outils",
+      "source": "mais",
+      "canonical": "aber",
+      "forms": []
+    },
+    {
+      "theme": "Adjektive und kleine Wörter - Adjectifs et mots-outils",
+      "source": "parce que",
+      "canonical": "weil",
+      "forms": []
+    },
+    {
+      "theme": "Adjektive und kleine Wörter - Adjectifs et mots-outils",
+      "source": "car",
+      "canonical": "denn",
+      "forms": []
+    },
+    {
+      "theme": "Adjektive und kleine Wörter - Adjectifs et mots-outils",
+      "source": "c'est pourquoi",
+      "canonical": "deshalb",
+      "alt_target": [
+        "deswegen"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Adjektive und kleine Wörter - Adjectifs et mots-outils",
+      "source": "aussi",
+      "canonical": "auch",
+      "forms": []
+    },
+    {
+      "theme": "Adjektive und kleine Wörter - Adjectifs et mots-outils",
+      "source": "avec",
+      "canonical": "mit",
+      "forms": []
+    },
+    {
+      "theme": "Adjektive und kleine Wörter - Adjectifs et mots-outils",
+      "source": "sans",
+      "canonical": "ohne",
+      "forms": []
+    },
+    {
+      "theme": "Adjektive und kleine Wörter - Adjectifs et mots-outils",
+      "source": "pour",
+      "canonical": "für",
+      "forms": []
+    },
+    {
+      "theme": "Adjektive und kleine Wörter - Adjectifs et mots-outils",
+      "source": "chez",
+      "canonical": "bei",
+      "forms": []
+    },
+    {
+      "theme": "Adjektive und kleine Wörter - Adjectifs et mots-outils",
+      "source": "déjà",
+      "canonical": "schon",
+      "forms": []
+    },
+    {
+      "theme": "Adjektive und kleine Wörter - Adjectifs et mots-outils",
+      "source": "encore",
+      "canonical": "noch",
+      "forms": []
+    },
+    {
+      "theme": "Adjektive und kleine Wörter - Adjectifs et mots-outils",
+      "source": "très",
+      "canonical": "sehr",
+      "forms": []
+    },
+    {
+      "theme": "Adjektive und kleine Wörter - Adjectifs et mots-outils",
+      "source": "beaucoup",
+      "canonical": "viel",
+      "forms": []
+    },
+    {
+      "theme": "Adjektive und kleine Wörter - Adjectifs et mots-outils",
+      "source": "un peu",
+      "canonical": "ein bisschen",
+      "alt_target": [
+        "ein wenig"
+      ],
+      "forms": []
+    }
+  ]
+}
