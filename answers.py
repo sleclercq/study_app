@@ -55,9 +55,12 @@ def normalize(text: str) -> str:
     Lowercase, trim outer punctuation/spaces, collapse inner whitespace.
 
     Ligatures are spelled out (œ -> oe), because no child types "l'œil" and
-    that is a keyboard question, never a vocabulary one.
+    that is a keyboard question, never a vocabulary one. Same for the curly
+    apostrophe of the textbook (’ -> ') and for an ellipsis marking a gap in
+    a phrase ("Wie …?" is answered "Wie").
     """
     text = text.strip().lower().replace("\u0153", "oe").replace("\u00e6", "ae")
+    text = text.replace("\u2019", "'").replace("\u2026", " ").replace("...", " ")
     text = " ".join(text.split())
     return text.strip(_TRIM_CHARS).strip()
 

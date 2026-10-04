@@ -7,6 +7,8 @@ Navigation flow:
   PlayerScreen -> ExerciseSelectionScreen -> VerbSelectionScreen -+-> QuizScreen        -> ResultsScreen
                                                                  +-> EnglishQuizScreen -> ResultsScreen
                                           |                      +-> DirectionScreen   -> QuizScreen -> ResultsScreen
+                                          +-> ModeScreen -> QuizScreen (progressive session) -> ResultsScreen
+                                          |            +-> VerbSelectionScreen (free practice, as above)
                                           +-> (no selection) -----> QuizScreen / AccordPPScreen -> ResultsScreen
 
 Which of those paths an exercise takes is decided by its `kind`, read from the
@@ -17,6 +19,7 @@ Nothing about a given exercise is hardcoded in this file any more.
 import tkinter as tk
 from tkinter import messagebox
 import random
+import re
 from datetime import datetime
 
 import answers
@@ -38,8 +41,10 @@ CURRENT_LEVEL = "4e"
 # Exercise kinds: what a session looks like for each family of exercise
 # ---------------------------------------------------------------------------
 #
-#   select    : show VerbSelectionScreen first (pick the words / themes)
-#   direction : ask which way round to translate (DirectionScreen)
+#   select      : show VerbSelectionScreen first (pick the words / themes)
+#   direction   : ask which way round to translate (DirectionScreen)
+#   progressive : open on ModeScreen, which offers the progressive session
+#                 (db.get_progressive_questions) before free practice
 #   screen    : the screen that runs the questions
 #   build     : (exercise, enabled_word_ids, direction) -> list of questions
 #
@@ -60,6 +65,12 @@ _KINDS: dict = {
     # Vocabulary list, translated either way.
     "vocab": {
         "select": True, "direction": True, "screen": "QuizScreen",
+        "build": lambda ex, ids, d: db.get_vocab_questions(ex["id"], enabled_word_ids=ids, direction=d),
+    },
+    # Big catch-up list (6e-5e textbook lexicons): free practice exactly like
+    # "vocab", plus the progressive session offered first on ModeScreen.
+    "leitner": {
+        "select": True, "direction": True, "progressive": True, "screen": "QuizScreen",
         "build": lambda ex, ids, d: db.get_vocab_questions(ex["id"], enabled_word_ids=ids, direction=d),
     },
     # A bank of sentences with a blank: no per-word selection, random draw.
@@ -106,7 +117,10 @@ def open_exercise(app, exercise: dict) -> None:
     """Menu click: go to the selection screen, or straight into the questions."""
     app_state["exercise"] = exercise
     app_state.pop("enabled_word_ids", None)
-    if kind_spec(exercise)["select"]:
+    spec = kind_spec(exercise)
+    if spec.get("progressive"):
+        app.show_frame("ModeScreen")
+    elif spec["select"]:
         app.show_frame("VerbSelectionScreen")
     else:
         start_session(app, exercise)
@@ -133,7 +147,29 @@ def start_session(app, exercise: dict, enabled_word_ids=None,
     app_state["questions"] = questions[:SESSION_LENGTH]
     app_state["enabled_word_ids"] = enabled_word_ids
     app_state["direction"] = direction
+    app_state["mode"] = "free"
     app.show_frame(kind_spec(exercise)["screen"])
+
+
+def start_progressive_session(app, exercise: dict) -> None:
+    """
+    Today's progressive series for the current player: the words due for
+    review, topped up with new ones in textbook order. Which words and in
+    which direction is decided by db.get_progressive_questions().
+    """
+    player = app_state["player"]
+    questions = db.get_progressive_questions(exercise["id"], player["id"], size=SESSION_LENGTH)
+    if not questions:
+        messagebox.showinfo(
+            "Rien pour aujourd'hui",
+            "Tous les mots ont déjà été présentés et aucun n'est à revoir aujourd'hui.\n"
+            "Reviens demain !",
+        )
+        return
+    app_state["questions"] = questions
+    app_state["mode"] = "progressive"
+    app_state["progress_before"] = db.get_progress_stats(exercise["id"], player["id"])
+    app.show_frame("QuizScreen")
 
 
 # ---------------------------------------------------------------------------
@@ -220,6 +256,7 @@ class App(tk.Tk):
         for FrameClass in (
             PlayerScreen,
             ExerciseSelectionScreen,
+            ModeScreen,
             VerbSelectionScreen,
             DirectionScreen,
             QuizScreen,
@@ -482,8 +519,7 @@ class VerbSelectionScreen(tk.Frame):
         btn_row.pack(fill="x")
 
         tk.Button(btn_row, text="← Retour", font=self.BTN_FONT,
-                  command=lambda: self.app.show_frame("ExerciseSelectionScreen")
-                  ).pack(side="left", padx=(0, 8))
+                  command=self._back).pack(side="left", padx=(0, 8))
 
         self._start_btn = tk.Button(
             btn_row, text="Commencer  ▶", font=("Helvetica", 14, "bold"),
@@ -556,6 +592,10 @@ class VerbSelectionScreen(tk.Frame):
             ).grid(row=first_row + i // 2, column=i % 2, sticky="w", padx=12, pady=2)
         self._grid_row = first_row + (len(words) + 1) // 2
 
+    def _back(self) -> None:
+        progressive = kind_spec(app_state.get("exercise") or {}).get("progressive")
+        self.app.show_frame("ModeScreen" if progressive else "ExerciseSelectionScreen")
+
     def _toggle_theme(self, theme: str) -> None:
         wanted = self._theme_vars[theme].get()
         for word_id in self._theme_words[theme]:
@@ -601,6 +641,127 @@ class VerbSelectionScreen(tk.Frame):
             self.app.show_frame("DirectionScreen")
         else:
             start_session(self.app, exercise, enabled_ids)
+
+
+# ---------------------------------------------------------------------------
+# Screen 3a: How to work a big list (progressive exercises only)
+# ---------------------------------------------------------------------------
+
+class ModeScreen(tk.Frame):
+    """
+    Entry of a progressive exercise (the 6e-5e German catch-up list).
+
+    Two ways in: today's session, where the app picks the words - the one
+    recommended, so it comes first and big - or free practice on units picked
+    by hand, the ordinary vocabulary flow. The player's progress sits on top:
+    on a list of a thousand words, watching the acquired count move is most of
+    the motivation. The method is explained in plain words, like the typing
+    rules elsewhere, so that a word coming back is never a mystery.
+    """
+
+    BG             = "#f5f0e8"
+    TITLE_FONT     = ("Helvetica", 18, "bold")
+    STATS_FONT     = ("Helvetica", 13, "bold")
+    SUB_FONT       = ("Helvetica", 11)
+    BTN_FONT       = ("Helvetica", 15, "bold")
+    ALT_BTN_FONT   = ("Helvetica", 13)
+    HOW_TITLE_FONT = ("Helvetica", 11, "bold")
+    HOW_FONT       = ("Helvetica", 11)
+    BACK_FONT      = ("Helvetica", 12)
+
+    BAR_WIDTH, BAR_HEIGHT = 520, 14
+    COLOR_ACQUIRED = "#4a7c59"
+    COLOR_LEARNING = "#d9a441"
+    COLOR_UNSEEN   = "#ddd5c4"
+
+    HOW_IT_WORKS = (
+        "Chaque séance reprend les mots à revoir aujourd'hui, puis ajoute des mots\n"
+        "nouveaux dans l'ordre du manuel : plus tu en connais, plus il en arrive.\n"
+        "Un mot nouveau est un petit test, en allemand. Trouvé du premier coup :\n"
+        "il est acquis, tu ne le reverras que dans 2 mois pour vérifier.\n"
+        "Pas trouvé : tu l'apprends, d'abord dans le sens allemand → français, puis\n"
+        "dans l'autre, de plus en plus espacé (le lendemain, 3 jours, 7 jours).\n"
+        "Trouvé grâce à l'indice : il recule d'une case. Raté : il repart au début."
+    )
+
+    def __init__(self, parent, app):
+        super().__init__(parent, bg=self.BG)
+        self.app = app
+        self._build_ui()
+
+    def _build_ui(self) -> None:
+        self.configure(padx=50, pady=22)
+
+        self._title = tk.Label(self, text="", font=self.TITLE_FONT,
+                               bg=self.BG, fg="#3a2a0a")
+        self._title.pack(pady=(0, 10))
+
+        self._stats = tk.Label(self, text="", font=self.STATS_FONT, bg=self.BG, fg="#3a2a0a")
+        self._stats.pack()
+        self._bar = tk.Canvas(self, width=self.BAR_WIDTH, height=self.BAR_HEIGHT,
+                              bg=self.COLOR_UNSEEN, highlightthickness=0)
+        self._bar.pack(pady=(6, 4))
+        self._next = tk.Label(self, text="", font=self.SUB_FONT, bg=self.BG, fg="#666")
+        self._next.pack(pady=(0, 16))
+
+        tk.Button(
+            self, text="Séance du jour  ▶", font=self.BTN_FONT,
+            bg="#4a7c59", fg="black", activebackground=darken("#4a7c59"), pady=14,
+            command=lambda: start_progressive_session(self.app, app_state["exercise"]),
+        ).pack(fill="x")
+        tk.Label(self, text="L'appli choisit les mots : ceux à revoir, puis des nouveaux.",
+                 font=self.SUB_FONT, bg=self.BG, fg="#666").pack(pady=(3, 12))
+
+        tk.Button(
+            self, text="Réviser des unités au choix", font=self.ALT_BTN_FONT,
+            command=lambda: self.app.show_frame("VerbSelectionScreen"),
+        ).pack(fill="x")
+
+        how = tk.Frame(self, bg="#ece5d8")
+        how.pack(fill="x", pady=(16, 0))
+        tk.Label(how, text="Comment ça marche", font=self.HOW_TITLE_FONT,
+                 bg="#ece5d8", fg="#6a5a3a", anchor="w").pack(fill="x", padx=12, pady=(8, 2))
+        tk.Label(how, text=self.HOW_IT_WORKS, font=self.HOW_FONT, bg="#ece5d8",
+                 fg="#5a4a2a", justify="left", anchor="w").pack(fill="x", padx=12, pady=(0, 10))
+
+        tk.Button(
+            self, text="← Retour", font=self.BACK_FONT,
+            command=lambda: self.app.show_frame("ExerciseSelectionScreen"),
+        ).pack(pady=(14, 0))
+
+    def on_show(self) -> None:
+        exercise, player = app_state.get("exercise") or {}, app_state.get("player") or {}
+        if not exercise or not player:
+            return
+        self._title.config(text=exercise.get("name", ""))
+
+        stats = db.get_progress_stats(exercise["id"], player["id"])
+        self._stats.config(
+            text=f"Acquis : {stats['acquired']}   ·   En cours : {stats['learning']}"
+                 f"   ·   À découvrir : {stats['unseen']}"
+        )
+        self._draw_bar(stats)
+
+        parts = []
+        if stats["tested"] >= 20:
+            rate = round(100 * stats["known_at_test"] / stats["tested"])
+            parts.append(f"{rate} % des mots testés étaient déjà sus")
+        if stats["due"]:
+            parts.append(f"{stats['due']} mot{'s' if stats['due'] > 1 else ''} à revoir aujourd'hui")
+        if stats["next_theme"]:
+            parts.append(f"prochains mots nouveaux : {stats['next_theme']}")
+        self._next.config(text="   ·   ".join(parts) or "Tous les mots ont été présentés.")
+
+    def _draw_bar(self, stats: dict) -> None:
+        """Acquired (green), learning (amber), still unseen (background)."""
+        self._bar.delete("all")
+        total = stats["total"] or 1
+        acquired = self.BAR_WIDTH * stats["acquired"] / total
+        learning = self.BAR_WIDTH * stats["learning"] / total
+        self._bar.create_rectangle(0, 0, acquired, self.BAR_HEIGHT,
+                                   fill=self.COLOR_ACQUIRED, width=0)
+        self._bar.create_rectangle(acquired, 0, acquired + learning, self.BAR_HEIGHT,
+                                   fill=self.COLOR_LEARNING, width=0)
 
 
 # ---------------------------------------------------------------------------
@@ -835,7 +996,9 @@ class QuizScreen(tk.Frame):
         """" · Français → Allemand" for a one-way vocabulary series, else ""."""
         exercise = app_state.get("exercise", {})
         direction = app_state.get("direction", db.DIRECTION_MIXED)
-        if exercise.get("kind") != "vocab":
+        if app_state.get("mode") == "progressive":
+            return "   ·   séance progressive"
+        if not kind_spec(exercise)["direction"]:
             return ""
         source = exercise.get("source_language", "")
         target = exercise.get("target_language", "")
@@ -897,11 +1060,13 @@ class QuizScreen(tk.Frame):
             else:
                 points, msg = 0.25, "Bien joué !"
             self._score += points
+            self._record_progress(q, db.result_of(self._attempts, found=True))
             self._feedback_label.config(text=f"\u2713  {msg}", fg=self.COLOR_CORRECT)
             self._hint_label.config(text="")
             self._show_continue()
 
         elif self._attempts >= 3:
+            self._record_progress(q, db.result_of(self._attempts, found=False))
             self._feedback_label.config(text="\u2717  Pas cette fois\u2026", fg=self.COLOR_WRONG)
             self._hint_label.config(
                 text=f"La bonne réponse était : {correct_display}",
@@ -927,6 +1092,12 @@ class QuizScreen(tk.Frame):
 
             self._entry.focus_set()
             self._entry.select_range(0, "end")
+
+    @staticmethod
+    def _record_progress(q: dict, result: str) -> None:
+        """Progressive mode only: file the outcome, the word moves to its next box."""
+        if q.get("progressive"):
+            db.record_progress(app_state["player"]["id"], q["word_id"], result)
 
     def _show_continue(self) -> None:
         self._answered = True
@@ -1769,7 +1940,12 @@ class ResultsScreen(tk.Frame):
 
         self._msg_label = tk.Label(self, text="", font=self.MSG_FONT,
                                    bg=self.BG, fg="#3a2a0a")
-        self._msg_label.pack(pady=(0, 10))
+        self._msg_label.pack(pady=(0, 4))
+
+        # Progressive sessions only: where the player now stands on the list.
+        self._progress_label = tk.Label(self, text="", font=("Helvetica", 12),
+                                        bg=self.BG, fg="#4a6a3a")
+        self._progress_label.pack(pady=(0, 8))
 
         tk.Frame(self, bg="#ccc", height=1).pack(fill="x", pady=(0, 6))
 
@@ -1809,8 +1985,21 @@ class ResultsScreen(tk.Frame):
         msg = next(m for thr, m in self._MESSAGES if pct >= thr)
         self._msg_label.config(text=msg)
 
+        self._progress_label.config(text=self._progress_text())
         self._populate_history()
         self._bind_wheel()
+
+    @staticmethod
+    def _progress_text() -> str:
+        """"Mots acquis : 57 (+3) · en cours : 143 · à découvrir : 780" after a progressive series."""
+        if app_state.get("mode") != "progressive":
+            return ""
+        exercise, player = app_state["exercise"], app_state["player"]
+        now = db.get_progress_stats(exercise["id"], player["id"])
+        gained = now["acquired"] - app_state.get("progress_before", now)["acquired"]
+        delta = f" (+{gained})" if gained > 0 else ""
+        return (f"Mots acquis : {now['acquired']}{delta}   ·   en cours : {now['learning']}"
+                f"   ·   à découvrir : {now['unseen']}")
 
     def _populate_history(self) -> None:
         for w in self._hist_inner.winfo_children():
@@ -1865,6 +2054,9 @@ class ResultsScreen(tk.Frame):
         exercise = app_state.get("exercise", {})
         if not exercise:
             self.app.show_frame("ExerciseSelectionScreen")
+            return
+        if app_state.get("mode") == "progressive":
+            start_progressive_session(self.app, exercise)
             return
 
         spec = kind_spec(exercise)

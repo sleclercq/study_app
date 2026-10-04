@@ -30,7 +30,8 @@ Extensibility notes:
 import sqlite3
 import json
 from pathlib import Path
-from datetime import datetime
+import random
+from datetime import date, datetime, timedelta
 from typing import Optional
 
 # Default path for the SQLite database file, next to this module.
@@ -235,6 +236,37 @@ _MIGRATIONS: list[str] = [
     ALTER TABLE exercises ADD COLUMN prompt_reverse   TEXT    NOT NULL DEFAULT '';
     ALTER TABLE words     ADD COLUMN theme            TEXT    NOT NULL DEFAULT '';
     """,
+    # -----------------------------------------------------------------------
+    # Migration 6 - progressive mode (Leitner boxes) + exercise retirement.
+    #
+    # word_progress: one row per (player, word) once the word has been asked in
+    #   a progressive session. `box` 1..5 is how well the word is known, `due`
+    #   the day it should come back (ISO date). No row = never seen.
+    #   first_known remembers whether the word was already known the very first
+    #   time, which is what paces the arrival of new words (see
+    #   get_progressive_questions).
+    # exercises.active / words.active: 0 once the exercise's file, or the word
+    #   within its file, is gone from data/. Rows and sessions stay in the DB -
+    #   history is never deleted - they just leave the menu and the quizzes.
+    #   Correcting a word in a JSON file therefore replaces it cleanly instead
+    #   of leaving the misspelt version in play. Restoring the entry revives it.
+    # -----------------------------------------------------------------------
+    """
+    CREATE TABLE IF NOT EXISTS word_progress (
+        player_id   INTEGER NOT NULL REFERENCES players(id),
+        word_id     INTEGER NOT NULL REFERENCES words(id),
+        box         INTEGER NOT NULL DEFAULT 0,
+        due         TEXT    NOT NULL DEFAULT '',
+        seen        INTEGER NOT NULL DEFAULT 0,
+        first_known INTEGER NOT NULL DEFAULT 0,
+        first_seen  TEXT    NOT NULL DEFAULT '',
+        last_seen   TEXT    NOT NULL DEFAULT '',
+        PRIMARY KEY (player_id, word_id)
+    );
+    CREATE INDEX IF NOT EXISTS idx_word_progress_due ON word_progress (player_id, due);
+    ALTER TABLE exercises ADD COLUMN active INTEGER NOT NULL DEFAULT 1;
+    ALTER TABLE words     ADD COLUMN active INTEGER NOT NULL DEFAULT 1;
+    """,
 ]
 
 
@@ -330,6 +362,18 @@ def _word_meta_forms(word_data: dict) -> list:
     return rows
 
 
+def _exercise_files(data_dir: Path) -> list:
+    """
+    Every exercise file under data/, subject folders included (data/allemand/...).
+    Folders starting with "_" (data/_sources, the raw lesson photos and PDFs)
+    are never read.
+    """
+    return sorted(
+        path for path in data_dir.rglob("*.json")
+        if not any(part.startswith("_") for part in path.relative_to(data_dir).parts)
+    )
+
+
 def seed_exercises(db_path: Path = _DB_PATH, data_dir: Path = _DATA_DIR) -> None:
     """
     Load every JSON exercise file from data_dir into the database.
@@ -371,17 +415,20 @@ def seed_exercises(db_path: Path = _DB_PATH, data_dir: Path = _DATA_DIR) -> None
       ]
     }
 
-    To add a whole new exercise: drop a .json file in data/ and restart the app.
+    To add a whole new exercise: drop a .json file in data/<matière>/ and restart.
+    To retire one: remove its file. It leaves the menu, its history stays.
     """
     if not data_dir.exists():
         return
 
+    seen_slugs: list = []
     with _connect(db_path) as conn:
-        for json_file in sorted(data_dir.glob("*.json")):
+        for json_file in _exercise_files(data_dir):
             with open(json_file, encoding="utf-8") as f:
                 exercise = json.load(f)
 
             slug = exercise["slug"]
+            seen_slugs.append(slug)
 
             row = conn.execute(
                 "SELECT id FROM exercises WHERE slug = ?", (slug,)
@@ -411,13 +458,14 @@ def seed_exercises(db_path: Path = _DB_PATH, data_dir: Path = _DATA_DIR) -> None
                 theme = word_data.get("theme", "")
 
                 if existing.get(key):
-                    # Already seeded: keep the row (and its player prefs) untouched,
-                    # only realign the theme if the list was reorganised.
+                    # Already seeded: keep the row (and its player prefs and
+                    # progress) untouched, only realign the theme if the list was
+                    # reorganised, and revive it if it had been retired.
                     known = existing[key].pop(0)
-                    if known["theme"] != theme:
-                        conn.execute(
-                            "UPDATE words SET theme = ? WHERE id = ?", (theme, known["id"])
-                        )
+                    conn.execute(
+                        "UPDATE words SET theme = ?, active = 1 WHERE id = ?",
+                        (theme, known["id"]),
+                    )
                     continue
 
                 cursor = conn.execute(
@@ -432,6 +480,18 @@ def seed_exercises(db_path: Path = _DB_PATH, data_dir: Path = _DATA_DIR) -> None
                         "INSERT INTO forms (word_id, label, value) VALUES (?, ?, ?)",
                         (word_id, form["label"], form["value"]),
                     )
+
+            # Whatever is still in `existing` is no longer in the file: retired.
+            conn.executemany(
+                "UPDATE words SET active = 0 WHERE id = ?",
+                [(w["id"],) for rows in existing.values() for w in rows],
+            )
+
+        # An exercise whose file left data/ leaves the menu, but keeps its rows:
+        # its sessions are a child's history and are never deleted.
+        conn.execute("UPDATE exercises SET active = 0")
+        conn.executemany("UPDATE exercises SET active = 1 WHERE slug = ?",
+                         [(slug,) for slug in seen_slugs])
 
 
 # ---------------------------------------------------------------------------
@@ -481,7 +541,7 @@ def list_exercises(db_path: Path = _DB_PATH) -> list:
     """
     with _connect(db_path) as conn:
         rows = conn.execute(
-            "SELECT * FROM exercises ORDER BY level, sort_order, name"
+            "SELECT * FROM exercises WHERE active = 1 ORDER BY level, sort_order, name"
         ).fetchall()
     return [dict(r) for r in rows]
 
@@ -535,7 +595,7 @@ def get_words_for_exercise(exercise_id: int, db_path: Path = _DB_PATH) -> list:
     """
     with _connect(db_path) as conn:
         rows = conn.execute(
-            "SELECT id, source, canonical FROM words WHERE exercise_id = ? ORDER BY rowid",
+            "SELECT id, source, canonical FROM words WHERE exercise_id = ? AND active = 1 ORDER BY rowid",
             (exercise_id,),
         ).fetchall()
     return [dict(r) for r in rows]
@@ -558,7 +618,7 @@ def get_word_prefs(player_id: int, exercise_id: int, db_path: Path = _DB_PATH) -
                FROM words w
                LEFT JOIN player_word_prefs p
                       ON p.word_id = w.id AND p.player_id = ?
-               WHERE w.exercise_id = ?
+               WHERE w.exercise_id = ? AND w.active = 1
                ORDER BY w.rowid""",
             (player_id, exercise_id),
         ).fetchall()
@@ -613,7 +673,7 @@ def get_questions_for_exercise(
     with _connect(db_path) as conn:
         exercise = _get_exercise(conn, exercise_id)
         words = conn.execute(
-            "SELECT id, source, canonical FROM words WHERE exercise_id = ? ORDER BY rowid",
+            "SELECT id, source, canonical FROM words WHERE exercise_id = ? AND active = 1 ORDER BY rowid",
             (exercise_id,),
         ).fetchall()
         forms_by_word = _forms_by_word(conn, exercise_id)
@@ -673,6 +733,49 @@ DIRECTION_REVERSE = "reverse"   # foreign language -> French (comprehension)
 DIRECTION_MIXED   = "mixed"     # both, shuffled together
 
 
+def _vocab_question(exercise: dict, word, metadata: list, direction: str) -> dict:
+    """
+    One translation question for a vocabulary word, in the given direction.
+    Shared by the free mode (get_vocab_questions) and the progressive mode
+    (get_progressive_questions), so both word and correct questions the same way.
+    """
+    source, canonical = word["source"], word["canonical"]
+    args = dict(
+        source=source, canonical=canonical,
+        source_language=exercise.get("source_language", "français"),
+        target_language=exercise.get("target_language", ""),
+    )
+    if direction == DIRECTION_FORWARD:
+        return {
+            "type": "vocab",
+            "direction": DIRECTION_FORWARD,
+            "prompt": _fill(
+                exercise.get("prompt_canonical", ""),
+                "Traduis en {target_language}\u00a0: \u00ab\u00a0{source}\u00a0\u00bb",
+                **args,
+            ),
+            "answer": canonical,
+            "accepted": [canonical] + [v for label, v in metadata if label == "__alt_target__"],
+            "answer_lang": exercise.get("target_lang_code", ""),
+            "word_source": source,
+            "theme": word["theme"],
+        }
+    return {
+        "type": "vocab",
+        "direction": DIRECTION_REVERSE,
+        "prompt": _fill(
+            exercise.get("prompt_reverse", ""),
+            "Traduis en {source_language}\u00a0: \u00ab\u00a0{canonical}\u00a0\u00bb",
+            **args,
+        ),
+        "answer": source,
+        "accepted": [source] + [v for label, v in metadata if label == "__alt_source__"],
+        "answer_lang": exercise.get("source_lang_code", ""),
+        "word_source": source,
+        "theme": word["theme"],
+    }
+
+
 def get_vocab_questions(
     exercise_id: int,
     enabled_word_ids: Optional[list] = None,
@@ -689,79 +792,262 @@ def get_vocab_questions(
       accepted    : every answer that counts as correct (expected + synonyms
                     declared as alt_source / alt_target in the JSON)
       answer_lang : "de" / "fr" - which tolerance answers.matches() applies
-      theme       : the vocabulary chapter, kept for future per-theme stats
+      theme       : the vocabulary chapter
     """
     with _connect(db_path) as conn:
         exercise = _get_exercise(conn, exercise_id)
         words = conn.execute(
             "SELECT id, source, canonical, theme FROM words "
-            "WHERE exercise_id = ? ORDER BY rowid",
+            "WHERE exercise_id = ? AND active = 1 ORDER BY rowid",
             (exercise_id,),
         ).fetchall()
         forms_by_word = _forms_by_word(conn, exercise_id)
 
-    source_language = exercise.get("source_language", "français")
-    target_language = exercise.get("target_language", "")
-    source_code = exercise.get("source_lang_code", "")
-    target_code = exercise.get("target_lang_code", "")
-    forward_tpl = exercise.get("prompt_canonical", "")
-    reverse_tpl = exercise.get("prompt_reverse", "")
-
     enabled_set = set(enabled_word_ids) if enabled_word_ids is not None else None
+    wanted = {
+        DIRECTION_FORWARD: (DIRECTION_FORWARD,),
+        DIRECTION_REVERSE: (DIRECTION_REVERSE,),
+    }.get(direction, (DIRECTION_FORWARD, DIRECTION_REVERSE))
 
     questions = []
     for word in words:
-        word_id = word["id"]
-        if enabled_set is not None and word_id not in enabled_set:
+        if enabled_set is not None and word["id"] not in enabled_set:
             continue
-
-        source = word["source"]
-        canonical = word["canonical"]
-        if not canonical:
+        if not word["canonical"]:
             continue
-
-        metadata = forms_by_word.get(word_id, [])
-        alt_target = [v for label, v in metadata if label == "__alt_target__"]
-        alt_source = [v for label, v in metadata if label == "__alt_source__"]
-
-        prompt_args = dict(
-            source=source, canonical=canonical,
-            source_language=source_language, target_language=target_language,
-        )
-
-        if direction in (DIRECTION_FORWARD, DIRECTION_MIXED):
-            questions.append({
-                "type": "vocab",
-                "direction": DIRECTION_FORWARD,
-                "prompt": _fill(
-                    forward_tpl,
-                    "Traduis en {target_language}\u00a0: \u00ab\u00a0{source}\u00a0\u00bb",
-                    **prompt_args,
-                ),
-                "answer": canonical,
-                "accepted": [canonical] + alt_target,
-                "answer_lang": target_code,
-                "word_source": source,
-                "theme": word["theme"],
-            })
-
-        if direction in (DIRECTION_REVERSE, DIRECTION_MIXED):
-            questions.append({
-                "type": "vocab",
-                "direction": DIRECTION_REVERSE,
-                "prompt": _fill(
-                    reverse_tpl,
-                    "Traduis en {source_language}\u00a0: \u00ab\u00a0{canonical}\u00a0\u00bb",
-                    **prompt_args,
-                ),
-                "answer": source,
-                "accepted": [source] + alt_source,
-                "answer_lang": source_code,
-                "word_source": source,
-                "theme": word["theme"],
-            })
-
+        for one_direction in wanted:
+            questions.append(_vocab_question(
+                exercise, word, forms_by_word.get(word["id"], []), one_direction))
     return questions
+
+
+# ---------------------------------------------------------------------------
+# Progressive mode (Leitner boxes)
+# ---------------------------------------------------------------------------
+#
+# What it is for: about a thousand words from 6e and 5e to catch up on, some
+# long known, some forgotten, some never learnt. Drilling them all equally
+# spends the evening on words the child already knows; this spends it on the
+# others, and brings each word back just before it would be forgotten.
+#
+# Each (player, word) sits in a box, and the box sets the direction asked:
+#   0  never asked      French -> German: a TEST, the word is supposed known
+#   1  to learn         German -> French (recognise it first), back at once
+#   2  recognised       French -> German from now on, back the next day
+#   3  produced once    back in 3 days
+#   4  produced twice   back in 7 days
+#   5  acquis           back in 60 days, as a spot check
+#
+# Each answer has one of three outcomes (same 3 attempts as everywhere):
+#   first   right on the first try       -> up one box
+#   hint    right on the 2nd or 3rd try  -> down one box (never below 2)
+#   missed  revealed after 3 misses      -> box 1, to be learnt again
+# with two exceptions for a word seen for the first time: right away means it
+# was known all along, it goes straight to box 5 (acquis); found with the hint,
+# it starts at box 2.
+#
+# Why this shape (tuned by simulating 980 words, see the commit that added it):
+# testing a supposedly known word in the hard direction first clears the known
+# ones in a single question, which is what makes a catch-up of this size
+# possible in a school term rather than a school year. A hint only costs one
+# box, not a full restart: a word that needed its first two letters is shaky,
+# not forgotten.
+#
+# Scoring and the 3-attempt rule are untouched: this only decides WHICH words
+# make up the 20 questions, and in which direction each one is asked.
+
+BOX_INTERVAL_DAYS = {1: 0, 2: 1, 3: 3, 4: 7, 5: 60}
+BOX_TO_LEARN = 1              # asked German -> French
+BOX_PRODUCTION = 2            # from this box on, asked French -> German
+BOX_ACQUIRED = 5
+RESULT_FIRST, RESULT_HINT, RESULT_MISSED = "first", "hint", "missed"
+NEW_WORDS_MIN = 6             # new words in a session even when reviews pile up
+NEW_WORDS_CAP = (8, 20)       # new words per session, from "most were unknown" to "all known"
+NEW_WORDS_FIRST_CAP = 10      # before there is enough history to judge
+NEW_WORDS_WINDOW = 20         # how many recent first encounters set the pace
+
+
+def _today() -> str:
+    return date.today().isoformat()
+
+
+def _add_days(day: str, days: int) -> str:
+    return (date.fromisoformat(day) + timedelta(days=days)).isoformat()
+
+
+def next_box(box: int, result: str) -> int:
+    """Where a word goes after being asked, given its box before the question."""
+    if box == 0:                                   # first encounter: a test
+        return {RESULT_FIRST: BOX_ACQUIRED, RESULT_HINT: BOX_PRODUCTION}.get(result, BOX_TO_LEARN)
+    if box == BOX_TO_LEARN:                        # recognition
+        return BOX_PRODUCTION if result == RESULT_FIRST else BOX_TO_LEARN
+    if result == RESULT_FIRST:                     # production
+        return min(box + 1, BOX_ACQUIRED)
+    if result == RESULT_HINT:
+        return max(BOX_PRODUCTION, box - 1)
+    return BOX_TO_LEARN
+
+
+def result_of(attempts: int, found: bool) -> str:
+    """Outcome of a question from the attempt that found it (or not)."""
+    if not found:
+        return RESULT_MISSED
+    return RESULT_FIRST if attempts == 1 else RESULT_HINT
+
+
+def _new_word_cap(conn, player_id: int, exercise_id: int) -> int:
+    """
+    How many new words the next session may bring: the more of the recent new
+    words were already known, the faster the list is walked through.
+    """
+    rows = conn.execute(
+        """SELECT p.first_known FROM word_progress p
+           JOIN words w ON w.id = p.word_id
+           WHERE p.player_id = ? AND w.exercise_id = ?
+           ORDER BY p.first_seen DESC, w.rowid DESC
+           LIMIT ?""",
+        (player_id, exercise_id, NEW_WORDS_WINDOW),
+    ).fetchall()
+    if len(rows) < NEW_WORDS_WINDOW // 2:
+        return NEW_WORDS_FIRST_CAP
+    known_rate = sum(r["first_known"] for r in rows) / len(rows)
+    low, high = NEW_WORDS_CAP
+    return low + round((high - low) * known_rate)
+
+
+def get_progressive_questions(
+    exercise_id: int,
+    player_id: int,
+    today: Optional[str] = None,
+    size: int = 20,
+    db_path: Path = _DB_PATH,
+) -> list:
+    """
+    The questions of today's progressive session for this player.
+
+    Words due for review come first, weakest box first; new words are then
+    added in the order of the JSON file (the textbook's order, unit by unit),
+    at the pace set by _new_word_cap(). Box 1 is asked German -> French, every
+    other box - new words included, as a test - French -> German.
+
+    Each question carries "progressive": True, its "word_id" and "box", so the
+    quiz can report the outcome to record_progress(). Returns [] when nothing
+    is due and every word has been introduced.
+    """
+    today = today or _today()
+    with _connect(db_path) as conn:
+        exercise = _get_exercise(conn, exercise_id)
+        words = conn.execute(
+            """SELECT w.id, w.source, w.canonical, w.theme,
+                      COALESCE(p.box, 0) AS box, COALESCE(p.due, '') AS due
+               FROM words w
+               LEFT JOIN word_progress p ON p.word_id = w.id AND p.player_id = ?
+               WHERE w.exercise_id = ? AND w.active = 1 AND w.canonical != ''
+               ORDER BY w.rowid""",
+            (player_id, exercise_id),
+        ).fetchall()
+        forms_by_word = _forms_by_word(conn, exercise_id)
+        cap = _new_word_cap(conn, player_id, exercise_id)
+
+    order = {w["id"]: i for i, w in enumerate(words)}
+    due = sorted(
+        (w for w in words if w["box"] >= 1 and w["due"] <= today),
+        key=lambda w: (w["box"], w["due"], order[w["id"]]),
+    )
+    unseen = [w for w in words if w["box"] == 0]
+
+    room_for_new = max(size - len(due), NEW_WORDS_MIN) if unseen else 0
+    n_new = min(cap, len(unseen), room_for_new)
+    chosen = due[:size - n_new] + unseen[:n_new]
+
+    questions = []
+    for word in chosen:
+        direction = DIRECTION_REVERSE if word["box"] == BOX_TO_LEARN else DIRECTION_FORWARD
+        question = _vocab_question(exercise, word, forms_by_word.get(word["id"], []), direction)
+        question.update(progressive=True, word_id=word["id"], box=word["box"])
+        questions.append(question)
+    random.shuffle(questions)
+    return questions
+
+
+def record_progress(
+    player_id: int,
+    word_id: int,
+    result: str,
+    today: Optional[str] = None,
+    db_path: Path = _DB_PATH,
+) -> int:
+    """
+    File the outcome of one progressive question and return the word's new box.
+    result: RESULT_FIRST / RESULT_HINT / RESULT_MISSED (see result_of()).
+    """
+    today = today or _today()
+    now = datetime.now().isoformat(timespec="seconds")
+    with _connect(db_path) as conn:
+        row = conn.execute(
+            "SELECT box FROM word_progress WHERE player_id = ? AND word_id = ?",
+            (player_id, word_id),
+        ).fetchone()
+        box = row["box"] if row else 0
+        new_box = next_box(box, result)
+        due = _add_days(today, BOX_INTERVAL_DAYS[new_box])
+        if row is None:
+            conn.execute(
+                """INSERT INTO word_progress
+                   (player_id, word_id, box, due, seen, first_known, first_seen, last_seen)
+                   VALUES (?, ?, ?, ?, 1, ?, ?, ?)""",
+                (player_id, word_id, new_box, due, int(result == RESULT_FIRST), now, now),
+            )
+        else:
+            conn.execute(
+                """UPDATE word_progress
+                   SET box = ?, due = ?, seen = seen + 1, last_seen = ?
+                   WHERE player_id = ? AND word_id = ?""",
+                (new_box, due, now, player_id, word_id),
+            )
+    return new_box
+
+
+def get_progress_stats(
+    exercise_id: int,
+    player_id: int,
+    today: Optional[str] = None,
+    db_path: Path = _DB_PATH,
+) -> dict:
+    """
+    Where a player stands on a progressive exercise:
+      total, acquired (box 5), learning (boxes 1-4), unseen (never asked),
+      due (to review today), next_theme (where the new words come from),
+      tested and known_at_test: how many words met so far, and how many of
+      them were already known the first time - the honest measure of how much
+      catching up there really is.
+    """
+    today = today or _today()
+    with _connect(db_path) as conn:
+        row = conn.execute(
+            """SELECT COUNT(*) AS total,
+                      COALESCE(SUM(p.box = ?), 0) AS acquired,
+                      COALESCE(SUM(p.box BETWEEN 1 AND ?), 0) AS learning,
+                      COALESCE(SUM(p.box >= 1 AND p.due <= ?), 0) AS due,
+                      COUNT(p.word_id) AS tested,
+                      COALESCE(SUM(p.first_known), 0) AS known_at_test
+               FROM words w
+               LEFT JOIN word_progress p ON p.word_id = w.id AND p.player_id = ?
+               WHERE w.exercise_id = ? AND w.active = 1 AND w.canonical != ''""",
+            (BOX_ACQUIRED, BOX_ACQUIRED - 1, today, player_id, exercise_id),
+        ).fetchone()
+        next_word = conn.execute(
+            """SELECT w.theme FROM words w
+               LEFT JOIN word_progress p ON p.word_id = w.id AND p.player_id = ?
+               WHERE w.exercise_id = ? AND w.active = 1 AND w.canonical != ''
+                 AND p.word_id IS NULL
+               ORDER BY w.rowid LIMIT 1""",
+            (player_id, exercise_id),
+        ).fetchone()
+    stats = dict(row)
+    stats["unseen"] = stats["total"] - stats["acquired"] - stats["learning"]
+    stats["next_theme"] = next_word["theme"] if next_word else ""
+    return stats
 
 
 # ---------------------------------------------------------------------------
@@ -787,7 +1073,7 @@ def get_english_questions_for_exercise(
     """
     with _connect(db_path) as conn:
         words = conn.execute(
-            "SELECT id, source FROM words WHERE exercise_id = ? ORDER BY rowid",
+            "SELECT id, source FROM words WHERE exercise_id = ? AND active = 1 ORDER BY rowid",
             (exercise_id,),
         ).fetchall()
         forms_by_word = _forms_by_word(conn, exercise_id)
@@ -831,7 +1117,7 @@ def get_fill_blank_questions(
     """
     with _connect(db_path) as conn:
         words = conn.execute(
-            "SELECT source, canonical FROM words WHERE exercise_id = ? ORDER BY rowid",
+            "SELECT source, canonical FROM words WHERE exercise_id = ? AND active = 1 ORDER BY rowid",
             (exercise_id,),
         ).fetchall()
 
@@ -875,7 +1161,7 @@ def get_accord_pp_questions(
     with _connect(db_path) as conn:
         words = conn.execute(
             "SELECT id, source, canonical FROM words "
-            "WHERE exercise_id = ? ORDER BY rowid",
+            "WHERE exercise_id = ? AND active = 1 ORDER BY rowid",
             (exercise_id,),
         ).fetchall()
         forms_by_word = _forms_by_word(conn, exercise_id)
