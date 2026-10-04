@@ -312,14 +312,13 @@
   },
   {
    "theme": "6e - Unité 0",
-   "source": "Salut !",
+   "source": "Salut ! (en arrivant)",
    "canonical": "Hallo!",
    "_annee": "6e",
    "_unite": "U0",
    "_brut": "Hallo!",
    "alt_target": [
-    "Hi!",
-    "Tschüss!"
+    "Hi!"
    ],
    "forms": []
   },
@@ -341,14 +340,13 @@
   },
   {
    "theme": "6e - Unité 0",
-   "source": "Salut !",
+   "source": "Salut ! (en arrivant)",
    "canonical": "Hi!",
    "_annee": "6e",
    "_unite": "U0",
    "_brut": "Hi!",
    "alt_target": [
-    "Hallo!",
-    "Tschüss!"
+    "Hallo!"
    ],
    "forms": []
   },
@@ -372,7 +370,7 @@
   },
   {
    "theme": "6e - Unité 0",
-   "source": "rose",
+   "source": "rose (couleur)",
    "canonical": "rosa",
    "_annee": "6e",
    "_unite": "U0",
@@ -382,9 +380,6 @@
    ],
    "_aussi": [
     "5e U3"
-   ],
-   "alt_target": [
-    "rosig"
    ],
    "forms": []
   },
@@ -597,15 +592,11 @@
   },
   {
    "theme": "6e - Unité 0",
-   "source": "Salut !",
+   "source": "Salut ! (en partant)",
    "canonical": "Tschüss!",
    "_annee": "6e",
    "_unite": "U0",
    "_brut": "Tschüss!",
-   "alt_target": [
-    "Hallo!",
-    "Hi!"
-   ],
    "forms": []
   },
   {
@@ -821,14 +812,11 @@
   },
   {
    "theme": "6e - Unité 1",
-   "source": "aimer",
+   "source": "aimer (adorer)",
    "canonical": "lieben",
    "_annee": "6e",
    "_unite": "U1",
    "_brut": "lieben",
-   "alt_target": [
-    "lieb haben"
-   ],
    "forms": []
   },
   {
@@ -2221,7 +2209,7 @@
   },
   {
    "theme": "6e - Unité 3",
-   "source": "café",
+   "source": "café (boisson)",
    "canonical": "der Kaffee",
    "_annee": "6e",
    "_unite": "U3",
@@ -2232,9 +2220,6 @@
    ],
    "_aussi": [
     "5e U6"
-   ],
-   "alt_target": [
-    "das Café"
    ],
    "forms": []
   },
@@ -2856,14 +2841,11 @@
   },
   {
    "theme": "6e - Unité 4",
-   "source": "après",
+   "source": "après (après l'école)",
    "canonical": "nach",
    "_annee": "6e",
    "_unite": "U4",
    "_brut": "nach",
-   "alt_target": [
-    "danach"
-   ],
    "forms": []
   },
   {
@@ -3121,15 +3103,12 @@
   },
   {
    "theme": "6e - Unité 4",
-   "source": "heure",
+   "source": "heure (l'heure qu'il est)",
    "canonical": "die Uhrzeit",
    "_annee": "6e",
    "_unite": "U4",
    "_brut": "Uhrzeit (-en), die",
    "_pluriel": "-en",
-   "alt_target": [
-    "die Stunde"
-   ],
    "forms": []
   },
   {
@@ -3195,15 +3174,12 @@
   },
   {
    "theme": "6e - Unité 5",
-   "source": "dîner",
+   "source": "dîner (nom)",
    "canonical": "das Abendessen",
    "_annee": "6e",
    "_unite": "U5",
    "_brut": "Abendessen (-), das",
    "_pluriel": "-",
-   "alt_target": [
-    "zu Abend essen"
-   ],
    "forms": []
   },
   {
@@ -3912,15 +3888,12 @@
   },
   {
    "theme": "6e - Unité 5",
-   "source": "déjeuner",
+   "source": "déjeuner (nom)",
    "canonical": "das Mittagessen",
    "_annee": "6e",
    "_unite": "U5",
    "_brut": "Mittagessen (-), das",
    "_pluriel": "-",
-   "alt_target": [
-    "zu Mittag essen"
-   ],
    "forms": []
   },
   {
@@ -4108,26 +4081,20 @@
   },
   {
    "theme": "6e - Unité 5",
-   "source": "dîner",
+   "source": "dîner (verbe)",
    "canonical": "zu Abend essen",
    "_annee": "6e",
    "_unite": "U5",
    "_brut": "zu Abend essen",
-   "alt_target": [
-    "das Abendessen"
-   ],
    "forms": []
   },
   {
    "theme": "6e - Unité 5",
-   "source": "déjeuner",
+   "source": "déjeuner (verbe)",
    "canonical": "zu Mittag essen",
    "_annee": "6e",
    "_unite": "U5",
    "_brut": "zu Mittag essen",
-   "alt_target": [
-    "das Mittagessen"
-   ],
    "forms": []
   },
   {
@@ -4403,14 +4370,11 @@
   },
   {
    "theme": "6e - Unité 6",
-   "source": "aimer",
+   "source": "aimer (tendrement)",
    "canonical": "lieb haben",
    "_annee": "6e",
    "_unite": "U6",
    "_brut": "lieb haben",
-   "alt_target": [
-    "lieben"
-   ],
    "forms": []
   },
   {
@@ -4450,15 +4414,12 @@
   },
   {
    "theme": "6e - Unité 6",
-   "source": "chat",
+   "source": "chat (animal)",
    "canonical": "die Katze",
    "_annee": "6e",
    "_unite": "U6",
    "_brut": "Katze (-n), die",
    "_pluriel": "-n",
-   "alt_target": [
-    "der Chat"
-   ],
    "forms": []
   },
   {
@@ -4594,14 +4555,13 @@
   },
   {
    "theme": "6e - Unité 6",
-   "source": "voleur / voleuse",
+   "source": "voleur / voleuse (brigand)",
    "canonical": "der Räuber",
    "_annee": "6e",
    "_unite": "U6",
    "_brut": "Räuber (-), der / Räuberin (-nen), die",
    "_pluriel": "-",
    "alt_target": [
-    "der Dieb",
     "die Räuberin"
    ],
    "alt_source": [
@@ -4704,15 +4664,12 @@
   },
   {
    "theme": "6e - Unité 6",
-   "source": "motif",
+   "source": "motif (sujet d'une image)",
    "canonical": "das Motiv",
    "_annee": "6e",
    "_unite": "U6",
    "_brut": "Motiv (-e), das",
    "_pluriel": "-e",
-   "alt_target": [
-    "das Muster"
-   ],
    "forms": []
   },
   {
@@ -4896,7 +4853,7 @@
   },
   {
    "theme": "6e - Unité 6",
-   "source": "laver",
+   "source": "laver (en général)",
    "canonical": "waschen",
    "_annee": "6e",
    "_unite": "U6",
@@ -4906,9 +4863,6 @@
    ],
    "_aussi": [
     "5e U2"
-   ],
-   "alt_target": [
-    "abwaschen (abgewaschen)"
    ],
    "forms": []
   },
@@ -5042,14 +4996,13 @@
   },
   {
    "theme": "6e - Unité 7",
-   "source": "voleur / voleuse",
+   "source": "voleur / voleuse (qui vole en cachette)",
    "canonical": "der Dieb",
    "_annee": "6e",
    "_unite": "U7",
    "_brut": "Dieb (-e), der / Diebin (-nen), die",
    "_pluriel": "-e",
    "alt_target": [
-    "der Räuber",
     "die Diebin"
    ],
    "alt_source": [
@@ -5521,7 +5474,7 @@
   },
   {
    "theme": "6e - Unité 7",
-   "source": "suspect / suspecte",
+   "source": "suspect / suspecte (adjectif)",
    "canonical": "verdächtig",
    "_annee": "6e",
    "_unite": "U7",
@@ -5530,14 +5483,11 @@
     "suspect",
     "suspecte"
    ],
-   "alt_target": [
-    "der Verdächtige (/ die)"
-   ],
    "forms": []
   },
   {
    "theme": "6e - Unité 7",
-   "source": "suspect / suspecte",
+   "source": "suspect / suspecte (nom)",
    "canonical": "der Verdächtige (/ die)",
    "_annee": "6e",
    "_unite": "U7",
@@ -5546,9 +5496,6 @@
    "alt_source": [
     "suspect",
     "suspecte"
-   ],
-   "alt_target": [
-    "verdächtig"
    ],
    "forms": []
   },
@@ -5886,15 +5833,12 @@
   },
   {
    "theme": "6e - Fêtes",
-   "source": "motif",
+   "source": "motif (décor qui se répète)",
    "canonical": "das Muster",
    "_annee": "6e",
    "_unite": "DF",
    "_brut": "Muster (-), das",
    "_pluriel": "-",
-   "alt_target": [
-    "das Motiv"
-   ],
    "forms": []
   },
   {
@@ -6060,15 +6004,12 @@
   },
   {
    "theme": "5e - Unité 1",
-   "source": "échange",
+   "source": "échange (scolaire)",
    "canonical": "der Austausch",
    "_annee": "5e",
    "_unite": "U1",
    "_brut": "Austausch (-e), der",
    "_pluriel": "-e",
-   "alt_target": [
-    "der Tausch"
-   ],
    "forms": []
   },
   {
@@ -6283,7 +6224,7 @@
   },
   {
    "theme": "5e - Unité 1",
-   "source": "toujours",
+   "source": "toujours (tout le temps)",
    "canonical": "immer",
    "_annee": "5e",
    "_unite": "U1",
@@ -6291,21 +6232,15 @@
    "_aussi": [
     "5e U2"
    ],
-   "alt_target": [
-    "immer noch"
-   ],
    "forms": []
   },
   {
    "theme": "5e - Unité 1",
-   "source": "toujours",
+   "source": "toujours (encore maintenant)",
    "canonical": "immer noch",
    "_annee": "5e",
    "_unite": "U1",
    "_brut": "immer noch",
-   "alt_target": [
-    "immer"
-   ],
    "forms": []
   },
   {
@@ -6713,14 +6648,11 @@
   },
   {
    "theme": "5e - Unité 2",
-   "source": "laver",
+   "source": "laver (la vaisselle)",
    "canonical": "abwaschen (abgewaschen)",
    "_annee": "5e",
    "_unite": "U2",
    "_brut": "abwaschen (abgewaschen)",
-   "alt_target": [
-    "waschen"
-   ],
    "forms": []
   },
   {
@@ -6825,14 +6757,11 @@
   },
   {
    "theme": "5e - Unité 2",
-   "source": "après",
+   "source": "après (après ça)",
    "canonical": "danach",
    "_annee": "5e",
    "_unite": "U2",
    "_brut": "danach",
-   "alt_target": [
-    "nach"
-   ],
    "forms": []
   },
   {
@@ -7161,14 +7090,11 @@
   },
   {
    "theme": "5e - Unité 2",
-   "source": "par",
+   "source": "par (une fois par semaine)",
    "canonical": "pro … (einmal pro Woche)",
    "_annee": "5e",
    "_unite": "U2",
    "_brut": "pro … (einmal pro Woche)",
-   "alt_target": [
-    "durch"
-   ],
    "forms": []
   },
   {
@@ -7224,15 +7150,12 @@
   },
   {
    "theme": "5e - Unité 2",
-   "source": "échange",
+   "source": "échange (troc)",
    "canonical": "der Tausch",
    "_annee": "5e",
    "_unite": "U2",
    "_brut": "Tausch (Sg.), der",
    "_pluriel": "Sg.",
-   "alt_target": [
-    "der Austausch"
-   ],
    "forms": []
   },
   {
@@ -7352,38 +7275,29 @@
   },
   {
    "theme": "5e - Unité 3",
-   "source": "célèbre",
+   "source": "célèbre (connu)",
    "canonical": "bekannt",
    "_annee": "5e",
    "_unite": "U3",
    "_brut": "bekannt",
-   "alt_target": [
-    "berühmt"
-   ],
    "forms": []
   },
   {
    "theme": "5e - Unité 3",
-   "source": "confortable",
+   "source": "confortable (vêtement, fauteuil)",
    "canonical": "bequem",
    "_annee": "5e",
    "_unite": "U3",
    "_brut": "bequem",
-   "alt_target": [
-    "gemütlich"
-   ],
    "forms": []
   },
   {
    "theme": "5e - Unité 3",
-   "source": "célèbre",
+   "source": "célèbre (fameux)",
    "canonical": "berühmt",
    "_annee": "5e",
    "_unite": "U3",
    "_brut": "berühmt",
-   "alt_target": [
-    "bekannt"
-   ],
    "forms": []
   },
   {
@@ -8269,7 +8183,7 @@
   },
   {
    "theme": "5e - Unité 4",
-   "source": "frais / fraîche",
+   "source": "frais / fraîche (du pain frais)",
    "canonical": "frisch",
    "_annee": "5e",
    "_unite": "U4",
@@ -8277,9 +8191,6 @@
    "alt_source": [
     "frais",
     "fraîche"
-   ],
-   "alt_target": [
-    "kühl"
    ],
    "forms": []
   },
@@ -8405,7 +8316,7 @@
   },
   {
    "theme": "5e - Unité 4",
-   "source": "frais / fraîche",
+   "source": "frais / fraîche (un peu froid)",
    "canonical": "kühl",
    "_annee": "5e",
    "_unite": "U4",
@@ -8413,9 +8324,6 @@
    "alt_source": [
     "frais",
     "fraîche"
-   ],
-   "alt_target": [
-    "frisch"
    ],
    "forms": []
   },
@@ -8503,14 +8411,11 @@
   },
   {
    "theme": "5e - Unité 4",
-   "source": "rose",
+   "source": "rose (au figuré : un avenir rose)",
    "canonical": "rosig",
    "_annee": "5e",
    "_unite": "U4",
    "_brut": "rosig",
-   "alt_target": [
-    "rosa"
-   ],
    "forms": []
   },
   {
@@ -8661,7 +8566,7 @@
   },
   {
    "theme": "5e - Unité 5",
-   "source": "foyer",
+   "source": "foyer (salle de détente)",
    "canonical": "der Aufenthaltsraum",
    "_annee": "5e",
    "_unite": "U5",
@@ -8670,9 +8575,6 @@
     "5e U8"
    ],
    "_pluriel": "¨-e",
-   "alt_target": [
-    "das Foyer"
-   ],
    "forms": []
   },
   {
@@ -8772,15 +8674,12 @@
   },
   {
    "theme": "5e - Unité 5",
-   "source": "foyer",
+   "source": "foyer (hall d'entrée)",
    "canonical": "das Foyer",
    "_annee": "5e",
    "_unite": "U5",
    "_brut": "Foyer (-s), das",
    "_pluriel": "-s",
-   "alt_target": [
-    "der Aufenthaltsraum"
-   ],
    "forms": []
   },
   {
@@ -8804,14 +8703,11 @@
   },
   {
    "theme": "5e - Unité 5",
-   "source": "confortable",
+   "source": "confortable (douillet)",
    "canonical": "gemütlich",
    "_annee": "5e",
    "_unite": "U5",
    "_brut": "gemütlich",
-   "alt_target": [
-    "bequem"
-   ],
    "forms": []
   },
   {
@@ -9167,15 +9063,12 @@
   },
   {
    "theme": "5e - Unité 5",
-   "source": "heure",
+   "source": "heure (durée)",
    "canonical": "die Stunde",
    "_annee": "5e",
    "_unite": "U5",
    "_brut": "Stunde (-n), die",
    "_pluriel": "-n",
-   "alt_target": [
-    "die Uhrzeit"
-   ],
    "forms": []
   },
   {
@@ -9383,27 +9276,21 @@
   },
   {
    "theme": "5e - Unité 6",
-   "source": "café",
+   "source": "café (lieu)",
    "canonical": "das Café",
    "_annee": "5e",
    "_unite": "U6",
    "_brut": "Café (-s), das",
    "_pluriel": "-s",
-   "alt_target": [
-    "der Kaffee"
-   ],
    "forms": []
   },
   {
    "theme": "5e - Unité 6",
-   "source": "par",
+   "source": "par (à travers)",
    "canonical": "durch",
    "_annee": "5e",
    "_unite": "U6",
    "_brut": "durch",
-   "alt_target": [
-    "pro … (einmal pro Woche)"
-   ],
    "forms": []
   },
   {
@@ -9598,26 +9485,20 @@
   },
   {
    "theme": "5e - Unité 6",
-   "source": "à gauche",
+   "source": "à gauche (aller vers la gauche)",
    "canonical": "nach links",
    "_annee": "5e",
    "_unite": "U6",
    "_brut": "nach links",
-   "alt_target": [
-    "links"
-   ],
    "forms": []
   },
   {
    "theme": "5e - Unité 6",
-   "source": "à droite",
+   "source": "à droite (aller vers la droite)",
    "canonical": "nach rechts",
    "_annee": "5e",
    "_unite": "U6",
    "_brut": "nach rechts",
-   "alt_target": [
-    "rechts"
-   ],
    "forms": []
   },
   {
@@ -9647,14 +9528,11 @@
   },
   {
    "theme": "5e - Unité 6",
-   "source": "à gauche",
+   "source": "à gauche (se trouver à gauche)",
    "canonical": "links",
    "_annee": "5e",
    "_unite": "U6",
    "_brut": "links",
-   "alt_target": [
-    "nach links"
-   ],
    "forms": []
   },
   {
@@ -9839,14 +9717,11 @@
   },
   {
    "theme": "5e - Unité 6",
-   "source": "à droite",
+   "source": "à droite (se trouver à droite)",
    "canonical": "rechts",
    "_annee": "5e",
    "_unite": "U6",
    "_brut": "rechts",
-   "alt_target": [
-    "nach rechts"
-   ],
    "forms": []
   },
   {
@@ -10132,15 +10007,12 @@
   },
   {
    "theme": "5e - Unité 7",
-   "source": "chat",
+   "source": "chat (en ligne)",
    "canonical": "der Chat",
    "_annee": "5e",
    "_unite": "U7",
    "_brut": "Chat (-s), der",
    "_pluriel": "-s",
-   "alt_target": [
-    "die Katze"
-   ],
    "forms": []
   },
   {

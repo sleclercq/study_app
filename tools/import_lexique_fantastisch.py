@@ -26,7 +26,12 @@ Comment le lexique est lu (voir le XML produit par pdftohtml -xml) :
   - l'encadré d'explication en haut de la première page n'est pas une entrée,
     ni les numéros de page écrits en lettres (« hundertvierzehn ») ;
   - le lexique inverse (français-allemand), s'il suit, est ignoré : c'est un
-    index des mêmes mots, avec le gras inversé.
+    index des mêmes mots, avec le gras inversé ;
+  - un même français pour plusieurs allemands (« café » = Kaffee / Café) : dans
+    le sens français -> allemand, l'enfant ne peut pas deviner lequel est
+    attendu. Chaque cas est tranché à la main dans SENS (précision entre
+    parenthèses) ou SYNONYMES (chacun accepte les autres) ; un cas non tranché
+    est listé en fin d'import, et build_site.py le signale à chaque build.
 """
 
 import argparse
@@ -46,6 +51,53 @@ UNIT_LABELS = {"DF": "Fêtes"}
 
 # Coquilles du manuel, corrigées avant tout traitement.
 TYPOS = {"Freizeitaktität": "Freizeitaktivität"}
+
+# Même français, sens différents : la précision est ajoutée entre parenthèses
+# ("café" -> "café (boisson)"). Dans le sens allemand -> français, la
+# parenthèse n'est jamais exigée (answers.js).
+# {français du manuel: {allemand: précision}}
+SENS = {
+    "Salut !": {"Hallo!": "en arrivant", "Hi!": "en arrivant", "Tschüss!": "en partant"},
+    "rose": {"rosa": "couleur", "rosig": "au figuré : un avenir rose"},
+    "aimer": {"lieben": "adorer", "lieb haben": "tendrement"},
+    "café": {"der Kaffee": "boisson", "das Café": "lieu"},
+    "après": {"nach": "après l'école", "danach": "après ça"},
+    "heure": {"die Uhrzeit": "l'heure qu'il est", "die Stunde": "durée"},
+    "dîner": {"das Abendessen": "nom", "zu Abend essen": "verbe"},
+    "déjeuner": {"das Mittagessen": "nom", "zu Mittag essen": "verbe"},
+    "chat": {"die Katze": "animal", "der Chat": "en ligne"},
+    "voleur / voleuse": {"der Räuber": "brigand", "der Dieb": "qui vole en cachette"},
+    "motif": {"das Motiv": "sujet d'une image", "das Muster": "décor qui se répète"},
+    "laver": {"waschen": "en général", "abwaschen (abgewaschen)": "la vaisselle"},
+    "suspect / suspecte": {"verdächtig": "adjectif", "der Verdächtige (/ die)": "nom"},
+    "échange": {"der Austausch": "scolaire", "der Tausch": "troc"},
+    "toujours": {"immer": "tout le temps", "immer noch": "encore maintenant"},
+    "par": {"pro … (einmal pro Woche)": "une fois par semaine", "durch": "à travers"},
+    "célèbre": {"bekannt": "connu", "berühmt": "fameux"},
+    "confortable": {"bequem": "vêtement, fauteuil", "gemütlich": "douillet"},
+    "frais / fraîche": {"frisch": "du pain frais", "kühl": "un peu froid"},
+    "foyer": {"der Aufenthaltsraum": "salle de détente", "das Foyer": "hall d'entrée"},
+    "à gauche": {"nach links": "aller vers la gauche", "links": "se trouver à gauche"},
+    "à droite": {"nach rechts": "aller vers la droite", "rechts": "se trouver à droite"},
+}
+
+# Même français, traductions qui se valent : chaque mot accepte les autres
+# (alt_target). Français tel qu'il est après SENS.
+SYNONYMES = {
+    "Salut ! (en arrivant)",        # Hallo! / Hi!
+    "club (scolaire)",              # die AG / die Arbeitsgemeinschaft
+    "taille-crayon",                # der Anspitzer / der Spitzer
+    "participer",                   # mitmachen / teilnehmen
+    "aider",                        # helfen / mithelfen
+    "salle de classe",              # das Klassenzimmer / der Klassenraum
+    "carnaval",                     # der Karneval / der Fasching
+    "choisir",                      # aussuchen / wählen
+    "ensemble",                     # zusammen / gemeinsam
+    "cent",                         # einhundert / hundert
+    "mille",                        # eintausend / tausend
+    "écologique",                   # umweltschonend / ökologisch
+    "quartier",                     # der Stadtteil / das Stadtviertel
+}
 
 NOUN_RE = re.compile(
     r"^\s*(?P<word>[^,()/]+?)\s*(?:\((?P<pl>[^)]*)\))?\s*,\s*(?P<art>der|die|das)\b(?P<rest>.*)$")
@@ -212,6 +264,15 @@ def french_alternatives(fr: str) -> list:
     return sorted(alts)
 
 
+def ambiguous_french(words: list) -> dict:
+    """{français: [mots]} pour chaque français qui a plusieurs traductions allemandes."""
+    groups: dict = {}
+    for word in words:
+        groups.setdefault(word["source"], []).append(word)
+    return {french: group for french, group in groups.items()
+            if len({w["canonical"] for w in group}) > 1}
+
+
 def build_words(years: list) -> list:
     """years: [("6e", [pdf, ...]), ("5e", [...])] dans l'ordre de progression."""
     words, by_german = [], {}
@@ -251,15 +312,17 @@ def build_words(years: list) -> list:
 
     words.sort(key=lambda w: w["_rang"])        # stable : alphabétique dans chaque unité
 
-    # Même français pour deux mots allemands : chacun accepte l'autre, sinon la
-    # question français -> allemand est impossible à réussir.
-    by_french: dict = {}
+    # Même français pour plusieurs mots allemands : sens précisé (SENS), ou
+    # traductions acceptées l'une pour l'autre (SYNONYMES). Un cas qui n'est ni
+    # l'un ni l'autre reste tel quel, pour que build_site.py le signale.
     for word in words:
-        by_french.setdefault(word["source"].lower(), []).append(word)
-    for group in by_french.values():
-        for word in group:
-            others = {o["canonical"] for o in group if o is not word}
-            if others:
+        precision = SENS.get(word["source"], {}).get(word["canonical"])
+        if precision:
+            word["source"] = f"{word['source']} ({precision})"
+    for french, group in ambiguous_french(words).items():
+        if french in SYNONYMES:
+            for word in group:
+                others = {o["canonical"] for o in group if o is not word}
                 word["alt_target"] = sorted(set(word.get("alt_target", [])) | others)
 
     for word in words:
@@ -311,6 +374,14 @@ def main(argv=None) -> int:
     print(f"{len(words)} mots écrits dans {args.sortie}")
     for theme, count in per_theme.items():
         print(f"  {theme:20} {count:4}")
+
+    undecided = {french: group for french, group in ambiguous_french(words).items()
+                 if french not in SYNONYMES}
+    if undecided:
+        print(f"\nÀ TRANCHER : {len(undecided)} mot(s) français ont plusieurs traductions, "
+              "à ajouter dans SENS ou SYNONYMES puis relancer :")
+        for french, group in undecided.items():
+            print(f"  « {french} » : " + " / ".join(w["canonical"] for w in group))
     return 0
 
 

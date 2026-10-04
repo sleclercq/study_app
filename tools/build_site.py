@@ -152,15 +152,21 @@ def warnings_for(exercise, where: str) -> list:
         return []
     found = []
     seen_pairs = set()
-    translations = {}
+    by_source = {}
     for word in exercise["words"]:
         pair = (word["source"], word["canonical"])
         if pair in seen_pairs:
             found.append(f"{where} : « {word['source']} » est en double (même traduction) : "
                          "les deux partagent la même progression.")
         seen_pairs.add(pair)
-        translations.setdefault(word["source"], set()).add(word["canonical"])
-    ambiguous = [source for source, canonicals in translations.items() if len(canonicals) > 1]
+        by_source.setdefault(word["source"], []).append(word)
+    # Several translations are fine when each word accepts all the others
+    # (synonyms via alt_target): whichever the child gives is then right.
+    ambiguous = [
+        source for source, group in by_source.items()
+        if any({o["canonical"] for o in group} - {w["canonical"]} - set(w.get("alt_target", []))
+               for w in group)
+    ]
     if exercise.get("kind") in ("vocab", "leitner") and ambiguous:
         examples = ", ".join(f"« {source} »" for source in ambiguous[:4])
         found.append(f"{where} : {len(ambiguous)} mot(s) français ont plusieurs traductions ({examples}...) : "
