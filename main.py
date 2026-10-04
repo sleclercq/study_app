@@ -1472,6 +1472,8 @@ class AccordPPScreen(tk.Frame):
       - ONE attempt per sentence — no hints, no retries.
       - For avoir_cod_avant questions the student must ALSO identify the COD
         by clicking on the word(s) in the sentence before submitting.
+      - The COD is judged on positions, not text (_expected_cod): in
+        'Ces jouets, les enfants les ont _____', the article 'les' is wrong.
       - After submission, colour-coded feedback shows:
           green  = correct answer / correctly selected COD word
           red    = wrong answer / wrongly selected word
@@ -1793,6 +1795,23 @@ class AccordPPScreen(tk.Frame):
         """
         return " ".join(w.strip(".,;:!?\"'»«()-") for w in text.split())
 
+    def _expected_cod(self, sentence: str, cod: str) -> set:
+        """
+        Indices of the tokens the student must click: the last occurrence of
+        the cod words, in a row, before the blank. The COD of avoir_cod_avant
+        always precedes the verb, and when a word occurs twice ('Ces jouets,
+        les enfants les ont _____') it is the one closest to the blank.
+        Same rule as engine.codIndices on the website. Empty when not found.
+        """
+        words = [w for w in (self._strip_punct(w) for w in cod.split()) if w]
+        tokens = self._tokenize(sentence)
+        blank = next((i for i, (display, _, _) in enumerate(tokens) if "_____" in display), len(tokens))
+        for start in range(blank - len(words), -1, -1):
+            if words and all(tokens[start + k][2] and self._strip_punct(tokens[start + k][1]) == word
+                             for k, word in enumerate(words)):
+                return set(range(start, start + len(words)))
+        return set()
+
     # ------------------------------------------------------------------
     # Submission and feedback
     # ------------------------------------------------------------------
@@ -1811,12 +1830,13 @@ class AccordPPScreen(tk.Frame):
         # COD check applies only to avoir_cod_avant questions
         cod_ok       = True
         selected_cod = ""
+        expected     = set()
         if q["case"] == "avoir_cod_avant":
             selected_cod = self._get_selected_cod()
-            # COD comparison is case-sensitive (strip punct, keep case) so that
-            # 'Les' (article) and 'les' (pronoun) are correctly distinguished.
-            cod_ok = self._strip_punct(selected_cod) == self._strip_punct(q["cod"])
-            self._color_cod_tokens(q["cod"])
+            # Judged on positions: exactly the expected tokens, no more, no less.
+            expected = self._expected_cod(q["prompt"], q["cod"])
+            cod_ok = bool(expected) and self._selected_tokens == expected
+            self._color_cod_tokens(expected)
 
         # Scoring:
         #   PP wrong                                       → 0.0
@@ -1851,9 +1871,16 @@ class AccordPPScreen(tk.Frame):
                     f"\u00ab {selected_cod} \u00bb"
                     if selected_cod else "(aucun sélectionné)"
                 )
-                lines.append(
-                    f"\u2717  COD : {shown}  \u2192  \u00ab {q['cod']} \u00bb"
-                )
+                # Spelt like the COD but taken elsewhere in the sentence (the article 'les').
+                if selected_cod and self._strip_punct(selected_cod) == self._strip_punct(q["cod"]):
+                    target = "les mots" if len(expected) > 1 else "le mot"
+                    lines.append(
+                        f"\u2717  COD : {shown}, mais pas au bon endroit  \u2192  {target} en jaune"
+                    )
+                else:
+                    lines.append(
+                        f"\u2717  COD : {shown}  \u2192  \u00ab {q['cod']} \u00bb"
+                    )
 
         overall_ok = pp_ok and cod_ok
         self._feedback_lbl.config(
@@ -1873,21 +1900,20 @@ class AccordPPScreen(tk.Frame):
         )
         self._next_btn.pack(fill="x")
 
-    def _color_cod_tokens(self, expected_cod: str) -> None:
+    def _color_cod_tokens(self, expected: set) -> None:
         """
-        Colour each selectable token after submission:
+        Colour each selectable token after submission, by position (expected =
+        indices from _expected_cod, so the article 'les' is never 'missed'):
           green (#90EE90) : selected AND part of the expected COD
           red   (#f0a0a0) : selected but NOT part of the expected COD
           gold  (#FFD700) : NOT selected but IS part of the expected COD (missed)
           default         : neither selected nor expected (no change)
         """
-        # Use case-sensitive word set so 'Les' (article) ≠ 'les' (pronoun)
-        expected_words = {self._strip_punct(w) for w in expected_cod.split()}
         for i, (lbl, raw, selectable) in enumerate(self._token_labels):
             if lbl is None or not selectable:
                 continue
             is_selected = i in self._selected_tokens
-            is_expected = self._strip_punct(raw) in expected_words
+            is_expected = i in expected
             if is_selected and is_expected:
                 lbl.config(bg="#90EE90")
             elif is_selected and not is_expected:

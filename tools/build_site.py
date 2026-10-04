@@ -63,6 +63,10 @@ KINDS = {"forms", "triple", "vocab", "leitner", "sentences", "accord_pp"}
 ACCORD_CASES = {"sans_auxiliaire", "avec_etre", "avoir_cod_apres", "avoir_cod_avant"}
 TRIPLE_LABELS = {"base verbale", "prétérit", "participe passé"}
 
+# How the site reads an accord sentence (web/engine.js, accordTokens and stripPunct).
+TOKEN_STRIP = ".,;:!?\"'»«()"
+PUNCT_STRIP = ".,;:!?\"'»«()-"
+
 
 def exercise_files(data_dir: Path) -> list:
     """Same rule as db._exercise_files: data/**/*.json, "_" folders never read."""
@@ -114,8 +118,36 @@ def check_exercise(exercise, where: str) -> list:
     return errors
 
 
+def cod_found(sentence: str, cod: str) -> bool:
+    """True when the __cod__ words appear in a row before the blank: the words the
+    child must tap (engine.codIndices takes the last such run, case kept)."""
+    words = [w for w in (w.strip(PUNCT_STRIP) for w in cod.split()) if w]
+    tokens = sentence.split()
+    blank = next((i for i, token in enumerate(tokens) if "_____" in token), len(tokens))
+    keys = [None if token.startswith("(") else token.strip(TOKEN_STRIP).strip(PUNCT_STRIP)
+            for token in tokens[:blank]]
+    return bool(words) and any(keys[start:start + len(words)] == words
+                               for start in range(blank - len(words) + 1))
+
+
+def accord_warnings(exercise, where: str) -> list:
+    """avoir_cod_avant sentences whose COD the child could never tap right."""
+    found = []
+    for number, word in enumerate(exercise["words"], start=1):
+        labels = {f["label"]: f["value"] for f in word.get("forms", [])}
+        cod = labels.get("__cod__", "")
+        if labels.get("__case__") == "avoir_cod_avant" and not cod_found(word["source"], cod):
+            found.append(f"{where}, mot n°{number} : __cod__ « {cod} » introuvable avant le blanc de "
+                         f"« {word['source']} » (mêmes mots que la phrase, casse comprise) : "
+                         "le COD ne pourra jamais être validé.")
+    return found
+
+
 def warnings_for(exercise, where: str) -> list:
-    """Not blocking, but worth a look: the classic traps of a vocabulary list."""
+    """Not blocking, but worth a look: the classic traps of a vocabulary list,
+    and the accord sentences whose COD cannot be found."""
+    if exercise.get("kind") == "accord_pp":
+        return accord_warnings(exercise, where)
     if exercise.get("kind") not in ("vocab", "leitner", "forms", "triple"):
         return []
     found = []

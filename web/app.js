@@ -1028,27 +1028,11 @@ function showTripleQuiz() {
 //   the word(s) of the COD in the sentence.
 //   Participle wrong: 0. Right but COD wrong: 0.5. Right (and COD right): 1.
 //   After answering: green = right, red = wrong, gold = COD word missed.
-
-const TOKEN_STRIP = ".,;:!?\"'»«()";
-const PUNCT_STRIP = ".,;:!?\"'»«()-";
-
-/** Words of the sentence: (display, raw, selectable). Case is kept: "Les" != "les". */
-function tokenize(sentence) {
-  return sentence.split(/\s+/).filter(Boolean).map((word) => {
-    const isBlank = word.includes("_____");
-    const isHint = word.startsWith("(");
-    const raw = !isBlank && !isHint ? answers.stripChars(word, TOKEN_STRIP) : word;
-    return { display: word, raw, selectable: !isBlank && !isHint && raw !== "" };
-  });
-}
+//   The COD is judged on positions (engine.codIndices): the article "les" of
+//   "Ces jouets, les enfants les ont _____" is not the pronoun "les".
 
 /** Lowercase, punctuation stripped word by word: the participle comparison. */
-const accordKey = (text) => text.split(/\s+/).filter(Boolean)
-  .map((w) => answers.stripChars(w, PUNCT_STRIP).toLowerCase()).join(" ");
-
-/** Punctuation stripped, case kept: the COD comparison. */
-const stripPunct = (text) => text.split(/\s+/).filter(Boolean)
-  .map((w) => answers.stripChars(w, PUNCT_STRIP)).join(" ");
+const accordKey = (text) => engine.stripPunct(text).toLowerCase();
 
 function showAccordQuiz() {
   const questions = state.questions;
@@ -1087,7 +1071,7 @@ function showAccordQuiz() {
     const withCod = q.case === "avoir_cod_avant";
     codTitle.hidden = !withCod;
     if (withCod) {
-      tokens = tokenize(q.prompt).map((token, i) => ({
+      tokens = engine.accordTokens(q.prompt).map((token, i) => ({
         ...token,
         el: token.selectable
           ? h("button", { class: "token", type: "button", "aria-pressed": "false", onclick: () => toggle(i) }, token.display)
@@ -1128,18 +1112,13 @@ function showAccordQuiz() {
 
     let codOk = true;
     let pickedCod = "";
+    let expected = [];
     if (q.case === "avoir_cod_avant") {
       pickedCod = [...picked].sort((a, b) => a - b).map((i) => tokens[i].raw).join(" ");
-      codOk = stripPunct(pickedCod) === stripPunct(q.cod);
-      const expected = new Set(q.cod.split(/\s+/).filter(Boolean).map(stripPunct));
-      tokens.forEach((token, i) => {
-        if (!token.selectable) return;
-        const isPicked = picked.has(i);
-        const isExpected = expected.has(stripPunct(token.raw));
-        if (isPicked && isExpected) token.el.classList.add("right");
-        else if (isPicked) token.el.classList.add("wrong");
-        else if (isExpected) token.el.classList.add("missed");
-      });
+      expected = engine.codIndices(tokens, q.cod);
+      const verdict = engine.checkCod(expected, picked);
+      codOk = verdict.ok;
+      for (const [i, mark] of verdict.marks) tokens[i].el.classList.add(mark);
     }
 
     score += !ppOk ? 0 : (q.case === "avoir_cod_avant" && !codOk ? 0.5 : 1);
@@ -1148,9 +1127,14 @@ function showAccordQuiz() {
       ? h("p", { class: "right" }, `✓  Participe passé : ${q.answer}`)
       : h("p", { class: "wrong" }, `✗  Participe passé : ${typed || "(vide)"}  →  ${q.answer}`)];
     if (q.case === "avoir_cod_avant") {
+      const shown = pickedCod ? `« ${pickedCod} »` : "(aucun mot touché)";
+      // Spelt like the COD but taken elsewhere in the sentence (the article "les").
+      const misplaced = pickedCod !== "" && engine.stripPunct(pickedCod) === engine.stripPunct(q.cod);
       lines.push(codOk
         ? h("p", { class: "right" }, `✓  COD identifié : « ${q.cod} »`)
-        : h("p", { class: "wrong" }, `✗  COD : ${pickedCod ? `« ${pickedCod} »` : "(aucun mot touché)"}  →  « ${q.cod} »`));
+        : h("p", { class: "wrong" }, misplaced
+          ? `✗  COD : ${shown}, mais pas au bon endroit  →  ${expected.length > 1 ? "les mots" : "le mot"} en jaune`
+          : `✗  COD : ${shown}  →  « ${q.cod} »`));
     }
     feedback.replaceChildren(...lines);
     caseLabel.textContent = CASE_LABELS[q.case] ?? "";

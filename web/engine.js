@@ -4,6 +4,7 @@
  * Port of the query functions of db.py: same questions, same wording, same
  * rules. Pure functions, no DOM and no storage, so that they can be tested with
  * `node --test tests/` (the GitHub workflow refuses to publish when they fail).
+ * Also the pure part of the accord screen: which words of a sentence are the COD.
  *
  * An exercise is the object built by tools/build_site.py from its JSON file in
  * data/: the metadata (kind, prompts, languages...) plus `words`, each word being
@@ -11,6 +12,8 @@
  * A word is identified by source + canonical, exactly like the desktop app's
  * seeding: correcting a word in its file starts it over as a new word.
  */
+
+import { stripChars } from "./answers.js";
 
 export const SESSION_LENGTH = 20;
 
@@ -170,6 +173,67 @@ export function buildAccordQuestions(exercise) {
       cod: meta.__cod__ ?? "",
     };
   });
+}
+
+// ---------------------------------------------------------------------------
+// Accord du participe passé: the COD tapped in the sentence (avoir_cod_avant)
+// ---------------------------------------------------------------------------
+//
+//   Judged on positions, never on text: in "Ces jouets, les enfants les ont
+//   _____ (casser).", the article "les" is spelt like the COD but is not it.
+//   The COD of this case always precedes the verb, and when a word occurs
+//   twice it is the occurrence closest to the blank.
+
+const TOKEN_STRIP = ".,;:!?\"'»«()";
+const PUNCT_STRIP = ".,;:!?\"'»«()-";
+
+/** Punctuation stripped word by word, case kept: "Les" != "les". */
+export const stripPunct = (text) => text.split(/\s+/).filter(Boolean)
+  .map((w) => stripChars(w, PUNCT_STRIP)).join(" ");
+
+/**
+ * Words of the sentence: {display, raw, blank, selectable}. The blank, the
+ * "(infinitive)" hint and a lone punctuation mark cannot be tapped.
+ */
+export function accordTokens(sentence) {
+  return sentence.split(/\s+/).filter(Boolean).map((word) => {
+    const isBlank = word.includes("_____");
+    const isHint = word.startsWith("(");
+    const raw = !isBlank && !isHint ? stripChars(word, TOKEN_STRIP) : word;
+    return { display: word, raw, blank: isBlank, selectable: !isBlank && !isHint && raw !== "" };
+  });
+}
+
+/**
+ * Indices of the tokens the child must tap: the last occurrence of the __cod__
+ * words, in a row, before the blank. Empty when __cod__ is not found there
+ * (the tests fail and tools/build_site.py warns).
+ */
+export function codIndices(tokens, cod) {
+  const words = cod.split(/\s+/).map((w) => stripChars(w, PUNCT_STRIP)).filter(Boolean);
+  const blank = tokens.findIndex((t) => t.blank);
+  const end = blank < 0 ? tokens.length : blank;
+  for (let start = end - words.length; start >= 0 && words.length > 0; start--) {
+    const found = words.every((word, k) =>
+      tokens[start + k].selectable && stripPunct(tokens[start + k].raw) === word);
+    if (found) return words.map((_, k) => start + k);
+  }
+  return [];
+}
+
+/**
+ * The tapped words against the expected ones (two collections of indices).
+ * ok: exactly the expected words, no more, no less. marks: the colour of each
+ * word concerned, "right" (tapped, expected), "wrong" (tapped, not expected)
+ * or "missed" (expected, not tapped).
+ */
+export function checkCod(expected, picked) {
+  const want = new Set(expected);
+  const marks = new Map();
+  for (const i of picked) marks.set(i, want.has(i) ? "right" : "wrong");
+  for (const i of want) if (!marks.has(i)) marks.set(i, "missed");
+  const ok = want.size > 0 && [...marks.values()].every((mark) => mark === "right");
+  return { ok, marks };
 }
 
 // ---------------------------------------------------------------------------

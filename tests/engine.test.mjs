@@ -99,6 +99,49 @@ test("triple and accord: the forms become fields and grammar", () => {
   assert.ok(accord.filter((q) => q.case === "avoir_cod_avant").every((q) => q.cod));
 });
 
+test("accord: two « les », only the pronoun before the verb is the COD", () => {
+  const tokens = engine.accordTokens("Ces jouets, les enfants les ont _____ (casser).");
+  assert.deepEqual(tokens.map((t) => t.raw).slice(0, 6), ["Ces", "jouets", "les", "enfants", "les", "ont"]);
+  const expected = engine.codIndices(tokens, "les");
+  assert.deepEqual(expected, [4]);
+  // ok decides the score (1, or 0.5 when the participle is right but not the COD),
+  // marks the colours: the article is never "missed" once the pronoun is tapped.
+  const tap = (...indices) => {
+    const { ok, marks } = engine.checkCod(expected, new Set(indices));
+    return { ok, marks: Object.fromEntries(marks) };
+  };
+  assert.deepEqual(tap(4), { ok: true, marks: { 4: "right" } });
+  assert.deepEqual(tap(2), { ok: false, marks: { 2: "wrong", 4: "missed" } });
+  assert.deepEqual(tap(2, 4), { ok: false, marks: { 2: "wrong", 4: "right" } });
+  assert.deepEqual(tap(), { ok: false, marks: { 4: "missed" } });
+});
+
+test("accord: a COD of several words is found as a whole, before the blank only", () => {
+  const tokens = engine.accordTokens("Quelles victoires les chevaliers ont-ils _____ (remporter) ?");
+  const expected = engine.codIndices(tokens, "Quelles victoires");
+  assert.deepEqual(expected, [0, 1]);
+  assert.equal(engine.checkCod(expected, new Set([0])).ok, false);
+  assert.equal(engine.checkCod(expected, new Set([1, 0])).ok, true);
+  assert.deepEqual(engine.codIndices(tokens, "quelles victoires"), []);    // case kept
+  // Words after the blank, or no COD to find: nothing can be right.
+  assert.deepEqual(engine.codIndices(engine.accordTokens("Ils ont _____ (voir) les films."), "les"), []);
+  assert.equal(engine.checkCod([], new Set()).ok, false);
+});
+
+test("accord: every avoir_cod_avant sentence of data/ has its __cod__ before the blank", () => {
+  let checked = 0;
+  for (const exercise of exercises.filter((e) => e.kind === "accord_pp")) {
+    for (const q of engine.buildAccordQuestions(exercise)) {
+      if (q.case !== "avoir_cod_avant") continue;
+      const indices = engine.codIndices(engine.accordTokens(q.prompt), q.cod);
+      assert.equal(indices.length, q.cod.split(/\s+/).filter(Boolean).length,
+        `${exercise.slug}: COD « ${q.cod} » not found before the blank of « ${q.prompt} »`);
+      checked++;
+    }
+  }
+  assert.ok(checked > 0);
+});
+
 // ---------------------------------------------------------------------------
 // Progressive mode
 // ---------------------------------------------------------------------------
