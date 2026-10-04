@@ -1,0 +1,49 @@
+# Publishes the website on GitHub Pages at every push to main:
+# https://sleclercq.github.io/study_app/
+#
+# Tests, then build (which also checks every file of data/). If either fails,
+# nothing is published and the version online stays as it was; GitHub sends
+# an email. Same commands locally: see README.md.
+
+name: Site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One publication at a time; a newer push waits for the one in progress.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+      - name: Tests
+        run: node --test tests/*.test.mjs
+      - name: Build
+        run: python3 tools/build_site.py
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

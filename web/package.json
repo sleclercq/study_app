@@ -1,0 +1,5 @@
+{
+  "private": true,
+  "type": "module",
+  "description": "Not a package: tells node that web/*.js are ES modules, for the tests (node --test tests/). Not published."
+}
