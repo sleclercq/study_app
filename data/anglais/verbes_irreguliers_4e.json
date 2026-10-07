@@ -1,0 +1,339 @@
+{
+  "_notes": [
+    "=== ANGLAIS, VERBES IRRÉGULIERS DE 4e ===",
+    "",
+    "Les verbes surlignés en rose ou en bleu sur la fiche de verbes irréguliers",
+    "(photo du 07/10/2026, rangée dans data/_sources/anglais/4e/). Les verbes",
+    "surlignés seulement en vert ou en orange ne sont pas repris (CUT, FIGHT,",
+    "FALL, FORGET).",
+    "",
+    "Ordre et traductions de la fiche, famille par famille. Deux écarts voulus :",
+    "  - STRIKE : la fiche dit « frapper », comme HIT (« frapper, battre ») ; le",
+    "    « (≠ hit) » dit à l'enfant lequel des deux est attendu.",
+    "  - GET : participe passé « got », comme sur la fiche (la liste de 5e",
+    "    attend « got/gotten »).",
+    "",
+    "AJOUTER UN VERBE : l'ajouter dans words, pousser. L'historique est conservé."
+  ],
+  "slug": "english_irregular_verbs_4e",
+  "name": "Anglais - Verbes irréguliers de 4e",
+  "level": "4e",
+  "kind": "triple",
+  "sort_order": 30,
+  "color": "#4a6a9c",
+  "button_label": "Anglais - Verbes irréguliers\n(les verbes surlignés de la fiche)",
+  "source_language": "Français",
+  "target_language": "Anglais",
+  "source_lang_code": "fr",
+  "target_lang_code": "",
+  "canonical_prompt": "",
+  "form_prompt": "",
+  "words": [
+    {
+      "source": "frapper, battre",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "hit"
+        },
+        {
+          "label": "prétérit",
+          "value": "hit"
+        },
+        {
+          "label": "participe passé",
+          "value": "hit"
+        }
+      ]
+    },
+    {
+      "source": "attraper",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "catch"
+        },
+        {
+          "label": "prétérit",
+          "value": "caught"
+        },
+        {
+          "label": "participe passé",
+          "value": "caught"
+        }
+      ]
+    },
+    {
+      "source": "penser",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "think"
+        },
+        {
+          "label": "prétérit",
+          "value": "thought"
+        },
+        {
+          "label": "participe passé",
+          "value": "thought"
+        }
+      ]
+    },
+    {
+      "source": "sentir, ressentir",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "feel"
+        },
+        {
+          "label": "prétérit",
+          "value": "felt"
+        },
+        {
+          "label": "participe passé",
+          "value": "felt"
+        }
+      ]
+    },
+    {
+      "source": "obtenir",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "get"
+        },
+        {
+          "label": "prétérit",
+          "value": "got"
+        },
+        {
+          "label": "participe passé",
+          "value": "got"
+        }
+      ]
+    },
+    {
+      "source": "dormir",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "sleep"
+        },
+        {
+          "label": "prétérit",
+          "value": "slept"
+        },
+        {
+          "label": "participe passé",
+          "value": "slept"
+        }
+      ]
+    },
+    {
+      "source": "avoir",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "have"
+        },
+        {
+          "label": "prétérit",
+          "value": "had"
+        },
+        {
+          "label": "participe passé",
+          "value": "had"
+        }
+      ]
+    },
+    {
+      "source": "entendre",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "hear"
+        },
+        {
+          "label": "prétérit",
+          "value": "heard"
+        },
+        {
+          "label": "participe passé",
+          "value": "heard"
+        }
+      ]
+    },
+    {
+      "source": "frapper (≠ hit)",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "strike"
+        },
+        {
+          "label": "prétérit",
+          "value": "struck"
+        },
+        {
+          "label": "participe passé",
+          "value": "struck"
+        }
+      ]
+    },
+    {
+      "source": "courir",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "run"
+        },
+        {
+          "label": "prétérit",
+          "value": "ran"
+        },
+        {
+          "label": "participe passé",
+          "value": "run"
+        }
+      ]
+    },
+    {
+      "source": "manger",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "eat"
+        },
+        {
+          "label": "prétérit",
+          "value": "ate"
+        },
+        {
+          "label": "participe passé",
+          "value": "eaten"
+        }
+      ]
+    },
+    {
+      "source": "cacher",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "hide"
+        },
+        {
+          "label": "prétérit",
+          "value": "hid"
+        },
+        {
+          "label": "participe passé",
+          "value": "hidden"
+        }
+      ]
+    },
+    {
+      "source": "voler, dérober",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "steal"
+        },
+        {
+          "label": "prétérit",
+          "value": "stole"
+        },
+        {
+          "label": "participe passé",
+          "value": "stolen"
+        }
+      ]
+    },
+    {
+      "source": "faire",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "do"
+        },
+        {
+          "label": "prétérit",
+          "value": "did"
+        },
+        {
+          "label": "participe passé",
+          "value": "done"
+        }
+      ]
+    },
+    {
+      "source": "aller",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "go"
+        },
+        {
+          "label": "prétérit",
+          "value": "went"
+        },
+        {
+          "label": "participe passé",
+          "value": "gone"
+        }
+      ]
+    },
+    {
+      "source": "souffler",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "blow"
+        },
+        {
+          "label": "prétérit",
+          "value": "blew"
+        },
+        {
+          "label": "participe passé",
+          "value": "blown"
+        }
+      ]
+    },
+    {
+      "source": "être",
+      "canonical": "",
+      "forms": [
+        {
+          "label": "base verbale",
+          "value": "be"
+        },
+        {
+          "label": "prétérit",
+          "value": "was/were"
+        },
+        {
+          "label": "participe passé",
+          "value": "been"
+        }
+      ]
+    }
+  ]
+}

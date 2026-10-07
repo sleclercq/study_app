@@ -16,6 +16,7 @@ allemand/
     manuel_fantastisch_neu/
         1re_annee_6e/lexique_1..3.pdf      lexique allemand-français de 6e
         2e_annee_5e/lexique_1..3.pdf       lexique allemand-français de 5e
+anglais/4e/fiche_verbes_irreguliers.png    fiche des jumeaux, surlignée : rose ou bleu = verbes_irreguliers_4e.json
 anglais/5e/IMG_4443_verbes_irreguliers.HEIC
 francais/5e/IMG_4445_cours_accord_participe_passe.HEIC
 francais/5e/IMG_4446_exercice_accord_participe_passe.HEIC
