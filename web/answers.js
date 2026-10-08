@@ -1,13 +1,18 @@
 /*
  * answers.js - Comparing what the child typed with what was expected.
  *
- * Same rules as answers.py (the desktop app), function for function:
+ * Same rules as answers.py (the desktop app), function for function, except
+ * the hyphens (website only since 2026-10-07: the desktop app no longer evolves):
  *
  *   no language code  strict historical comparison (Latin, English, French
  *                     grammar): lowercase, outer spaces and punctuation ignored.
  *   German ("de")     ä/ö/ü/ß may be typed ae/oe/ue/ss. The article stays
  *                     mandatory: "der Tisch" is not satisfied by "Tisch".
  *   French ("fr")     accents optional, leading article optional.
+ *   German and French a hyphen counts for nothing: typed, replaced by a space or
+ *                     left out, on either side ("jeux-vidéo" = "jeux vidéo",
+ *                     "Volley-Ball" = "Volleyball"). A space alone stays a
+ *                     space: "Video Spiel" is not "Videospiel".
  *
  * A parenthesis in an expected answer is never required ("la fille (de
  * quelqu'un)" is answered "la fille"), and the synonyms of the JSON seed
@@ -33,6 +38,12 @@ const TRIM_CHARS = " \t\n.,;:!?\"'«»";
 
 // German articles that may open an answer (hints never spell them out).
 const DE_ARTICLES = ["der", "die", "das", "den", "dem", "ein", "eine", "einen"];
+
+// A hyphen, or a dash a phone keyboard may put in its place (iOS turns "--" into an em dash).
+const HYPHEN_RE = /[-\u2010\u2011\u2012\u2013\u2014\u2212]/;
+
+// Past this many hyphens, only the two uniform readings (all spaces, all left out).
+const MAX_HYPHENS = 6;
 
 /** Python's str.strip(chars): remove any of `chars` from both ends. */
 export function stripChars(text, chars) {
@@ -81,9 +92,29 @@ function frKey(text) {
   return text;
 }
 
+/**
+ * Every reading of the hyphens of a normalized text, each one as a space or as
+ * nothing: "jeux-vidéo" -> ["jeux vidéo", "jeuxvidéo"]. With the readings of
+ * both sides compared, a hyphen matches a hyphen, a space or nothing, while a
+ * space still never matches nothing.
+ */
+function hyphenReadings(text) {
+  const parts = text.split(HYPHEN_RE);
+  let readings = [parts[0]];
+  if (parts.length - 1 > MAX_HYPHENS) {
+    readings = [parts.join(" "), parts.join("")];
+  } else {
+    for (const part of parts.slice(1)) {
+      readings = readings.flatMap((reading) => [`${reading} ${part}`, reading + part]);
+    }
+  }
+  return readings.map(normalize);
+}
+
 /** Every spelling that counts as "this answer" in the given language. */
 export function keysFor(text, lang = "") {
-  const variants = new Set([normalize(text), normalize(String(text).replace(PAREN_RE, ""))]);
+  let variants = [normalize(text), normalize(String(text).replace(PAREN_RE, ""))];
+  if (lang === "de" || lang === "fr") variants = variants.flatMap(hyphenReadings);
   const keys = new Set(variants);
   for (const variant of variants) {
     if (lang === "de") {

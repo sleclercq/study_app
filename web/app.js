@@ -44,13 +44,17 @@ const kindSpec = (exercise) => KINDS[exercise.kind] ?? KINDS.forms;
 
 // What counts as a correct answer, written for the child in the language of the
 // expected answer. Must follow every change of tolerance in answers.js.
+// A line common to both languages is shown once when both are listed.
+const HYPHEN_RULE = "Les tirets ne comptent pas : jeux-vidéo = jeux vidéo, T-Shirt = TShirt.";
 const ANSWER_RULES = {
   de: [
     "ä ö ü ß : tu peux taper ae oe ue ss (für = fuer, mais fur est faux).",
     "L'article fait partie de la réponse : der Tisch, pas Tisch.",
+    HYPHEN_RULE,
   ],
   fr: [
     "Les accents ne sont pas obligatoires (fenetre = fenêtre), l'article non plus (fenêtre = la fenêtre).",
+    HYPHEN_RULE,
   ],
 };
 
@@ -196,7 +200,7 @@ function topBar({ title, back, right }) {
 }
 
 function rulesBox(langs, { title = null } = {}) {
-  const lines = langs.flatMap((lang) => ANSWER_RULES[lang] ?? []);
+  const lines = [...new Set(langs.flatMap((lang) => ANSWER_RULES[lang] ?? []))];
   if (!lines.length) return null;
   return h("div", { class: "rules" },
     title ? h("p", { class: "rules-title" }, title) : null,

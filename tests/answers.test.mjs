@@ -40,6 +40,28 @@ test("French: accents and leading article optional", () => {
   assert.ok(!matches("porte", "la fenêtre", "fr"));
 });
 
+test("German and French: a hyphen counts for nothing", () => {
+  assert.ok(matches("jeux-vidéo", "les jeux vidéo", "fr"));
+  assert.ok(matches("jeux video", "les jeux-vidéo", "fr"));
+  assert.ok(matches("weekend", "le week-end", "fr"));
+  assert.ok(matches("Saint-Valentin", "(jour de la) Saint- Valentin", "fr"));
+  assert.ok(matches("das T Shirt", "das T-Shirt", "de"));
+  assert.ok(matches("das TShirt", "das T-Shirt", "de"));
+  assert.ok(matches("der Volley-Ball", "der Volleyball", "de"));
+  assert.ok(matches("Lieblings", "Lieblings-", "de"));
+  assert.ok(matches("das T\u2014Shirt", "das T-Shirt", "de"));    // "--" turned into a dash by iOS
+  assert.ok(matches("a-b-c-d-e-f-g-h", "abcdefgh", "fr"));        // past MAX_HYPHENS
+  assert.ok(!matches("T-Shirt", "das T-Shirt", "de"));            // the article stays mandatory
+  assert.ok(!matches("der Volley Ball", "der Volleyball", "de"));  // a space alone stays a space
+  assert.ok(!matches("jeux-videos", "les jeux vidéo", "fr"));      // only the hyphen is free
+});
+
+test("hyphens stay strict when the exercise has no language code", () => {
+  assert.ok(matches("a-t-elle", "a-t-elle"));
+  assert.ok(!matches("a t elle", "a-t-elle"));
+  assert.ok(!matches("atelle", "a-t-elle"));
+});
+
 test("a parenthesis of the expected answer is never required", () => {
   assert.ok(matches("la fille", "la fille (de quelqu'un)", "fr"));
   assert.ok(matches("fille", "la fille (de quelqu'un)", "fr"));
