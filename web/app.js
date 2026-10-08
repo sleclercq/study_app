@@ -849,8 +849,11 @@ function showQuiz() {
 //
 //   Each field is scored on its own (1 / 0.5 / 0.25 at the attempt where the
 //   child gets it right, 0 when the app revealed it); question = sum / 3.
-//   Right fields lock green. After a wrong attempt the first still-wrong field
-//   is revealed in blue; after the third one every remaining field is.
+//   Right fields lock green. A wrong field turns red, keeps what was typed and
+//   gets the hint of the other quizzes under it (2 letters, then 4): nothing is
+//   revealed before the third attempt, which reveals every remaining field.
+//   The Tk version revealed one wrong field per miss, which gave the answers
+//   away (reported by the twins, 2026-10-08).
 
 /** Lowercase, spaces collapsed, "was / were" = "was/were": the comparison of the Tk version. */
 const tripleKey = (text) => answers.collapseSpaces(text.trim().toLowerCase().replace(/\s*\/\s*/g, "/"));
@@ -863,7 +866,9 @@ function showTripleQuiz() {
   let score = 0;
   let answered = false;
   let fieldScores = [null, null, null];
-  let fieldRevealed = [false, false, false];
+
+  /** A field still to fill, or still holding the miss of the last attempt. */
+  const pending = (field) => !field.disabled && (!field.value.trim() || field.classList.contains("wrong"));
 
   const counter = h("span", { class: "quiz-counter" });
   const [progress, progressFill] = progressLine();
@@ -871,17 +876,22 @@ function showTripleQuiz() {
   const inputs = labels.map((label, i) => h("input", {
     ...ANSWER_FIELD, class: "answer", lang: "en", "aria-label": label,
     enterkeyhint: i < 2 ? "next" : "go",
-    // Enter in a field goes to the next empty one rather than validating a
-    // half-filled question (which would burn an attempt). The button validates.
+    // Enter goes to the next field still empty or red (after this one, then
+    // from the top) rather than validating a half-done question, which would
+    // burn an attempt. The button validates.
     onkeydown: (event) => {
       if (event.key !== "Enter" || answered) return;
-      const target = inputs.find((field, j) => j > i && !field.disabled && !field.value.trim());
+      const target = [i + 1, i + 2].map((j) => inputs[j % 3]).find(pending);
       if (target) {
         event.preventDefault();
         target.focus();
+        if (finePointer) target.select();
       }
     },
+    // Once retyped, a red field no longer holds the miss.
+    oninput: () => inputs[i].classList.remove("wrong"),
   }));
+  const hints = labels.map(() => h("span", { class: "field-hint" }));
   const submit = h("button", { class: "btn wide", type: "submit" }, "Valider");
   const feedback = h("p", { class: "feedback", role: "status" });
   const next = h("button", { class: "btn primary continue", type: "button", hidden: true, onclick: goNext }, "Continuer →");
@@ -894,14 +904,15 @@ function showTripleQuiz() {
       else check();
     },
   },
-  labels.map((label, i) => h("label", { class: "field" }, h("span", { class: "field-label" }, label), inputs[i])),
+  labels.map((label, i) => h("label", { class: "field" },
+    h("span", { class: "field-label" }, label), inputs[i], hints[i])),
   submit);
 
   function load() {
     attempts = 0;
     answered = false;
     fieldScores = [null, null, null];
-    fieldRevealed = [false, false, false];
+    for (const hint of hints) hint.textContent = "";
     const q = questions[index];
     counter.textContent = `${index + 1} / ${questions.length}`;
     progressFill.style.width = `${(100 * index) / questions.length}%`;
@@ -932,9 +943,10 @@ function showTripleQuiz() {
     const ok = inputs.map((field, i) => tripleKey(field.value) === tripleKey(values[i]));
 
     ok.forEach((good, i) => {
-      if (good && fieldScores[i] === null && !fieldRevealed[i]) {
+      if (good && fieldScores[i] === null) {
         fieldScores[i] = points;
         lock(i, "right");
+        hints[i].textContent = "";
       }
     });
     const questionScore = () => fieldScores.reduce((sum, s) => sum + (s ?? 0), 0) / 3;
@@ -949,9 +961,9 @@ function showTripleQuiz() {
       score += questionScore();
       ok.forEach((good, i) => {
         if (!good) {
-          fieldRevealed[i] = true;
           inputs[i].value = values[i];
           lock(i, "revealed");
+          hints[i].textContent = "";
         }
       });
       feedback.textContent = "✗  Pas cette fois…";
@@ -961,25 +973,15 @@ function showTripleQuiz() {
       const remaining = 3 - attempts;
       feedback.textContent = `✗  Pas tout à fait… encore ${remaining} ${remaining === 1 ? "essai" : "essais"}.`;
       feedback.className = "feedback wrong";
-      // Reveal the first still-wrong field, then go to the next one to fix.
-      let revealedOne = false;
-      let focused = false;
-      for (let i = 0; i < 3; i++) {
-        if (ok[i] || fieldRevealed[i]) continue;
-        if (!revealedOne) {
-          fieldRevealed[i] = true;
-          inputs[i].value = values[i];
-          lock(i, "revealed");
-          revealedOne = true;
-        } else {
-          inputs[i].className = "answer wrong";
-          inputs[i].focus();
-          if (finePointer) inputs[i].select();
-          focused = true;
-          break;
-        }
+      // Nothing is revealed yet: each wrong field turns red with its hint, and
+      // the first one takes the focus.
+      const wrong = [0, 1, 2].filter((i) => !ok[i]);
+      for (const i of wrong) {
+        inputs[i].className = "answer wrong";
+        hints[i].textContent = `Indice : ${answers.hintPrefix(values[i], attempts)}…`;
       }
-      if (!focused) submit.focus();
+      inputs[wrong[0]].focus();
+      if (finePointer) inputs[wrong[0]].select();
     }
   }
 
