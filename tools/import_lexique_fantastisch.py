@@ -27,6 +27,11 @@ Comment le lexique est lu (voir le XML produit par pdftohtml -xml) :
     ni les numéros de page écrits en lettres (« hundertvierzehn ») ;
   - le lexique inverse (français-allemand), s'il suit, est ignoré : c'est un
     index des mêmes mots, avec le gras inversé ;
+  - les coquilles du manuel sont corrigées par TYPOS avant tout traitement :
+    lettre oubliée (« Freizeitaktität »), virgule avant le pluriel
+    (« Mädchen, (-) das » donnait « Mädchen, das » au lieu de « das Mädchen »),
+    espace manquante après « / » (« erste / erster /erstes » donnait la seule
+    réponse « erster /erstes » au lieu de « erster » et « erstes ») ;
   - un même français pour plusieurs allemands (« café » = Kaffee / Café) : dans
     le sens français -> allemand, l'enfant ne peut pas deviner lequel est
     attendu. Chaque cas est tranché à la main dans SENS (précision entre
@@ -50,7 +55,11 @@ REVERSE_INDEX_RE = re.compile(r"fran(ç|c)ais-allemand", re.I)
 UNIT_LABELS = {"DF": "Fêtes"}
 
 # Coquilles du manuel, corrigées avant tout traitement.
-TYPOS = {"Freizeitaktität": "Freizeitaktivität"}
+TYPOS = {
+    "Freizeitaktität": "Freizeitaktivität",
+    "Mädchen, (-) das": "Mädchen (-), das",     # virgule avant le pluriel : article non reconnu
+    "erster /erstes": "erster / erstes",        # espace manquante : une seule réponse au lieu de deux
+}
 
 # Même français, sens différents : la précision est ajoutée entre parenthèses
 # ("café" -> "café (boisson)"). Dans le sens allemand -> français, la

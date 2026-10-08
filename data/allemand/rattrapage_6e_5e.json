@@ -2883,10 +2883,11 @@
   {
    "theme": "6e - Unité 4",
    "source": "jeune fille",
-   "canonical": "Mädchen, (-) das",
+   "canonical": "das Mädchen",
    "_annee": "6e",
    "_unite": "U4",
-   "_brut": "Mädchen, (-) das",
+   "_brut": "Mädchen (-), das",
+   "_pluriel": "-",
    "forms": []
   },
   {
@@ -9338,9 +9339,10 @@
    "canonical": "erste",
    "_annee": "5e",
    "_unite": "U6",
-   "_brut": "erste / erster /erstes",
+   "_brut": "erste / erster / erstes",
    "alt_target": [
-    "erster /erstes"
+    "erster",
+    "erstes"
    ],
    "alt_source": [
     "premier",
