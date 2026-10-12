@@ -1,9 +1,10 @@
 # Publishes the website on GitHub Pages at every push to main:
 # https://sleclercq.github.io/study_app/
 #
-# Tests, then build (which also checks every file of data/). If either fails,
-# nothing is published and the version online stays as it was; GitHub sends
-# an email. Same commands locally: see README.md.
+# Tests, then the QCM answers (tools/check_qcm.py runs their Python), then
+# build (which also checks every file of data/). If any fails, nothing is
+# published and the version online stays as it was; GitHub sends an email.
+# Same commands locally: see README.md.
 
 name: Site
 
@@ -32,6 +33,8 @@ jobs:
           node-version: 22
       - name: Tests
         run: node --test tests/*.test.mjs
+      - name: QCM answers (runs the Python of every question)
+        run: python3 tools/check_qcm.py
       - name: Build
         run: python3 tools/build_site.py
       - uses: actions/upload-pages-artifact@v5

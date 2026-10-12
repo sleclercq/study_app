@@ -21,9 +21,11 @@ import * as answers from "./answers.js";
 import * as engine from "./engine.js";
 import * as store from "./store.js";
 
-// School year being revised right now. Its exercises open the menu; previous
-// years are grouped underneath as "Révisions". Bump this every September.
-const CURRENT_LEVEL = "4e";
+// School years being revised right now, one per child (the twins in 4e, their
+// sister in 1re). Their exercises open the menu, the year of the last series
+// played first; previous years are grouped underneath as "Révisions". Bump them
+// every September.
+const CURRENT_LEVELS = ["4e", "1re"];
 
 const KINDS = {
   // French -> Latin infinitive + conjugated forms, one answer field.
@@ -38,6 +40,17 @@ const KINDS = {
   sentences: { select: false, direction: false, screen: "quiz", build: (ex) => engine.buildSentenceQuestions(ex) },
   // Accord du participe passé: its own screen (tap the COD, then answer).
   accord_pp: { select: false, direction: false, screen: "accord", build: (ex) => engine.buildAccordQuestions(ex) },
+  // QCM with five choices: chapters ticked as a whole, missed questions come back.
+  qcm: {
+    select: true, themesOnly: true, direction: false, screen: "qcm",
+    build: (ex, keys) => engine.buildQcmQuestions(ex, keys, store.loadPlayer(state.player).progress[ex.slug] ?? {}),
+  },
+};
+
+const QCM_HEADINGS = {
+  cours: "Question de cours",
+  resultat: "Que donne ce code ?",
+  code: "Quel code donne ce résultat ?",
 };
 
 const kindSpec = (exercise) => KINDS[exercise.kind] ?? KINDS.forms;
@@ -365,18 +378,25 @@ async function importBackup(event) {
 // Menu
 // ---------------------------------------------------------------------------
 
-function levelSortKey(level) {
-  if (level === CURRENT_LEVEL) return [0, ""];
-  if (!level) return [2, ""];
-  return [1, level];               // "4e" < "5e" < "6e" = most recent first
+/** Menu order: `first` (the year of the last series), the other current years, then the rest. */
+function levelRank(level, first) {
+  if (level === first) return -1;
+  const current = CURRENT_LEVELS.indexOf(level);
+  if (current >= 0) return current;
+  return level ? CURRENT_LEVELS.length : CURRENT_LEVELS.length + 1;
 }
 
 function levelHeading(level) {
   if (!level) return "Autres exercices";
-  return level === CURRENT_LEVEL ? `Programme de ${level}` : `Révisions de ${level}`;
+  return CURRENT_LEVELS.includes(level) ? `Programme de ${level}` : `Révisions de ${level}`;
 }
 
 function exerciseBadge(exercise, doc) {
+  if (exercise.kind === "qcm") {
+    const stats = engine.qcmStats(exercise.words, doc.progress[exercise.slug] ?? {});
+    if (!stats.seen) return `${stats.total} questions`;
+    return `${stats.seen} vue${stats.seen > 1 ? "s" : ""} sur ${stats.total}` + (stats.to_review ? ` · ${stats.to_review} à revoir` : "");
+  }
   if (kindSpec(exercise).progressive) {
     const stats = engine.progressStats(exercise, doc.progress[exercise.slug] ?? {});
     if (!stats.tested) return `${stats.total} mots`;
@@ -394,13 +414,14 @@ function showMenu() {
     if (!byLevel.has(level)) byLevel.set(level, []);
     byLevel.get(level).push(exercise);
   }
-  const levels = [...byLevel.keys()].sort((a, b) => {
-    const [ka, kb] = [levelSortKey(a), levelSortKey(b)];
-    return ka[0] - kb[0] || ka[1].localeCompare(kb[1]);
-  });
+  const lastSlug = doc.sessions.at(-1)?.slug;
+  const lastLevel = state.exercises.find((e) => e.slug === lastSlug)?.level;
+  const first = CURRENT_LEVELS.includes(lastLevel) ? lastLevel : null;
+  // "4e" < "5e" < "6e": among previous years, the most recent first.
+  const levels = [...byLevel.keys()].sort((a, b) => levelRank(a, first) - levelRank(b, first) || a.localeCompare(b));
 
   const sections = levels.map((level) => {
-    const current = level === CURRENT_LEVEL;
+    const current = CURRENT_LEVELS.includes(level);
     return h("section", { class: "menu-section" },
       h("h2", { class: "section-title" }, levelHeading(level)),
       byLevel.get(level).map((exercise) => {
@@ -475,6 +496,7 @@ function startProgressiveSession() {
 function openQuiz(screen) {
   if (screen === "triple") showTripleQuiz();
   else if (screen === "accord") showAccordQuiz();
+  else if (screen === "qcm") showQcmQuiz();
   else showQuiz();
 }
 
@@ -582,7 +604,7 @@ function showSelection() {
       theme.count.textContent = `${ticked}/${theme.keys.length}`;
     }
     const ticked = [...checks.values()].filter((box) => box.checked).length;
-    counter.textContent = `${ticked} / ${checks.size} sélectionnés`;
+    counter.textContent = spec.themesOnly ? `${ticked} / ${checks.size} questions` : `${ticked} / ${checks.size} sélectionnés`;
     startButton.disabled = ticked === 0;
   }
 
@@ -601,7 +623,27 @@ function showSelection() {
     groups.at(-1).words.push(word);
   }
   const openThemes = exercise.words.length <= 100;
+  // A QCM is revised chapter by chapter: one box per theme, its questions
+  // ticked behind it (the prefs keep the same per-question format).
+  const qcmProgress = spec.themesOnly ? store.loadPlayer(state.player).progress[exercise.slug] ?? {} : null;
+  const themeRow = ({ theme, words }) => {
+    const keys = words.map(engine.wordKey);
+    const box = h("input", {
+      type: "checkbox", checked: keys.some((key) => unticked[key] !== false),
+      onchange: () => {
+        for (const key of keys) checks.get(key).checked = box.checked;
+        refresh();
+      },
+    });
+    for (const key of keys) checks.set(key, { checked: box.checked });
+    const stats = engine.qcmStats(words, qcmProgress);
+    const detail = `${stats.total} questions` + (stats.seen ? ` · ${stats.seen} vue${stats.seen > 1 ? "s" : ""}` : "")
+      + (stats.to_review ? ` · ${stats.to_review} à revoir` : "");
+    return h("label", { class: "theme-pick" }, box,
+      h("span", { class: "theme-name" }, theme || exercise.name, h("span", { class: "theme-detail" }, detail)));
+  };
   const list = groups.map(({ theme, words }) => {
+    if (spec.themesOnly) return themeRow({ theme, words });
     const grid = h("div", { class: "word-grid" }, words.map(wordCheckbox));
     if (!theme) return grid;
     const keys = words.map(engine.wordKey);
@@ -620,6 +662,7 @@ function showSelection() {
 
   function setAll(value) {
     for (const box of checks.values()) box.checked = value;
+    if (spec.themesOnly) for (const row of list) row.querySelector("input").checked = value;
     refresh();
   }
 
@@ -635,8 +678,10 @@ function showSelection() {
   }
 
   refresh();
+  const title = spec.themesOnly ? "Choisir les chapitres"
+    : spec.direction ? "Choisir les mots à réviser" : "Choisir les verbes à réviser";
   show(h("div", { class: "screen with-footer" },
-    topBar({ title: spec.direction ? "Choisir les mots à réviser" : "Choisir les verbes à réviser", back }),
+    topBar({ title, back }),
     h("div", { class: "button-row" },
       h("button", { class: "btn secondary small", type: "button", onclick: () => setAll(true) }, "Tout cocher"),
       h("button", { class: "btn secondary small", type: "button", onclick: () => setAll(false) }, "Tout décocher")),
@@ -1190,6 +1235,150 @@ function showAccordQuiz() {
 }
 
 // ---------------------------------------------------------------------------
+// Quiz: QCM, five choices
+// ---------------------------------------------------------------------------
+//
+//   One attempt, as in the real test: a tap on a choice answers. Right = 1,
+//   wrong = 0. The right choice then turns green, a wrong pick red, and the
+//   explanation shows. Each answer is filed (engine.recordQcm), so that the
+//   next series brings back what was missed. Text between `backquotes` (in a
+//   question, a choice or an explanation) shows as code.
+
+const LETTERS = "ABCDE";
+
+/** "Que renvoie `len(t)` ?" -> text and <code> nodes. */
+function richText(text) {
+  return text.split("`").map((part, i) => (i % 2 ? h("code", {}, part) : part));
+}
+
+/**
+ * Code or console output, one block per line. A line too long for a phone
+ * wraps, and goes on 2 characters further right than its own indentation, so
+ * that the rest is never taken for a new line of the program.
+ */
+function codeLines(text) {
+  return text.split("\n").map((line) => {
+    const indent = line.length - line.trimStart().length;
+    return h("span", { class: "code-line", style: { "padding-left": `${indent + 2}ch`, "text-indent": "-2ch" } },
+      line.trimStart() || "\u00a0");
+  });
+}
+
+function showQcmQuiz() {
+  const questions = state.questions;
+  let index = 0;
+  let score = 0;
+  let answered = false;
+  let buttons = [];
+
+  const counter = h("span", { class: "quiz-counter" });
+  const [progress, progressFill] = progressLine();
+  const heading = h("p", { class: "qcm-heading" });
+  const question = h("p", { class: "qcm-question" });
+  const code = h("pre", { class: "code" });
+  const outputLabel = h("p", { class: "code-label" }, "Résultat attendu :");
+  const output = h("pre", { class: "code output" });
+  const choices = h("div", { class: "choices" });
+  const feedback = h("p", { class: "feedback", role: "status" });
+  const explanation = h("div", { class: "explanation" });
+  const next = h("button", { class: "btn primary continue", type: "button", hidden: true, onclick: goNext });
+
+  function load() {
+    answered = false;
+    const q = questions[index];
+    counter.textContent = `${index + 1} / ${questions.length}`;
+    progressFill.style.width = `${(100 * index) / questions.length}%`;
+    heading.textContent = [QCM_HEADINGS[q.qcm_type], q.theme].filter(Boolean).join(" · ");
+    question.replaceChildren(...richText(q.prompt));
+    code.replaceChildren(...codeLines(q.code));
+    code.hidden = !q.code;
+    output.replaceChildren(...codeLines(q.output));
+    output.hidden = outputLabel.hidden = !q.output;
+    // A result or a piece of code is shown as the console would, the rest as text.
+    const asCode = q.qcm_type !== "cours";
+    buttons = q.choices.map((choice, i) => h("button", { class: "choice", type: "button", onclick: () => pick(i) },
+      h("span", { class: "choice-letter" }, LETTERS[i]),
+      asCode ? h("pre", { class: "choice-code" }, codeLines(choice.text)) : h("span", { class: "choice-text" }, richText(choice.text))));
+    choices.replaceChildren(...buttons);
+    feedback.textContent = "";
+    feedback.className = "feedback";
+    explanation.replaceChildren();
+    explanation.hidden = true;
+    next.hidden = true;
+    window.scrollTo(0, 0);
+  }
+
+  function pick(i) {
+    if (answered) return;
+    answered = true;
+    const q = questions[index];
+    const ok = q.choices[i].right;
+    if (ok) score += 1;
+    const slug = state.exercise.slug;
+    store.updatePlayer(state.player, (doc) => {
+      doc.progress[slug] ??= {};
+      engine.recordQcm(doc.progress[slug], q.word_key, ok);
+    });
+    q.choices.forEach((choice, j) => {
+      buttons[j].disabled = true;
+      buttons[j].classList.add(choice.right ? "right" : j === i ? "wrong" : "dimmed");
+    });
+    const letter = LETTERS[q.choices.findIndex((choice) => choice.right)];
+    feedback.textContent = ok ? "✓  Bonne réponse !" : `✗  La bonne réponse était la ${letter}.`;
+    feedback.className = `feedback ${ok ? "right" : "wrong"}`;
+    if (q.explanation) {
+      explanation.replaceChildren(...q.explanation.split("\n").map((line) => h("p", {}, richText(line))));
+      explanation.hidden = false;
+    }
+    next.textContent = index + 1 >= questions.length ? "Voir les résultats ▶" : "Question suivante →";
+    next.hidden = false;
+    progressFill.style.width = `${(100 * (index + 1)) / questions.length}%`;
+    next.focus({ preventScroll: true });
+  }
+
+  function goNext() {
+    if (!answered) return;
+    index++;
+    if (index >= questions.length) {
+      saveSession(score, questions.length);
+      showResults();
+    } else {
+      load();
+    }
+  }
+
+  // Keyboard (computer): A to E or 1 to 5 to answer, Enter or Space to go on
+  // (on the focused "Continuer" button, the button itself does it).
+  const onKey = (event) => {
+    if (event.metaKey || event.ctrlKey || event.altKey) return;
+    if (!answered) {
+      const key = event.key.toUpperCase();
+      const i = LETTERS.includes(key) ? LETTERS.indexOf(key) : "12345".indexOf(key);
+      if (key.length === 1 && i >= 0 && i < buttons.length) pick(i);
+    } else if ((event.key === "Enter" || event.key === " ") && !event.target.closest?.("button")) {
+      event.preventDefault();
+      goNext();
+    }
+  };
+  document.addEventListener("keydown", onKey);
+
+  show(h("div", { class: "screen quiz" },
+    quizBar(state.player, counter),
+    progress,
+    heading,
+    question,
+    code,
+    outputLabel,
+    output,
+    choices,
+    feedback,
+    explanation,
+    next),
+  { back: confirmLeave, onLeave: () => document.removeEventListener("keydown", onKey) });
+  load();
+}
+
+// ---------------------------------------------------------------------------
 // Results
 // ---------------------------------------------------------------------------
 
@@ -1234,12 +1423,13 @@ function showResults() {
 /**
  * Play the same exercise again. Words picked by hand (Latin, English verbs):
  * back to that selection. Progressive: the next session. The others redraw
- * a fresh series right away, vocabulary keeping its words and direction.
+ * a fresh series right away, vocabulary keeping its words and direction, a
+ * QCM its chapters.
  */
 function replay() {
   const spec = kindSpec(state.exercise);
   if (state.mode === "progressive") startProgressiveSession();
-  else if (spec.select && !spec.direction) showSelection();
+  else if (spec.select && !spec.direction && !spec.themesOnly) showSelection();
   else startSession(state.direction);
 }
 

@@ -30,6 +30,7 @@ const BUILDERS = {
   leitner: (ex) => engine.buildVocabQuestions(ex),
   sentences: (ex) => engine.buildSentenceQuestions(ex),
   accord_pp: (ex) => engine.buildAccordQuestions(ex),
+  qcm: (ex) => engine.buildQcmQuestions(ex, null, {}, { size: ex.words.length }),
 };
 
 test("fill: template, fallback, unknown placeholder", () => {
@@ -254,4 +255,63 @@ test("nothing due and every word met: no session", () => {
   const progress = {};
   for (const w of tiny.words) engine.recordProgress(progress, engine.wordKey(w), FIRST, { today: "2026-10-04", now: "2026-10-04T18:00:00" });
   assert.deepEqual(engine.buildProgressiveQuestions(tiny, progress, { today: "2026-10-05" }), []);
+});
+
+// ---------------------------------------------------------------------------
+// QCM
+// ---------------------------------------------------------------------------
+
+const qcms = exercises.filter((e) => e.kind === "qcm");
+
+test("qcm: five different choices, exactly one right, the right one being canonical", () => {
+  assert.ok(qcms.length >= 1);
+  for (const exercise of qcms) {
+    for (const q of engine.buildQcmQuestions(exercise, null, {}, { size: exercise.words.length })) {
+      assert.equal(q.choices.length, 5, q.prompt);
+      assert.equal(new Set(q.choices.map((c) => c.text.trim())).size, 5, q.prompt);
+      const right = q.choices.filter((c) => c.right);
+      assert.equal(right.length, 1, q.prompt);
+      assert.equal(right[0].text, q.answer);
+      assert.ok(engine.QCM_TYPES.includes(q.qcm_type), q.qcm_type);
+      if (q.qcm_type === "resultat") assert.ok(q.code, q.prompt);
+      if (q.qcm_type === "code") assert.ok(q.output, q.prompt);
+    }
+  }
+});
+
+test("qcm: every question has its own key (same wording, different code)", () => {
+  for (const exercise of qcms) {
+    const keys = exercise.words.map(engine.wordKey);
+    assert.equal(new Set(keys).size, keys.length, exercise.slug);
+  }
+  // Words of the other kinds have no code: their key, hence their history, is unchanged.
+  assert.equal(engine.wordKey({ source: "le père", canonical: "der Vater" }), "le père\u001fder Vater");
+});
+
+test("qcm draw: missed questions first (half a series at most), then unseen, then the least asked", () => {
+  const words = Array.from({ length: 40 }, (_, i) => ({ source: `q${i}`, canonical: "a", wrong: ["b", "c", "d", "e"], code: `print(${i})` }));
+  const exercise = { kind: "qcm", words };
+  const keys = words.map(engine.wordKey);
+  const progress = {};
+  keys.slice(0, 12).forEach((key) => engine.recordQcm(progress, key, false, { now: "2026-10-12T20:00:00" }));
+  keys.slice(12, 30).forEach((key) => engine.recordQcm(progress, key, true, { now: "2026-10-12T20:00:00" }));
+  const drawn = engine.buildQcmQuestions(exercise, null, progress, { size: 20 }).map((q) => q.word_key);
+  assert.equal(drawn.length, 20);
+  assert.equal(drawn.filter((key) => keys.slice(0, 12).includes(key)).length, 10);   // 10 of the 12 missed
+  assert.equal(drawn.filter((key) => keys.slice(30).includes(key)).length, 10);      // all 10 unseen
+  // Everything met: the 2 missed left, then the least asked.
+  const again = engine.buildQcmQuestions(exercise, new Set(keys.slice(0, 30)), progress, { size: 20 }).map((q) => q.word_key);
+  assert.ok(keys.slice(0, 12).every((key) => again.includes(key)));
+});
+
+test("qcm progress: seen, missed, last answer; stats per theme", () => {
+  const progress = {};
+  engine.recordQcm(progress, "k", false, { now: "2026-10-12T20:00:00" });
+  engine.recordQcm(progress, "k", true, { now: "2026-10-12T20:05:00" });
+  assert.deepEqual(progress.k, { seen: 2, missed: 1, last_ok: 1, last_seen: "2026-10-12T20:05:00" });
+  const words = [{ source: "a", canonical: "1" }, { source: "b", canonical: "2" }, { source: "c", canonical: "3" }];
+  const rows = {};
+  engine.recordQcm(rows, engine.wordKey(words[0]), true);
+  engine.recordQcm(rows, engine.wordKey(words[1]), false);
+  assert.deepEqual(engine.qcmStats(words, rows), { total: 3, seen: 2, to_review: 1 });
 });

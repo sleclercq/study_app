@@ -59,9 +59,12 @@ META_DEFAULTS = {
     "form_prompt": "",
 }
 
-KINDS = {"forms", "triple", "vocab", "leitner", "sentences", "accord_pp"}
+KINDS = {"forms", "triple", "vocab", "leitner", "sentences", "accord_pp", "qcm"}
 ACCORD_CASES = {"sans_auxiliaire", "avec_etre", "avoir_cod_apres", "avoir_cod_avant"}
 TRIPLE_LABELS = {"base verbale", "prétérit", "participe passé"}
+QCM_TYPES = {"cours", "resultat", "code"}
+# Fields of a QCM question read by the site, besides source / canonical / theme.
+QCM_FIELDS = ("type", "code", "output", "wrong", "explanation")
 
 # How the site reads an accord sentence (web/engine.js, accordTokens and stripPunct).
 TOKEN_STRIP = ".,;:!?\"'»«()"
@@ -115,6 +118,45 @@ def check_exercise(exercise, where: str) -> list:
                           f'(attendu : {", ".join(sorted(ACCORD_CASES))}).')
         if kind == "triple" and not TRIPLE_LABELS <= set(labels):
             errors.append(f'{at} : il faut les trois formes {", ".join(sorted(TRIPLE_LABELS))}.')
+        if kind == "qcm":
+            errors.extend(check_qcm_question(word, at))
+    if kind == "qcm":
+        keys = [qcm_key(word) for word in words if isinstance(word, dict)]
+        for key in sorted({key for key in keys if keys.count(key) > 1}):
+            errors.append(f"{where} : la question « {key[0]} » est en double (même code, même réponse) : "
+                          "les deux partageraient la même progression.")
+    return errors
+
+
+def qcm_key(word: dict) -> tuple:
+    """What tells two questions apart, like engine.wordKey on the site."""
+    return tuple(str(word.get(key, "")) for key in ("source", "canonical", "code", "output"))
+
+
+def check_qcm_question(word: dict, at: str) -> list:
+    """Five choices, one of them right, all different: otherwise the QCM lies."""
+    errors = [f'{at} : "{key}" doit être un texte.'
+              for key in ("source", "canonical", "code", "output", "explanation", "theme")
+              if not isinstance(word.get(key, ""), str)]
+    if errors:
+        return errors
+    kind = word.get("type", "cours")
+    if kind not in QCM_TYPES:
+        errors.append(f'{at} : type "{kind}" inconnu (attendu : {", ".join(sorted(QCM_TYPES))}).')
+    if not word.get("source", "").strip():
+        errors.append(f'{at} : la question ("source") est vide.')
+    wrong = word.get("wrong")
+    if not isinstance(wrong, list) or len(wrong) != 4 or any(not isinstance(w, str) or not w.strip() for w in wrong):
+        errors.append(f'{at} : "wrong" doit contenir exactement 4 mauvaises réponses (textes non vides).')
+    elif not word.get("canonical", "").strip():
+        errors.append(f'{at} : "canonical" (la bonne réponse) est vide.')
+    elif len({w.strip() for w in wrong} | {word["canonical"].strip()}) != 5:
+        errors.append(f'{at} : les 5 propositions ne sont pas toutes différentes '
+                      '(ou la bonne réponse est aussi dans "wrong").')
+    if kind == "resultat" and not word.get("code", "").strip():
+        errors.append(f'{at} : une question "resultat" montre un code : "code" est vide.')
+    if kind == "code" and not word.get("output", "").strip():
+        errors.append(f'{at} : une question "code" montre le résultat voulu : "output" est vide.')
     return errors
 
 
@@ -186,6 +228,9 @@ def slim_word(word: dict) -> dict:
     for key in ("alt_source", "alt_target"):
         if word.get(key):
             out[key] = list(word[key])
+    for key in QCM_FIELDS:
+        if word.get(key):
+            out[key] = word[key]
     return out
 
 

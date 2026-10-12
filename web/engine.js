@@ -21,9 +21,15 @@ export const DIRECTION_FORWARD = "forward";   // French -> foreign language (pro
 export const DIRECTION_REVERSE = "reverse";   // foreign language -> French (comprehension)
 export const DIRECTION_MIXED = "mixed";       // both, shuffled together
 
-/** Stable identity of a word, used by the word selection and the progress. */
+/**
+ * Stable identity of a word, used by the word selection and the progress.
+ * A QCM question also carries its code: two "Que va afficher ce code ?" with
+ * the same answer are two questions. No other kind has a `code` or an
+ * `output`, so their keys are unchanged.
+ */
 export function wordKey(word) {
-  return `${word.source}\u001f${word.canonical}`;
+  const key = `${word.source}\u001f${word.canonical}`;
+  return word.code || word.output ? `${key}\u001f${word.code ?? ""}\u001f${word.output ?? ""}` : key;
 }
 
 /** Fisher-Yates, in place. `rng` is injectable for the tests. */
@@ -173,6 +179,70 @@ export function buildAccordQuestions(exercise) {
       cod: meta.__cod__ ?? "",
     };
   });
+}
+
+// ---------------------------------------------------------------------------
+// QCM: one right answer (`canonical`) and four wrong ones (`wrong`)
+// ---------------------------------------------------------------------------
+//
+//   A question is {theme, type, source, code, output, canonical, wrong,
+//   explanation}: `type` is "cours" (a question on the lesson), "resultat"
+//   (what does this code give) or "code" (which code gives this result), and
+//   decides how the screen shows it. The five choices are shuffled at every draw.
+//
+//   The draw is not random: over an evening the child must meet every question,
+//   and meet again the ones missed. A series takes the questions missed last
+//   time (at most half of it), then the ones never asked, then the least asked.
+//   Progress of a player: { [wordKey]: {seen, missed, last_ok, last_seen} }.
+
+export const QCM_TYPES = ["cours", "resultat", "code"];
+
+function qcmQuestion(word, rng) {
+  const choices = shuffle([
+    { text: word.canonical, right: true },
+    ...(word.wrong ?? []).map((text) => ({ text, right: false })),
+  ], rng);
+  return {
+    type: "qcm",
+    qcm_type: word.type ?? "cours",
+    theme: word.theme ?? "",
+    prompt: word.source,
+    code: word.code ?? "",
+    output: word.output ?? "",
+    answer: word.canonical,
+    choices,
+    explanation: word.explanation ?? "",
+    word_key: wordKey(word),
+  };
+}
+
+/** kind "qcm": up to `size` questions among the ticked themes, shuffled. */
+export function buildQcmQuestions(exercise, enabledKeys = null, progress = {}, { size = SESSION_LENGTH, rng = Math.random } = {}) {
+  const pool = shuffle(selected(exercise.words, enabledKeys).map((word) => ({ word, row: progress[wordKey(word)] })), rng);
+  const missed = pool.filter(({ row }) => row && !row.last_ok);
+  const unseen = pool.filter(({ row }) => !row);
+  const rest = pool.filter(({ row }) => row && row.last_ok).sort((a, b) => a.row.seen - b.row.seen);
+  const firstMissed = missed.slice(0, Math.ceil(size / 2));
+  const order = [...firstMissed, ...unseen, ...missed.slice(firstMissed.length), ...rest];
+  return shuffle(order.slice(0, size).map(({ word }) => qcmQuestion(word, rng)), rng);
+}
+
+/** File the answer to one QCM question (mutates `progress`). */
+export function recordQcm(progress, key, ok, { now = localStamp() } = {}) {
+  const row = progress[key] ?? { seen: 0, missed: 0 };
+  progress[key] = { ...row, seen: row.seen + 1, missed: row.missed + (ok ? 0 : 1), last_ok: ok ? 1 : 0, last_seen: now };
+}
+
+/** total, seen (asked at least once), to_review (missed the last time), for the words given. */
+export function qcmStats(words, progress) {
+  const stats = { total: words.length, seen: 0, to_review: 0 };
+  for (const word of words) {
+    const row = progress[wordKey(word)];
+    if (!row) continue;
+    stats.seen++;
+    if (!row.last_ok) stats.to_review++;
+  }
+  return stats;
 }
 
 // ---------------------------------------------------------------------------

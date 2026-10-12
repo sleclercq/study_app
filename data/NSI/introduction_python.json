@@ -1,0 +1,4316 @@
+{
+  "_notes": [
+    "=== NSI 1re, INTRODUCTION À PYTHON : QCM - GUIDE DE MAINTENANCE ===",
+    "",
+    "Questions tirées du polycopié « Introduction à Python » (NSI - L.J, pages 3 à 14,",
+    "photos du 12/10/2026 rangées dans data/_sources/nsi/1re/, IMG_5980 à IMG_5991),",
+    "pour le contrôle du 13/10/2026 : QCM à 5 réponses.",
+    "",
+    "FORMAT (kind qcm) : chaque entrée de 'words' est une question.",
+    "  theme       : le chapitre du cours (un bloc par chapitre, dans l'ordre du cours)",
+    "  type        : cours | resultat (que donne ce code) | code (quel code donne ce résultat)",
+    "  source      : la question",
+    "  code        : resultat = le code montré ; code = le début de programme donné (facultatif)",
+    "  output      : code seulement, le résultat à obtenir",
+    "  canonical   : la bonne réponse ; wrong : exactement 4 mauvaises réponses",
+    "  explanation : affichée après la réponse",
+    "  Le texte entre `accents graves` s'affiche comme du code.",
+    "  Une erreur s'écrit « Erreur (NomDeLErreur) », comme ZeroDivisionError.",
+    "",
+    "VÉRIFICATION : python3 tools/check_qcm.py exécute le code de chaque question",
+    "resultat et code, et refuse une bonne réponse fausse ou une mauvaise réponse",
+    "qui donnerait aussi le résultat. Le workflow GitHub le lance avant de publier.",
+    "",
+    "ÉCARTS VOULUS AVEC LE POLYCOPIÉ (le cours a quelques erreurs, aucune question",
+    "ne porte dessus, pour que la réponse de l'appli ne contredise pas la prof) :",
+    "  - {None} n'est pas un ensemble vide (c'est {None}) : la question demande set().",
+    "  - for cles, valeurs in enumerate(code) donne (indice, clé), pas (clé, valeur).",
+    "  - l'ordre de code.keys() est celui d'insertion depuis Python 3.7.",
+    "  - le timestamp de time.time() est en secondes, depuis 1970 à minuit (pas midi).",
+    "  - bin(41).strip('0b') ne marche que par chance (strip enlève aussi les 0 de fin).",
+    "",
+    "AJOUTER DES QUESTIONS : les ajouter dans leur chapitre, lancer check_qcm.py, pousser.",
+    "Une question corrigée (source, réponse ou code) est une nouvelle question : sa",
+    "progression repart de zéro, rien d'autre n'est touché."
+  ],
+  "slug": "nsi_1re_introduction_python",
+  "name": "NSI - Introduction à Python",
+  "level": "1re",
+  "kind": "qcm",
+  "sort_order": 10,
+  "color": "#3a6ea5",
+  "button_label": "NSI - Introduction à Python\n(QCM du contrôle, 5 réponses par question)",
+  "source_language": "",
+  "target_language": "",
+  "source_lang_code": "",
+  "target_lang_code": "",
+  "words": [
+    {
+      "theme": "1. Caractéristiques et noms de variables",
+      "type": "cours",
+      "source": "Qui a créé le langage Python ?",
+      "canonical": "Guido van Rossum",
+      "wrong": [
+        "Linus Torvalds",
+        "Bill Gates",
+        "Alan Turing",
+        "Dennis Ritchie"
+      ],
+      "explanation": "Python a été créé en 1990 par Guido van Rossum, à Amsterdam."
+    },
+    {
+      "theme": "1. Caractéristiques et noms de variables",
+      "type": "cours",
+      "source": "En quelle année Python a-t-il été créé ?",
+      "canonical": "1990",
+      "wrong": [
+        "1970",
+        "1985",
+        "2000",
+        "2008"
+      ],
+      "explanation": "Python a été créé en 1990 par Guido van Rossum."
+    },
+    {
+      "theme": "1. Caractéristiques et noms de variables",
+      "type": "cours",
+      "source": "Python est un langage interprété. Cela veut dire que :",
+      "canonical": "le code source est converti en code machine puis exécuté chaque fois que le programme est lancé",
+      "wrong": [
+        "il faut déclarer le type de chaque variable",
+        "il ne fonctionne que sur un seul système d'exploitation",
+        "le code est d'abord traduit en anglais",
+        "on ne peut pas l'utiliser gratuitement"
+      ],
+      "explanation": "Interprété : le code est converti et exécuté à chaque lancement. Python est aussi portable, extensible et gratuit."
+    },
+    {
+      "theme": "1. Caractéristiques et noms de variables",
+      "type": "cours",
+      "source": "Comment Python repère-t-il un bloc d'instructions (après un `if`, un `for`, un `def`...) ?",
+      "canonical": "Par l'indentation (le décalage des lignes), qui est obligatoire",
+      "wrong": [
+        "Par des accolades `{ }`",
+        "Par les mots `begin` et `end`",
+        "Par un point-virgule à la fin du bloc",
+        "Par des parenthèses `( )`"
+      ],
+      "explanation": "Pas d'accolades en Python : ce sont les indentations, OBLIGATOIRES, qui marquent les blocs."
+    },
+    {
+      "theme": "1. Caractéristiques et noms de variables",
+      "type": "cours",
+      "source": "Quel caractère annonce le début d'un bloc, à la fin de la ligne `if x > 0` ?",
+      "canonical": "`:`",
+      "wrong": [
+        "`;`",
+        "`{`",
+        "`.`",
+        "`->`"
+      ],
+      "explanation": "On écrit `if x > 0:` puis le bloc indenté. Grâce au `:`, pas besoin de parenthèses autour de la condition."
+    },
+    {
+      "theme": "1. Caractéristiques et noms de variables",
+      "type": "cours",
+      "source": "Comment écrit-on un commentaire sur une ligne en Python ?",
+      "canonical": "`# mon commentaire`",
+      "wrong": [
+        "`// mon commentaire`",
+        "`<!-- mon commentaire -->`",
+        "`-- mon commentaire`",
+        "`/* mon commentaire`"
+      ],
+      "explanation": "Un commentaire commence par `#` et va jusqu'à la fin de la ligne."
+    },
+    {
+      "theme": "1. Caractéristiques et noms de variables",
+      "type": "cours",
+      "source": "Comment transformer tout un paragraphe en commentaire ?",
+      "canonical": "L'encadrer de triples guillemets `\"\"\"`",
+      "wrong": [
+        "Mettre un `#` au début et à la fin du paragraphe",
+        "L'encadrer d'accolades `{ }`",
+        "Le mettre entre parenthèses",
+        "Le faire précéder du mot `rem`"
+      ],
+      "explanation": "Les triples guillemets `\"\"\"` ... `\"\"\"` encadrent un paragraphe entier."
+    },
+    {
+      "theme": "1. Caractéristiques et noms de variables",
+      "type": "cours",
+      "source": "Faut-il terminer chaque instruction par un `;` en Python ?",
+      "canonical": "Non : c'est le passage à la ligne qui termine l'instruction",
+      "wrong": [
+        "Oui, toujours",
+        "Oui, sauf à la dernière ligne",
+        "Seulement dans les boucles",
+        "Seulement après un `print`"
+      ],
+      "explanation": "Pas de séparateur ni de terminateur d'instructions : le passage à la ligne joue ce rôle."
+    },
+    {
+      "theme": "1. Caractéristiques et noms de variables",
+      "type": "cours",
+      "source": "Que veut dire « typage dynamique » ?",
+      "canonical": "Le type d'une variable vient de la valeur qu'on lui donne, sans déclaration",
+      "wrong": [
+        "Il faut déclarer le type de chaque variable avant de l'utiliser",
+        "Une variable ne peut jamais changer de valeur",
+        "Le type d'une variable change au hasard pendant l'exécution",
+        "Seuls les nombres ont un type"
+      ],
+      "explanation": "Pas de déclaration : `n = 8` fait de n un int, `n = 8.0` en fait un float."
+    },
+    {
+      "theme": "1. Caractéristiques et noms de variables",
+      "type": "cours",
+      "source": "Lequel de ces noms de variable est autorisé ?",
+      "canonical": "`note_finale`",
+      "wrong": [
+        "`2eme_note`",
+        "`note-finale`",
+        "`note finale`",
+        "`note$`"
+      ],
+      "explanation": "Lettres, chiffres et _ seulement, sans commencer par un chiffre. Le tiret est interdit : c'est la soustraction."
+    },
+    {
+      "theme": "1. Caractéristiques et noms de variables",
+      "type": "cours",
+      "source": "Lequel de ces noms de variable est INTERDIT ?",
+      "canonical": "`for`",
+      "wrong": [
+        "`For`",
+        "`_for`",
+        "`for2`",
+        "`fort`"
+      ],
+      "explanation": "`for` est un mot réservé. `For` est autorisé car la casse compte : ce n'est pas le même mot."
+    },
+    {
+      "theme": "1. Caractéristiques et noms de variables",
+      "type": "cours",
+      "source": "`toto` et `Toto` sont :",
+      "canonical": "deux variables différentes, car la casse compte",
+      "wrong": [
+        "la même variable",
+        "deux noms interdits",
+        "une variable et une fonction",
+        "une erreur de syntaxe"
+      ],
+      "explanation": "La casse est significative : majuscules et minuscules sont des lettres différentes."
+    },
+    {
+      "theme": "1. Caractéristiques et noms de variables",
+      "type": "cours",
+      "source": "Lequel de ces mots est un mot réservé de Python, interdit comme nom de variable ?",
+      "canonical": "`while`",
+      "wrong": [
+        "`print`",
+        "`list`",
+        "`input`",
+        "`range`"
+      ],
+      "explanation": "`print`, `list`, `input` et `range` sont des fonctions natives, pas des mots réservés. `while` fait partie des mots réservés, comme `if`, `for`, `def`, `True`..."
+    },
+    {
+      "theme": "1. Caractéristiques et noms de variables",
+      "type": "cours",
+      "source": "Selon le cours, combien Python compte-t-il de mots réservés ?",
+      "canonical": "33",
+      "wrong": [
+        "12",
+        "20",
+        "50",
+        "100"
+      ],
+      "explanation": "33 dans le cours. Les versions récentes de Python en ont ajouté deux (`async` et `await`)."
+    },
+    {
+      "theme": "1. Caractéristiques et noms de variables",
+      "type": "cours",
+      "source": "À quoi sert la fonction `dir(var)` ?",
+      "canonical": "À lister les fonctions et méthodes disponibles pour `var`",
+      "wrong": [
+        "À afficher le dossier du programme",
+        "À donner l'adresse mémoire de `var`",
+        "À afficher l'aide sur `var`",
+        "À supprimer `var`"
+      ],
+      "explanation": "`dir(var)` liste les méthodes, `help(fct)` affiche l'aide, `id(objet)` donne l'adresse mémoire."
+    },
+    {
+      "theme": "1. Caractéristiques et noms de variables",
+      "type": "cours",
+      "source": "Quelle fonction donne l'adresse mémoire d'un objet ?",
+      "canonical": "`id(objet)`",
+      "wrong": [
+        "`dir(objet)`",
+        "`help(objet)`",
+        "`type(objet)`",
+        "`adr(objet)`"
+      ],
+      "explanation": "`id(objet)` donne l'adresse mémoire de l'objet."
+    },
+    {
+      "theme": "1. Caractéristiques et noms de variables",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "x = 5\nX = 2\nprint(x + X)",
+      "canonical": "7",
+      "wrong": [
+        "10",
+        "4",
+        "Erreur (NameError)",
+        "xX"
+      ],
+      "explanation": "x et X sont deux variables différentes (la casse compte) : 5 + 2 = 7."
+    },
+    {
+      "theme": "1.2 Affectations, types, caractères spéciaux",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(type(3.14))",
+      "canonical": "<class 'float'>",
+      "wrong": [
+        "<class 'int'>",
+        "<class 'str'>",
+        "float",
+        "3.14"
+      ],
+      "explanation": "`type()` renvoie le type ; `print` l'affiche sous la forme <class 'float'>."
+    },
+    {
+      "theme": "1.2 Affectations, types, caractères spéciaux",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "msg = \"Quoi de neuf ?\"\nprint(type(msg))",
+      "canonical": "<class 'str'>",
+      "wrong": [
+        "<class 'msg'>",
+        "<class 'chr'>",
+        "str",
+        "Quoi de neuf ?"
+      ],
+      "explanation": "Une valeur entre guillemets est une chaîne de caractères : type str."
+    },
+    {
+      "theme": "1.2 Affectations, types, caractères spéciaux",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(type(8), type(8.0))",
+      "canonical": "<class 'int'> <class 'float'>",
+      "wrong": [
+        "<class 'int'> <class 'int'>",
+        "<class 'float'> <class 'float'>",
+        "<class 'float'> <class 'int'>",
+        "8 8.0"
+      ],
+      "explanation": "8 est un entier (int), 8.0 un nombre décimal (float) : c'est l'exemple du cours."
+    },
+    {
+      "theme": "1.2 Affectations, types, caractères spéciaux",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "a = 3 + 2j\nprint(type(a))",
+      "canonical": "<class 'complex'>",
+      "wrong": [
+        "<class 'int'>",
+        "<class 'float'>",
+        "<class 'str'>",
+        "Erreur (NameError)"
+      ],
+      "explanation": "3 + 2j est un nombre complexe : partie réelle 3, partie imaginaire 2."
+    },
+    {
+      "theme": "1.2 Affectations, types, caractères spéciaux",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(type(True))",
+      "canonical": "<class 'bool'>",
+      "wrong": [
+        "<class 'str'>",
+        "<class 'int'>",
+        "True",
+        "<class 'boolean'>"
+      ],
+      "explanation": "True et False sont les deux booléens : type bool."
+    },
+    {
+      "theme": "1.2 Affectations, types, caractères spéciaux",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "pi, e = 3.14, 2e-3\nprint(e)",
+      "canonical": "0.002",
+      "wrong": [
+        "2e-3",
+        "0.02",
+        "0.0002",
+        "-6.0"
+      ],
+      "explanation": "2e-3 veut dire 2 × 10 puissance -3, donc 0.002."
+    },
+    {
+      "theme": "1.2 Affectations, types, caractères spéciaux",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "a, b = 3, 2.54\nprint(b)",
+      "canonical": "2.54",
+      "wrong": [
+        "3",
+        "(3, 2.54)",
+        "5.54",
+        "Erreur (ValueError)"
+      ],
+      "explanation": "Affectation parallèle : a prend 3 et b prend 2.54 en même temps."
+    },
+    {
+      "theme": "1.2 Affectations, types, caractères spéciaux",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "a = b = 3\nb = b + 1\nprint(a, b)",
+      "canonical": "3 4",
+      "wrong": [
+        "4 4",
+        "3 3",
+        "4 3",
+        "Erreur (SyntaxError)"
+      ],
+      "explanation": "`a = b = 3` donne 3 aux deux variables. Ensuite seul b change."
+    },
+    {
+      "theme": "1.2 Affectations, types, caractères spéciaux",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "a, b = 1, 2\na, b = b, a\nprint(a, b)",
+      "canonical": "2 1",
+      "wrong": [
+        "1 2",
+        "2 2",
+        "1 1",
+        "(2, 1)"
+      ],
+      "explanation": "`a, b = b, a` échange les valeurs de a et b en une seule ligne."
+    },
+    {
+      "theme": "1.2 Affectations, types, caractères spéciaux",
+      "type": "code",
+      "source": "Quel code affiche exactement ce résultat ?",
+      "output": "2 1",
+      "canonical": "a, b = 1, 2\nc = a\na = b\nb = c\nprint(a, b)",
+      "wrong": [
+        "a, b = 1, 2\na = b\nb = a\nprint(a, b)",
+        "a, b = 1, 2\nb = a\na = b\nprint(a, b)",
+        "a, b = 1, 2\na, b = a, b\nprint(a, b)",
+        "a, b = 1, 2\nc = a\nb = c\na = b\nprint(a, b)"
+      ],
+      "explanation": "Pour échanger sans `a, b = b, a`, il faut une variable de secours c. Sans elle, `a = b` écrase la valeur de a."
+    },
+    {
+      "theme": "1.2 Affectations, types, caractères spéciaux",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(bin(5))",
+      "canonical": "0b101",
+      "wrong": [
+        "101",
+        "0b5",
+        "5",
+        "0x5"
+      ],
+      "explanation": "`bin()` écrit le nombre en binaire avec le préfixe 0b : 5 = 4 + 1 = 101 en binaire."
+    },
+    {
+      "theme": "1.2 Affectations, types, caractères spéciaux",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(hex(255))",
+      "canonical": "0xff",
+      "wrong": [
+        "ff",
+        "0b11111111",
+        "255",
+        "0x255"
+      ],
+      "explanation": "`hex()` écrit le nombre en hexadécimal avec le préfixe 0x : 255 = 15 × 16 + 15 = ff."
+    },
+    {
+      "theme": "1.2 Affectations, types, caractères spéciaux",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "n = 0b101\nprint(n)",
+      "canonical": "5",
+      "wrong": [
+        "101",
+        "0b101",
+        "3",
+        "Erreur (SyntaxError)"
+      ],
+      "explanation": "0b101 est un entier écrit en binaire. `print` l'affiche en décimal : 5."
+    },
+    {
+      "theme": "1.2 Affectations, types, caractères spéciaux",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(0x10)",
+      "canonical": "16",
+      "wrong": [
+        "10",
+        "0x10",
+        "1",
+        "Erreur (SyntaxError)"
+      ],
+      "explanation": "0x10 est écrit en hexadécimal : 1 × 16 + 0 = 16."
+    },
+    {
+      "theme": "1.2 Affectations, types, caractères spéciaux",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(ord('A'))",
+      "canonical": "65",
+      "wrong": [
+        "A",
+        "1",
+        "97",
+        "Erreur (TypeError)"
+      ],
+      "explanation": "`ord()` donne le code ASCII d'un caractère : 'A' vaut 65 (et 'a' vaut 97)."
+    },
+    {
+      "theme": "1.2 Affectations, types, caractères spéciaux",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(chr(66))",
+      "canonical": "B",
+      "wrong": [
+        "66",
+        "'B'",
+        "b",
+        "A"
+      ],
+      "explanation": "`chr()` fait l'inverse de `ord()` : chr(65) = 'A', donc chr(66) = 'B'. `print` affiche B sans guillemets."
+    },
+    {
+      "theme": "1.2 Affectations, types, caractères spéciaux",
+      "type": "code",
+      "source": "Quel code affiche exactement ce résultat ?",
+      "output": "a",
+      "canonical": "print(chr(97))",
+      "wrong": [
+        "print(ord(97))",
+        "print(chr('a'))",
+        "print(ord('a'))",
+        "print(chr(65))"
+      ],
+      "explanation": "chr(97) = 'a'. ord('a') affiche 97, chr(65) affiche A, et ord(97) ou chr('a') provoquent une erreur."
+    },
+    {
+      "theme": "1.2 Affectations, types, caractères spéciaux",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(\"Bonjour\\nPython\")",
+      "canonical": "Bonjour\nPython",
+      "wrong": [
+        "Bonjour\\nPython",
+        "Bonjour Python",
+        "BonjourPython",
+        "Bonjour\n\nPython"
+      ],
+      "explanation": "`\\n` dans une chaîne veut dire « nouvelle ligne » : Python va à la ligne."
+    },
+    {
+      "theme": "1.2 Affectations, types, caractères spéciaux",
+      "type": "cours",
+      "source": "Que représente `\\t` dans une chaîne de caractères ?",
+      "canonical": "Une tabulation",
+      "wrong": [
+        "Un retour à la ligne",
+        "La lettre T majuscule",
+        "La fin de la chaîne",
+        "Un antislash suivi de la lettre t"
+      ],
+      "explanation": "`\\t` = tabulation, `\\n` = nouvelle ligne, `\\'` = apostrophe, `\\\\` = antislash."
+    },
+    {
+      "theme": "1.2 Affectations, types, caractères spéciaux",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print('C\\'est facile')",
+      "canonical": "C'est facile",
+      "wrong": [
+        "C\\'est facile",
+        "C est facile",
+        "Cest facile",
+        "Erreur (SyntaxError)"
+      ],
+      "explanation": "Dans une chaîne entre apostrophes, `\\'` permet d'écrire une apostrophe sans fermer la chaîne."
+    },
+    {
+      "theme": "1.2 Affectations, types, caractères spéciaux",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(\"C:\\\\temp\")",
+      "canonical": "C:\\temp",
+      "wrong": [
+        "C:\\\\temp",
+        "C:temp",
+        "C: temp",
+        "Erreur (SyntaxError)"
+      ],
+      "explanation": "`\\\\` est le moyen d'écrire UN antislash dans une chaîne."
+    },
+    {
+      "theme": "1.2 Affectations, types, caractères spéciaux",
+      "type": "cours",
+      "source": "Quels sont les types standards du cours ?",
+      "canonical": "`bool`, `int`, `float`, `str`, `complex`",
+      "wrong": [
+        "`int`, `real`, `text`, `char`, `logic`",
+        "`number`, `string`, `boolean`, `char`, `double`",
+        "`int`, `float` et c'est tout",
+        "`list`, `print`, `input`, `range`, `type`"
+      ],
+      "explanation": "booléens (bool), entiers (int), décimaux (float), chaînes (str) et complexes (complex)."
+    },
+    {
+      "theme": "1.2 Affectations, types, caractères spéciaux",
+      "type": "code",
+      "source": "Quel code affiche exactement ce résultat ?",
+      "output": "<class 'int'>",
+      "canonical": "print(type(7))",
+      "wrong": [
+        "print(type(7.0))",
+        "print(type(\"7\"))",
+        "print(type(7 / 1))",
+        "print(type(True))"
+      ],
+      "explanation": "7 est un entier. 7.0 et 7 / 1 sont des float, \"7\" une chaîne, True un booléen."
+    },
+    {
+      "theme": "1.2 Affectations, types, caractères spéciaux",
+      "type": "code",
+      "source": "Quel code affiche exactement ce résultat ?",
+      "output": "2009",
+      "canonical": "print(0x7d9)",
+      "wrong": [
+        "print(hex(2009))",
+        "print(\"0x7d9\")",
+        "print(bin(2009))",
+        "print(0b2009)"
+      ],
+      "explanation": "0x7d9 est 2009 écrit en hexadécimal (exemple du cours) : print l'affiche en décimal. hex(2009) affiche 0x7d9, et 0b2009 est une erreur (en binaire il n'y a que 0 et 1)."
+    },
+    {
+      "theme": "1.2 Affectations, types, caractères spéciaux",
+      "type": "code",
+      "source": "Quel code affiche exactement ce résultat ?",
+      "output": "Ligne 1\nLigne 2",
+      "canonical": "print(\"Ligne 1\\nLigne 2\")",
+      "wrong": [
+        "print(\"Ligne 1\", \"Ligne 2\")",
+        "print(\"Ligne 1\\\\nLigne 2\")",
+        "print(\"Ligne 1\" + \"Ligne 2\")",
+        "print(\"Ligne 1\\tLigne 2\")"
+      ],
+      "explanation": "`\\n` fait aller à la ligne. `\\\\n` affiche un antislash suivi de n, et `\\t` une tabulation."
+    },
+    {
+      "theme": "1.4 Opérations et comparaisons",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(7 / 2)",
+      "canonical": "3.5",
+      "wrong": [
+        "3",
+        "1",
+        "3.0",
+        "4"
+      ],
+      "explanation": "`/` est la division décimale : 7 / 2 = 3.5."
+    },
+    {
+      "theme": "1.4 Opérations et comparaisons",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(7 // 2)",
+      "canonical": "3",
+      "wrong": [
+        "3.5",
+        "1",
+        "4",
+        "3.0"
+      ],
+      "explanation": "`//` est la division entière : dans 7 il y a 3 fois 2."
+    },
+    {
+      "theme": "1.4 Opérations et comparaisons",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(7 % 2)",
+      "canonical": "1",
+      "wrong": [
+        "3",
+        "3.5",
+        "0",
+        "2"
+      ],
+      "explanation": "`%` donne le reste de la division entière : 7 = 3 × 2 + 1."
+    },
+    {
+      "theme": "1.4 Opérations et comparaisons",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(2 ** 3)",
+      "canonical": "8",
+      "wrong": [
+        "6",
+        "9",
+        "5",
+        "23"
+      ],
+      "explanation": "`**` est la puissance : 2 ** 3 = 2 × 2 × 2 = 8."
+    },
+    {
+      "theme": "1.4 Opérations et comparaisons",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(10 / 2)",
+      "canonical": "5.0",
+      "wrong": [
+        "5",
+        "2",
+        "0",
+        "5.00"
+      ],
+      "explanation": "`/` donne toujours un float, même quand le résultat tombe juste : 5.0."
+    },
+    {
+      "theme": "1.4 Opérations et comparaisons",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(17 // 5, 17 % 5)",
+      "canonical": "3 2",
+      "wrong": [
+        "2 3",
+        "3.4 2",
+        "3 0.4",
+        "3.4 0.4"
+      ],
+      "explanation": "17 = 3 × 5 + 2 : quotient entier 3, reste 2."
+    },
+    {
+      "theme": "1.4 Opérations et comparaisons",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(9 ** 0.5)",
+      "canonical": "3.0",
+      "wrong": [
+        "3",
+        "4.5",
+        "81",
+        "9.5"
+      ],
+      "explanation": "Puissance 0.5 = racine carrée. Le résultat est un float : 3.0."
+    },
+    {
+      "theme": "1.4 Opérations et comparaisons",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(round(3.14159, 2))",
+      "canonical": "3.14",
+      "wrong": [
+        "3.1",
+        "3",
+        "3.141",
+        "3.15"
+      ],
+      "explanation": "`round(nb, x)` arrondit nb avec x chiffres après la virgule."
+    },
+    {
+      "theme": "1.4 Opérations et comparaisons",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(round(2.567, 1))",
+      "canonical": "2.6",
+      "wrong": [
+        "2.5",
+        "2.56",
+        "3",
+        "2.57"
+      ],
+      "explanation": "1 chiffre après la virgule : 2.567 est plus près de 2.6 que de 2.5."
+    },
+    {
+      "theme": "1.4 Opérations et comparaisons",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(2 + 3 * 4)",
+      "canonical": "14",
+      "wrong": [
+        "20",
+        "24",
+        "9",
+        "234"
+      ],
+      "explanation": "Comme en maths, la multiplication passe avant l'addition : 2 + 12 = 14."
+    },
+    {
+      "theme": "1.4 Opérations et comparaisons",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(3 < 2)",
+      "canonical": "False",
+      "wrong": [
+        "True",
+        "false",
+        "0",
+        "Erreur (TypeError)"
+      ],
+      "explanation": "Une comparaison vaut True ou False, avec une majuscule. 3 n'est pas plus petit que 2."
+    },
+    {
+      "theme": "1.4 Opérations et comparaisons",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(1 != 3)",
+      "canonical": "True",
+      "wrong": [
+        "False",
+        "true",
+        "1",
+        "-2"
+      ],
+      "explanation": "`!=` veut dire « n'est pas égal à ». 1 est bien différent de 3."
+    },
+    {
+      "theme": "1.4 Opérations et comparaisons",
+      "type": "cours",
+      "source": "Quelle est la différence entre `a = 1` et `a == 1` ?",
+      "canonical": "`a = 1` donne la valeur 1 à a ; `a == 1` teste si a vaut 1",
+      "wrong": [
+        "Aucune, les deux écritures sont équivalentes",
+        "`a = 1` teste si a vaut 1 ; `a == 1` donne la valeur 1 à a",
+        "`a == 1` donne deux fois la valeur 1 à a",
+        "`a = 1` est interdit en Python"
+      ],
+      "explanation": "Un seul = : affectation. Deux == : comparaison, qui vaut True ou False."
+    },
+    {
+      "theme": "1.4 Opérations et comparaisons",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "x = 7\nprint(x > 5 and x < 10)",
+      "canonical": "True",
+      "wrong": [
+        "False",
+        "7",
+        "x",
+        "Erreur (SyntaxError)"
+      ],
+      "explanation": "`and` est vrai si les deux comparaisons sont vraies : 7 > 5 et 7 < 10."
+    },
+    {
+      "theme": "1.4 Opérations et comparaisons",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "x = 3\nprint(x > 5 or x == 3)",
+      "canonical": "True",
+      "wrong": [
+        "False",
+        "3",
+        "None",
+        "Erreur (SyntaxError)"
+      ],
+      "explanation": "`or` est vrai si au moins une des deux comparaisons est vraie : ici x == 3."
+    },
+    {
+      "theme": "1.4 Opérations et comparaisons",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(not (2 > 1))",
+      "canonical": "False",
+      "wrong": [
+        "True",
+        "-1",
+        "not True",
+        "Erreur (SyntaxError)"
+      ],
+      "explanation": "2 > 1 vaut True, et `not` inverse : False."
+    },
+    {
+      "theme": "1.4 Opérations et comparaisons",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(True and False)",
+      "canonical": "False",
+      "wrong": [
+        "True",
+        "TrueFalse",
+        "1",
+        "None"
+      ],
+      "explanation": "`and` n'est vrai que si les deux sont vrais."
+    },
+    {
+      "theme": "1.4 Opérations et comparaisons",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "maliste = [1, 2, 3]\nprint(4 in maliste)",
+      "canonical": "False",
+      "wrong": [
+        "True",
+        "3",
+        "[1, 2, 3, 4]",
+        "Erreur (TypeError)"
+      ],
+      "explanation": "`in` teste si une valeur est dans la liste : 4 n'y est pas."
+    },
+    {
+      "theme": "1.4 Opérations et comparaisons",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(\"a\" in \"banane\")",
+      "canonical": "True",
+      "wrong": [
+        "False",
+        "2",
+        "1",
+        "3"
+      ],
+      "explanation": "`in` marche aussi sur les chaînes : la lettre a est bien dans banane."
+    },
+    {
+      "theme": "1.4 Opérations et comparaisons",
+      "type": "cours",
+      "source": "Que teste l'opérateur `is` ?",
+      "canonical": "Si deux variables désignent le même objet (la même zone mémoire)",
+      "wrong": [
+        "Si deux valeurs sont égales, exactement comme `==`",
+        "Si une valeur est dans une liste",
+        "Le type d'une variable",
+        "Si une variable existe"
+      ],
+      "explanation": "`==` compare les valeurs, `is` vérifie que c'est le même objet en mémoire (même `id`)."
+    },
+    {
+      "theme": "1.4 Opérations et comparaisons",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "a = [1, 2]\nb = [1, 2]\nprint(a == b, a is b)",
+      "canonical": "True False",
+      "wrong": [
+        "True True",
+        "False False",
+        "False True",
+        "Erreur (TypeError)"
+      ],
+      "explanation": "Même contenu, donc `==` vaut True ; mais ce sont deux listes distinctes en mémoire, donc `is` vaut False."
+    },
+    {
+      "theme": "1.4 Opérations et comparaisons",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "a = [1, 2]\nb = a\nprint(a == b, a is b)",
+      "canonical": "True True",
+      "wrong": [
+        "True False",
+        "False False",
+        "False True",
+        "Erreur (TypeError)"
+      ],
+      "explanation": "`b = a` ne copie pas la liste : a et b désignent le même objet, donc `is` vaut True."
+    },
+    {
+      "theme": "1.4 Opérations et comparaisons",
+      "type": "code",
+      "source": "Quel code affiche exactement ce résultat ?",
+      "output": "True",
+      "canonical": "print(3 >= 3)",
+      "wrong": [
+        "print(3 > 3)",
+        "print(3 = 3)",
+        "print(3 != 3)",
+        "print(3 <= 2)"
+      ],
+      "explanation": "3 >= 3 est vrai (plus grand OU ÉGAL). `print(3 = 3)` est une erreur : un seul = est une affectation."
+    },
+    {
+      "theme": "1.4 Opérations et comparaisons",
+      "type": "code",
+      "source": "Quel code affiche exactement ce résultat ?",
+      "output": "2.5",
+      "canonical": "print(5 / 2)",
+      "wrong": [
+        "print(5 // 2)",
+        "print(5 % 2)",
+        "print(5 ** 2)",
+        "print(5 / 2.0 // 1)"
+      ],
+      "explanation": "5 / 2 = 2.5. Les autres donnent 2 (division entière), 1 (reste), 25 (puissance) et 2.0."
+    },
+    {
+      "theme": "1.4 Opérations et comparaisons",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "n = 14\nprint(n % 2 == 0)",
+      "canonical": "True",
+      "wrong": [
+        "False",
+        "0",
+        "7",
+        "14"
+      ],
+      "explanation": "Le reste de 14 divisé par 2 est 0 : c'est la façon de tester si un nombre est pair."
+    },
+    {
+      "theme": "1.4 Opérations et comparaisons",
+      "type": "code",
+      "source": "Quel code affiche exactement ce résultat ?",
+      "output": "1",
+      "canonical": "print(10 % 3)",
+      "wrong": [
+        "print(10 // 3)",
+        "print(10 / 3)",
+        "print(3 % 10)",
+        "print(10 % 5)"
+      ],
+      "explanation": "10 = 3 × 3 + 1 : le reste est 1. 10 // 3 donne le quotient 3, et 3 % 10 vaut 3."
+    },
+    {
+      "theme": "1.4 Opérations et comparaisons",
+      "type": "code",
+      "source": "Quel code affiche exactement ce résultat ?",
+      "output": "False",
+      "canonical": "print(5 > 3 and 2 > 4)",
+      "wrong": [
+        "print(5 > 3 or 2 > 4)",
+        "print(not 2 > 4)",
+        "print(5 > 3)",
+        "print(2 < 4 and 3 < 5)"
+      ],
+      "explanation": "and est faux dès qu'une des deux comparaisons est fausse : 2 > 4 est faux."
+    },
+    {
+      "theme": "2. Entrées et sorties (input, print, format)",
+      "type": "cours",
+      "source": "Quel est le type de la valeur renvoyée par `input()` ?",
+      "canonical": "Toujours `str` (une chaîne de caractères)",
+      "wrong": [
+        "`int` si on tape un nombre entier",
+        "`float` si on tape un nombre",
+        "`bool`",
+        "Le type de ce qu'on tape"
+      ],
+      "explanation": "`input()` fait toujours une saisie en mode texte. Pour un nombre, il faut transtyper avec `int()` ou `float()`."
+    },
+    {
+      "theme": "2. Entrées et sorties (input, print, format)",
+      "type": "cours",
+      "source": "On exécute `x = input(\"Nombre ? \")` et l'utilisateur tape 5. Que vaut `x` ?",
+      "canonical": "`'5'`, la chaîne de caractères",
+      "wrong": [
+        "`5`, l'entier",
+        "`5.0`",
+        "`None`",
+        "`'Nombre ? 5'`"
+      ],
+      "explanation": "`input()` renvoie ce qui a été tapé, sous forme de chaîne. Le message d'invite n'en fait pas partie."
+    },
+    {
+      "theme": "2. Entrées et sorties (input, print, format)",
+      "type": "cours",
+      "source": "Comment récupérer un ENTIER tapé par l'utilisateur ?",
+      "canonical": "`n = int(input(\"n ? \"))`",
+      "wrong": [
+        "`n = input(int(\"n ? \"))`",
+        "`n = input(\"n ? \").int()`",
+        "`int n = input(\"n ? \")`",
+        "`n = integer(input(\"n ? \"))`"
+      ],
+      "explanation": "On transtype la chaîne renvoyée par `input()` avec `int()`, comme dans l'exemple 3 du cours."
+    },
+    {
+      "theme": "2. Entrées et sorties (input, print, format)",
+      "type": "resultat",
+      "source": "`input()` renvoie toujours une chaîne : l'utilisateur a tapé 3 puis 4. Qu'affiche ce code ?",
+      "code": "a = \"3\"\nb = \"4\"\nprint(a + b)",
+      "canonical": "34",
+      "wrong": [
+        "7",
+        "3 4",
+        "'34'",
+        "Erreur (TypeError)"
+      ],
+      "explanation": "Avec deux chaînes, + les colle bout à bout (concaténation). Pour obtenir 7, il faut `int(a) + int(b)`."
+    },
+    {
+      "theme": "2. Entrées et sorties (input, print, format)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "a = 3\nb = 4\nprint(\"Le produit de\", a, \"par\", b, \"vaut :\", a * b)",
+      "canonical": "Le produit de 3 par 4 vaut : 12",
+      "wrong": [
+        "Le produit de a par b vaut : a * b",
+        "Le produit de3par4vaut :12",
+        "Le produit de 3 par 4 vaut : 34",
+        "Erreur (TypeError)"
+      ],
+      "explanation": "`print` affiche ses éléments séparés par une espace ; a * b est calculé : 12."
+    },
+    {
+      "theme": "2. Entrées et sorties (input, print, format)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "a = 3\nb = 4\nprint(f\"Le produit de {a} par {b} vaut : {a * b}\")",
+      "canonical": "Le produit de 3 par 4 vaut : 12",
+      "wrong": [
+        "Le produit de {a} par {b} vaut : {a * b}",
+        "Le produit de a par b vaut : a * b",
+        "Le produit de 3 par 4 vaut : {a * b}",
+        "Le produit de 3 par 4 vaut : 3 * 4"
+      ],
+      "explanation": "Dans une f-string, ce qui est entre { } est remplacé par sa valeur, calculs compris."
+    },
+    {
+      "theme": "2. Entrées et sorties (input, print, format)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "a = 2\nprint(\"a vaut {a}\")",
+      "canonical": "a vaut {a}",
+      "wrong": [
+        "a vaut 2",
+        "2 vaut 2",
+        "a vaut a",
+        "Erreur (NameError)"
+      ],
+      "explanation": "Il manque le f devant la chaîne : les accolades sont affichées telles quelles."
+    },
+    {
+      "theme": "2. Entrées et sorties (input, print, format)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(\"{0} + {1} = {2}\".format(2, 3, 2 + 3))",
+      "canonical": "2 + 3 = 5",
+      "wrong": [
+        "{0} + {1} = {2}",
+        "0 + 1 = 2",
+        "2 + 3 = 2 + 3",
+        "5 + 5 = 5"
+      ],
+      "explanation": "`format()` remplace {0}, {1}, {2} par ses arguments dans l'ordre : 2, 3 et 5."
+    },
+    {
+      "theme": "2. Entrées et sorties (input, print, format)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(\"int: {0:d}; hex: {0:x}\".format(42))",
+      "canonical": "int: 42; hex: 2a",
+      "wrong": [
+        "int: 42; hex: 42",
+        "int: 42; hex: 0x2a",
+        "int: 42; hex: 101010",
+        "int: 2a; hex: 42"
+      ],
+      "explanation": ":d affiche en décimal, :x en hexadécimal (sans 0x) : 42 = 2 × 16 + 10 = 2a."
+    },
+    {
+      "theme": "2. Entrées et sorties (input, print, format)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(\"bin: {0:b}\".format(5))",
+      "canonical": "bin: 101",
+      "wrong": [
+        "bin: 0b101",
+        "bin: 5",
+        "bin: 10",
+        "bin: 110"
+      ],
+      "explanation": ":b affiche en binaire, sans le préfixe 0b."
+    },
+    {
+      "theme": "2. Entrées et sorties (input, print, format)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(\"{0:.2f}\".format(3.14159))",
+      "canonical": "3.14",
+      "wrong": [
+        "3.1",
+        "3.14159",
+        "3.15",
+        "3.142"
+      ],
+      "explanation": ":.2f affiche un float avec 2 chiffres après la virgule."
+    },
+    {
+      "theme": "2. Entrées et sorties (input, print, format)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(\"{0:03d}\".format(7))",
+      "canonical": "007",
+      "wrong": [
+        "7",
+        "700",
+        "7.000",
+        "0.07"
+      ],
+      "explanation": ":03d affiche l'entier sur 3 chiffres en complétant par des zéros à gauche."
+    },
+    {
+      "theme": "2. Entrées et sorties (input, print, format)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(\"{0:f}\".format(2.5))",
+      "canonical": "2.500000",
+      "wrong": [
+        "2.5",
+        "2.50",
+        "2",
+        "2.500"
+      ],
+      "explanation": ":f sans précision affiche 6 chiffres après la virgule (comme 31.460000 dans le cours)."
+    },
+    {
+      "theme": "2. Entrées et sorties (input, print, format)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(\"exp : {0:e}\".format(1000))",
+      "canonical": "exp : 1.000000e+03",
+      "wrong": [
+        "exp : 1000",
+        "exp : 10e3",
+        "exp : 1.0e3",
+        "exp : 1000.000000"
+      ],
+      "explanation": ":e affiche en notation scientifique : 1000 = 1 × 10 puissance 3."
+    },
+    {
+      "theme": "2. Entrées et sorties (input, print, format)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "age = 14\nprint(f\"Tu as {age:.1f} ans\")",
+      "canonical": "Tu as 14.0 ans",
+      "wrong": [
+        "Tu as 14 ans",
+        "Tu as 14.1 ans",
+        "Tu as 1.4 ans",
+        "Tu as {age:.1f} ans"
+      ],
+      "explanation": "Dans une f-string, :.1f affiche le nombre avec 1 chiffre après la virgule : 14.0."
+    },
+    {
+      "theme": "2. Entrées et sorties (input, print, format)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(format(5, '08b'))",
+      "canonical": "00000101",
+      "wrong": [
+        "101",
+        "0b101",
+        "00000005",
+        "5"
+      ],
+      "explanation": "'08b' : en binaire, sur 8 chiffres, complété par des zéros. 5 = 101."
+    },
+    {
+      "theme": "2. Entrées et sorties (input, print, format)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "coord = (3, 5)\nprint(\"X: {0[0]}; Y: {0[1]}\".format(coord))",
+      "canonical": "X: 3; Y: 5",
+      "wrong": [
+        "X: 0; Y: 1",
+        "X: (3, 5); Y: (3, 5)",
+        "X: 3; Y: 3",
+        "Erreur (IndexError)"
+      ],
+      "explanation": "{0[0]} est l'élément 0 du premier argument (coord), {0[1]} son élément 1. C'est un exemple du cours."
+    },
+    {
+      "theme": "2. Entrées et sorties (input, print, format)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(\"A\", \"B\", \"C\")",
+      "canonical": "A B C",
+      "wrong": [
+        "ABC",
+        "A,B,C",
+        "('A', 'B', 'C')",
+        "A\nB\nC"
+      ],
+      "explanation": "Avec des virgules, `print` sépare les éléments par une espace, sur une seule ligne."
+    },
+    {
+      "theme": "2. Entrées et sorties (input, print, format)",
+      "type": "code",
+      "source": "Le début du programme est donné. Quel code le complète pour afficher exactement le résultat attendu ?",
+      "code": "name = \"Eric\"\nage = 14",
+      "output": "Bonjour Eric, tu as 14 ans",
+      "canonical": "print(f\"Bonjour {name}, tu as {age} ans\")",
+      "wrong": [
+        "print(\"Bonjour {name}, tu as {age} ans\")",
+        "print(\"Bonjour\", name, \", tu as\", age, \"ans\")",
+        "print(\"Bonjour \" + name + \", tu as \" + age + \" ans\")",
+        "print(f\"Bonjour name, tu as age ans\")"
+      ],
+      "explanation": "Seule la f-string remplace {name} et {age}. Avec des virgules, `print` ajoute une espace avant la virgule ; et + entre une chaîne et un entier provoque une erreur."
+    },
+    {
+      "theme": "2. Entrées et sorties (input, print, format)",
+      "type": "code",
+      "source": "Le début du programme est donné. Quel code le complète pour afficher exactement le résultat attendu ?",
+      "code": "a = 3\nb = 4",
+      "output": "Le résultat est 7",
+      "canonical": "print(\"Le résultat est\", a + b)",
+      "wrong": [
+        "print(\"Le résultat est\" + a + b)",
+        "print(\"Le résultat est\", \"a + b\")",
+        "print(\"Le résultat est {a + b}\")",
+        "print(\"Le résultat est\", a, b)"
+      ],
+      "explanation": "Avec une virgule, print ajoute une espace et calcule a + b. Le + entre une chaîne et un nombre est une erreur ; sans f, les accolades restent telles quelles."
+    },
+    {
+      "theme": "2. Entrées et sorties (input, print, format)",
+      "type": "code",
+      "source": "Le début du programme est donné. Quel code le complète pour afficher exactement le résultat attendu ?",
+      "code": "pi = 3.14159",
+      "output": "3.14",
+      "canonical": "print(round(pi, 2))",
+      "wrong": [
+        "print(round(pi))",
+        "print(round(pi, 3))",
+        "print(int(pi))",
+        "print(pi // 1)"
+      ],
+      "explanation": "round(pi, 2) garde 2 chiffres après la virgule. round(pi) et int(pi) donnent 3, pi // 1 donne 3.0."
+    },
+    {
+      "theme": "2. Entrées et sorties (input, print, format)",
+      "type": "code",
+      "source": "Le début du programme est donné. Quel code le complète pour afficher exactement le résultat attendu ?",
+      "code": "note = 15",
+      "output": "Note : 15/20",
+      "canonical": "print(f\"Note : {note}/20\")",
+      "wrong": [
+        "print(\"Note :\", note, \"/20\")",
+        "print(\"Note : {note}/20\")",
+        "print(\"Note : \" + note + \"/20\")",
+        "print(f\"Note : {note / 20}\")"
+      ],
+      "explanation": "La f-string colle la valeur au texte. Avec des virgules, print ajouterait une espace avant /20."
+    },
+    {
+      "theme": "3. Conditions et boucles",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "x = 7\nif x > 5:\n    print(\"grand\")\nelse:\n    print(\"petit\")",
+      "canonical": "grand",
+      "wrong": [
+        "petit",
+        "grand\npetit",
+        "7",
+        "Erreur (SyntaxError)"
+      ],
+      "explanation": "7 > 5 est vrai : seul le bloc du if est exécuté."
+    },
+    {
+      "theme": "3. Conditions et boucles",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "x = 5\nif x > 5:\n    print(\"A\")\nelif x == 5:\n    print(\"B\")\nelse:\n    print(\"C\")",
+      "canonical": "B",
+      "wrong": [
+        "A",
+        "C",
+        "A\nB",
+        "B\nC"
+      ],
+      "explanation": "5 > 5 est faux, x == 5 est vrai : on exécute le bloc du elif, et le else est sauté."
+    },
+    {
+      "theme": "3. Conditions et boucles",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "x = 12\nif x > 5:\n    print(\"A\")\nif x > 10:\n    print(\"B\")",
+      "canonical": "A\nB",
+      "wrong": [
+        "A",
+        "B",
+        "AB",
+        "B\nA"
+      ],
+      "explanation": "Deux if séparés : chacun est testé. Les deux conditions sont vraies."
+    },
+    {
+      "theme": "3. Conditions et boucles",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "x = 12\nif x > 5:\n    print(\"A\")\nelif x > 10:\n    print(\"B\")",
+      "canonical": "A",
+      "wrong": [
+        "A\nB",
+        "B",
+        "AB",
+        "Erreur (SyntaxError)"
+      ],
+      "explanation": "Avec elif, dès qu'une condition est vraie, les suivantes ne sont plus testées."
+    },
+    {
+      "theme": "3. Conditions et boucles",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "note = 2\nmatch note:\n    case 0:\n        print(\"nul\")\n    case 1 | 2:\n        print(\"pas terrible\")\n    case _:\n        print(\"problème\")",
+      "canonical": "pas terrible",
+      "wrong": [
+        "nul",
+        "problème",
+        "pas terrible\nproblème",
+        "Erreur (SyntaxError)"
+      ],
+      "explanation": "`case 1 | 2` veut dire 1 OU 2. Une fois un cas trouvé, le match s'arrête."
+    },
+    {
+      "theme": "3. Conditions et boucles",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "note = 7\nmatch note:\n    case 0:\n        print(\"nul\")\n    case 1 | 2:\n        print(\"pas terrible\")\n    case _:\n        print(\"problème\")",
+      "canonical": "problème",
+      "wrong": [
+        "nul",
+        "pas terrible",
+        "Rien du tout",
+        "Erreur (ValueError)"
+      ],
+      "explanation": "Aucun cas ne correspond à 7 : c'est `case _` (tous les autres cas) qui s'applique."
+    },
+    {
+      "theme": "3. Conditions et boucles",
+      "type": "cours",
+      "source": "Dans un `match`, que veut dire `case _:` ?",
+      "canonical": "Tous les autres cas, si aucun `case` précédent ne correspond",
+      "wrong": [
+        "Le cas où la variable vaut le caractère _",
+        "Le cas où la variable est vide",
+        "La fin du match",
+        "Une erreur"
+      ],
+      "explanation": "`case _` est le cas par défaut, comme le « sinon » d'un choix « Cas où »."
+    },
+    {
+      "theme": "3. Conditions et boucles",
+      "type": "cours",
+      "source": "Comment s'écrit « sinon si » en Python ?",
+      "canonical": "`elif`",
+      "wrong": [
+        "`else if`",
+        "`elseif`",
+        "`sinon si`",
+        "`elsif`"
+      ],
+      "explanation": "NB du cours : le Sinon Si se traduit elif."
+    },
+    {
+      "theme": "3. Conditions et boucles",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "for i in range(3):\n    print(i)",
+      "canonical": "0\n1\n2",
+      "wrong": [
+        "1\n2\n3",
+        "0\n1\n2\n3",
+        "3",
+        "0 1 2"
+      ],
+      "explanation": "range(3) donne 0, 1, 2 : on commence à 0 et on s'arrête AVANT 3."
+    },
+    {
+      "theme": "3. Conditions et boucles",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "for i in range(2, 8, 2):\n    print(i)",
+      "canonical": "2\n4\n6",
+      "wrong": [
+        "2\n4\n6\n8",
+        "2\n3\n4\n5\n6\n7",
+        "2\n8",
+        "4\n6\n8"
+      ],
+      "explanation": "range(début, fin, pas) : de 2 à 8 non compris, de 2 en 2."
+    },
+    {
+      "theme": "3. Conditions et boucles",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "s = 0\nfor i in range(1, 5):\n    s = s + i\nprint(s)",
+      "canonical": "10",
+      "wrong": [
+        "15",
+        "4",
+        "6",
+        "1\n3\n6\n10"
+      ],
+      "explanation": "i prend 1, 2, 3, 4 (5 non compris) : s = 1 + 2 + 3 + 4 = 10. Le print est après la boucle : un seul affichage."
+    },
+    {
+      "theme": "3. Conditions et boucles",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "s = 0\nfor i in range(1, 5):\n    s = s + i\n    print(s)",
+      "canonical": "1\n3\n6\n10",
+      "wrong": [
+        "10",
+        "1\n2\n3\n4",
+        "0\n1\n3\n6",
+        "1\n3\n6\n10\n15"
+      ],
+      "explanation": "Le print est indenté, donc dans la boucle : il affiche s à chaque tour."
+    },
+    {
+      "theme": "3. Conditions et boucles",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "k = 10\np = 1\nwhile p <= k:\n    p = 2 * p\np = p / 2\nprint(p)",
+      "canonical": "8.0",
+      "wrong": [
+        "8",
+        "16",
+        "16.0",
+        "10"
+      ],
+      "explanation": "p passe à 2, 4, 8, 16 ; 16 > 10 arrête la boucle. 16 / 2 = 8.0, un float à cause de /. C'est l'exemple 3 du cours (plus grand facteur de 2)."
+    },
+    {
+      "theme": "3. Conditions et boucles",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "n = 0\nwhile n < 3:\n    n = n + 1\nprint(n)",
+      "canonical": "3",
+      "wrong": [
+        "2",
+        "4",
+        "0",
+        "1\n2\n3"
+      ],
+      "explanation": "La boucle tourne tant que n < 3 : elle s'arrête quand n vaut 3."
+    },
+    {
+      "theme": "3. Conditions et boucles",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "n = 10\nwhile n > 0:\n    n = n - 3\nprint(n)",
+      "canonical": "-2",
+      "wrong": [
+        "1",
+        "0",
+        "-3",
+        "4"
+      ],
+      "explanation": "n vaut 10, 7, 4, 1, puis -2 : c'est seulement là que n > 0 devient faux."
+    },
+    {
+      "theme": "3. Conditions et boucles",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "for lettre in \"NSI\":\n    print(lettre)",
+      "canonical": "N\nS\nI",
+      "wrong": [
+        "NSI",
+        "0\n1\n2",
+        "N S I",
+        "Erreur (TypeError)"
+      ],
+      "explanation": "Une boucle for sur une chaîne la parcourt caractère par caractère."
+    },
+    {
+      "theme": "3. Conditions et boucles",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "n = 0\nfor i in range(3):\n    for j in range(4):\n        n = n + 1\nprint(n)",
+      "canonical": "12",
+      "wrong": [
+        "7",
+        "4",
+        "3",
+        "16"
+      ],
+      "explanation": "La boucle intérieure fait 4 tours, et elle est lancée 3 fois : 3 × 4 = 12."
+    },
+    {
+      "theme": "3. Conditions et boucles",
+      "type": "cours",
+      "source": "Quelle boucle choisir quand on ne sait pas à l'avance combien de tours il faudra (par exemple : redemander tant que la réponse est fausse) ?",
+      "canonical": "`while`",
+      "wrong": [
+        "`for`",
+        "`if`",
+        "`match`",
+        "`range`"
+      ],
+      "explanation": "`while condition:` répète tant que la condition est vraie. `for` sert à parcourir une plage ou une liste connue."
+    },
+    {
+      "theme": "3. Conditions et boucles",
+      "type": "cours",
+      "source": "Que se passe-t-il avec `while x > 0:` si x vaut 5 et n'est jamais modifié dans la boucle ?",
+      "canonical": "La boucle ne s'arrête jamais (boucle infinie)",
+      "wrong": [
+        "La boucle tourne 5 fois",
+        "La boucle ne tourne pas du tout",
+        "Python affiche une erreur",
+        "La boucle tourne une seule fois"
+      ],
+      "explanation": "La condition reste vraie pour toujours. Il faut que la boucle modifie x pour qu'elle s'arrête un jour."
+    },
+    {
+      "theme": "3. Conditions et boucles",
+      "type": "code",
+      "source": "Quel code affiche exactement ce résultat ?",
+      "output": "1\n2\n3",
+      "canonical": "for i in range(1, 4):\n    print(i)",
+      "wrong": [
+        "for i in range(3):\n    print(i)",
+        "for i in range(1, 3):\n    print(i)",
+        "for i in range(1, 4):\nprint(i)",
+        "i = 1\nwhile i < 3:\n    print(i)\n    i = i + 1"
+      ],
+      "explanation": "range(1, 4) donne 1, 2, 3. Sans indentation sous le for, c'est une IndentationError."
+    },
+    {
+      "theme": "3. Conditions et boucles",
+      "type": "code",
+      "source": "Quel code affiche exactement ce résultat ?",
+      "output": "0\n2\n4\n6\n8",
+      "canonical": "for i in range(0, 10, 2):\n    print(i)",
+      "wrong": [
+        "for i in range(0, 8, 2):\n    print(i)",
+        "for i in range(2, 10, 2):\n    print(i)",
+        "for i in range(0, 10):\n    print(i * 2)",
+        "for i in range(0, 10, 2):\n    print(i + 2)"
+      ],
+      "explanation": "De 0 à 10 non compris, de 2 en 2. range(0, 10) avec i * 2 irait jusqu'à 18."
+    },
+    {
+      "theme": "3. Conditions et boucles",
+      "type": "code",
+      "source": "Le début du programme est donné. Quel code le complète pour afficher exactement le résultat attendu ?",
+      "code": "n = 8",
+      "output": "pair",
+      "canonical": "if n % 2 == 0:\n    print(\"pair\")\nelse:\n    print(\"impair\")",
+      "wrong": [
+        "if n % 2 == 1:\n    print(\"pair\")\nelse:\n    print(\"impair\")",
+        "if n / 2 == 0:\n    print(\"pair\")\nelse:\n    print(\"impair\")",
+        "if n % 2 = 0:\n    print(\"pair\")",
+        "if n // 2 == 0:\n    print(\"pair\")\nelse:\n    print(\"impair\")"
+      ],
+      "explanation": "Un nombre est pair quand le reste de sa division par 2 (n % 2) vaut 0. `= 0` dans un if est une erreur : il faut `==`."
+    },
+    {
+      "theme": "3. Conditions et boucles",
+      "type": "code",
+      "source": "Quel code affiche exactement ce résultat ?",
+      "output": "3\n2\n1",
+      "canonical": "n = 3\nwhile n > 0:\n    print(n)\n    n = n - 1",
+      "wrong": [
+        "n = 3\nwhile n > 0:\n    n = n - 1\n    print(n)",
+        "n = 3\nwhile n >= 0:\n    print(n)\n    n = n - 1",
+        "for n in range(3):\n    print(n)",
+        "for n in range(1, 4):\n    print(n)"
+      ],
+      "explanation": "On affiche n AVANT de le diminuer, et on s'arrête quand n vaut 0. Diminuer d'abord afficherait 2, 1, 0."
+    },
+    {
+      "theme": "3. Conditions et boucles",
+      "type": "code",
+      "source": "Quel code affiche exactement ce résultat ?",
+      "output": "10",
+      "canonical": "s = 0\nfor i in range(5):\n    s = s + i\nprint(s)",
+      "wrong": [
+        "s = 0\nfor i in range(4):\n    s = s + i\nprint(s)",
+        "s = 0\nfor i in range(5):\n    s = i\nprint(s)",
+        "s = 0\nfor i in range(5):\n    s = s + 1\nprint(s)",
+        "s = 1\nfor i in range(5):\n    s = s * i\nprint(s)"
+      ],
+      "explanation": "range(5) donne 0, 1, 2, 3, 4 : leur somme vaut 10. s = s + 1 compterait les tours (5)."
+    },
+    {
+      "theme": "4. Nombres aléatoires",
+      "type": "cours",
+      "source": "Pourquoi parle-t-on de nombres « pseudo-aléatoires » ?",
+      "canonical": "Un ordinateur est déterministe : il calcule ces nombres, il ne peut pas produire un vrai hasard",
+      "wrong": [
+        "Parce qu'ils sont tirés sur Internet",
+        "Parce qu'ils sont toujours pairs",
+        "Parce que Python arrondit les nombres",
+        "Parce qu'on ne peut tirer que des entiers"
+      ],
+      "explanation": "Par essence, un ordinateur est déterministe : on parle de générateur de nombres pseudo-aléatoires."
+    },
+    {
+      "theme": "4. Nombres aléatoires",
+      "type": "cours",
+      "source": "Quelle bibliothèque faut-il importer pour tirer des nombres au hasard ?",
+      "canonical": "`random`",
+      "wrong": [
+        "`math`",
+        "`time`",
+        "`hasard`",
+        "`datetime`"
+      ],
+      "explanation": "La bibliothèque random fournit random(), uniform(), randint(), choice(), choices(), sample() et shuffle()."
+    },
+    {
+      "theme": "4. Nombres aléatoires",
+      "type": "cours",
+      "source": "Quelles valeurs peut renvoyer `randint(1, 6)` ?",
+      "canonical": "1, 2, 3, 4, 5 ou 6 : les deux bornes sont comprises",
+      "wrong": [
+        "1, 2, 3, 4 ou 5 : 6 est exclu",
+        "Un nombre décimal entre 1 et 6",
+        "0, 1, 2, 3, 4 ou 5",
+        "Seulement 1 ou 6"
+      ],
+      "explanation": "randint(début, fin) donne un entier entre début et fin, fin COMPRISE (contrairement à range)."
+    },
+    {
+      "theme": "4. Nombres aléatoires",
+      "type": "cours",
+      "source": "Que renvoie `random()` ?",
+      "canonical": "Un nombre décimal (float) entre 0 et 1",
+      "wrong": [
+        "Un entier entre 0 et 100",
+        "0 ou 1",
+        "Une lettre au hasard",
+        "Un nombre décimal entre -1 et 1"
+      ],
+      "explanation": "random() : float compris entre 0 et 1."
+    },
+    {
+      "theme": "4. Nombres aléatoires",
+      "type": "cours",
+      "source": "Quelle fonction renvoie un nombre décimal au hasard entre 2 et 5 ?",
+      "canonical": "`uniform(2, 5)`",
+      "wrong": [
+        "`randint(2, 5)`",
+        "`random(2, 5)`",
+        "`choice(2, 5)`",
+        "`sample(2, 5)`"
+      ],
+      "explanation": "uniform(début, fin) : float entre début et fin. randint(2, 5) donnerait un entier."
+    },
+    {
+      "theme": "4. Nombres aléatoires",
+      "type": "cours",
+      "source": "Avec `couleurs = [\"rouge\", \"vert\", \"bleu\"]`, quelle instruction tire UNE couleur au hasard ?",
+      "canonical": "`choice(couleurs)`",
+      "wrong": [
+        "`randint(couleurs)`",
+        "`shuffle(couleurs)`",
+        "`uniform(couleurs)`",
+        "`random(couleurs)`"
+      ],
+      "explanation": "choice(liste) renvoie un élément de la liste."
+    },
+    {
+      "theme": "4. Nombres aléatoires",
+      "type": "cours",
+      "source": "Que fait `random.shuffle(liste)` ?",
+      "canonical": "Elle mélange la liste : ses éléments changent de place",
+      "wrong": [
+        "Elle renvoie un élément au hasard",
+        "Elle trie la liste",
+        "Elle supprime un élément au hasard",
+        "Elle remplace les éléments par des nombres au hasard"
+      ],
+      "explanation": "shuffle permute aléatoirement la liste elle-même."
+    },
+    {
+      "theme": "4. Nombres aléatoires",
+      "type": "cours",
+      "source": "Quelle différence entre `choices(liste, k=3)` et `sample(liste, 3)` ?",
+      "canonical": "`sample` ne prend jamais deux fois le même élément, `choices` peut le reprendre",
+      "wrong": [
+        "Aucune",
+        "`choices` renvoie des nombres, `sample` des lettres",
+        "`sample` trie le résultat",
+        "`choices` mélange la liste de départ"
+      ],
+      "explanation": "Les deux renvoient 3 éléments de la liste ; avec choices un élément peut sortir plusieurs fois (tirage avec remise)."
+    },
+    {
+      "theme": "4. Nombres aléatoires",
+      "type": "cours",
+      "source": "Pour le jeu du nombre mystère (exercice 2), quelle instruction tire le nombre entre 1 et 30 ?",
+      "canonical": "`nombre = randint(1, 30)`",
+      "wrong": [
+        "`nombre = randint(30)`",
+        "`nombre = random(1, 30)`",
+        "`nombre = uniform(1, 30)`",
+        "`nombre = randint(0, 30)`"
+      ],
+      "explanation": "randint(1, 30) donne un entier de 1 à 30 inclus. uniform donnerait un nombre décimal."
+    },
+    {
+      "theme": "5. Exceptions",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(1 / 0)",
+      "canonical": "Erreur (ZeroDivisionError)",
+      "wrong": [
+        "0",
+        "inf",
+        "None",
+        "Erreur (ValueError)"
+      ],
+      "explanation": "Diviser par zéro provoque une ZeroDivisionError."
+    },
+    {
+      "theme": "5. Exceptions",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "liste = [1, 2, 3]\nprint(liste[3])",
+      "canonical": "Erreur (IndexError)",
+      "wrong": [
+        "3",
+        "None",
+        "[1, 2, 3]",
+        "Erreur (KeyError)"
+      ],
+      "explanation": "Les indices vont de 0 à 2 : l'indice 3 n'existe pas, c'est une IndexError."
+    },
+    {
+      "theme": "5. Exceptions",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(int(\"douze\"))",
+      "canonical": "Erreur (ValueError)",
+      "wrong": [
+        "12",
+        "douze",
+        "0",
+        "Erreur (NameError)"
+      ],
+      "explanation": "int() ne sait pas convertir le texte « douze » : la valeur est incorrecte, ValueError."
+    },
+    {
+      "theme": "5. Exceptions",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(age)",
+      "canonical": "Erreur (NameError)",
+      "wrong": [
+        "age",
+        "None",
+        "0",
+        "Erreur (ValueError)"
+      ],
+      "explanation": "La variable age n'a jamais été créée : le nom est introuvable, NameError."
+    },
+    {
+      "theme": "5. Exceptions",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "code = {\"noir\": 0}\nprint(code[\"rouge\"])",
+      "canonical": "Erreur (KeyError)",
+      "wrong": [
+        "None",
+        "0",
+        "rouge",
+        "Erreur (IndexError)"
+      ],
+      "explanation": "La clé rouge n'est pas dans le dictionnaire : KeyError."
+    },
+    {
+      "theme": "5. Exceptions",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(\"5\" + 3)",
+      "canonical": "Erreur (TypeError)",
+      "wrong": [
+        "8",
+        "53",
+        "5 3",
+        "Erreur (ValueError)"
+      ],
+      "explanation": "On ne peut pas additionner une chaîne et un entier : TypeError. Il faut `int(\"5\") + 3` ou `\"5\" + str(3)`."
+    },
+    {
+      "theme": "5. Exceptions",
+      "type": "cours",
+      "source": "Quelle exception obtient-on en important une bibliothèque qui n'existe pas (par exemple `import maths`) ?",
+      "canonical": "`ImportError`",
+      "wrong": [
+        "`NameError`",
+        "`ValueError`",
+        "`KeyError`",
+        "`IndexError`"
+      ],
+      "explanation": "ImportError : bibliothèque non installée ou nom incorrect. Python affiche plus précisément ModuleNotFoundError, qui est une sorte d'ImportError."
+    },
+    {
+      "theme": "5. Exceptions",
+      "type": "cours",
+      "source": "Quelle exception signale une indentation incorrecte ?",
+      "canonical": "`IndentationError`",
+      "wrong": [
+        "`IndexError`",
+        "`ValueError`",
+        "`NameError`",
+        "`SpaceError`"
+      ],
+      "explanation": "IndentationError : l'indentation est incorrecte. Attention à ne pas la confondre avec IndexError (indice)."
+    },
+    {
+      "theme": "5. Exceptions",
+      "type": "cours",
+      "source": "Que signifie l'exception `KeyboardInterrupt` ?",
+      "canonical": "L'utilisateur a appuyé sur la touche d'interruption (Ctrl-C)",
+      "wrong": [
+        "Le clavier n'est pas branché",
+        "On a tapé une lettre au lieu d'un chiffre",
+        "On a appuyé sur Entrée sans rien taper",
+        "Le programme attend une saisie"
+      ],
+      "explanation": "KeyboardInterrupt : appui sur la touche d'interruption (normalement Control-C)."
+    },
+    {
+      "theme": "5. Exceptions",
+      "type": "cours",
+      "source": "Quelle exception attraper si on ne sait pas laquelle peut se produire ?",
+      "canonical": "`Exception`, la classe de base de toutes les exceptions",
+      "wrong": [
+        "`Error`",
+        "`AllErrors`",
+        "`SyntaxError`",
+        "`ValueError`"
+      ],
+      "explanation": "Exception est la classe de base de toutes les exceptions."
+    },
+    {
+      "theme": "5. Exceptions",
+      "type": "cours",
+      "source": "Dans un message d'erreur, que nous apprend le `Traceback` ?",
+      "canonical": "D'où vient l'erreur : le fichier, le numéro de ligne et le code qui l'a provoquée",
+      "wrong": [
+        "Comment corriger l'erreur automatiquement",
+        "La liste de toutes les variables du programme",
+        "Le temps d'exécution du programme",
+        "Rien d'utile : c'est le nom du programme"
+      ],
+      "explanation": "Le Traceback remonte à l'origine de l'exception : fichier, ligne, code fautif, puis le nom de l'exception."
+    },
+    {
+      "theme": "5. Exceptions",
+      "type": "cours",
+      "source": "Dans `try: ... except: ... else: ...`, quand le bloc `else` est-il exécuté ?",
+      "canonical": "Quand le bloc `try` s'est déroulé sans erreur",
+      "wrong": [
+        "Quand une erreur s'est produite",
+        "Toujours, à la fin",
+        "Jamais",
+        "Avant le bloc `try`"
+      ],
+      "explanation": "except s'exécute s'il y a une erreur, else s'il n'y en a pas (exemple 4 bis du cours)."
+    },
+    {
+      "theme": "5. Exceptions",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "try:\n    i = 1 / 0\nexcept:\n    print(\"nombre non valide\")\nelse:\n    print(\"ok\")",
+      "canonical": "nombre non valide",
+      "wrong": [
+        "ok",
+        "nombre non valide\nok",
+        "Erreur (ZeroDivisionError)",
+        "0"
+      ],
+      "explanation": "La division par zéro provoque une erreur : on passe dans except, et le else n'est pas exécuté."
+    },
+    {
+      "theme": "5. Exceptions",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "try:\n    i = 1 / 4\nexcept:\n    print(\"erreur\")\nelse:\n    print(i)",
+      "canonical": "0.25",
+      "wrong": [
+        "erreur",
+        "erreur\n0.25",
+        "0",
+        "Erreur (ZeroDivisionError)"
+      ],
+      "explanation": "Pas d'erreur dans le try : except est sauté et else affiche i."
+    },
+    {
+      "theme": "5. Exceptions",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "try:\n    n = int(\"12a\")\nexcept ValueError:\n    print(\"pas un nombre\")",
+      "canonical": "pas un nombre",
+      "wrong": [
+        "12",
+        "12a",
+        "pas un nombre\n12",
+        "Erreur (ValueError)"
+      ],
+      "explanation": "int(\"12a\") provoque une ValueError, attrapée par except ValueError : le programme continue."
+    },
+    {
+      "theme": "5. Exceptions",
+      "type": "code",
+      "source": "Quel code affiche exactement ce résultat ?",
+      "output": "division impossible",
+      "canonical": "try:\n    x = 1 / 0\nexcept ZeroDivisionError:\n    print(\"division impossible\")",
+      "wrong": [
+        "try:\n    x = 1 / 1\nexcept ZeroDivisionError:\n    print(\"division impossible\")",
+        "try:\n    x = 1 / 0\nexcept ValueError:\n    print(\"division impossible\")",
+        "x = 1 / 0\nprint(\"division impossible\")",
+        "try:\n    x = 1 / 0\nexcept ZeroDivisionError:\n    x = 0\nelse:\n    print(\"division impossible\")"
+      ],
+      "explanation": "Il faut une erreur dans le try ET un except qui attrape CETTE erreur. except ValueError laisse passer la ZeroDivisionError."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "cours",
+      "source": "Une chaîne de caractères (str) est immuable. Cela veut dire :",
+      "canonical": "qu'on ne peut pas modifier un de ses caractères",
+      "wrong": [
+        "qu'on ne peut pas l'afficher",
+        "qu'elle ne peut contenir que des lettres",
+        "qu'on ne peut pas la mettre dans une variable",
+        "qu'elle a toujours la même longueur"
+      ],
+      "explanation": "On peut créer une nouvelle chaîne (avec + par exemple) mais pas remplacer un caractère. Une liste, elle, se modifie."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "chaine = \"NSI\"\nchaine[0] = \"n\"\nprint(chaine)",
+      "canonical": "Erreur (TypeError)",
+      "wrong": [
+        "nSI",
+        "nNSI",
+        "NSI",
+        "Erreur (IndexError)"
+      ],
+      "explanation": "Une chaîne est immuable : on ne peut pas remplacer un de ses caractères."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "liste = [\"N\", \"S\", \"I\"]\nliste[0] = \"n\"\nprint(liste)",
+      "canonical": "['n', 'S', 'I']",
+      "wrong": [
+        "['N', 'S', 'I']",
+        "nSI",
+        "['n', 'N', 'S', 'I']",
+        "Erreur (TypeError)"
+      ],
+      "explanation": "Une liste est modifiable : on remplace l'élément d'indice 0."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "chaine = \"NSI\"\nchaine = chaine + \"!\"\nprint(chaine)",
+      "canonical": "NSI!",
+      "wrong": [
+        "NSI !",
+        "!NSI",
+        "['NSI', '!']",
+        "Erreur (TypeError)"
+      ],
+      "explanation": "On peut concaténer avec + : cela crée une nouvelle chaîne, rangée dans la même variable."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "chaine = \"Lycée\"\nprint(chaine[0], chaine[-1])",
+      "canonical": "L e",
+      "wrong": [
+        "L é",
+        "y e",
+        "L 5",
+        "Erreur (IndexError)"
+      ],
+      "explanation": "L'indice 0 est le premier caractère, l'indice -1 le dernier."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "chaine = \"Lycée Louis Le Grand.\"\nprint(len(chaine))",
+      "canonical": "21",
+      "wrong": [
+        "20",
+        "18",
+        "4",
+        "22"
+      ],
+      "explanation": "len compte tous les caractères, espaces et point compris : indices 0 à 20, donc 21 caractères."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "chaine = \"Lycée Louis Le Grand.\"\nprint(chaine.index(\"L\"))",
+      "canonical": "0",
+      "wrong": [
+        "6",
+        "1",
+        "3",
+        "[0, 6, 12]"
+      ],
+      "explanation": "index renvoie l'indice de la PREMIÈRE apparition : le L de Lycée, à l'indice 0."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "chaine = \"Lycée Louis Le Grand.\"\nprint(chaine.count(\"Le\"))",
+      "canonical": "1",
+      "wrong": [
+        "2",
+        "0",
+        "3",
+        "12"
+      ],
+      "explanation": "« Le » n'apparaît qu'une fois : « Louis » commence par Lo, pas par Le."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(\"Bonjour\".upper())",
+      "canonical": "BONJOUR",
+      "wrong": [
+        "bonjour",
+        "Bonjour",
+        "B",
+        "bONJOUR"
+      ],
+      "explanation": "upper() met toute la chaîne en majuscules, lower() en minuscules."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(\"nsi en PREMIERE\".capitalize())",
+      "canonical": "Nsi en premiere",
+      "wrong": [
+        "NSI EN PREMIERE",
+        "Nsi En Premiere",
+        "Nsi en PREMIERE",
+        "nsi en premiere"
+      ],
+      "explanation": "capitalize() met la première lettre en majuscule ET tout le reste en minuscules."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(\"2026\".isdigit(), \"NSI\".islower())",
+      "canonical": "True False",
+      "wrong": [
+        "False False",
+        "True True",
+        "False True",
+        "2026 nsi"
+      ],
+      "explanation": "isdigit() : que des chiffres, vrai. islower() : tout en minuscules, faux pour NSI."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "chaine = \"Lycée Louis Le Grand.\"\nprint(chaine.replace(\"Lycée\", \"Fondation\"))",
+      "canonical": "Fondation Louis Le Grand.",
+      "wrong": [
+        "Lycée Louis Le Grand.",
+        "Fondation",
+        "LycéeFondation Louis Le Grand.",
+        "Erreur (TypeError)"
+      ],
+      "explanation": "replace(ancien, nouveau) renvoie une nouvelle chaîne où « Lycée » est remplacé par « Fondation »."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(\"banane\".find(\"na\"))",
+      "canonical": "2",
+      "wrong": [
+        "1",
+        "3",
+        "4",
+        "[2, 4]"
+      ],
+      "explanation": "find donne la position de la première apparition : b(0) a(1) n(2) a(3) : « na » commence à l'indice 2."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(\"L\" in \"Lycée\", \"l\" in \"Lycée\")",
+      "canonical": "True False",
+      "wrong": [
+        "True True",
+        "False False",
+        "False True",
+        "1 0"
+      ],
+      "explanation": "`in` respecte la casse : L majuscule est dans « Lycée », l minuscule non."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "liste = [3, 1, 2]\nliste.append(5)\nprint(liste)",
+      "canonical": "[3, 1, 2, 5]",
+      "wrong": [
+        "[5, 3, 1, 2]",
+        "[1, 2, 3, 5]",
+        "[3, 1, 2, [5]]",
+        "[3, 1, 2]"
+      ],
+      "explanation": "append ajoute un élément à la FIN de la liste, sans la trier."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "liste = [\"A\"]\nliste.append(\"Paris\")\nprint(liste)",
+      "canonical": "['A', 'Paris']",
+      "wrong": [
+        "['A', 'P', 'a', 'r', 'i', 's']",
+        "['AParis']",
+        "['Paris', 'A']",
+        "Erreur (TypeError)"
+      ],
+      "explanation": "append ajoute UN élément : la chaîne entière \"Paris\"."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "liste = [\"A\"]\nliste.extend(\"Paris\")\nprint(liste)",
+      "canonical": "['A', 'P', 'a', 'r', 'i', 's']",
+      "wrong": [
+        "['A', 'Paris']",
+        "['AParis']",
+        "['P', 'a', 'r', 'i', 's', 'A']",
+        "Erreur (TypeError)"
+      ],
+      "explanation": "extend ajoute CHAQUE élément : les lettres P, a, r, i, s une par une."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "liste = [5, 3, 5, 1]\nliste.remove(5)\nprint(liste)",
+      "canonical": "[3, 5, 1]",
+      "wrong": [
+        "[3, 1]",
+        "[5, 3, 1]",
+        "[5, 3, 5]",
+        "[5, 5, 1]"
+      ],
+      "explanation": "remove(élément) supprime la première apparition seulement."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "liste = [10, 20, 30]\ndel liste[1]\nprint(liste)",
+      "canonical": "[10, 30]",
+      "wrong": [
+        "[20, 30]",
+        "[10, 20]",
+        "[10, 20, 30]",
+        "[30]"
+      ],
+      "explanation": "del liste[1] supprime l'élément d'INDICE 1, c'est-à-dire 20."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "liste = [\"a\", \"c\"]\nliste.insert(1, \"b\")\nprint(liste)",
+      "canonical": "['a', 'b', 'c']",
+      "wrong": [
+        "['b', 'a', 'c']",
+        "['a', 'c', 'b']",
+        "['a', 'b']",
+        "['a', 1, 'b', 'c']"
+      ],
+      "explanation": "insert(i, e) insère e à l'indice i ; les éléments suivants sont décalés."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(\"1,2,3,4\".split(\",\"))",
+      "canonical": "['1', '2', '3', '4']",
+      "wrong": [
+        "[1, 2, 3, 4]",
+        "['1,2,3,4']",
+        "['1', ',', '2', ',', '3', ',', '4']",
+        "1 2 3 4"
+      ],
+      "explanation": "split(',') coupe la chaîne à chaque virgule : on obtient une liste de CHAÎNES."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(\"-\".join(\"NSI\"))",
+      "canonical": "N-S-I",
+      "wrong": [
+        "-N-S-I-",
+        "NSI-",
+        "N-S-I-",
+        "['N', 'S', 'I']"
+      ],
+      "explanation": "'-'.join(...) colle les éléments en mettant un - ENTRE eux, ni au début ni à la fin."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(\"  NSI \\n\".strip())",
+      "canonical": "NSI",
+      "wrong": [
+        "  NSI \\n",
+        "nsi",
+        "N S I",
+        "'NSI'"
+      ],
+      "explanation": "strip() enlève les espaces, \\n et \\t au début et à la fin de la chaîne."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(len(\"1,2,3,4\"))",
+      "canonical": "7",
+      "wrong": [
+        "4",
+        "8",
+        "3",
+        "1"
+      ],
+      "explanation": "Les virgules comptent : 4 chiffres + 3 virgules = 7 caractères. C'est un exemple du cours."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(list(\"1234\"))",
+      "canonical": "['1', '2', '3', '4']",
+      "wrong": [
+        "[1, 2, 3, 4]",
+        "['1234']",
+        "[1234]",
+        "1234"
+      ],
+      "explanation": "list() sur une chaîne donne la liste de ses caractères (des chaînes, pas des nombres)."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "liste = [20, 0, -12, 5.0, 51]\nprint(sum(liste), min(liste), max(liste))",
+      "canonical": "64.0 -12 51",
+      "wrong": [
+        "64 -12 51",
+        "64.0 0 51",
+        "5 -12 51",
+        "64.0 20 51"
+      ],
+      "explanation": "La somme vaut 64.0 : il suffit d'un float (5.0) dans la liste pour que la somme soit un float."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "nbr = [0, 6, 2, 4]\nnbr.sort()\nprint(nbr)",
+      "canonical": "[0, 2, 4, 6]",
+      "wrong": [
+        "[6, 4, 2, 0]",
+        "[0, 6, 2, 4]",
+        "[4, 2, 6, 0]",
+        "None"
+      ],
+      "explanation": "sort() trie la liste elle-même, dans l'ordre croissant."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "nbr = [0, 6, 2, 4]\nnbr.reverse()\nprint(nbr)",
+      "canonical": "[4, 2, 6, 0]",
+      "wrong": [
+        "[6, 4, 2, 0]",
+        "[0, 2, 4, 6]",
+        "[0, 6, 2, 4]",
+        "None"
+      ],
+      "explanation": "reverse() inverse l'ordre de la liste, il ne la trie pas."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "nbr = [3, 1, 2]\nprint(nbr.sort())",
+      "canonical": "None",
+      "wrong": [
+        "[1, 2, 3]",
+        "[3, 1, 2]",
+        "[3, 2, 1]",
+        "Erreur (TypeError)"
+      ],
+      "explanation": "Piège : sort() trie la liste mais ne renvoie rien (None). Il faut trier, puis afficher nbr."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "nbr = [3, 1, 2]\ntri = sorted(nbr)\nprint(tri, nbr)",
+      "canonical": "[1, 2, 3] [3, 1, 2]",
+      "wrong": [
+        "[1, 2, 3] [1, 2, 3]",
+        "[3, 1, 2] [1, 2, 3]",
+        "None [1, 2, 3]",
+        "[3, 2, 1] [3, 1, 2]"
+      ],
+      "explanation": "sorted() renvoie une NOUVELLE liste triée et laisse la liste de départ intacte."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "jour = ['lundi', 'mardi', 'mercredi', 'jeudi']\nprint(jour[2])",
+      "canonical": "mercredi",
+      "wrong": [
+        "mardi",
+        "'mercredi'",
+        "jeudi",
+        "['mercredi']"
+      ],
+      "explanation": "Les indices commencent à 0 : jour[2] est le 3e jour. print affiche une chaîne sans les guillemets."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "matriceA = [[1, 2, 3], [1, 5, 1]]\nprint(matriceA[1][1])",
+      "canonical": "5",
+      "wrong": [
+        "2",
+        "1",
+        "[1, 5, 1]",
+        "Erreur (IndexError)"
+      ],
+      "explanation": "matriceA[1] est la 2e ligne [1, 5, 1], et son élément d'indice 1 est 5."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "matriceA = [[1, 2, 3], [1, 5, 1]]\nprint(matriceA[0])",
+      "canonical": "[1, 2, 3]",
+      "wrong": [
+        "1",
+        "[1, 1]",
+        "[[1, 2, 3]]",
+        "[1, 5, 1]"
+      ],
+      "explanation": "matriceA[0] est la première ligne de la matrice : la liste [1, 2, 3]."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "for idc, nom in enumerate([\"a\", \"b\"]):\n    print(idc, nom)",
+      "canonical": "0 a\n1 b",
+      "wrong": [
+        "1 a\n2 b",
+        "a 0\nb 1",
+        "0\n1",
+        "a\nb"
+      ],
+      "explanation": "enumerate donne l'indice (à partir de 0) ET l'élément, dans cet ordre."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "liste1 = [1, 2, 3]\nliste2 = liste1\nliste2[0] = 99\nprint(liste1)",
+      "canonical": "[99, 2, 3]",
+      "wrong": [
+        "[1, 2, 3]",
+        "[99, 1, 2, 3]",
+        "99",
+        "Erreur (TypeError)"
+      ],
+      "explanation": "Attention du cours : liste2 = liste1 ne copie pas, les deux noms désignent la même zone mémoire."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "liste1 = [1, 2, 3]\nliste2 = [elem for elem in liste1]\nliste2[0] = 99\nprint(liste1)",
+      "canonical": "[1, 2, 3]",
+      "wrong": [
+        "[99, 2, 3]",
+        "[99, 1, 2, 3]",
+        "99",
+        "Erreur (TypeError)"
+      ],
+      "explanation": "[elem for elem in liste1] fabrique une vraie copie : modifier liste2 ne touche pas liste1."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(int('100', 2), int('100', 16))",
+      "canonical": "4 256",
+      "wrong": [
+        "100 100",
+        "4 16",
+        "2 16",
+        "256 4"
+      ],
+      "explanation": "int(chaîne, base) : '100' en binaire vaut 4, en hexadécimal 16 × 16 = 256."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(list(map(int, ['1', '2', '3'])))",
+      "canonical": "[1, 2, 3]",
+      "wrong": [
+        "['1', '2', '3']",
+        "6",
+        "123",
+        "[123]"
+      ],
+      "explanation": "map(int, liste) applique int à chaque élément : les chaînes deviennent des entiers."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "maListe = [x * 2 for x in range(4)]\nprint(maListe)",
+      "canonical": "[0, 2, 4, 6]",
+      "wrong": [
+        "[2, 4, 6, 8]",
+        "[0, 2, 4, 6, 8]",
+        "[0, 1, 2, 3, 0, 1, 2, 3]",
+        "[8]"
+      ],
+      "explanation": "x prend 0, 1, 2, 3 et on garde x * 2 à chaque fois (exemple 6 du cours)."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(list(range(0, 10, 2)))",
+      "canonical": "[0, 2, 4, 6, 8]",
+      "wrong": [
+        "[0, 2, 4, 6, 8, 10]",
+        "[2, 4, 6, 8, 10]",
+        "[0, 10, 2]",
+        "range(0, 10, 2)"
+      ],
+      "explanation": "De 0 à 10 NON compris, par pas de 2 : c'est l'exemple du cours."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "liste = [20, 0, -12, 5.0, 51]\ndel liste[3]\nprint(len(liste))",
+      "canonical": "4",
+      "wrong": [
+        "5",
+        "3",
+        "51",
+        "Erreur (IndexError)"
+      ],
+      "explanation": "del supprime l'élément d'indice 3 (5.0) : il en reste 4 (exemple 5 du cours)."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "cours",
+      "source": "Quelle méthode ajoute UN élément à la fin d'une liste ?",
+      "canonical": "`append()`",
+      "wrong": [
+        "`add()`",
+        "`extend()`",
+        "`push()`",
+        "`plus()`"
+      ],
+      "explanation": "append ajoute un élément. extend ajoute chaque élément d'une autre séquence. add, c'est pour les ensembles."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "cours",
+      "source": "Quelle méthode vide complètement une liste ?",
+      "canonical": "`clear()`",
+      "wrong": [
+        "`remove()`",
+        "`empty()`",
+        "`reset()`",
+        "`del()`"
+      ],
+      "explanation": "clear() supprime tous les éléments. remove(e) n'en supprime qu'un."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "cours",
+      "source": "Comment parcourir tous les éléments d'une liste `notes` ?",
+      "canonical": "`for n in notes:`",
+      "wrong": [
+        "`for notes:`",
+        "`while n in notes:`",
+        "`for n = notes:`",
+        "`for n in range(notes):`"
+      ],
+      "explanation": "for variable in liste : la variable prend chaque élément à tour de rôle."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "code",
+      "source": "Le début du programme est donné. Quel code le complète pour afficher exactement le résultat attendu ?",
+      "code": "liste = [10, 20, 30, 40]",
+      "output": "4",
+      "canonical": "print(len(liste))",
+      "wrong": [
+        "print(liste[4])",
+        "print(liste[-1])",
+        "print(liste.index(40))",
+        "print(sum(liste))"
+      ],
+      "explanation": "len donne le nombre d'éléments : 4. liste[4] n'existe pas (indices 0 à 3), liste[-1] vaut 40, index(40) vaut 3."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "code",
+      "source": "Quel code affiche exactement ce résultat ?",
+      "output": "['N', 'S', 'I']",
+      "canonical": "print(list(\"NSI\"))",
+      "wrong": [
+        "print([\"NSI\"])",
+        "print(\"NSI\".split())",
+        "print(list(\"N S I\"))",
+        "print(\"N-S-I\".split())"
+      ],
+      "explanation": "list() découpe la chaîne en caractères. split() sans argument coupe aux espaces : \"NSI\" reste entier."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "code",
+      "source": "Le début du programme est donné. Quel code le complète pour afficher exactement le résultat attendu ?",
+      "code": "mots = [\"le\", \"chat\", \"dort\"]",
+      "output": "le chat dort",
+      "canonical": "print(\" \".join(mots))",
+      "wrong": [
+        "print(\"\".join(mots))",
+        "print(mots)",
+        "print(\"-\".join(mots))",
+        "print(mots.join(\" \"))"
+      ],
+      "explanation": "C'est le séparateur qui appelle join : \" \".join(liste). Avec \"\" les mots seraient collés."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "code",
+      "source": "Le début du programme est donné. Quel code le complète pour afficher exactement le résultat attendu ?",
+      "code": "liste = [1, 2, 3]",
+      "output": "[1, 2, 3, 4]",
+      "canonical": "liste.append(4)\nprint(liste)",
+      "wrong": [
+        "liste.extend(4)\nprint(liste)",
+        "liste.insert(0, 4)\nprint(liste)",
+        "print(liste.append(4))",
+        "liste = liste + 4\nprint(liste)"
+      ],
+      "explanation": "append(4) ajoute 4 à la fin. extend(4) et liste + 4 provoquent une erreur (4 n'est pas une liste) ; print(liste.append(4)) affiche None."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "code",
+      "source": "Le début du programme est donné. Quel code le complète pour afficher exactement le résultat attendu ?",
+      "code": "phrase = \"banana\"",
+      "output": "3",
+      "canonical": "print(phrase.count(\"a\"))",
+      "wrong": [
+        "print(phrase.find(\"a\"))",
+        "print(len(phrase))",
+        "print(phrase.index(\"a\"))",
+        "print(\"a\" in phrase)"
+      ],
+      "explanation": "count compte les « a » de banana : 3. find et index donnent la position du premier a (1), len la longueur (6)."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "code",
+      "source": "Quel code affiche exactement ce résultat ?",
+      "output": "[0, 1, 4, 9]",
+      "canonical": "print([x ** 2 for x in range(4)])",
+      "wrong": [
+        "print([x * 2 for x in range(4)])",
+        "print([x ** 2 for x in range(1, 4)])",
+        "print([x ** 2 for x in range(5)])",
+        "print(list(range(0, 10, 3)))"
+      ],
+      "explanation": "Les carrés de 0, 1, 2, 3. x * 2 donnerait les doubles, range(1, 4) oublierait 0, range(5) ajouterait 16."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "code",
+      "source": "Le début du programme est donné. Quel code le complète pour afficher exactement le résultat attendu ?",
+      "code": "mot = \"python\"",
+      "output": "PYTHON",
+      "canonical": "print(mot.upper())",
+      "wrong": [
+        "print(mot.capitalize())",
+        "print(mot.lower())",
+        "print(upper(mot))",
+        "print(mot.isupper())"
+      ],
+      "explanation": "upper() est une méthode : on l'écrit après la chaîne, mot.upper(). capitalize donnerait Python."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "code",
+      "source": "Le début du programme est donné. Quel code le complète pour afficher exactement le résultat attendu ?",
+      "code": "notes = [12, 8, 15]",
+      "output": "3",
+      "canonical": "print(len(notes))",
+      "wrong": [
+        "print(notes[3])",
+        "print(notes.count(3))",
+        "print(max(notes))",
+        "print(notes.index(15))"
+      ],
+      "explanation": "len compte les éléments : 3. notes[3] n'existe pas, count(3) vaut 0, index(15) vaut 2."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "code",
+      "source": "Le début du programme est donné. Quel code le complète pour afficher exactement le résultat attendu ?",
+      "code": "lettres = ['c', 'a', 'b']",
+      "output": "['a', 'b', 'c']",
+      "canonical": "lettres.sort()\nprint(lettres)",
+      "wrong": [
+        "print(lettres.sort())",
+        "lettres.reverse()\nprint(lettres)",
+        "print(lettres[::-1])",
+        "print(sorted(lettres, reverse=True))"
+      ],
+      "explanation": "sort() trie la liste, puis on l'affiche. print(lettres.sort()) affiche None ; reverse et [::-1] retournent sans trier."
+    },
+    {
+      "theme": "6. Chaînes de caractères et listes",
+      "type": "code",
+      "source": "Le début du programme est donné. Quel code le complète pour afficher exactement le résultat attendu ?",
+      "code": "chaine = \"Lycée Louis\"",
+      "output": "Fondation Louis",
+      "canonical": "print(chaine.replace(\"Lycée\", \"Fondation\"))",
+      "wrong": [
+        "print(chaine.replace(\"Fondation\", \"Lycée\"))",
+        "print(\"Fondation\" + chaine)",
+        "print(chaine.find(\"Lycée\"))",
+        "chaine[0:5] = \"Fondation\"\nprint(chaine)"
+      ],
+      "explanation": "replace(ancien, nouveau), dans cet ordre. On ne peut pas modifier une partie d'une chaîne (immuable)."
+    },
+    {
+      "theme": "6. Découpage en tranches (slicing)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "s = \"ABCDEFGHIJKL\"\nprint(s[2:7])",
+      "canonical": "CDEFG",
+      "wrong": [
+        "CDEFGH",
+        "BCDEFG",
+        "BCDEF",
+        "CDEF"
+      ],
+      "explanation": "s[2:7] : de l'indice 2 (C) jusqu'à l'indice 7 NON compris, soit 5 caractères."
+    },
+    {
+      "theme": "6. Découpage en tranches (slicing)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "s = \"ABCDEFGHIJKL\"\nprint(s[:4])",
+      "canonical": "ABCD",
+      "wrong": [
+        "ABCDE",
+        "IJKL",
+        "EFGHIJKL",
+        "D"
+      ],
+      "explanation": "s[:4] : les 4 premiers caractères (indices 0 à 3)."
+    },
+    {
+      "theme": "6. Découpage en tranches (slicing)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "s = \"ABCDEFGHIJKL\"\nprint(s[-4:])",
+      "canonical": "IJKL",
+      "wrong": [
+        "ABCDEFGH",
+        "HIJKL",
+        "LKJI",
+        "ABCD"
+      ],
+      "explanation": "s[-4:] : les 4 derniers caractères."
+    },
+    {
+      "theme": "6. Découpage en tranches (slicing)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "s = \"ABCDEFGHIJKL\"\nprint(s[4:])",
+      "canonical": "EFGHIJKL",
+      "wrong": [
+        "ABCD",
+        "DEFGHIJKL",
+        "E",
+        "IJKL"
+      ],
+      "explanation": "s[4:] : tout sauf les 4 premiers."
+    },
+    {
+      "theme": "6. Découpage en tranches (slicing)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "s = \"ABCDEFGHIJKL\"\nprint(s[:-4])",
+      "canonical": "ABCDEFGH",
+      "wrong": [
+        "IJKL",
+        "ABCDEFG",
+        "ABCD",
+        "HIJKL"
+      ],
+      "explanation": "s[:-4] : tout sauf les 4 derniers."
+    },
+    {
+      "theme": "6. Découpage en tranches (slicing)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "s = \"ABCDEFGHIJKL\"\nprint(s[::3])",
+      "canonical": "ADGJ",
+      "wrong": [
+        "CFIL",
+        "ABC",
+        "LIFC",
+        "BEHK"
+      ],
+      "explanation": "s[::3] : du début à la fin, de 3 en 3 : indices 0, 3, 6, 9."
+    },
+    {
+      "theme": "6. Découpage en tranches (slicing)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "s = \"ABCDEFGHIJKL\"\nprint(s[::-3])",
+      "canonical": "LIFC",
+      "wrong": [
+        "ADGJ",
+        "LKJ",
+        "CFIL",
+        "JGDA"
+      ],
+      "explanation": "Un pas négatif part de la fin : L, puis 3 en arrière I, F, C."
+    },
+    {
+      "theme": "6. Découpage en tranches (slicing)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "s = \"ABCDEFGHIJKL\"\nprint(s[1::2])",
+      "canonical": "BDFHJL",
+      "wrong": [
+        "ACEGIK",
+        "BCDEFGHIJKL",
+        "B",
+        "LJHFDB"
+      ],
+      "explanation": "s[1::2] : à partir de l'indice 1, de 2 en 2 : les indices impairs."
+    },
+    {
+      "theme": "6. Découpage en tranches (slicing)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "s = \"ABCDEFGHIJKL\"\nprint(s[::-1])",
+      "canonical": "LKJIHGFEDCBA",
+      "wrong": [
+        "ABCDEFGHIJKL",
+        "L",
+        "LKJ",
+        "A"
+      ],
+      "explanation": "s[::-1] : copie à l'envers."
+    },
+    {
+      "theme": "6. Découpage en tranches (slicing)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "s = \"ABCDEFGHIJKL\"\nprint(s[:3], s[3:7], s[7:])",
+      "canonical": "ABC DEFG HIJKL",
+      "wrong": [
+        "('ABC', 'DEFG', 'HIJKL')",
+        "ABCD DEFG GHIJKL",
+        "ABC DEFGH IJKL",
+        "ABC EFG HIJKL"
+      ],
+      "explanation": "Partitionner : s[:3], s[3:7] et s[7:] se suivent sans se chevaucher. print les sépare par des espaces."
+    },
+    {
+      "theme": "6. Découpage en tranches (slicing)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "jour = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi']\nprint(jour[2:4])",
+      "canonical": "['mercredi', 'jeudi']",
+      "wrong": [
+        "['mercredi', 'jeudi', 'vendredi']",
+        "['mardi', 'mercredi', 'jeudi']",
+        "['mardi', 'mercredi']",
+        "mercredi jeudi"
+      ],
+      "explanation": "Indices 2 et 3 (4 non compris). Une tranche de liste est une liste."
+    },
+    {
+      "theme": "6. Découpage en tranches (slicing)",
+      "type": "code",
+      "source": "Le début du programme est donné. Quel code le complète pour afficher exactement le résultat attendu ?",
+      "code": "jour = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi']",
+      "output": "['lundi', 'mercredi', 'vendredi']",
+      "canonical": "print(jour[::2])",
+      "wrong": [
+        "print(jour[1::2])",
+        "print(jour[0:2])",
+        "print(jour[::3])",
+        "print(jour[0], jour[2], jour[4])"
+      ],
+      "explanation": "jour[::2] : les indices pairs 0, 2, 4, dans une liste. Le dernier choix affiche les mêmes jours, mais sans crochets ni guillemets."
+    },
+    {
+      "theme": "6. Découpage en tranches (slicing)",
+      "type": "code",
+      "source": "Le début du programme est donné. Quel code le complète pour afficher exactement le résultat attendu ?",
+      "code": "mot = \"ISN\"",
+      "output": "NSI",
+      "canonical": "print(mot[::-1])",
+      "wrong": [
+        "print(mot[-1])",
+        "print(mot.reverse())",
+        "print(mot[1::-1])",
+        "print(mot[::1])"
+      ],
+      "explanation": "mot[::-1] retourne la chaîne. reverse() n'existe que pour les listes (erreur sur une chaîne)."
+    },
+    {
+      "theme": "6. Découpage en tranches (slicing)",
+      "type": "code",
+      "source": "Le début du programme est donné. Quel code le complète pour afficher exactement le résultat attendu ?",
+      "code": "s = \"ABCDEFGHIJKL\"",
+      "output": "IJKL",
+      "canonical": "print(s[-4:])",
+      "wrong": [
+        "print(s[:-4])",
+        "print(s[-4])",
+        "print(s[8:11])",
+        "print(s[4:])"
+      ],
+      "explanation": "s[-4:] : les 4 derniers. s[-4] seul ne donne qu'un caractère (I), s[8:11] s'arrête avant L."
+    },
+    {
+      "theme": "6. Découpage en tranches (slicing)",
+      "type": "cours",
+      "source": "Que donne `liste[::2]` ?",
+      "canonical": "Les éléments d'indice pair (0, 2, 4...)",
+      "wrong": [
+        "Les 2 premiers éléments",
+        "Les éléments d'indice impair",
+        "Les 2 derniers éléments",
+        "Chaque élément en double"
+      ],
+      "explanation": "liste[::2] : indices pairs ; liste[1::2] : indices impairs ; liste[::-1] : à l'envers."
+    },
+    {
+      "theme": "6. Découpage en tranches (slicing)",
+      "type": "cours",
+      "source": "Dans `s[début:fin]`, l'élément d'indice `fin` est-il compris ?",
+      "canonical": "Non : la tranche s'arrête juste avant `fin`",
+      "wrong": [
+        "Oui, toujours",
+        "Seulement si fin est négatif",
+        "Seulement pour les listes",
+        "Seulement pour les chaînes"
+      ],
+      "explanation": "Comme range : s[2:7] va de l'indice 2 à l'indice 6."
+    },
+    {
+      "theme": "7. Tuples",
+      "type": "cours",
+      "source": "Qu'est-ce qu'un tuple ?",
+      "canonical": "Une sorte de liste non modifiable",
+      "wrong": [
+        "Une liste qu'on peut modifier",
+        "Un dictionnaire sans clés",
+        "Un ensemble sans doublons",
+        "Une chaîne de caractères"
+      ],
+      "explanation": "Les tuples sont des listes non modifiables. On les écrit entre parenthèses : (0, 1, 2)."
+    },
+    {
+      "theme": "7. Tuples",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "t = (0, 1, 2)\nprint(t[1])",
+      "canonical": "1",
+      "wrong": [
+        "0",
+        "2",
+        "(0, 1, 2)",
+        "Erreur (TypeError)"
+      ],
+      "explanation": "On lit un tuple comme une liste, avec un indice qui commence à 0."
+    },
+    {
+      "theme": "7. Tuples",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "t = (0, 1, 2)\nt[1] = 5\nprint(t)",
+      "canonical": "Erreur (TypeError)",
+      "wrong": [
+        "(0, 5, 2)",
+        "(5, 1, 2)",
+        "(0, 1, 2)",
+        "Erreur (IndexError)"
+      ],
+      "explanation": "Un tuple n'est pas modifiable : on ne peut pas changer un de ses éléments."
+    },
+    {
+      "theme": "7. Tuples",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "coord = (3, 12)\nx, y = coord\nprint(y)",
+      "canonical": "12",
+      "wrong": [
+        "3",
+        "(3, 12)",
+        "y",
+        "Erreur (ValueError)"
+      ],
+      "explanation": "x, y = coord range le premier élément dans x et le second dans y."
+    },
+    {
+      "theme": "7. Tuples",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "coord = (3, 12)\nprint(len(coord), 3 in coord)",
+      "canonical": "2 True",
+      "wrong": [
+        "15 True",
+        "2 False",
+        "1 True",
+        "12 True"
+      ],
+      "explanation": "Le tuple contient 2 éléments, et 3 en fait partie."
+    },
+    {
+      "theme": "7. Tuples",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "t1 = (1, 2, 3)\nt2 = (4, 5, 6)\nprint(tuple(zip(t1, t2)))",
+      "canonical": "((1, 4), (2, 5), (3, 6))",
+      "wrong": [
+        "((1, 2, 3), (4, 5, 6))",
+        "(1, 2, 3, 4, 5, 6)",
+        "(5, 7, 9)",
+        "((1, 6), (2, 5), (3, 4))"
+      ],
+      "explanation": "zip associe les éléments de même indice : t1[0] avec t2[0], t1[1] avec t2[1]..."
+    },
+    {
+      "theme": "7. Tuples",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "t = (1, 2)\nlst = list(t)\nlst.append(3)\nt = tuple(lst)\nprint(t)",
+      "canonical": "(1, 2, 3)",
+      "wrong": [
+        "[1, 2, 3]",
+        "(1, 2)",
+        "((1, 2), 3)",
+        "Erreur (AttributeError)"
+      ],
+      "explanation": "Pour ajouter un élément à un tuple : le convertir en liste, ajouter, reconvertir en tuple."
+    },
+    {
+      "theme": "7. Tuples",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "tpl = (1, 2)\ntpl = *tpl, 3\nprint(tpl)",
+      "canonical": "(1, 2, 3)",
+      "wrong": [
+        "((1, 2), 3)",
+        "(3, 1, 2)",
+        "[1, 2, 3]",
+        "Erreur (SyntaxError)"
+      ],
+      "explanation": "tpl = *tpl, element : l'autre façon du cours d'ajouter un élément à un tuple."
+    },
+    {
+      "theme": "7. Tuples",
+      "type": "cours",
+      "source": "Comment convertir une liste `lst` en tuple ?",
+      "canonical": "`tuple(lst)`",
+      "wrong": [
+        "`list(lst)`",
+        "`lst.tuple()`",
+        "`(lst)`",
+        "`zip(lst)`"
+      ],
+      "explanation": "tuple(lst) convertit en tuple, list(tpl) fait l'inverse."
+    },
+    {
+      "theme": "7. Tuples",
+      "type": "code",
+      "source": "Quel code affiche exactement ce résultat ?",
+      "output": "(1, 2, 3)",
+      "canonical": "print((1, 2, 3))",
+      "wrong": [
+        "print([1, 2, 3])",
+        "print(1, 2, 3)",
+        "print({1, 2, 3})",
+        "print(\"1, 2, 3\")"
+      ],
+      "explanation": "Les parenthèses marquent un tuple. Crochets : une liste ; accolades : un ensemble."
+    },
+    {
+      "theme": "7. Tuples",
+      "type": "code",
+      "source": "Le début du programme est donné. Quel code le complète pour afficher exactement le résultat attendu ?",
+      "code": "coord = (3, 12)",
+      "output": "3 12",
+      "canonical": "x, y = coord\nprint(x, y)",
+      "wrong": [
+        "print(coord)",
+        "x, y = coord\nprint(y, x)",
+        "x = coord\nprint(x)",
+        "print(coord[1], coord[0])"
+      ],
+      "explanation": "Le dépaquetage x, y = coord donne x = 3 et y = 12. print(coord) afficherait les parenthèses."
+    },
+    {
+      "theme": "8. Dictionnaires",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "code = {'noir': 0, 'marron': 1, 'rouge': 2}\nprint(code['marron'])",
+      "canonical": "1",
+      "wrong": [
+        "marron",
+        "0",
+        "('marron', 1)",
+        "Erreur (IndexError)"
+      ],
+      "explanation": "On lit la valeur associée à la clé 'marron'."
+    },
+    {
+      "theme": "8. Dictionnaires",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "code = {'noir': 0, 'marron': 1, 'rouge': 2}\nprint(code[1])",
+      "canonical": "Erreur (KeyError)",
+      "wrong": [
+        "marron",
+        "1",
+        "('marron', 1)",
+        "Erreur (IndexError)"
+      ],
+      "explanation": "Un dictionnaire est indexé par ses clés, pas par des numéros : 1 n'est pas une clé."
+    },
+    {
+      "theme": "8. Dictionnaires",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "code = {'noir': 0, 'marron': 1, 'rouge': 2}\ndel code['rouge']\nprint(len(code))",
+      "canonical": "2",
+      "wrong": [
+        "3",
+        "1",
+        "4",
+        "Erreur (KeyError)"
+      ],
+      "explanation": "del code['rouge'] efface cette entrée : il en reste 2."
+    },
+    {
+      "theme": "8. Dictionnaires",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "code = {'noir': 0, 'marron': 1}\ncode['orange'] = 3\nprint(code)",
+      "canonical": "{'noir': 0, 'marron': 1, 'orange': 3}",
+      "wrong": [
+        "{'noir': 0, 'marron': 1}",
+        "{'noir': 0, 'marron': 1, 3: 'orange'}",
+        "['noir', 'marron', 'orange']",
+        "Erreur (KeyError)"
+      ],
+      "explanation": "Affecter une clé qui n'existe pas l'AJOUTE, avec sa valeur."
+    },
+    {
+      "theme": "8. Dictionnaires",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "code = {'noir': 0, 'marron': 1}\nprint(code.get('orange'))",
+      "canonical": "None",
+      "wrong": [
+        "Erreur (KeyError)",
+        "0",
+        "orange",
+        "False"
+      ],
+      "explanation": "get renvoie None si la clé n'existe pas, au lieu d'une erreur."
+    },
+    {
+      "theme": "8. Dictionnaires",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "code = {'noir': 0, 'marron': 1, 'rouge': 2}\nprint(sum(code.values()))",
+      "canonical": "3",
+      "wrong": [
+        "2",
+        "[0, 1, 2]",
+        "noirmarronrouge",
+        "Erreur (TypeError)"
+      ],
+      "explanation": "values() donne les valeurs 0, 1, 2 : leur somme vaut 3."
+    },
+    {
+      "theme": "8. Dictionnaires",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "code = {'noir': 0, 'marron': 1}\nfor cle in code:\n    print(cle)",
+      "canonical": "noir\nmarron",
+      "wrong": [
+        "0\n1",
+        "('noir', 0)\n('marron', 1)",
+        "noir 0\nmarron 1",
+        "Erreur (TypeError)"
+      ],
+      "explanation": "Une boucle for sur un dictionnaire parcourt ses CLÉS."
+    },
+    {
+      "theme": "8. Dictionnaires",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "code = {'noir': 0, 'marron': 1}\nfor cle, valeur in code.items():\n    print(cle, valeur)",
+      "canonical": "noir 0\nmarron 1",
+      "wrong": [
+        "noir\nmarron",
+        "0 noir\n1 marron",
+        "('noir', 0)\n('marron', 1)",
+        "Erreur (ValueError)"
+      ],
+      "explanation": "items() donne les couples (clé, valeur), qu'on range dans deux variables."
+    },
+    {
+      "theme": "8. Dictionnaires",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "code = {'noir': 0, 'marron': 1, 'orange': 3}\nprint(sorted(code.items()))",
+      "canonical": "[('marron', 1), ('noir', 0), ('orange', 3)]",
+      "wrong": [
+        "[('noir', 0), ('marron', 1), ('orange', 3)]",
+        "['marron', 'noir', 'orange']",
+        "[0, 1, 3]",
+        "[('orange', 3), ('noir', 0), ('marron', 1)]"
+      ],
+      "explanation": "Trier les couples (clé, valeur) les trie d'abord par clé : ordre alphabétique."
+    },
+    {
+      "theme": "8. Dictionnaires",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "code = {'rouge': 2, 'noir': 0, 'marron': 1}\nprint(sorted(code.items(), key=lambda a: a[1]))",
+      "canonical": "[('noir', 0), ('marron', 1), ('rouge', 2)]",
+      "wrong": [
+        "[('marron', 1), ('noir', 0), ('rouge', 2)]",
+        "[('rouge', 2), ('noir', 0), ('marron', 1)]",
+        "[0, 1, 2]",
+        "[('rouge', 2), ('marron', 1), ('noir', 0)]"
+      ],
+      "explanation": "key=lambda a: a[1] trie selon l'élément 1 de chaque couple : la valeur."
+    },
+    {
+      "theme": "8. Dictionnaires",
+      "type": "cours",
+      "source": "Par quoi un dictionnaire est-il indexé ?",
+      "canonical": "Par des clés, d'un type immuable (chaîne, nombre, tuple...)",
+      "wrong": [
+        "Par des numéros de 0 à n-1, comme une liste",
+        "Par ordre alphabétique",
+        "Par des listes",
+        "Il n'est pas indexé"
+      ],
+      "explanation": "Les séquences sont indexées par des nombres, les dictionnaires par des clés immuables."
+    },
+    {
+      "theme": "8. Dictionnaires",
+      "type": "cours",
+      "source": "Quel est l'avantage de `code.get('orange')` par rapport à `code['orange']` ?",
+      "canonical": "Si la clé n'existe pas, get renvoie None au lieu de provoquer une erreur",
+      "wrong": [
+        "get est plus rapide",
+        "get ajoute la clé si elle n'existe pas",
+        "get renvoie toutes les valeurs",
+        "Aucun, c'est exactement pareil"
+      ],
+      "explanation": "code['orange'] provoque une KeyError si la clé n'existe pas ; get renvoie None."
+    },
+    {
+      "theme": "8. Dictionnaires",
+      "type": "cours",
+      "source": "Un dictionnaire est-il mutable ?",
+      "canonical": "Oui : on peut ajouter, modifier ou supprimer des entrées",
+      "wrong": [
+        "Non, comme un tuple",
+        "Seulement ses clés",
+        "Seulement si on le convertit en liste",
+        "Non, il faut en créer un nouveau"
+      ],
+      "explanation": "Les dictionnaires sont mutables : code['orange'] = 3 ajoute, del code['rouge'] supprime."
+    },
+    {
+      "theme": "8. Dictionnaires",
+      "type": "code",
+      "source": "Le début du programme est donné. Quel code le complète pour afficher exactement le résultat attendu ?",
+      "code": "pokemons = {'Pyroli': (0.9, 25, 'Feu', 'Eau'),\n            'Kaiminus': (0.6, 9.5, 'Eau', 'Électrik')}",
+      "output": "25",
+      "canonical": "print(pokemons['Pyroli'][1])",
+      "wrong": [
+        "print(pokemons['Pyroli'][0])",
+        "print(pokemons[0][1])",
+        "print(pokemons['Pyroli'])",
+        "print(pokemons['Pyroli'][2])"
+      ],
+      "explanation": "La valeur de 'Pyroli' est le tuple (taille, poids, type, faiblesse) : le poids est à l'indice 1."
+    },
+    {
+      "theme": "8. Dictionnaires",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "pokemons = {'Wattouat': (0.6, 7.8, 'Électrik', 'Sol'),\n            'Pyroli': (0.9, 25, 'Feu', 'Eau'),\n            'Voltali': (0.8, 24.5, 'Électrik', 'Sol')}\nfor nom, info in pokemons.items():\n    if info[2] == 'Électrik':\n        print(nom)",
+      "canonical": "Wattouat\nVoltali",
+      "wrong": [
+        "Pyroli",
+        "Wattouat",
+        "Électrik\nÉlectrik",
+        "Wattouat\nPyroli\nVoltali"
+      ],
+      "explanation": "info est le tuple du pokémon, info[2] son type : seuls Wattouat et Voltali sont de type Électrik."
+    },
+    {
+      "theme": "8. Dictionnaires",
+      "type": "code",
+      "source": "Le début du programme est donné. Quel code le complète pour afficher exactement le résultat attendu ?",
+      "code": "code = {'noir': 0, 'marron': 1}",
+      "output": "['noir', 'marron']",
+      "canonical": "print(list(code.keys()))",
+      "wrong": [
+        "print(list(code.values()))",
+        "print(code.keys())",
+        "print(list(code.items()))",
+        "print(code)"
+      ],
+      "explanation": "keys() donne les clés ; list() les met dans une liste. Sans list(), Python affiche dict_keys([...])."
+    },
+    {
+      "theme": "8. Dictionnaires",
+      "type": "code",
+      "source": "Le début du programme est donné. Quel code le complète pour afficher exactement le résultat attendu ?",
+      "code": "code = {'noir': 0, 'marron': 1}",
+      "output": "{'noir': 0, 'marron': 5}",
+      "canonical": "code['marron'] = 5\nprint(code)",
+      "wrong": [
+        "code[1] = 5\nprint(code)",
+        "code['marron'] = code['noir']\nprint(code)",
+        "code.get('marron') = 5\nprint(code)",
+        "code['marron'] = 5\nprint(code['marron'])"
+      ],
+      "explanation": "On modifie la valeur d'une clé existante par une affectation. code[1] = 5 ajouterait une nouvelle clé 1."
+    },
+    {
+      "theme": "8. Dictionnaires",
+      "type": "code",
+      "source": "Le début du programme est donné. Quel code le complète pour afficher exactement le résultat attendu ?",
+      "code": "code = {'noir': 0, 'marron': 1, 'rouge': 2}",
+      "output": "2",
+      "canonical": "print(code['rouge'])",
+      "wrong": [
+        "print(code[2])",
+        "print(code.get('orange'))",
+        "print(len(code))",
+        "print(code['noir'])"
+      ],
+      "explanation": "On lit la valeur par sa clé. code[2] est une erreur : 2 est une valeur, pas une clé."
+    },
+    {
+      "theme": "8. Dictionnaires",
+      "type": "code",
+      "source": "Le début du programme est donné. Quel code le complète pour afficher exactement le résultat attendu ?",
+      "code": "code = {'noir': 0, 'marron': 1, 'rouge': 2}",
+      "output": "True",
+      "canonical": "print('noir' in code)",
+      "wrong": [
+        "print(0 in code)",
+        "print('orange' in code)",
+        "print(code['noir'] == 1)",
+        "print(len(code) == 2)"
+      ],
+      "explanation": "`in` sur un dictionnaire cherche parmi les CLÉS : 'noir' en est une, 0 n'est qu'une valeur."
+    },
+    {
+      "theme": "9. Ensembles (set)",
+      "type": "cours",
+      "source": "Qu'est-ce qu'un ensemble (`set`) ?",
+      "canonical": "Une collection non ordonnée, sans élément en double",
+      "wrong": [
+        "Une liste triée",
+        "Une collection ordonnée avec des indices",
+        "Une liste non modifiable",
+        "Une suite de caractères"
+      ],
+      "explanation": "Un ensemble est une collection non ordonnée sans élément dupliqué."
+    },
+    {
+      "theme": "9. Ensembles (set)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "ens = set([1, 2, 2, 3, 3, 3])\nprint(len(ens))",
+      "canonical": "3",
+      "wrong": [
+        "6",
+        "1",
+        "2",
+        "Erreur (ValueError)"
+      ],
+      "explanation": "Un ensemble ne garde pas les doublons : il reste {1, 2, 3}."
+    },
+    {
+      "theme": "9. Ensembles (set)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "ens = {1, 2, 3}\nens.add(3)\nens.add(4)\nprint(ens)",
+      "canonical": "{1, 2, 3, 4}",
+      "wrong": [
+        "{1, 2, 3, 3, 4}",
+        "{1, 2, 3}",
+        "[1, 2, 3, 3, 4]",
+        "Erreur (KeyError)"
+      ],
+      "explanation": "Ajouter 3, déjà présent, ne change rien ; 4 est ajouté."
+    },
+    {
+      "theme": "9. Ensembles (set)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "a = set([1, 2, 3, 4])\nb = set([3, 4, 5, 6])\nprint(a | b)",
+      "canonical": "{1, 2, 3, 4, 5, 6}",
+      "wrong": [
+        "{3, 4}",
+        "{1, 2, 5, 6}",
+        "{1, 2}",
+        "{1, 2, 3, 4, 3, 4, 5, 6}"
+      ],
+      "explanation": "| est l'union : tous les éléments des deux ensembles, sans doublon."
+    },
+    {
+      "theme": "9. Ensembles (set)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "a = set([1, 2, 3, 4])\nb = set([3, 4, 5, 6])\nprint(a & b)",
+      "canonical": "{3, 4}",
+      "wrong": [
+        "{1, 2, 3, 4, 5, 6}",
+        "{1, 2, 5, 6}",
+        "{1, 2}",
+        "{5, 6}"
+      ],
+      "explanation": "& est l'intersection : les éléments communs aux deux ensembles."
+    },
+    {
+      "theme": "9. Ensembles (set)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "a = set([1, 2, 3, 4])\nb = set([3, 4, 5, 6])\nprint(a ^ b)",
+      "canonical": "{1, 2, 5, 6}",
+      "wrong": [
+        "{3, 4}",
+        "{1, 2, 3, 4, 5, 6}",
+        "{1, 2}",
+        "{5, 6}"
+      ],
+      "explanation": "^ est la différence symétrique : les éléments qui sont dans un seul des deux ensembles."
+    },
+    {
+      "theme": "9. Ensembles (set)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "a = set([1, 2, 3, 4])\nb = set([3, 4, 5, 6])\nprint(a - b)",
+      "canonical": "{1, 2}",
+      "wrong": [
+        "{5, 6}",
+        "{3, 4}",
+        "{1, 2, 5, 6}",
+        "{1, 2, 3, 4}"
+      ],
+      "explanation": "a - b : les éléments de a qui ne sont pas dans b."
+    },
+    {
+      "theme": "9. Ensembles (set)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "a = set([1, 2, 3, 4])\nb = set([3, 4, 5, 6])\nprint(b - a)",
+      "canonical": "{5, 6}",
+      "wrong": [
+        "{1, 2}",
+        "{3, 4}",
+        "{1, 2, 5, 6}",
+        "{3, 4, 5, 6}"
+      ],
+      "explanation": "b - a : les éléments de b qui ne sont pas dans a. L'ordre compte pour la différence."
+    },
+    {
+      "theme": "9. Ensembles (set)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "a = set([1, 2, 3, 4])\nb = set([1, 2])\nc = set([1, 2, 5])\nprint(a > b, c < a)",
+      "canonical": "True False",
+      "wrong": [
+        "False False",
+        "True True",
+        "False True",
+        "Erreur (TypeError)"
+      ],
+      "explanation": "a > b : tous les éléments de b sont dans a, vrai. c < a : 5 n'est pas dans a, faux."
+    },
+    {
+      "theme": "9. Ensembles (set)",
+      "type": "cours",
+      "source": "Quelle instruction crée un ensemble VIDE ?",
+      "canonical": "`ens = set()`",
+      "wrong": [
+        "`ens = {}`",
+        "`ens = []`",
+        "`ens = ()`",
+        "`ens = \"\"`"
+      ],
+      "explanation": "Attention : {} crée un dictionnaire vide, pas un ensemble. [] est une liste, () un tuple."
+    },
+    {
+      "theme": "9. Ensembles (set)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "ens = {1, 2, 3}\nprint(ens[0])",
+      "canonical": "Erreur (TypeError)",
+      "wrong": [
+        "1",
+        "3",
+        "{1}",
+        "Erreur (IndexError)"
+      ],
+      "explanation": "Un ensemble n'est pas ordonné : il n'a pas d'indices."
+    },
+    {
+      "theme": "9. Ensembles (set)",
+      "type": "cours",
+      "source": "Quelle méthode ajoute PLUSIEURS éléments à un ensemble ?",
+      "canonical": "`update()`",
+      "wrong": [
+        "`add()`",
+        "`append()`",
+        "`extend()`",
+        "`insert()`"
+      ],
+      "explanation": "add() ajoute un élément, update() plusieurs : ens1.update([4, \"B\"])."
+    },
+    {
+      "theme": "9. Ensembles (set)",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "ens1 = {1, 2}\nens2 = ens1.copy()\nens2.add(3)\nprint(ens1)",
+      "canonical": "{1, 2}",
+      "wrong": [
+        "{1, 2, 3}",
+        "{3}",
+        "None",
+        "Erreur (AttributeError)"
+      ],
+      "explanation": "copy() crée un nouvel ensemble : modifier la copie ne change pas l'original."
+    },
+    {
+      "theme": "9. Ensembles (set)",
+      "type": "code",
+      "source": "Le début du programme est donné. Quel code le complète pour afficher exactement le résultat attendu ?",
+      "code": "a = {1, 2, 3, 4}\nb = {3, 4, 5, 6}",
+      "output": "{3, 4}",
+      "canonical": "print(a.intersection(b))",
+      "wrong": [
+        "print(a.union(b))",
+        "print(a.difference(b))",
+        "print(a.symmetric_difference(b))",
+        "print(b - a)"
+      ],
+      "explanation": "L'intersection garde les éléments communs : 3 et 4."
+    },
+    {
+      "theme": "9. Ensembles (set)",
+      "type": "code",
+      "source": "Le début du programme est donné. Quel code le complète pour afficher exactement le résultat attendu ?",
+      "code": "a = {1, 2, 3, 4}\nb = {3, 4, 5, 6}",
+      "output": "{1, 2, 3, 4, 5, 6}",
+      "canonical": "print(a | b)",
+      "wrong": [
+        "print(a & b)",
+        "print(a ^ b)",
+        "print(a - b)",
+        "print(a + b)"
+      ],
+      "explanation": "| est l'union. + n'existe pas pour les ensembles (TypeError)."
+    },
+    {
+      "theme": "9. Ensembles (set)",
+      "type": "cours",
+      "source": "Comment enlever les doublons d'une liste `notes` ?",
+      "canonical": "`list(set(notes))`",
+      "wrong": [
+        "`notes.clear()`",
+        "`sorted(notes)`",
+        "`notes.remove()`",
+        "`tuple(notes)`"
+      ],
+      "explanation": "Passer par un ensemble supprime les doublons, puis list() redonne une liste."
+    },
+    {
+      "theme": "9. Ensembles (set)",
+      "type": "code",
+      "source": "Le début du programme est donné. Quel code le complète pour afficher exactement le résultat attendu ?",
+      "code": "a = {1, 2, 3, 4}\nb = {3, 4, 5, 6}",
+      "output": "{1, 2}",
+      "canonical": "print(a - b)",
+      "wrong": [
+        "print(b - a)",
+        "print(a & b)",
+        "print(a ^ b)",
+        "print(a.union(b))"
+      ],
+      "explanation": "a - b garde les éléments de a absents de b. b - a donnerait {5, 6}."
+    },
+    {
+      "theme": "10-11. Types, itérables et générateurs",
+      "type": "cours",
+      "source": "Parmi ces types, lequel est MUTABLE (modifiable) ?",
+      "canonical": "`list`",
+      "wrong": [
+        "`str`",
+        "`tuple`",
+        "`int`",
+        "`float`"
+      ],
+      "explanation": "Tableau du cours : list, dict et set sont mutables ; str et tuple ne le sont pas."
+    },
+    {
+      "theme": "10-11. Types, itérables et générateurs",
+      "type": "cours",
+      "source": "Lesquels de ces types sont tous des séquences (éléments atteints par un indice) ?",
+      "canonical": "`str`, `list`, `tuple`",
+      "wrong": [
+        "`list`, `dict`, `set`",
+        "`int`, `float`, `bool`",
+        "`dict`, `set`, `str`",
+        "`str`, `list`, `set`"
+      ],
+      "explanation": "Séquences : str, list, tuple. dict et set n'ont pas d'indices."
+    },
+    {
+      "theme": "10-11. Types, itérables et générateurs",
+      "type": "cours",
+      "source": "Lesquels de ces types sont tous mutables ?",
+      "canonical": "`list`, `dict`, `set`",
+      "wrong": [
+        "`str`, `list`, `tuple`",
+        "`int`, `float`, `bool`",
+        "`tuple`, `dict`, `set`",
+        "`str`, `dict`, `list`"
+      ],
+      "explanation": "Mutables : list, dict, set. Les autres ne se modifient pas."
+    },
+    {
+      "theme": "10-11. Types, itérables et générateurs",
+      "type": "cours",
+      "source": "Lequel de ces types n'est PAS itérable (on ne peut pas le parcourir avec `for`) ?",
+      "canonical": "`int`",
+      "wrong": [
+        "`str`",
+        "`list`",
+        "`dict`",
+        "`set`"
+      ],
+      "explanation": "int, float et bool ne sont ni des séquences, ni mutables, ni itérables."
+    },
+    {
+      "theme": "10-11. Types, itérables et générateurs",
+      "type": "cours",
+      "source": "D'après le tableau du cours, le type `str` est :",
+      "canonical": "une séquence itérable, mais pas mutable",
+      "wrong": [
+        "mutable et itérable, mais pas une séquence",
+        "une séquence mutable",
+        "ni une séquence, ni itérable",
+        "mutable, mais pas itérable"
+      ],
+      "explanation": "str : séquence (indices) et itérable (for), mais immuable."
+    },
+    {
+      "theme": "10-11. Types, itérables et générateurs",
+      "type": "cours",
+      "source": "D'après le tableau du cours, le type `dict` est :",
+      "canonical": "mutable et itérable, mais pas une séquence",
+      "wrong": [
+        "une séquence mutable et itérable",
+        "une séquence non mutable",
+        "ni mutable, ni itérable",
+        "itérable, mais pas mutable"
+      ],
+      "explanation": "dict : on le modifie et on le parcourt, mais il est indexé par des clés, pas par des indices."
+    },
+    {
+      "theme": "10-11. Types, itérables et générateurs",
+      "type": "cours",
+      "source": "D'après le tableau du cours, le type `tuple` est :",
+      "canonical": "une séquence itérable, mais pas mutable",
+      "wrong": [
+        "une séquence mutable et itérable",
+        "mutable et itérable, mais pas une séquence",
+        "ni une séquence, ni itérable",
+        "mutable, mais pas itérable"
+      ],
+      "explanation": "Comme str : séquence et itérable, mais pas modifiable."
+    },
+    {
+      "theme": "10-11. Types, itérables et générateurs",
+      "type": "cours",
+      "source": "Qu'est-ce qu'une séquence ?",
+      "canonical": "Une collection ordonnée dont on atteint les éléments par leur indice",
+      "wrong": [
+        "Une suite d'instructions",
+        "Une collection sans doublons",
+        "Une boucle qui se répète",
+        "Un type de nombre"
+      ],
+      "explanation": "Une séquence est une collection ordonnée d'objets accessibles par leur indice."
+    },
+    {
+      "theme": "10-11. Types, itérables et générateurs",
+      "type": "cours",
+      "source": "Que veut dire « itérable » ?",
+      "canonical": "Qu'on peut le parcourir avec une boucle `for`",
+      "wrong": [
+        "Qu'on peut le modifier",
+        "Qu'on peut le trier",
+        "Qu'il contient des nombres",
+        "Qu'on peut le copier"
+      ],
+      "explanation": "Itérable : parcourable avec une boucle for. Mutable : modifiable."
+    },
+    {
+      "theme": "10-11. Types, itérables et générateurs",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "def mon_generateur():\n    yield 'h'\n    yield 'i'\n\nfor value in mon_generateur():\n    print(value)",
+      "canonical": "h\ni",
+      "wrong": [
+        "hi",
+        "['h', 'i']",
+        "h",
+        "Erreur (SyntaxError)"
+      ],
+      "explanation": "Chaque yield fournit une valeur à la boucle, une à la fois (exemple 7 du cours)."
+    },
+    {
+      "theme": "10-11. Types, itérables et générateurs",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "def gen():\n    yield 1\n    yield 2\n\ng = gen()\nprint(list(g), list(g))",
+      "canonical": "[1, 2] []",
+      "wrong": [
+        "[1, 2] [1, 2]",
+        "[] []",
+        "[1, 2]",
+        "Erreur (TypeError)"
+      ],
+      "explanation": "Un générateur ne peut être parcouru qu'UNE seule fois : la deuxième fois, il est vide."
+    },
+    {
+      "theme": "10-11. Types, itérables et générateurs",
+      "type": "cours",
+      "source": "Quel mot-clé fait d'une fonction un générateur ?",
+      "canonical": "`yield`",
+      "wrong": [
+        "`return`",
+        "`generate`",
+        "`next`",
+        "`for`"
+      ],
+      "explanation": "yield fonctionne comme return, mais renvoie les valeurs une par une, à la volée."
+    },
+    {
+      "theme": "10-11. Types, itérables et générateurs",
+      "type": "cours",
+      "source": "Quel est l'avantage d'un générateur ?",
+      "canonical": "Il produit les valeurs à la volée, sans tout stocker en mémoire",
+      "wrong": [
+        "Il trie les valeurs automatiquement",
+        "Il peut être parcouru autant de fois qu'on veut",
+        "Il est modifiable comme une liste",
+        "Il ne contient jamais de doublons"
+      ],
+      "explanation": "Les valeurs sont produites une à une. L'inconvénient : un seul parcours possible."
+    },
+    {
+      "theme": "10-11. Types, itérables et générateurs",
+      "type": "cours",
+      "source": "Quel est l'inconvénient d'un générateur ?",
+      "canonical": "On ne peut le parcourir qu'une seule fois",
+      "wrong": [
+        "Il prend beaucoup de place en mémoire",
+        "Il ne peut contenir que des lettres",
+        "On ne peut pas l'utiliser dans une boucle for",
+        "Il faut l'importer d'une bibliothèque"
+      ],
+      "explanation": "Au lieu de tout stocker, il produit les valeurs à la volée : d'où un seul parcours."
+    },
+    {
+      "theme": "10-11. Types, itérables et générateurs",
+      "type": "code",
+      "source": "Quel code affiche exactement ce résultat ?",
+      "output": "1\n2\n3",
+      "canonical": "def gen():\n    yield 1\n    yield 2\n    yield 3\nfor v in gen():\n    print(v)",
+      "wrong": [
+        "def gen():\n    return 1\n    return 2\n    return 3\nprint(gen())",
+        "def gen():\n    yield 1\n    yield 2\n    yield 3\nprint(gen)",
+        "def gen():\n    yield 1\n    yield 2\n    yield 3\nfor v in gen():\n    print(v)\n    break",
+        "def gen():\n    yield 1\n    yield 2\n    yield 3\nprint(list(gen()))"
+      ],
+      "explanation": "Chaque yield fournit une valeur à la boucle. Le premier return termine la fonction : on n'obtient que 1."
+    },
+    {
+      "theme": "12. Le temps",
+      "type": "cours",
+      "source": "Le timestamp compte le temps écoulé depuis :",
+      "canonical": "le 1er janvier 1970 à minuit (mise en marche d'UNIX)",
+      "wrong": [
+        "le 1er janvier de l'année en cours",
+        "le démarrage de l'ordinateur",
+        "le lancement du programme",
+        "le 1er janvier 2000 à minuit"
+      ],
+      "explanation": "1970 est la date de mise en marche d'UNIX. `time.time()` donne ce timestamp."
+    },
+    {
+      "theme": "12. Le temps",
+      "type": "cours",
+      "source": "Quelle bibliothèque fournit les classes `date` et `datetime` ?",
+      "canonical": "`datetime`",
+      "wrong": [
+        "`time`",
+        "`math`",
+        "`random`",
+        "`clock`"
+      ],
+      "explanation": "from datetime import datetime : la classe datetime, dans la bibliothèque datetime."
+    },
+    {
+      "theme": "12. Le temps",
+      "type": "cours",
+      "source": "Quelle instruction met le programme en pause pendant 2 secondes ?",
+      "canonical": "`time.sleep(2)`",
+      "wrong": [
+        "`time.pause(2)`",
+        "`time.wait(2)`",
+        "`sleep.time(2)`",
+        "`time.stop(2)`"
+      ],
+      "explanation": "La fonction sleep() de la bibliothèque time fait une pause."
+    },
+    {
+      "theme": "12. Le temps",
+      "type": "cours",
+      "source": "Avec `d = datetime.now()`, comment obtenir le nombre d'heures ?",
+      "canonical": "`d.hour`",
+      "wrong": [
+        "`d.hours()`",
+        "`d.heure`",
+        "`hour(d)`",
+        "`d.h`"
+      ],
+      "explanation": "Attributs de datetime : hour, minute, second, microsecond (et day, month, year)."
+    },
+    {
+      "theme": "12. Le temps",
+      "type": "cours",
+      "source": "Avec `aujourdhui = date.today()`, quels attributs donnent le jour, le mois et l'année ?",
+      "canonical": "`day`, `month`, `year`",
+      "wrong": [
+        "`jour`, `mois`, `annee`",
+        "`d`, `m`, `y`",
+        "`hour`, `minute`, `second`",
+        "`today`, `now`, `time`"
+      ],
+      "explanation": "date.today() a les attributs day, month et year."
+    },
+    {
+      "theme": "12. Le temps",
+      "type": "cours",
+      "source": "Que fait `d.strftime(\"%d/%m/%y\")` ?",
+      "canonical": "Elle écrit la date sous forme de texte, par exemple 12/10/26",
+      "wrong": [
+        "Elle calcule le nombre de jours depuis 1970",
+        "Elle change la date de l'ordinateur",
+        "Elle affiche l'heure",
+        "Elle compare deux dates"
+      ],
+      "explanation": "strftime met en forme la date : %d jour, %m mois, %y année sur 2 chiffres."
+    },
+    {
+      "theme": "12. Le temps",
+      "type": "cours",
+      "source": "Dans `strftime`, que représente `%M` ?",
+      "canonical": "Les minutes",
+      "wrong": [
+        "Le mois",
+        "Les millisecondes",
+        "Le matin",
+        "L'année"
+      ],
+      "explanation": "Attention à la casse : %m est le mois, %M les minutes ; %H les heures, %S les secondes."
+    },
+    {
+      "theme": "12. Le temps",
+      "type": "cours",
+      "source": "Comment mesurer la durée d'une partie d'un programme ?",
+      "canonical": "Noter `time.time()` avant et après, puis faire la différence",
+      "wrong": [
+        "Utiliser `time.sleep()`",
+        "Appeler `time.ctime()` une seule fois",
+        "Compter les lignes du programme",
+        "Utiliser `random()`"
+      ],
+      "explanation": "C'est la fin de l'exemple 8 : nbs1 = time.time(), ..., nbs2 = time.time(), puis nbs2 - nbs1."
+    },
+    {
+      "theme": "13. Fonctions et lambda",
+      "type": "cours",
+      "source": "Quel mot-clé sert à définir une fonction ?",
+      "canonical": "`def`",
+      "wrong": [
+        "`function`",
+        "`fonction`",
+        "`func`",
+        "`define`"
+      ],
+      "explanation": "def nom_de_la_fonction(parametre1, parametre2):, puis le bloc indenté."
+    },
+    {
+      "theme": "13. Fonctions et lambda",
+      "type": "cours",
+      "source": "Dans `def add1(a, b=7, c=0):`, que sont `a`, `b` et `c` ?",
+      "canonical": "Les paramètres de la fonction",
+      "wrong": [
+        "Les arguments de la fonction",
+        "Les valeurs renvoyées",
+        "Des variables globales",
+        "Des mots réservés"
+      ],
+      "explanation": "Paramètres : les noms listés dans la définition. Arguments : les valeurs passées lors de l'appel."
+    },
+    {
+      "theme": "13. Fonctions et lambda",
+      "type": "cours",
+      "source": "Dans l'appel `add1(2, c=3)`, que sont `2` et `3` ?",
+      "canonical": "Les arguments : les valeurs réelles passées à la fonction",
+      "wrong": [
+        "Les paramètres de la fonction",
+        "Les valeurs renvoyées",
+        "Des indices",
+        "Des valeurs par défaut"
+      ],
+      "explanation": "Arguments : les valeurs réelles. Paramètres : les noms de la définition."
+    },
+    {
+      "theme": "13. Fonctions et lambda",
+      "type": "cours",
+      "source": "Comment appelle-t-on une fonction qui ne renvoie rien (pas de `return`) ?",
+      "canonical": "Une procédure",
+      "wrong": [
+        "Une méthode",
+        "Une boucle",
+        "Un générateur",
+        "Une lambda"
+      ],
+      "explanation": "Une fonction qui ne renvoie rien (None) est une procédure."
+    },
+    {
+      "theme": "13. Fonctions et lambda",
+      "type": "cours",
+      "source": "Que fait l'instruction `return` ?",
+      "canonical": "Elle termine la fonction et renvoie une valeur à celui qui l'a appelée",
+      "wrong": [
+        "Elle affiche une valeur à l'écran",
+        "Elle recommence la fonction",
+        "Elle crée une variable globale",
+        "Elle passe à la ligne"
+      ],
+      "explanation": "return renvoie le résultat. Pour l'afficher, il faut un print, dans ou hors de la fonction."
+    },
+    {
+      "theme": "13. Fonctions et lambda",
+      "type": "cours",
+      "source": "Pourquoi écrire des fonctions ?",
+      "canonical": "Pour éviter de répéter du code : les programmes sont plus courts et plus lisibles",
+      "wrong": [
+        "Pour que le programme aille toujours plus vite",
+        "Parce que Python l'exige",
+        "Pour cacher le code",
+        "Pour pouvoir utiliser print"
+      ],
+      "explanation": "Une fonction est une sorte de sous-programme qu'on appelle au besoin."
+    },
+    {
+      "theme": "13. Fonctions et lambda",
+      "type": "cours",
+      "source": "Avec `def f(**kwargs):`, que reçoit `kwargs` ?",
+      "canonical": "Un dictionnaire des arguments nommés",
+      "wrong": [
+        "Un tuple",
+        "Une liste",
+        "Un entier",
+        "Une chaîne de caractères"
+      ],
+      "explanation": "*args reçoit un tuple, **kwargs un dictionnaire."
+    },
+    {
+      "theme": "13. Fonctions et lambda",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "def add1(a, b=7, c=0):\n    return a + b + c\n\nprint(add1(2, c=3))",
+      "canonical": "12",
+      "wrong": [
+        "5",
+        "9",
+        "2",
+        "Erreur (TypeError)"
+      ],
+      "explanation": "a = 2, c = 3 et b garde sa valeur par défaut 7 : 2 + 7 + 3 = 12 (exemple 10 du cours)."
+    },
+    {
+      "theme": "13. Fonctions et lambda",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "def add1(a, b=7, c=0):\n    return a + b + c\n\nprint(add1(1, 2))",
+      "canonical": "3",
+      "wrong": [
+        "10",
+        "8",
+        "1",
+        "Erreur (TypeError)"
+      ],
+      "explanation": "Les arguments sans nom remplissent les paramètres dans l'ordre : a = 1, b = 2, et c vaut 0."
+    },
+    {
+      "theme": "13. Fonctions et lambda",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "def add2(*args):\n    r = 0\n    for n in args:\n        r += n\n    return r\n\nprint(add2(1, 3, 5))",
+      "canonical": "9",
+      "wrong": [
+        "1",
+        "135",
+        "(1, 3, 5)",
+        "Erreur (TypeError)"
+      ],
+      "explanation": "*args reçoit tous les arguments dans un tuple, et la boucle les additionne : 1 + 3 + 5."
+    },
+    {
+      "theme": "13. Fonctions et lambda",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "def f(*args):\n    print(args)\n\nf(1, 2, 3)",
+      "canonical": "(1, 2, 3)",
+      "wrong": [
+        "[1, 2, 3]",
+        "1 2 3",
+        "6",
+        "{1, 2, 3}"
+      ],
+      "explanation": "*args est un TUPLE : il s'affiche entre parenthèses."
+    },
+    {
+      "theme": "13. Fonctions et lambda",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "def double(x):\n    x * 2\n\nprint(double(4))",
+      "canonical": "None",
+      "wrong": [
+        "8",
+        "4",
+        "x * 2",
+        "Erreur (TypeError)"
+      ],
+      "explanation": "Piège : sans return, la fonction calcule x * 2 mais ne renvoie rien, donc None."
+    },
+    {
+      "theme": "13. Fonctions et lambda",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "def double(x):\n    print(x * 2)\n\ny = double(4)\nprint(y)",
+      "canonical": "8\nNone",
+      "wrong": [
+        "8",
+        "8\n8",
+        "None",
+        "16"
+      ],
+      "explanation": "La fonction AFFICHE 8, mais ne RENVOIE rien : y vaut None."
+    },
+    {
+      "theme": "13. Fonctions et lambda",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "def conversion(f):\n    c = (f - 32) / 1.8\n    return c\n\nprint(conversion(212))",
+      "canonical": "100.0",
+      "wrong": [
+        "100",
+        "212.0",
+        "180.0",
+        "Erreur (NameError)"
+      ],
+      "explanation": "(212 - 32) / 1.8 = 180 / 1.8 = 100.0, un float à cause de la division (exemple 9 du cours)."
+    },
+    {
+      "theme": "13. Fonctions et lambda",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "def f():\n    x = 5\n\nf()\nprint(x)",
+      "canonical": "Erreur (NameError)",
+      "wrong": [
+        "5",
+        "None",
+        "0",
+        "x"
+      ],
+      "explanation": "x est une variable de la fonction : elle n'existe pas en dehors."
+    },
+    {
+      "theme": "13. Fonctions et lambda",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "x = 1\ndef f():\n    x = 5\n\nf()\nprint(x)",
+      "canonical": "1",
+      "wrong": [
+        "5",
+        "6",
+        "None",
+        "Erreur (NameError)"
+      ],
+      "explanation": "Le x de la fonction est une autre variable, locale : le x extérieur ne change pas."
+    },
+    {
+      "theme": "13. Fonctions et lambda",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "x = 1\ndef f():\n    global x\n    x = 5\n\nf()\nprint(x)",
+      "canonical": "5",
+      "wrong": [
+        "1",
+        "6",
+        "None",
+        "Erreur (NameError)"
+      ],
+      "explanation": "global x permet à la fonction de modifier la variable extérieure."
+    },
+    {
+      "theme": "13. Fonctions et lambda",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "def fibo(n):\n    a, b = 0, 1\n    for i in range(n):\n        print(b)\n        a, b = b, a + b\n\nfibo(5)",
+      "canonical": "1\n1\n2\n3\n5",
+      "wrong": [
+        "0\n1\n1\n2\n3",
+        "1\n2\n3\n5\n8",
+        "5",
+        "1\n1\n2\n3\n5\n8"
+      ],
+      "explanation": "On affiche b à chaque tour : 1, 1, 2, 3, 5. Chaque terme est la somme des deux précédents (exemple 11)."
+    },
+    {
+      "theme": "13. Fonctions et lambda",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "somme = lambda a, b: a + b\nprint(somme(3, 2))",
+      "canonical": "5",
+      "wrong": [
+        "32",
+        "a + b",
+        "(3, 2)",
+        "Erreur (SyntaxError)"
+      ],
+      "explanation": "lambda arguments : expression. somme(3, 2) calcule 3 + 2."
+    },
+    {
+      "theme": "13. Fonctions et lambda",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "carre = lambda x: x ** 2\nprint(carre(4))",
+      "canonical": "16",
+      "wrong": [
+        "8",
+        "6",
+        "4",
+        "x ** 2"
+      ],
+      "explanation": "x ** 2 est le carré : 4 × 4 = 16."
+    },
+    {
+      "theme": "13. Fonctions et lambda",
+      "type": "cours",
+      "source": "Une fonction `lambda`, c'est :",
+      "canonical": "une petite fonction anonyme limitée à une seule expression",
+      "wrong": [
+        "une fonction qui contient forcément une boucle",
+        "une fonction qui ne prend jamais d'argument",
+        "une fonction de la bibliothèque math",
+        "une variable qui contient une liste"
+      ],
+      "explanation": "lambda arguments : expression, par exemple somme = lambda a, b : a + b."
+    },
+    {
+      "theme": "13. Fonctions et lambda",
+      "type": "code",
+      "source": "Le début du programme est donné. Quel code le complète pour afficher exactement le résultat attendu ?",
+      "code": "def add1(a, b=7, c=0):\n    return a + b + c",
+      "output": "12",
+      "canonical": "print(add1(2, c=3))",
+      "wrong": [
+        "print(add1(2, 3))",
+        "print(add1(2))",
+        "print(add1(c=3))",
+        "print(add1(2, 7, 0))"
+      ],
+      "explanation": "Seul add1(2, c=3) donne 2 + 7 + 3 = 12. add1(2, 3) met 3 dans b ; add1(c=3) oublie a, obligatoire."
+    },
+    {
+      "theme": "13. Fonctions et lambda",
+      "type": "code",
+      "source": "Quel code affiche exactement ce résultat ?",
+      "output": "8",
+      "canonical": "cube = lambda x: x ** 3\nprint(cube(2))",
+      "wrong": [
+        "cube = lambda x: x * 3\nprint(cube(2))",
+        "cube = lambda x: x ** 3\nprint(cube(3))",
+        "def cube(x):\n    x ** 3\nprint(cube(2))",
+        "cube = lambda x: x ** 3\nprint(cube)"
+      ],
+      "explanation": "2 ** 3 = 8. x * 3 donnerait 6 ; la fonction sans return affiche None ; print(cube) affiche la fonction elle-même."
+    },
+    {
+      "theme": "13. Fonctions et lambda",
+      "type": "code",
+      "source": "Quel code affiche exactement ce résultat ?",
+      "output": "9",
+      "canonical": "def carre(x):\n    return x * x\nprint(carre(3))",
+      "wrong": [
+        "def carre(x):\n    print(x * x)\nprint(carre(3))",
+        "def carre(x):\n    return x * x\nprint(carre(9))",
+        "def carre(x):\nreturn x * x\nprint(carre(3))",
+        "def carre(x):\n    return x + x\nprint(carre(3))"
+      ],
+      "explanation": "Le premier renvoie 9. Le deuxième affiche 9 puis None ; le troisième oublie l'indentation (erreur)."
+    },
+    {
+      "theme": "13. Fonctions et lambda",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(abs(-7), max(3, 9, 4), len(\"NSI\"))",
+      "canonical": "7 9 3",
+      "wrong": [
+        "-7 9 3",
+        "7 4 3",
+        "7 9 NSI",
+        "-7 3 3"
+      ],
+      "explanation": "Fonctions natives : abs (valeur absolue), max (le plus grand), len (la longueur)."
+    },
+    {
+      "theme": "13. Fonctions et lambda",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "print(sorted([3, 1, 2], reverse=True))",
+      "canonical": "[3, 2, 1]",
+      "wrong": [
+        "[1, 2, 3]",
+        "[2, 1, 3]",
+        "[3, 1, 2]",
+        "None"
+      ],
+      "explanation": "reverse=True trie dans l'ordre décroissant."
+    },
+    {
+      "theme": "13. Fonctions et lambda",
+      "type": "resultat",
+      "source": "Qu'affiche ce code ?",
+      "code": "eleves = [('alice', 15), ('bob', 12), ('chloe', 10)]\nprint(sorted(eleves, key=lambda e: e[1]))",
+      "canonical": "[('chloe', 10), ('bob', 12), ('alice', 15)]",
+      "wrong": [
+        "[('alice', 15), ('bob', 12), ('chloe', 10)]",
+        "[10, 12, 15]",
+        "[('alice', 15), ('chloe', 10), ('bob', 12)]",
+        "[('chloe', 10), ('bob', 12)]"
+      ],
+      "explanation": "key=lambda e: e[1] trie selon la note (l'élément d'indice 1), du plus petit au plus grand."
+    },
+    {
+      "theme": "13. Fonctions et lambda",
+      "type": "code",
+      "source": "Quel code affiche exactement ce résultat ?",
+      "output": "Bonjour Eric",
+      "canonical": "def saluer(nom):\n    return \"Bonjour \" + nom\nprint(saluer(\"Eric\"))",
+      "wrong": [
+        "def saluer(nom):\n    return \"Bonjour \" + nom\nprint(saluer(Eric))",
+        "def saluer(nom):\n    return \"Bonjour\" + nom\nprint(saluer(\"Eric\"))",
+        "def saluer(nom):\n    \"Bonjour \" + nom\nprint(saluer(\"Eric\"))",
+        "def saluer(nom):\n    return \"Bonjour nom\"\nprint(saluer(\"Eric\"))"
+      ],
+      "explanation": "Il faut des guillemets autour de \"Eric\" (sinon Python cherche une variable Eric), une espace après Bonjour, et un return."
+    },
+    {
+      "theme": "13. Fonctions et lambda",
+      "type": "code",
+      "source": "Quel code affiche exactement ce résultat ?",
+      "output": "15",
+      "canonical": "produit = lambda a, b: a * b\nprint(produit(3, 5))",
+      "wrong": [
+        "produit = lambda a, b: a + b\nprint(produit(3, 5))",
+        "produit = lambda a, b: a ** b\nprint(produit(3, 5))",
+        "produit = lambda a, b: a * b\nprint(produit(3))",
+        "produit = lambda a, b: a * b\nprint(produit)"
+      ],
+      "explanation": "3 × 5 = 15. produit(3) oublie un argument (erreur), print(produit) affiche la fonction au lieu de l'appeler."
+    }
+  ]
+}
