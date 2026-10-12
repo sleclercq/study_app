@@ -1,0 +1,17 @@
+// Publishes _site/ (built by tools/build_site.py) on Cloudflare, at
+// https://e.lairning.com only. Deployed by the "cloudflare" job of
+// .github/workflows/site.yml, never by hand.
+//
+// The access control is NOT here: it is a WAF rule of the lairning.com zone
+// that blocks every request without a client certificate issued by the zone
+// (one certificate per device, see tools/device_cert.sh). The two settings
+// below close the technical addresses Cloudflare would otherwise open
+// (*.workers.dev and one URL per version), which that rule does not cover.
+{
+  "name": "revisions",
+  "compatibility_date": "2026-10-01",
+  "assets": { "directory": "./_site" },
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [{ "pattern": "e.lairning.com", "custom_domain": true }]
+}

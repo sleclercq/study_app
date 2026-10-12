@@ -1,5 +1,8 @@
-# Publishes the website on GitHub Pages at every push to main:
-# https://sleclercq.github.io/study_app/
+# Publishes the website at every push to main, in two places while the
+# children move to the new address:
+#   https://sleclercq.github.io/study_app/   GitHub Pages, open to anyone
+#   https://e.lairning.com                   Cloudflare, client certificate only
+# GitHub Pages goes once every child's progress is on the new address.
 #
 # Tests, then the QCM answers (tools/check_qcm.py runs their Python), then
 # build (which also checks every file of data/). If any fails, nothing is
@@ -50,3 +53,22 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v5
+
+  # Cloudflare (wrangler.jsonc). Rebuilds instead of sharing the Pages
+  # artifact: the tests have passed in "build", and a failure here (token
+  # missing or expired) leaves GitHub Pages published as usual.
+  cloudflare:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+      - name: Build
+        run: python3 tools/build_site.py
+      - name: Deploy
+        run: npx --yes wrangler@4 deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

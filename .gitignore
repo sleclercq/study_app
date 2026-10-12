@@ -234,3 +234,7 @@ data/_sources/**/*.pdf
 
 # Site construit par tools/build_site.py (publié par la GitHub Action, pas versionné)
 _site/
+
+# Certificats client des appareils (tools/device_cert.py) : clés et profils,
+# jamais dans git.
+_certs/
