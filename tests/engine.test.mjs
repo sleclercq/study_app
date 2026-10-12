@@ -31,6 +31,7 @@ const BUILDERS = {
   sentences: (ex) => engine.buildSentenceQuestions(ex),
   accord_pp: (ex) => engine.buildAccordQuestions(ex),
   qcm: (ex) => engine.buildQcmQuestions(ex, null, {}, { size: ex.words.length }),
+  flashcard: (ex) => engine.buildFlashcardQuestions(ex, null, {}, { size: ex.words.length }),
 };
 
 test("fill: template, fallback, unknown placeholder", () => {
@@ -314,4 +315,42 @@ test("qcm progress: seen, missed, last answer; stats per theme", () => {
   engine.recordQcm(rows, engine.wordKey(words[0]), true);
   engine.recordQcm(rows, engine.wordKey(words[1]), false);
   assert.deepEqual(engine.qcmStats(words, rows), { total: 3, seen: 2, to_review: 1 });
+});
+
+// ---------------------------------------------------------------------------
+// Flashcards
+// ---------------------------------------------------------------------------
+
+test("flashcard: every card of data/ has a question, an answer and its own key", () => {
+  const decks = exercises.filter((e) => e.kind === "flashcard");
+  assert.ok(decks.length >= 1);
+  for (const exercise of decks) {
+    const cards = engine.buildFlashcardQuestions(exercise, null, {}, { size: exercise.words.length });
+    assert.equal(cards.length, exercise.words.length, exercise.slug);
+    for (const card of cards) assert.ok(card.prompt.trim() && card.answer.trim() && card.theme, card.prompt);
+    assert.equal(new Set(cards.map((card) => card.word_key)).size, cards.length, exercise.slug);
+  }
+});
+
+test("flashcard: the cards not known come back in the next series, mixed with the others", () => {
+  const words = Array.from({ length: 29 }, (_, i) => ({ theme: "Ch. 1", source: `q${i}`, canonical: `r${i}` }));
+  const exercise = { kind: "flashcard", words };
+  const keys = words.map(engine.wordKey);
+  const progress = {};
+  const first = engine.buildFlashcardQuestions(exercise, null, progress, { size: 20 }).map((q) => q.word_key);
+  assert.equal(first.length, 20);
+  // 6 not known, 14 known.
+  const notKnown = first.slice(0, 6);
+  first.forEach((key) => engine.recordQcm(progress, key, !notKnown.includes(key)));
+  const second = engine.buildFlashcardQuestions(exercise, null, progress, { size: 20 }).map((q) => q.word_key);
+  assert.ok(notKnown.every((key) => second.includes(key)));
+  assert.ok(keys.filter((key) => !first.includes(key)).every((key) => second.includes(key)));   // the 9 never asked
+  // Known the second time: no longer ahead of the others.
+  second.forEach((key) => engine.recordQcm(progress, key, true));
+  assert.equal(engine.qcmStats(words, progress).to_review, 0);
+  // Mixed: over many draws, a card not known is not always first.
+  const fresh = {};
+  engine.recordQcm(fresh, keys[0], false);
+  const firsts = new Set(Array.from({ length: 50 }, () => engine.buildFlashcardQuestions(exercise, null, fresh)[0].word_key));
+  assert.ok(firsts.size > 1);
 });

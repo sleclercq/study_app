@@ -59,7 +59,7 @@ META_DEFAULTS = {
     "form_prompt": "",
 }
 
-KINDS = {"forms", "triple", "vocab", "leitner", "sentences", "accord_pp", "qcm"}
+KINDS = {"forms", "triple", "vocab", "leitner", "sentences", "accord_pp", "qcm", "flashcard"}
 ACCORD_CASES = {"sans_auxiliaire", "avec_etre", "avoir_cod_apres", "avoir_cod_avant"}
 TRIPLE_LABELS = {"base verbale", "prétérit", "participe passé"}
 QCM_TYPES = {"cours", "resultat", "code"}
@@ -120,7 +120,9 @@ def check_exercise(exercise, where: str) -> list:
             errors.append(f'{at} : il faut les trois formes {", ".join(sorted(TRIPLE_LABELS))}.')
         if kind == "qcm":
             errors.extend(check_qcm_question(word, at))
-    if kind == "qcm":
+        if kind == "flashcard":
+            errors.extend(check_flashcard(word, at))
+    if kind in ("qcm", "flashcard"):
         keys = [qcm_key(word) for word in words if isinstance(word, dict)]
         for key in sorted({key for key in keys if keys.count(key) > 1}):
             errors.append(f"{where} : la question « {key[0]} » est en double (même code, même réponse) : "
@@ -158,6 +160,15 @@ def check_qcm_question(word: dict, at: str) -> list:
     if kind == "code" and not word.get("output", "").strip():
         errors.append(f'{at} : une question "code" montre le résultat voulu : "output" est vide.')
     return errors
+
+
+def check_flashcard(word: dict, at: str) -> list:
+    """A question and its answer, both written: the child sees nothing else."""
+    if not isinstance(word.get("theme", ""), str):
+        return [f'{at} : "theme" doit être un texte.']
+    return [f'{at} : {what} ("{key}") est vide.'
+            for key, what in (("source", "la question"), ("canonical", "la réponse"))
+            if isinstance(word.get(key), str) and not word[key].strip()]
 
 
 def cod_found(sentence: str, cod: str) -> bool:

@@ -3,7 +3,7 @@
  *
  * Same flow as the desktop app (main.py), adapted to a phone:
  *
- *   players -> menu -+-> selection -+-> quiz / triple       -> results
+ *   players -> menu -+-> selection -+-> quiz / triple / qcm / flashcard -> results
  *                    |              +-> direction -> quiz   -> results
  *                    +-> mode -+-> quiz (progressive)       -> results
  *                    |         +-> selection (free, as above)
@@ -44,6 +44,12 @@ const KINDS = {
   qcm: {
     select: true, themesOnly: true, direction: false, screen: "qcm",
     build: (ex, keys) => engine.buildQcmQuestions(ex, keys, store.loadPlayer(state.player).progress[ex.slug] ?? {}),
+  },
+  // Lesson cards: the answer on demand, the child says if they knew it; the
+  // cards not known come back in the next series (same draw as the QCM).
+  flashcard: {
+    select: true, themesOnly: true, direction: false, screen: "flashcard", selectTitle: "Choisir les parties du cours",
+    build: (ex, keys) => engine.buildFlashcardQuestions(ex, keys, store.loadPlayer(state.player).progress[ex.slug] ?? {}),
   },
 };
 
@@ -106,6 +112,7 @@ const state = {
   progressBefore: null,
   lastScore: 0,
   lastTotal: 0,
+  flashMissed: 0,             // flashcards not known in the series just played
 };
 
 const root = document.getElementById("app");
@@ -392,7 +399,7 @@ function levelHeading(level) {
 }
 
 function exerciseBadge(exercise, doc) {
-  if (exercise.kind === "qcm") {
+  if (kindSpec(exercise).themesOnly) {
     const stats = engine.qcmStats(exercise.words, doc.progress[exercise.slug] ?? {});
     if (!stats.seen) return `${stats.total} questions`;
     return `${stats.seen} vue${stats.seen > 1 ? "s" : ""} sur ${stats.total}` + (stats.to_review ? ` · ${stats.to_review} à revoir` : "");
@@ -497,6 +504,7 @@ function openQuiz(screen) {
   if (screen === "triple") showTripleQuiz();
   else if (screen === "accord") showAccordQuiz();
   else if (screen === "qcm") showQcmQuiz();
+  else if (screen === "flashcard") showFlashcardQuiz();
   else showQuiz();
 }
 
@@ -678,8 +686,8 @@ function showSelection() {
   }
 
   refresh();
-  const title = spec.themesOnly ? "Choisir les chapitres"
-    : spec.direction ? "Choisir les mots à réviser" : "Choisir les verbes à réviser";
+  const title = spec.selectTitle ?? (spec.themesOnly ? "Choisir les chapitres"
+    : spec.direction ? "Choisir les mots à réviser" : "Choisir les verbes à réviser");
   show(h("div", { class: "screen with-footer" },
     topBar({ title, back }),
     h("div", { class: "button-row" },
@@ -1379,6 +1387,106 @@ function showQcmQuiz() {
 }
 
 // ---------------------------------------------------------------------------
+// Quiz: flashcards
+// ---------------------------------------------------------------------------
+//
+//   Nothing to type: the child answers in their head, taps "Voir la réponse",
+//   then says whether they had it right. Oui = 1, Non = 0, and the next card
+//   comes at once. Each answer is filed (engine.recordQcm), so that the cards
+//   not known come back in the next series.
+
+function showFlashcardQuiz() {
+  const questions = state.questions;
+  let index = 0;
+  let score = 0;
+  let revealed = false;
+  state.flashMissed = 0;
+
+  const counter = h("span", { class: "quiz-counter" });
+  const [progress, progressFill] = progressLine();
+  const heading = h("p", { class: "qcm-heading" });
+  const question = h("p", { class: "qcm-question" });
+  const hint = h("p", { class: "hint-text" }, "Réponds dans ta tête, puis regarde la réponse.");
+  const showButton = h("button", { class: "btn primary continue", type: "button", onclick: reveal }, "Voir la réponse");
+  const answer = h("p", { class: "flash-answer" });
+  const ask = h("p", { class: "flash-ask" }, "Tu avais la bonne réponse ?");
+  const grades = h("div", { class: "button-row flash-grades" },
+    h("button", { class: "btn grade missed", type: "button", onclick: () => grade(false) }, "✗  Non"),
+    h("button", { class: "btn grade knew", type: "button", onclick: () => grade(true) }, "✓  Oui"));
+
+  function load() {
+    revealed = false;
+    const q = questions[index];
+    counter.textContent = `${index + 1} / ${questions.length}`;
+    progressFill.style.width = `${(100 * index) / questions.length}%`;
+    heading.textContent = q.theme;
+    question.textContent = q.prompt;
+    answer.textContent = q.answer;
+    hint.hidden = index > 0;
+    showButton.hidden = false;
+    answer.hidden = ask.hidden = grades.hidden = true;
+    window.scrollTo(0, 0);
+    if (finePointer) showButton.focus({ preventScroll: true });
+  }
+
+  function reveal() {
+    if (revealed) return;
+    revealed = true;
+    showButton.hidden = hint.hidden = true;
+    answer.hidden = ask.hidden = grades.hidden = false;
+  }
+
+  function grade(knew) {
+    if (!revealed) return;
+    const q = questions[index];
+    if (knew) score += 1;
+    else state.flashMissed++;
+    const slug = state.exercise.slug;
+    store.updatePlayer(state.player, (doc) => {
+      doc.progress[slug] ??= {};
+      engine.recordQcm(doc.progress[slug], q.word_key, knew);
+    });
+    index++;
+    if (index >= questions.length) {
+      saveSession(score, questions.length);
+      showResults();
+    } else {
+      load();
+    }
+  }
+
+  // Keyboard (computer): Enter or Space shows the answer, then O / 1 = oui,
+  // N / 2 = non (on the focused button, the button itself does it).
+  const onKey = (event) => {
+    if (event.metaKey || event.ctrlKey || event.altKey) return;
+    if (!revealed) {
+      if ((event.key === "Enter" || event.key === " ") && !event.target.closest?.("button")) {
+        event.preventDefault();
+        reveal();
+      }
+      return;
+    }
+    const key = event.key.toLowerCase();
+    if (key === "o" || key === "1") grade(true);
+    else if (key === "n" || key === "2") grade(false);
+  };
+  document.addEventListener("keydown", onKey);
+
+  show(h("div", { class: "screen quiz" },
+    quizBar(state.player, counter),
+    progress,
+    heading,
+    question,
+    hint,
+    showButton,
+    answer,
+    ask,
+    grades),
+  { back: confirmLeave, onLeave: () => document.removeEventListener("keydown", onKey) });
+  load();
+}
+
+// ---------------------------------------------------------------------------
 // Results
 // ---------------------------------------------------------------------------
 
@@ -1395,6 +1503,12 @@ function showResults() {
     const now = engine.progressStats(exercise, doc.progress[exercise.slug] ?? {});
     const gained = now.acquired - (state.progressBefore ?? now).acquired;
     progressText = `Mots acquis\u00a0: ${now.acquired}${gained > 0 ? `\u00a0(+${gained})` : ""} · en cours\u00a0: ${now.learning} · à découvrir\u00a0: ${now.unseen}`;
+  } else if (exercise.kind === "flashcard" && state.flashMissed) {
+    // At most half a series of them comes back next time (engine.drawMissedFirst).
+    const missed = state.flashMissed;
+    progressText = `${missed} carte${missed > 1 ? "s" : ""} à revoir\u00a0: `
+      + (missed > 1 ? "elles reviendront" : "elle reviendra")
+      + (missed > engine.SESSION_LENGTH / 2 ? " dans les prochaines séries." : " à la prochaine série.");
   }
 
   const history = doc.sessions.filter((s) => s.slug === exercise.slug).reverse();

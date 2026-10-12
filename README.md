@@ -47,6 +47,7 @@ python3 tools/check_qcm.py
 | 4e | Allemand - Vocabulaire du carnet | le vocabulaire du cours, dans les deux sens, article obligatoire |
 | 4e | Allemand - Rattrapage 6e et 5e | les 980 mots du manuel, en mode progressif (boîtes de Leitner) |
 | 4e | Anglais - Verbes irréguliers de 4e | les verbes surlignés de la fiche |
+| 4e | Histoire - Le cours | flashcards du cahier : la question, la réponse, « tu avais la bonne réponse ? » ; les cartes ratées reviennent à la série suivante |
 | 1re | NSI - Introduction à Python | QCM à 5 réponses, 309 questions par chapitre : cours, « que donne ce code », « quel code donne ce résultat » |
 | 5e | Verbes latins | infinitif et présent de l'indicatif |
 | 5e | Verbes anglais irréguliers | base verbale, prétérit, participe passé |

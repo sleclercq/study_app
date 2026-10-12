@@ -22,6 +22,8 @@ francais/5e/IMG_4445_cours_accord_participe_passe.HEIC
 francais/5e/IMG_4446_exercice_accord_participe_passe.HEIC
 latin/5e/IMG_4441_present_indicatif.HEIC
 nsi/1re/IMG_5980..5991                 polycopié « Introduction à Python », pages 3 à 14 = NSI/introduction_python.json
+histoire/4e/IMG_5992                   cahier d'histoire, chapitre 1 (L'Europe et le monde au XVIIIe), la leçon = histoire/cours_4e.json
+histoire/4e/IMG_5994                   cahier d'histoire, chapitre 1, les exercices 1 à 5
 ```
 
 Convention : un dossier par matière ; pour les carnets, un dossier daté par

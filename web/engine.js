@@ -216,18 +216,26 @@ function qcmQuestion(word, rng) {
   };
 }
 
-/** kind "qcm": up to `size` questions among the ticked themes, shuffled. */
-export function buildQcmQuestions(exercise, enabledKeys = null, progress = {}, { size = SESSION_LENGTH, rng = Math.random } = {}) {
-  const pool = shuffle(selected(exercise.words, enabledKeys).map((word) => ({ word, row: progress[wordKey(word)] })), rng);
+/**
+ * The `size` words of the next series, missed ones first (see above). Shared
+ * by the QCM and the flashcards, which keep the same progress.
+ */
+function drawMissedFirst(words, enabledKeys, progress, size, rng) {
+  const pool = shuffle(selected(words, enabledKeys).map((word) => ({ word, row: progress[wordKey(word)] })), rng);
   const missed = pool.filter(({ row }) => row && !row.last_ok);
   const unseen = pool.filter(({ row }) => !row);
   const rest = pool.filter(({ row }) => row && row.last_ok).sort((a, b) => a.row.seen - b.row.seen);
   const firstMissed = missed.slice(0, Math.ceil(size / 2));
   const order = [...firstMissed, ...unseen, ...missed.slice(firstMissed.length), ...rest];
-  return shuffle(order.slice(0, size).map(({ word }) => qcmQuestion(word, rng)), rng);
+  return order.slice(0, size).map(({ word }) => word);
 }
 
-/** File the answer to one QCM question (mutates `progress`). */
+/** kind "qcm": up to `size` questions among the ticked themes, shuffled. */
+export function buildQcmQuestions(exercise, enabledKeys = null, progress = {}, { size = SESSION_LENGTH, rng = Math.random } = {}) {
+  return shuffle(drawMissedFirst(exercise.words, enabledKeys, progress, size, rng).map((word) => qcmQuestion(word, rng)), rng);
+}
+
+/** File the answer to one QCM question or flashcard (mutates `progress`). */
 export function recordQcm(progress, key, ok, { now = localStamp() } = {}) {
   const row = progress[key] ?? { seen: 0, missed: 0 };
   progress[key] = { ...row, seen: row.seen + 1, missed: row.missed + (ok ? 0 : 1), last_ok: ok ? 1 : 0, last_seen: now };
@@ -243,6 +251,26 @@ export function qcmStats(words, progress) {
     if (!row.last_ok) stats.to_review++;
   }
   return stats;
+}
+
+// ---------------------------------------------------------------------------
+// Flashcards: a question, the answer on demand, the child says if they knew it
+// ---------------------------------------------------------------------------
+//
+//   A card is {theme, source, canonical}. Nothing is typed: the child answers
+//   in their head, shows the answer, then says if they had it right: oui (1
+//   point) or non (0). Same draw, progress and stats as the QCM: the cards not
+//   known come back in the next series (at most half of it), mixed with the others.
+
+/** kind "flashcard": up to `size` cards among the ticked themes, shuffled. */
+export function buildFlashcardQuestions(exercise, enabledKeys = null, progress = {}, { size = SESSION_LENGTH, rng = Math.random } = {}) {
+  return shuffle(drawMissedFirst(exercise.words, enabledKeys, progress, size, rng).map((word) => ({
+    type: "flashcard",
+    theme: word.theme ?? "",
+    prompt: word.source,
+    answer: word.canonical,
+    word_key: wordKey(word),
+  })), rng);
 }
 
 // ---------------------------------------------------------------------------

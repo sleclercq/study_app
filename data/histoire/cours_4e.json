@@ -1,0 +1,186 @@
+{
+  "_notes": [
+    "=== HISTOIRE 4e : LE COURS EN FLASHCARDS - GUIDE DE MAINTENANCE ===",
+    "",
+    "Questions tirées du cahier d'histoire (photos du 12/10/2026 rangées dans",
+    "data/_sources/histoire/4e/ : IMG_5992 = la leçon, IMG_5994 = les exercices).",
+    "",
+    "FORMAT (kind flashcard) : chaque entrée de 'words' est une carte.",
+    "  theme     : « Chapitre N · partie » ; l'écran de choix coche une partie entière",
+    "  source    : la question",
+    "  canonical : la réponse, montrée quand l'enfant la demande",
+    "  L'enfant répond dans sa tête, regarde la réponse et dit s'il l'avait (oui / non).",
+    "  Une carte « non » revient à la série suivante, mélangée aux autres.",
+    "",
+    "AJOUTER UN CHAPITRE : ajouter ses cartes à la suite, avec un nouveau 'theme'.",
+    "Ne jamais changer le slug. Corriger une question ou une réponse la fait",
+    "repartir de zéro (c'est une nouvelle carte), les autres gardent leur historique.",
+    "",
+    "LES RÉPONSES SONT CELLES DU CAHIER, mot pour mot autant que possible, même quand",
+    "un manuel dirait autrement, pour ne jamais contredire le professeur.",
+    "",
+    "À VÉRIFIER AVEC LE CAHIER :",
+    "  - Les 6 puissances majeures : la leçon cite l'Angleterre, la France et les",
+    "    Provinces-Unies (Ouest), la Russie, la Prusse et l'Autriche (Est). La réponse",
+    "    à l'exercice 5, au crayon, met le royaume d'Espagne à la place des",
+    "    Provinces-Unies. Les cartes suivent la leçon.",
+    "  - Sous les 6 puissances, la leçon liste sans titre l'Empire ottoman, le Portugal",
+    "    et l'Espagne : la carte les cite sans dire ce qu'ils sont.",
+    "  - La page de droite de la leçon (« puissance... état... influence... les",
+    "    autres États ») n'est pas photographiée : rien n'en est tiré."
+  ],
+  "slug": "histoire_cours_4e",
+  "name": "Histoire - Le cours",
+  "level": "4e",
+  "kind": "flashcard",
+  "sort_order": 40,
+  "color": "#a0522d",
+  "button_label": "Histoire - Le cours\n(flashcards : la question, puis la réponse)",
+  "words": [
+    {
+      "theme": "Chapitre 1 · Introduction : des monarchies",
+      "source": "Au XVIIIe siècle, comment l'Europe est-elle divisée ?",
+      "canonical": "En un grand nombre d'États dirigés par des souverains."
+    },
+    {
+      "theme": "Chapitre 1 · Introduction : des monarchies",
+      "source": "Au XVIIIe siècle, quel est le régime politique de la plupart des États européens ?",
+      "canonical": "Des monarchies, le plus souvent absolues."
+    },
+    {
+      "theme": "Chapitre 1 · Introduction : des monarchies",
+      "source": "Quel est le régime politique dominant en Europe au XVIIIe siècle ?",
+      "canonical": "La monarchie absolue."
+    },
+    {
+      "theme": "Chapitre 1 · Introduction : des monarchies",
+      "source": "Quel autre régime politique est présent en Europe au XVIIIe siècle ?",
+      "canonical": "La monarchie parlementaire."
+    },
+    {
+      "theme": "Chapitre 1 · Introduction : des monarchies",
+      "source": "Qui dirige une monarchie ?",
+      "canonical": "Un monarque (un souverain)."
+    },
+    {
+      "theme": "Chapitre 1 · Introduction : des monarchies",
+      "source": "Que peut-on dire de l'Europe au XVIIIe siècle d'un point de vue politique, comparée aux autres continents ?",
+      "canonical": "L'Europe est dominée par la puissance de la monarchie."
+    },
+    {
+      "theme": "Chapitre 1 · I. Des États européens rivaux",
+      "source": "Combien d'États s'affirment comme des puissances majeures en Europe et dans le monde au XVIIIe siècle ?",
+      "canonical": "6 États."
+    },
+    {
+      "theme": "Chapitre 1 · I. Des États européens rivaux",
+      "source": "Quelles sont les 3 grandes puissances de l'ouest de l'Europe au XVIIIe siècle ?",
+      "canonical": "L'Angleterre (Royaume-Uni), le royaume de France et les Provinces-Unies."
+    },
+    {
+      "theme": "Chapitre 1 · I. Des États européens rivaux",
+      "source": "Quelles sont les 3 grandes puissances de l'est de l'Europe au XVIIIe siècle ?",
+      "canonical": "L'Empire russe, le royaume de Prusse et le royaume d'Autriche."
+    },
+    {
+      "theme": "Chapitre 1 · I. Des États européens rivaux",
+      "source": "Cite les 6 puissances majeures de l'Europe au XVIIIe siècle.",
+      "canonical": "À l'ouest : l'Angleterre, la France, les Provinces-Unies.\nÀ l'est : l'Empire russe, la Prusse, l'Autriche."
+    },
+    {
+      "theme": "Chapitre 1 · I. Des États européens rivaux",
+      "source": "Quels autres États la leçon cite-t-elle, après les 6 puissances majeures ?",
+      "canonical": "L'Empire ottoman, le royaume du Portugal et le royaume d'Espagne."
+    },
+    {
+      "theme": "Chapitre 1 · I. Des États européens rivaux",
+      "source": "Pour quelle raison politique les puissances européennes sont-elles rivales ?",
+      "canonical": "L'extension de leurs territoires."
+    },
+    {
+      "theme": "Chapitre 1 · I. Des États européens rivaux",
+      "source": "Pour quelle raison économique les puissances européennes sont-elles rivales ?",
+      "canonical": "Les rivalités commerciales."
+    },
+    {
+      "theme": "Chapitre 1 · I. Des États européens rivaux",
+      "source": "Que provoquent les rivalités entre les puissances européennes ?",
+      "canonical": "De nombreuses guerres entre puissances européennes."
+    },
+    {
+      "theme": "Chapitre 1 · I. Des États européens rivaux",
+      "source": "Cite les 3 guerres entre puissances européennes vues dans la leçon.",
+      "canonical": "La guerre de Succession d'Espagne, la guerre de Succession d'Autriche et la guerre de Sept Ans."
+    },
+    {
+      "theme": "Chapitre 1 · II. A. De grands empires coloniaux",
+      "source": "Au XVIIIe siècle, que possèdent les États d'Europe dans le reste du monde ?",
+      "canonical": "D'importants domaines coloniaux (de grands empires coloniaux)."
+    },
+    {
+      "theme": "Chapitre 1 · II. A. De grands empires coloniaux",
+      "source": "Quelles sont les colonies du royaume d'Angleterre ?",
+      "canonical": "L'Amérique du Nord, l'Inde (et l'Océanie)."
+    },
+    {
+      "theme": "Chapitre 1 · II. A. De grands empires coloniaux",
+      "source": "Quelles sont les colonies du royaume de France ?",
+      "canonical": "La Nouvelle-France, la Louisiane et les Antilles."
+    },
+    {
+      "theme": "Chapitre 1 · II. A. De grands empires coloniaux",
+      "source": "Quelles sont les colonies du royaume d'Espagne ?",
+      "canonical": "La Nouvelle-Grenade et la Nouvelle-Espagne."
+    },
+    {
+      "theme": "Chapitre 1 · II. A. De grands empires coloniaux",
+      "source": "Quelles sont les colonies du royaume du Portugal ?",
+      "canonical": "Le Brésil (et l'Angola, le Mozambique)."
+    },
+    {
+      "theme": "Chapitre 1 · II. A. De grands empires coloniaux",
+      "source": "Quelle est la colonie de la République des Provinces-Unies ?",
+      "canonical": "L'Insulinde (les Indes néerlandaises), aujourd'hui l'Indonésie."
+    },
+    {
+      "theme": "Chapitre 1 · II. A. De grands empires coloniaux",
+      "source": "À quel État appartiennent la Nouvelle-France, la Louisiane et les Antilles ?",
+      "canonical": "Au royaume de France."
+    },
+    {
+      "theme": "Chapitre 1 · II. A. De grands empires coloniaux",
+      "source": "À quel État appartiennent la Nouvelle-Grenade et la Nouvelle-Espagne ?",
+      "canonical": "Au royaume d'Espagne."
+    },
+    {
+      "theme": "Chapitre 1 · II. A. De grands empires coloniaux",
+      "source": "À quel État appartient le Brésil ?",
+      "canonical": "Au royaume du Portugal."
+    },
+    {
+      "theme": "Chapitre 1 · II. A. De grands empires coloniaux",
+      "source": "D'après la leçon, à quel État appartiennent l'Amérique du Nord et l'Inde ?",
+      "canonical": "Au royaume d'Angleterre."
+    },
+    {
+      "theme": "Chapitre 1 · II. A. De grands empires coloniaux",
+      "source": "À quel État appartient l'Insulinde (les Indes néerlandaises) ?",
+      "canonical": "À la République des Provinces-Unies."
+    },
+    {
+      "theme": "Chapitre 1 · II. A. De grands empires coloniaux",
+      "source": "Où la France et l'Angleterre ouvrent-elles progressivement de nombreux comptoirs ?",
+      "canonical": "En Afrique, en Amérique et en Asie."
+    },
+    {
+      "theme": "Chapitre 1 · II. A. De grands empires coloniaux",
+      "source": "Que provoquent les nombreux comptoirs de la France et de l'Angleterre ?",
+      "canonical": "Ils affirment leur puissance, et provoquent entre elles une rivalité féroce."
+    },
+    {
+      "theme": "Chapitre 1 · II. A. De grands empires coloniaux",
+      "source": "À la fin du XVIIIe siècle, quelles sont les 2 principales puissances coloniales ?",
+      "canonical": "La France et l'Angleterre."
+    }
+  ]
+}
