@@ -24,6 +24,9 @@ latin/5e/IMG_4441_present_indicatif.HEIC
 nsi/1re/IMG_5980..5991                 polycopié « Introduction à Python », pages 3 à 14 = NSI/introduction_python.json
 histoire/4e/IMG_5992                   cahier d'histoire, chapitre 1 (L'Europe et le monde au XVIIIe), la leçon = histoire/cours_4e.json
 histoire/4e/IMG_5994                   cahier d'histoire, chapitre 1, les exercices 1 à 5
+geographie/1re/IMG_6079..6093          cahier de géographie, chapitre 2 (la métropolisation), sans IMG_6091
+                                       = geographie/metropolisation.json et metropolisation_qcm.json
+geographie/specs_metropolisation.md    la leçon transcrite, les doutes du cahier et les décisions prises
 ```
 
 Convention : un dossier par matière ; pour les carnets, un dossier daté par

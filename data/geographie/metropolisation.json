@@ -1,0 +1,197 @@
+{
+  "_notes": [
+    "=== GÉOGRAPHIE 1re, LA MÉTROPOLISATION : FLASHCARDS DE DÉFINITIONS - GUIDE DE MAINTENANCE ===",
+    "",
+    "Définitions tirées du cahier de géographie, chapitre 2 « La métropolisation dans",
+    "le monde : le poids croissant des métropoles » (photos du 01/11/2026 rangées dans",
+    "data/_sources/geographie/1re/, IMG_6079 à IMG_6093, sans IMG_6091), pour le",
+    "contrôle du 02/11/2026. La leçon transcrite, les choix et les doutes sont dans",
+    "data/_sources/geographie/specs_metropolisation.md. Le QCM du même chapitre est",
+    "dans metropolisation_qcm.json.",
+    "",
+    "FORMAT (kind flashcard) : chaque entrée de 'words' est une carte.",
+    "  theme     : la partie du cours ; l'écran de choix coche une partie entière",
+    "  source    : le mot ou la notion à définir",
+    "  canonical : la définition du cahier, montrée quand l'enfant la demande ;",
+    "              une seconde ligne donne parfois l'exemple ou le chiffre du cours",
+    "  L'enfant cherche la définition dans sa tête, regarde la réponse et dit s'il",
+    "  l'avait (oui / non). Une carte « non » revient à la série suivante.",
+    "  Un seul sens (mot -> définition) : le QCM fait aussi l'autre sens.",
+    "",
+    "LES DÉFINITIONS SONT CELLES DU CAHIER, mot pour mot autant que possible, même",
+    "quand un manuel dirait autrement, pour ne jamais contredire la professeure.",
+    "Mégapole et métropole ne sont définis nulle part dans le cahier : pas de carte.",
+    "",
+    "ÉCARTS VOULUS (décidés le 01/11/2026, ne pas « corriger ») :",
+    "  - GaWC est développé « Global World City » et le classement Mori s'appelle",
+    "    « Global City Index », comme dans le cahier (noms officiels : Globalization",
+    "    and World Cities, Global Power City Index).",
+    "",
+    "AJOUTER OU CORRIGER : ne jamais changer le slug. Une carte corrigée repart de",
+    "zéro (c'est une nouvelle carte), les autres gardent leur historique."
+  ],
+  "slug": "geographie_1re_metropolisation_definitions",
+  "name": "Géographie - La métropolisation : définitions",
+  "level": "1re",
+  "kind": "flashcard",
+  "sort_order": 20,
+  "color": "#2a7f6f",
+  "button_label": "Géographie - Métropolisation\n(flashcards : le mot, puis la définition)",
+  "words": [
+    {
+      "theme": "Introduction : la transition urbaine",
+      "source": "Transition urbaine",
+      "canonical": "Passage d'un monde majoritairement rural à un monde majoritairement urbain.\n2010 : 50 % / 50 %. Estimation pour 2050 : 2/3 de la population en ville."
+    },
+    {
+      "theme": "Introduction : la transition urbaine",
+      "source": "Exode rural",
+      "canonical": "Quitter les campagnes pour aller dans les villes.\nExplication de la croissance urbaine valable seulement pour les pays en développement."
+    },
+    {
+      "theme": "Introduction : la transition urbaine",
+      "source": "Accroissement naturel positif",
+      "canonical": "Le taux de natalité est supérieur au taux de mortalité.\nEn ville, il est positif, voire très positif (soins, cadre de vie...)."
+    },
+    {
+      "theme": "Introduction : la transition urbaine",
+      "source": "« Vivre en ville » (en France)",
+      "canonical": "Vivre dans une agglomération de plus de 2 000 habitants.\nCe n'est pas la même définition dans les autres États."
+    },
+    {
+      "theme": "I. La métropolisation, un phénomène mondial",
+      "source": "Métropolisation",
+      "canonical": "Processus de concentration croissante de la population, de la richesse et des fonctions de commandement dans les grandes villes.\nC'est une des conséquences de la mondialisation."
+    },
+    {
+      "theme": "I. La métropolisation, un phénomène mondial",
+      "source": "Mondialisation",
+      "canonical": "Mise en relation des différentes parties du monde par l'intensification des flux (hommes, marchandises, argent, etc.)."
+    },
+    {
+      "theme": "I. La métropolisation, un phénomène mondial",
+      "source": "PUB (produit urbain brut)",
+      "canonical": "Toutes les richesses matérielles et immatérielles produites par une ville."
+    },
+    {
+      "theme": "I. La métropolisation, un phénomène mondial",
+      "source": "Global City Index (classement Mori) : que mesure-t-il ?",
+      "canonical": "Le pouvoir de commandement qu'une ville exerce dans les domaines politique, économique et culturel.\n1. Londres, 2. Tokyo, 3. New York, 4. Paris, 5. Singapour."
+    },
+    {
+      "theme": "I. La métropolisation, un phénomène mondial",
+      "source": "GaWC (Global World City) : que mesure-t-il ?",
+      "canonical": "La quantité de rayonnements mondiaux, d'institutions mondiales, et les liens avec les autres métropoles.\n1. Londres, 2. New York, 3. Hong Kong, 4. Beijing, 5. Singapour."
+    },
+    {
+      "theme": "II. Concentration des activités et des fonctions",
+      "source": "Nappes pavillonnaires",
+      "canonical": "Quartiers résidentiels de pavillons uniformes, pour les classes moyennes.\n1 ou 2 étages maximum, pas de verticalité."
+    },
+    {
+      "theme": "II. Concentration des activités et des fonctions",
+      "source": "Hub",
+      "canonical": "Endroit où les flux se concentrent et se redistribuent."
+    },
+    {
+      "theme": "II. Concentration des activités et des fonctions",
+      "source": "Technopole",
+      "canonical": "Parc d'activités spécialisé dans les hautes technologies."
+    },
+    {
+      "theme": "III.A Étalement et mobilités",
+      "source": "Espaces périurbains",
+      "canonical": "La périphérie du tissu urbain : une alternance entre espaces ruraux et espaces urbains."
+    },
+    {
+      "theme": "III.A Étalement et mobilités",
+      "source": "Échangeur",
+      "canonical": "Carrefour routier sans croisement à niveau."
+    },
+    {
+      "theme": "III.A Étalement et mobilités",
+      "source": "ZAC (zone d'aménagement concerté)",
+      "canonical": "Procédure d'urbanisme permettant à une collectivité publique d'aménager et d'équiper des terrains afin de les céder à des constructeurs publics ou privés, dans un projet global et cohérent."
+    },
+    {
+      "theme": "III.A Étalement et mobilités",
+      "source": "Bidonvilles (ou habitats informels, précaires)",
+      "canonical": "En périphérie des villes, ensemble d'abris précaires en carton, en tôle et autres matériaux, où vivent les plus démunis."
+    },
+    {
+      "theme": "III.B Nouveaux quartiers",
+      "source": "Quartiers d'affaires secondaires",
+      "canonical": "Nouveaux centres qui entourent le quartier d'affaires principal, fixés notamment autour des gares qui relient la métropole au reste du monde (ex. : Shibuya, à Tokyo).\nIls naissent parce que le centre-ville est de plus en plus cher et de moins en moins accessible."
+    },
+    {
+      "theme": "III.B Nouveaux quartiers",
+      "source": "Polder",
+      "canonical": "Étendue artificielle de terre gagnée sur l'eau, le plus souvent dont le niveau est inférieur à celui de la mer, à partir de marais, d'estuaires, de lacs ou de zones littorales.\nAu Japon, les polders sont au-dessus du niveau de la mer (déchets réutilisés et béton)."
+    },
+    {
+      "theme": "III.B Nouveaux quartiers",
+      "source": "Centre des congrès",
+      "canonical": "Bâtiment équipé pour accueillir des congrès et des événements professionnels."
+    },
+    {
+      "theme": "III.B Nouveaux quartiers",
+      "source": "Zonage",
+      "canonical": "Découpage d'un territoire en espaces spécialisés dans une activité donnée."
+    },
+    {
+      "theme": "III.B Nouveaux quartiers",
+      "source": "Migrations pendulaires",
+      "canonical": "Migrations journalières (matin et soir) entre les zones d'habitat et de travail des habitants d'une ville."
+    },
+    {
+      "theme": "III.C Un espace urbain fragmenté",
+      "source": "Rurbanisation",
+      "canonical": "Installation de citadins dans de petits villages de campagne ou dans de petits lotissements en bordure de ces villages.\nDepuis les années 1980, notamment dans les pays post-industrialisés."
+    },
+    {
+      "theme": "III.C Un espace urbain fragmenté",
+      "source": "Néo-ruraux",
+      "canonical": "Pendant le Covid, citadins installés à la campagne qui, contrairement aux rurbains, tentaient de se reconvertir, notamment dans des métiers agricoles."
+    },
+    {
+      "theme": "III.C Un espace urbain fragmenté",
+      "source": "Gated communities",
+      "canonical": "Ensemble immobilier sécurisé auquel le grand public ne peut pas accéder, et dont l'objectif est de garantir plus de sécurité et de tranquillité aux résidents, souvent aisés.\nAussi appelées « barrios cerrados » en Amérique du Sud."
+    },
+    {
+      "theme": "IV.A Les villes-monde",
+      "source": "Ville globale",
+      "canonical": "Ville qui dirige l'économie mondiale grâce à son importance, notamment dans la mondialisation.\n(Les géographes anglo-saxons appellent « villes globales » les métropoles les plus influentes.)"
+    },
+    {
+      "theme": "IV.A Les villes-monde",
+      "source": "Ville mondiale",
+      "canonical": "Ville rayonnant par sa culture.\n(Les géographes français appellent « villes mondiales » les métropoles les plus influentes.)"
+    },
+    {
+      "theme": "IV.A Les villes-monde",
+      "source": "Ville-monde",
+      "canonical": "Englobe ville globale et ville mondiale (comme Paris).\nLes villes-monde sont le haut de la hiérarchie mondiale."
+    },
+    {
+      "theme": "IV.A Les villes-monde",
+      "source": "Métropoles « répulsives »",
+      "canonical": "Métropoles qui ont perdu leur rôle mondial ou leur capacité d'attraction.\nEx. : Detroit, Leipzig."
+    },
+    {
+      "theme": "IV.A Les villes-monde",
+      "source": "Shrinking cities",
+      "canonical": "Agglomérations urbaines qui ont connu une perte de population notable lors du départ massif de leurs habitants.\nEx. : Detroit, Leipzig."
+    },
+    {
+      "theme": "IV.B Une compétition impitoyable",
+      "source": "Mobilités douces",
+      "canonical": "Ensemble des modes de déplacement à faible, voire zéro, émission carbone."
+    },
+    {
+      "theme": "IV.B Une compétition impitoyable",
+      "source": "Politiques urbaines",
+      "canonical": "Ensemble d'actions de l'État visant à revaloriser certains quartiers urbains dits « sensibles » ou « prioritaires » et à réduire les inégalités sociales entre les territoires."
+    }
+  ]
+}

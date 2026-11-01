@@ -1,0 +1,2429 @@
+{
+  "_notes": [
+    "=== GÉOGRAPHIE 1re, LA MÉTROPOLISATION : QCM - GUIDE DE MAINTENANCE ===",
+    "",
+    "Questions tirées du cahier de géographie, chapitre 2 « La métropolisation dans",
+    "le monde : le poids croissant des métropoles » (photos du 01/11/2026 rangées dans",
+    "data/_sources/geographie/1re/, IMG_6079 à IMG_6093, sans IMG_6091), pour le",
+    "contrôle du 02/11/2026. La leçon transcrite, les choix et les doutes sont dans",
+    "data/_sources/geographie/specs_metropolisation.md. Les flashcards de définitions",
+    "du même chapitre sont dans metropolisation.json.",
+    "",
+    "FORMAT (kind qcm) : chaque entrée de 'words' est une question.",
+    "  theme       : la partie du cours (un bloc par partie, dans l'ordre du cours)",
+    "  type        : toujours « cours » (rien à exécuter)",
+    "  source      : la question",
+    "  canonical   : la bonne réponse ; wrong : exactement 4 mauvaises réponses",
+    "  explanation : affichée après la réponse",
+    "",
+    "LES RÉPONSES SONT CELLES DU CAHIER, même quand une autre source dirait autrement,",
+    "pour ne jamais contredire la professeure. Les mauvaises réponses sont tirées du",
+    "cours quand c'est possible, pour que le QCM fasse réviser les autres notions.",
+    "",
+    "ÉCARTS VOULUS (décidés le 01/11/2026, ne pas « corriger ») :",
+    "  - Mégapoles en 1950 : Londres et Tokyo, comme le cahier (les sources usuelles",
+    "    disent New York et Tokyo) : New York n'est jamais proposée sur ce point.",
+    "  - GaWC = « Global World City » et classement Mori = « Global City Index »,",
+    "    comme le cahier ; les noms officiels ne sont jamais proposés.",
+    "  - Burj Khalifa : 825 m et environ 200 étages, comme le cahier (828 m et 163",
+    "    étages en réalité) ; ni 828 m ni 163 ne sont proposés.",
+    "  - Le cahier dit Lagos « capitale du Nigeria » : rien sur ce point.",
+    "  - « Pays d'émigration » du cahier est lu « pays d'immigration ».",
+    "  - Rien sur la phrase illisible sur l'Amérique latine, ni sur la « porn urban",
+    "    photography », ni sur les « pays nouvellement urbanisés ».",
+    "  - Johannesburg et Singapour sont des métropoles du cours sans être sur la",
+    "    carte des 30 mégapoles : jamais proposées comme intrus de la carte.",
+    "",
+    "AJOUTER DES QUESTIONS : les ajouter dans leur partie, lancer",
+    "python3 tools/build_site.py (il vérifie les 5 réponses), pousser. Une question",
+    "corrigée est une nouvelle question : sa progression repart de zéro."
+  ],
+  "slug": "geographie_1re_metropolisation_qcm",
+  "name": "Géographie - La métropolisation : QCM",
+  "level": "1re",
+  "kind": "qcm",
+  "sort_order": 21,
+  "color": "#2a7f6f",
+  "button_label": "Géographie - Métropolisation\n(QCM du contrôle, 5 réponses par question)",
+  "words": [
+    {
+      "theme": "Introduction : la transition urbaine",
+      "type": "cours",
+      "source": "Combien y avait-il de citadins dans le monde en 1900 ?",
+      "canonical": "260 millions",
+      "wrong": [
+        "26 millions",
+        "600 millions",
+        "1 milliard",
+        "2,6 milliards"
+      ],
+      "explanation": "En 1900 : 260 millions de citadins, pour 1 milliard d'habitants."
+    },
+    {
+      "theme": "Introduction : la transition urbaine",
+      "type": "cours",
+      "source": "Combien y avait-il de citadins dans le monde en 2019 ?",
+      "canonical": "4 milliards",
+      "wrong": [
+        "260 millions",
+        "1 milliard",
+        "2 milliards",
+        "7,8 milliards"
+      ],
+      "explanation": "En 2019 : 4 milliards de citadins, pour 7,8 milliards d'habitants."
+    },
+    {
+      "theme": "Introduction : la transition urbaine",
+      "type": "cours",
+      "source": "Combien y a-t-il de citadins dans le monde en 2025 ?",
+      "canonical": "4,8 milliards",
+      "wrong": [
+        "1 milliard",
+        "2,4 milliards",
+        "6,5 milliards",
+        "8 milliards"
+      ],
+      "explanation": "En 2025 : 4,8 milliards de citadins, soit 58 % des plus de 8 milliards d'habitants."
+    },
+    {
+      "theme": "Introduction : la transition urbaine",
+      "type": "cours",
+      "source": "En 2025, quelle part des habitants de la planète vit en ville ?",
+      "canonical": "58 %",
+      "wrong": [
+        "25 %",
+        "40 %",
+        "75 %",
+        "90 %"
+      ],
+      "explanation": "4,8 milliards de citadins en 2025 : 58 % des habitants."
+    },
+    {
+      "theme": "Introduction : la transition urbaine",
+      "type": "cours",
+      "source": "En quelle année la population mondiale est-elle pour moitié urbaine, pour moitié rurale (50 % / 50 %) ?",
+      "canonical": "2010",
+      "wrong": [
+        "1900",
+        "1950",
+        "1990",
+        "2050"
+      ],
+      "explanation": "2010 : 50 % / 50 %. Estimation pour 2050 : 2/3 de la population en ville."
+    },
+    {
+      "theme": "Introduction : la transition urbaine",
+      "type": "cours",
+      "source": "D'après les estimations, quelle part de la population vivra en ville en 2050 ?",
+      "canonical": "Les 2/3",
+      "wrong": [
+        "Le quart",
+        "Le tiers",
+        "La moitié",
+        "Presque 100 %"
+      ],
+      "explanation": "Estimation pour 2050 : 2/3 de la population en ville (contre 50 % en 2010)."
+    },
+    {
+      "theme": "Introduction : la transition urbaine",
+      "type": "cours",
+      "source": "La transition urbaine, c'est :",
+      "canonical": "le passage d'un monde majoritairement rural à un monde majoritairement urbain",
+      "wrong": [
+        "le passage d'un monde majoritairement urbain à un monde majoritairement rural",
+        "l'installation de citadins dans de petits villages de campagne",
+        "la concentration de la richesse et des fonctions de commandement dans les grandes villes",
+        "le découpage d'un territoire en espaces spécialisés"
+      ],
+      "explanation": "Transition urbaine : passage d'un monde majoritairement rural à un monde majoritairement urbain."
+    },
+    {
+      "theme": "Introduction : la transition urbaine",
+      "type": "cours",
+      "source": "Que désigne l'« explosion urbaine » ?",
+      "canonical": "De plus en plus de personnes vivent dans les villes",
+      "wrong": [
+        "Les villes perdent une grande partie de leurs habitants",
+        "Les villes détruisent leurs bidonvilles",
+        "Les citadins partent vivre dans les villages",
+        "Les villes construisent de plus en plus de gratte-ciel"
+      ],
+      "explanation": "On vit dans un monde de plus en plus urbain : explosion urbaine, de plus en plus de personnes dans les villes."
+    },
+    {
+      "theme": "Introduction : la transition urbaine",
+      "type": "cours",
+      "source": "En France, « vivre en ville », c'est vivre dans une agglomération de plus de :",
+      "canonical": "2 000 habitants",
+      "wrong": [
+        "200 habitants",
+        "10 000 habitants",
+        "100 000 habitants",
+        "1 million d'habitants"
+      ],
+      "explanation": "« Vivre en ville » = vivre dans une agglomération de plus de 2 000 habitants (pas la même définition dans les autres États)."
+    },
+    {
+      "theme": "Introduction : la transition urbaine",
+      "type": "cours",
+      "source": "La définition de « vivre en ville » :",
+      "canonical": "n'est pas la même dans tous les États",
+      "wrong": [
+        "est la même dans tous les pays du monde",
+        "est fixée par l'ONU pour tous les pays",
+        "dépend seulement de la surface de la ville",
+        "dépend du nombre de gratte-ciel"
+      ],
+      "explanation": "En France, c'est plus de 2 000 habitants, mais ce n'est pas la même définition dans les autres États."
+    },
+    {
+      "theme": "Introduction : la transition urbaine",
+      "type": "cours",
+      "source": "En ville, l'accroissement naturel est positif. Cela veut dire que :",
+      "canonical": "le taux de natalité est supérieur au taux de mortalité",
+      "wrong": [
+        "le taux de mortalité est supérieur au taux de natalité",
+        "plus de gens arrivent dans la ville qu'il n'en part",
+        "la surface de la ville augmente chaque année",
+        "les citadins vivent plus longtemps que les ruraux"
+      ],
+      "explanation": "Accroissement naturel positif : taux de natalité > taux de mortalité."
+    },
+    {
+      "theme": "Introduction : la transition urbaine",
+      "type": "cours",
+      "source": "Pourquoi l'accroissement naturel est-il positif, voire très positif, en ville ?",
+      "canonical": "Grâce aux soins et au cadre de vie",
+      "wrong": [
+        "Grâce aux gratte-ciel",
+        "Parce que l'exode rural est interdit",
+        "Parce que les villes sont sur les littoraux",
+        "Grâce au télétravail"
+      ],
+      "explanation": "Explication démographique (pays en transition démographique) : en ville, l'accroissement naturel est positif grâce aux soins, au cadre de vie, etc."
+    },
+    {
+      "theme": "Introduction : la transition urbaine",
+      "type": "cours",
+      "source": "L'exode rural, c'est :",
+      "canonical": "quitter les campagnes pour aller dans les villes",
+      "wrong": [
+        "quitter les villes pour s'installer dans les campagnes",
+        "quitter son pays pour s'installer à l'étranger",
+        "se déplacer chaque jour entre son domicile et son travail",
+        "gagner des terres sur la mer"
+      ],
+      "explanation": "Exode rural : quitter les campagnes pour aller dans les villes."
+    },
+    {
+      "theme": "Introduction : la transition urbaine",
+      "type": "cours",
+      "source": "D'après le cours, l'exode rural explique la croissance urbaine :",
+      "canonical": "seulement dans les pays en développement",
+      "wrong": [
+        "seulement dans les pays développés",
+        "seulement en Europe",
+        "dans tous les pays de la même façon",
+        "seulement depuis le Covid"
+      ],
+      "explanation": "L'exode rural est une explication valable seulement pour les pays en développement."
+    },
+    {
+      "theme": "Introduction : la transition urbaine",
+      "type": "cours",
+      "source": "Quelle est l'explication économique de la croissance des villes ?",
+      "canonical": "Les villes offrent du travail : elles concentrent diverses activités, donc plus d'emplois",
+      "wrong": [
+        "Les loyers y sont moins chers qu'à la campagne, donc les familles s'y installent en nombre",
+        "Le taux de natalité y est supérieur au taux de mortalité, grâce aux soins et au cadre de vie",
+        "Les villes sont toutes situées sur les littoraux, ce qui attire les populations des campagnes",
+        "Les campagnes sont interdites aux nouveaux habitants, qui doivent donc partir en ville"
+      ],
+      "explanation": "Économiquement : les populations sont attirées par les villes, qui offrent du travail. Le taux de natalité, c'est l'explication démographique."
+    },
+    {
+      "theme": "Introduction : la transition urbaine",
+      "type": "cours",
+      "source": "Quelle est la problématique du chapitre ?",
+      "canonical": "Comment la métropolisation marque-t-elle la transition urbaine actuelle, et pourquoi les métropoles possèdent-elles de plus en plus de pouvoir et de richesses ?",
+      "wrong": [
+        "Comment l'exode rural vide-t-il les campagnes, et pourquoi les villes moyennes perdent-elles de plus en plus d'habitants ?",
+        "Comment les bidonvilles disparaissent-ils des métropoles, et pourquoi les États construisent-ils de plus en plus de logements ?",
+        "Comment la mondialisation fait-elle disparaître les frontières, et pourquoi les capitales perdent-elles de plus en plus de pouvoir ?",
+        "Comment les métropoles européennes restent-elles les plus peuplées, et pourquoi l'Asie s'urbanise-t-elle de plus en plus lentement ?"
+      ],
+      "explanation": "Problématique : comment la métropolisation marque-t-elle la transition urbaine actuelle, et pourquoi les métropoles possèdent-elles de plus en plus de pouvoir et de richesses ?"
+    },
+    {
+      "theme": "Carte des mégapoles et croissance inégale",
+      "type": "cours",
+      "source": "Combien y avait-il de mégapoles en 1950 ?",
+      "canonical": "2",
+      "wrong": [
+        "0",
+        "10",
+        "20",
+        "30"
+      ],
+      "explanation": "Seulement 2 mégapoles en 1950 : Londres et Tokyo. Aujourd'hui, plus de 30."
+    },
+    {
+      "theme": "Carte des mégapoles et croissance inégale",
+      "type": "cours",
+      "source": "D'après le cours, quelles étaient les 2 mégapoles de 1950 ?",
+      "canonical": "Londres et Tokyo",
+      "wrong": [
+        "Paris et Tokyo",
+        "Londres et Paris",
+        "Mexico et Tokyo",
+        "Londres et Shanghai"
+      ],
+      "explanation": "Seulement 2 mégapoles en 1950 : Londres et Tokyo."
+    },
+    {
+      "theme": "Carte des mégapoles et croissance inégale",
+      "type": "cours",
+      "source": "Combien y a-t-il de mégapoles aujourd'hui ?",
+      "canonical": "Plus de 30",
+      "wrong": [
+        "2",
+        "Une dizaine",
+        "Plus de 100",
+        "Plus de 500"
+      ],
+      "explanation": "2 mégapoles en 1950, plus de 30 aujourd'hui (la carte du cours en compte 30)."
+    },
+    {
+      "theme": "Carte des mégapoles et croissance inégale",
+      "type": "cours",
+      "source": "Laquelle de ces villes est une mégapole de la carte du cours ?",
+      "canonical": "Kinshasa",
+      "wrong": [
+        "Sydney",
+        "Berlin",
+        "Madrid",
+        "Toronto"
+      ],
+      "explanation": "Kinshasa (capitale de la RDC) est la mégapole n° 9 de la carte."
+    },
+    {
+      "theme": "Carte des mégapoles et croissance inégale",
+      "type": "cours",
+      "source": "Parmi ces villes d'Asie, laquelle est une mégapole de la carte ?",
+      "canonical": "Dhaka",
+      "wrong": [
+        "Hanoï",
+        "Kaboul",
+        "Katmandou",
+        "Oulan-Bator"
+      ],
+      "explanation": "Dhaka est la mégapole n° 20 de la carte, avec Karachi, Mumbai, Delhi et Kolkata en Asie du Sud."
+    },
+    {
+      "theme": "Carte des mégapoles et croissance inégale",
+      "type": "cours",
+      "source": "Parmi ces villes d'Amérique, laquelle est une mégapole de la carte ?",
+      "canonical": "Lima",
+      "wrong": [
+        "Montréal",
+        "La Havane",
+        "Quito",
+        "Vancouver"
+      ],
+      "explanation": "En Amérique : Los Angeles, Chicago, New York, Mexico, Lima, Rio de Janeiro, São Paulo, Buenos Aires."
+    },
+    {
+      "theme": "Carte des mégapoles et croissance inégale",
+      "type": "cours",
+      "source": "Parmi ces villes d'Afrique, laquelle est une mégapole de la carte ?",
+      "canonical": "Lagos",
+      "wrong": [
+        "Dakar",
+        "Nairobi",
+        "Alger",
+        "Casablanca"
+      ],
+      "explanation": "En Afrique, la carte place Kinshasa, Lagos et Le Caire."
+    },
+    {
+      "theme": "Carte des mégapoles et croissance inégale",
+      "type": "cours",
+      "source": "Parmi ces villes d'Europe, laquelle est une mégapole de la carte ?",
+      "canonical": "Istanbul",
+      "wrong": [
+        "Berlin",
+        "Madrid",
+        "Rome",
+        "Varsovie"
+      ],
+      "explanation": "En Europe, la carte place Londres, Paris, Istanbul et Moscou."
+    },
+    {
+      "theme": "Carte des mégapoles et croissance inégale",
+      "type": "cours",
+      "source": "Laquelle de ces villes n'est PAS sur la carte des mégapoles ?",
+      "canonical": "Sydney",
+      "wrong": [
+        "Chongqing",
+        "Guangzhou",
+        "Osaka",
+        "Kolkata"
+      ],
+      "explanation": "Il n'y a aucune mégapole en Océanie sur la carte. Chongqing, Guangzhou, Osaka et Kolkata y sont."
+    },
+    {
+      "theme": "Carte des mégapoles et croissance inégale",
+      "type": "cours",
+      "source": "Quelle mégapole de la carte est la capitale de la République démocratique du Congo (RDC) ?",
+      "canonical": "Kinshasa",
+      "wrong": [
+        "Lagos",
+        "Le Caire",
+        "Lima",
+        "Karachi"
+      ],
+      "explanation": "Kinshasa, capitale de la RDC."
+    },
+    {
+      "theme": "Carte des mégapoles et croissance inégale",
+      "type": "cours",
+      "source": "Quelle mégapole de la carte est la capitale de l'Égypte ?",
+      "canonical": "Le Caire",
+      "wrong": [
+        "Kinshasa",
+        "Lagos",
+        "Istanbul",
+        "Karachi"
+      ],
+      "explanation": "Le Caire, capitale de l'Égypte."
+    },
+    {
+      "theme": "Carte des mégapoles et croissance inégale",
+      "type": "cours",
+      "source": "Quelle mégapole de la carte est la capitale des Philippines ?",
+      "canonical": "Manille",
+      "wrong": [
+        "Jakarta",
+        "Osaka",
+        "Séoul",
+        "Dhaka"
+      ],
+      "explanation": "Manille, capitale des Philippines ; Jakarta, capitale de l'Indonésie."
+    },
+    {
+      "theme": "Carte des mégapoles et croissance inégale",
+      "type": "cours",
+      "source": "Jakarta est la capitale de l'Indonésie, mais :",
+      "canonical": "plus pour longtemps",
+      "wrong": [
+        "seulement depuis 2020",
+        "elle n'est pas une mégapole",
+        "elle n'est pas sur un littoral",
+        "elle va fusionner avec Manille"
+      ],
+      "explanation": "Jakarta : capitale de l'Indonésie, plus pour longtemps (l'Indonésie déplace sa capitale)."
+    },
+    {
+      "theme": "Carte des mégapoles et croissance inégale",
+      "type": "cours",
+      "source": "D'après le cours, qu'est-ce que New Delhi ?",
+      "canonical": "Un quartier de Delhi",
+      "wrong": [
+        "Une ville différente, loin de Delhi",
+        "Un quartier de Mumbai",
+        "Le nouveau nom de Kolkata",
+        "Une ville construite sur un polder"
+      ],
+      "explanation": "Delhi est la mégapole n° 18 de la carte ; New Delhi est un quartier de Delhi."
+    },
+    {
+      "theme": "Carte des mégapoles et croissance inégale",
+      "type": "cours",
+      "source": "En Europe, pourquoi la population des grandes villes augmente-t-elle lentement ?",
+      "canonical": "L'urbanisation y est ancienne : une grande part des habitants vit déjà en ville",
+      "wrong": [
+        "L'exode rural y est interdit depuis longtemps, donc personne ne quitte les campagnes",
+        "Les gratte-ciel y sont interdits partout, donc les villes ne peuvent plus accueillir personne",
+        "Les villes européennes sont presque toutes des shrinking cities, qui perdent leurs habitants",
+        "Les Européens partent massivement vivre dans les grandes métropoles d'Asie"
+      ],
+      "explanation": "Urbanisation ancienne en Europe : une grande part des habitants vit en ville, donc la population des grandes villes augmente lentement."
+    },
+    {
+      "theme": "Carte des mégapoles et croissance inégale",
+      "type": "cours",
+      "source": "En Asie, d'après le cours :",
+      "canonical": "l'urbanisation des métropoles est rapide en Chine et en Inde",
+      "wrong": [
+        "l'urbanisation est ancienne et presque terminée",
+        "les grandes villes perdent leurs habitants",
+        "il n'y a aucune mégapole",
+        "l'urbanisation des campagnes est nulle"
+      ],
+      "explanation": "Urbanisation lente en Asie (celle des campagnes est plus importante que celle des villes), mais celle des métropoles est rapide en Chine et en Inde."
+    },
+    {
+      "theme": "Carte des mégapoles et croissance inégale",
+      "type": "cours",
+      "source": "Jusqu'en quelle année l'exode rural était-il interdit en Chine ?",
+      "canonical": "1978",
+      "wrong": [
+        "1918",
+        "1949",
+        "1989",
+        "2008"
+      ],
+      "explanation": "Exode rural tardif en Chine, car interdit jusqu'en 1978, puis explosion urbaine sur la côte Est."
+    },
+    {
+      "theme": "Carte des mégapoles et croissance inégale",
+      "type": "cours",
+      "source": "Pourquoi la Chine interdisait-elle l'exode rural ?",
+      "canonical": "Pour garder la main-d'œuvre dans les campagnes, pour les cultures",
+      "wrong": [
+        "Pour éviter la pollution et les embouteillages dans les grandes villes",
+        "Pour réserver les grandes villes aux touristes et aux entreprises",
+        "Pour éviter les migrations pendulaires entre campagnes et villes",
+        "Pour construire d'abord des polders sur toute la côte Est"
+      ],
+      "explanation": "L'exode rural était interdit pour garder la main-d'œuvre dans les campagnes (cultures)."
+    },
+    {
+      "theme": "Carte des mégapoles et croissance inégale",
+      "type": "cours",
+      "source": "Après 1978, où a lieu l'explosion urbaine en Chine ?",
+      "canonical": "Sur la côte Est, avec l'industrialisation",
+      "wrong": [
+        "Dans l'Ouest, près des montagnes",
+        "Dans les campagnes du Sud",
+        "Dans le désert de Gobi",
+        "Uniquement à Hong Kong"
+      ],
+      "explanation": "Après l'exode rural tardif : explosion urbaine sur la côte Est, avec l'industrialisation."
+    },
+    {
+      "theme": "Carte des mégapoles et croissance inégale",
+      "type": "cours",
+      "source": "Laquelle de ces situations rend l'urbanisation plus rapide et plus forte, d'après le cours ?",
+      "canonical": "Un pays d'immigration, où les nouveaux venus s'installent dans les grandes villes",
+      "wrong": [
+        "Un pays où l'exode rural est interdit, pour garder la main-d'œuvre dans les campagnes",
+        "Un pays où les campagnes sont très peuplées et les cultures très nombreuses",
+        "Un pays sans aucun littoral, loin des grands échanges mondiaux",
+        "Un pays où les citadins partent s'installer dans de petits villages"
+      ],
+      "explanation": "Raisons d'une urbanisation plus rapide : villes très anciennes (Europe), désert en campagne, pays d'immigration (Amérique latine, Australie)."
+    },
+    {
+      "theme": "Carte des mégapoles et croissance inégale",
+      "type": "cours",
+      "source": "Quels exemples le cours donne-t-il de pays d'immigration où l'urbanisation est forte ?",
+      "canonical": "L'Amérique latine et l'Australie",
+      "wrong": [
+        "La Chine et l'Inde",
+        "Le Japon et la Corée du Sud",
+        "L'Europe de l'Est",
+        "L'Afrique centrale"
+      ],
+      "explanation": "Pays d'immigration avec des gens qui viennent s'installer dans les grandes villes : Amérique latine, Australie, etc."
+    },
+    {
+      "theme": "Carte des mégapoles et croissance inégale",
+      "type": "cours",
+      "source": "Pourquoi un désert en campagne rend-il l'urbanisation plus forte ?",
+      "canonical": "La population est alors dans les villes, et pas à la campagne",
+      "wrong": [
+        "Les villes construisent des polders dans le désert",
+        "Les citadins partent vivre dans le désert",
+        "Le désert attire les touristes de l'urbex",
+        "L'exode rural y est interdit"
+      ],
+      "explanation": "Désert en campagne, donc la population est dans les villes et pas à la campagne."
+    },
+    {
+      "theme": "I. La métropolisation, un phénomène mondial",
+      "type": "cours",
+      "source": "La métropolisation, c'est :",
+      "canonical": "le processus de concentration croissante de la population, de la richesse et des fonctions de commandement dans les grandes villes",
+      "wrong": [
+        "le passage d'un monde majoritairement rural à un monde majoritairement urbain, de 1900 à aujourd'hui",
+        "la mise en relation des différentes parties du monde par l'intensification des flux (hommes, marchandises, argent)",
+        "l'installation de citadins dans de petits villages de campagne ou dans des lotissements en bordure de ces villages",
+        "le découpage du territoire d'une ville en espaces spécialisés, chacun dans une activité donnée"
+      ],
+      "explanation": "Métropolisation : processus de concentration croissante de la population, de la richesse et des fonctions de commandement dans les grandes villes."
+    },
+    {
+      "theme": "I. La métropolisation, un phénomène mondial",
+      "type": "cours",
+      "source": "La métropolisation est une des conséquences :",
+      "canonical": "de la mondialisation",
+      "wrong": [
+        "de l'exode rural en Europe",
+        "du télétravail",
+        "de la rurbanisation",
+        "des migrations pendulaires"
+      ],
+      "explanation": "La métropolisation est une des conséquences de la mondialisation."
+    },
+    {
+      "theme": "I. La métropolisation, un phénomène mondial",
+      "type": "cours",
+      "source": "Mise en relation des différentes parties du monde par l'intensification des flux : c'est...",
+      "canonical": "la mondialisation",
+      "wrong": [
+        "la métropolisation",
+        "la transition urbaine",
+        "le zonage",
+        "la rurbanisation"
+      ],
+      "explanation": "Mondialisation : mise en relation des différentes parties du monde par l'intensification des flux (hommes, marchandises, argent, etc.)."
+    },
+    {
+      "theme": "I. La métropolisation, un phénomène mondial",
+      "type": "cours",
+      "source": "Quels flux le cours cite-t-il dans la définition de la mondialisation ?",
+      "canonical": "Hommes, marchandises, argent",
+      "wrong": [
+        "Eau, électricité, déchets",
+        "Pétrole, gaz, charbon",
+        "Idées, langues, religions",
+        "Touristes seulement"
+      ],
+      "explanation": "Intensification des flux : hommes, marchandises, argent, etc."
+    },
+    {
+      "theme": "I. La métropolisation, un phénomène mondial",
+      "type": "cours",
+      "source": "Que veut dire PUB ?",
+      "canonical": "Produit urbain brut",
+      "wrong": [
+        "Population urbaine brute",
+        "Plan d'urbanisme de base",
+        "Pouvoir urbain de la banlieue",
+        "Produit unique des bourses"
+      ],
+      "explanation": "PUB : produit urbain brut, toutes les richesses matérielles et immatérielles produites par une ville."
+    },
+    {
+      "theme": "I. La métropolisation, un phénomène mondial",
+      "type": "cours",
+      "source": "Le PUB (produit urbain brut) mesure :",
+      "canonical": "toutes les richesses matérielles et immatérielles produites par une ville",
+      "wrong": [
+        "le nombre d'habitants d'une ville",
+        "le pouvoir de commandement d'une ville dans les domaines politique, économique et culturel",
+        "les liens d'une ville avec les autres métropoles",
+        "le nombre de gratte-ciel d'une ville"
+      ],
+      "explanation": "PUB : toutes les richesses matérielles et immatérielles produites par une ville."
+    },
+    {
+      "theme": "I. La métropolisation, un phénomène mondial",
+      "type": "cours",
+      "source": "Le Global City Index (classement Mori) mesure :",
+      "canonical": "le pouvoir de commandement qu'une ville exerce dans les domaines politique, économique et culturel",
+      "wrong": [
+        "toutes les richesses matérielles et immatérielles produites par une ville",
+        "la quantité de rayonnements mondiaux, d'institutions mondiales, et les liens avec les autres métropoles",
+        "la surface urbanisée d'une ville depuis 1950",
+        "la part de la population qui vit en bidonville"
+      ],
+      "explanation": "Global City Index (classement Mori) : pouvoir de commandement dans les domaines politique, économique et culturel."
+    },
+    {
+      "theme": "I. La métropolisation, un phénomène mondial",
+      "type": "cours",
+      "source": "Le GaWC mesure :",
+      "canonical": "la quantité de rayonnements mondiaux, d'institutions mondiales, et les liens avec les autres métropoles",
+      "wrong": [
+        "le pouvoir de commandement qu'une ville exerce dans les domaines politique, économique et culturel",
+        "toutes les richesses matérielles et immatérielles produites par une ville",
+        "le nombre de mégapoles d'un pays",
+        "la distance moyenne entre domicile et travail"
+      ],
+      "explanation": "GaWC : quantité de rayonnements mondiaux, d'institutions mondiales, liens avec les autres métropoles."
+    },
+    {
+      "theme": "I. La métropolisation, un phénomène mondial",
+      "type": "cours",
+      "source": "Dans le cours, que veut dire le sigle GaWC ?",
+      "canonical": "Global World City",
+      "wrong": [
+        "Great American World Cities",
+        "Global Area of World Capitals",
+        "Grand Atlas of World Cities",
+        "Global and Wealthy Cities"
+      ],
+      "explanation": "GaWC (Global World City), comme dans le cahier."
+    },
+    {
+      "theme": "I. La métropolisation, un phénomène mondial",
+      "type": "cours",
+      "source": "Quel autre nom le cours donne-t-il au Global City Index ?",
+      "canonical": "Le classement Mori",
+      "wrong": [
+        "Le classement GaWC",
+        "Le classement de l'ONU",
+        "Le PUB",
+        "Le classement de l'UNESCO"
+      ],
+      "explanation": "Global City Index (classement Mori)."
+    },
+    {
+      "theme": "I. La métropolisation, un phénomène mondial",
+      "type": "cours",
+      "source": "Quelle ville est 1re du Global City Index (classement Mori) ?",
+      "canonical": "Londres",
+      "wrong": [
+        "Tokyo",
+        "New York",
+        "Paris",
+        "Singapour"
+      ],
+      "explanation": "Global City Index : 1. Londres, 2. Tokyo, 3. New York, 4. Paris, 5. Singapour."
+    },
+    {
+      "theme": "I. La métropolisation, un phénomène mondial",
+      "type": "cours",
+      "source": "Quelle ville est 2e du Global City Index (classement Mori) ?",
+      "canonical": "Tokyo",
+      "wrong": [
+        "Londres",
+        "New York",
+        "Paris",
+        "Hong Kong"
+      ],
+      "explanation": "Global City Index : 1. Londres, 2. Tokyo, 3. New York, 4. Paris, 5. Singapour."
+    },
+    {
+      "theme": "I. La métropolisation, un phénomène mondial",
+      "type": "cours",
+      "source": "Quel est le rang de Paris au Global City Index (classement Mori) ?",
+      "canonical": "4e",
+      "wrong": [
+        "1re",
+        "2e",
+        "3e",
+        "5e"
+      ],
+      "explanation": "Global City Index : 1. Londres, 2. Tokyo, 3. New York, 4. Paris, 5. Singapour."
+    },
+    {
+      "theme": "I. La métropolisation, un phénomène mondial",
+      "type": "cours",
+      "source": "Quelle ville est 2e du classement GaWC ?",
+      "canonical": "New York",
+      "wrong": [
+        "Tokyo",
+        "Londres",
+        "Hong Kong",
+        "Paris"
+      ],
+      "explanation": "GaWC : 1. Londres, 2. New York, 3. Hong Kong, 4. Beijing, 5. Singapour."
+    },
+    {
+      "theme": "I. La métropolisation, un phénomène mondial",
+      "type": "cours",
+      "source": "Quelle ville est dans le top 5 du GaWC, mais pas dans celui du Global City Index ?",
+      "canonical": "Hong Kong",
+      "wrong": [
+        "Londres",
+        "New York",
+        "Singapour",
+        "Paris"
+      ],
+      "explanation": "GaWC : Londres, New York, Hong Kong, Beijing, Singapour. Global City Index : Londres, Tokyo, New York, Paris, Singapour."
+    },
+    {
+      "theme": "I. La métropolisation, un phénomène mondial",
+      "type": "cours",
+      "source": "Quelle ville est dans le top 5 du Global City Index, mais pas dans celui du GaWC ?",
+      "canonical": "Paris",
+      "wrong": [
+        "Londres",
+        "New York",
+        "Singapour",
+        "Hong Kong"
+      ],
+      "explanation": "Global City Index : Londres, Tokyo, New York, Paris, Singapour. GaWC : Londres, New York, Hong Kong, Beijing, Singapour."
+    },
+    {
+      "theme": "I. La métropolisation, un phénomène mondial",
+      "type": "cours",
+      "source": "Quelles villes sont dans le top 5 des deux classements (Global City Index et GaWC) ?",
+      "canonical": "Londres, New York et Singapour",
+      "wrong": [
+        "Londres, Tokyo et Paris",
+        "Tokyo, Hong Kong et Beijing",
+        "Paris, New York et Hong Kong",
+        "Londres, Paris et Singapour"
+      ],
+      "explanation": "Londres (1re des deux), New York et Singapour sont dans les deux top 5."
+    },
+    {
+      "theme": "I. La métropolisation, un phénomène mondial",
+      "type": "cours",
+      "source": "Le nombre de gratte-ciel d'une métropole :",
+      "canonical": "indique sa puissance économique, mais pas seulement",
+      "wrong": [
+        "ne dit rien de sa puissance économique",
+        "est le seul indice qui permet de classer les métropoles",
+        "dépend seulement de son nombre d'habitants",
+        "est le même dans toutes les métropoles"
+      ],
+      "explanation": "Les gratte-ciel indiquent la puissance économique, mais pas seulement : ils ont parfois été quasi obligatoires, ailleurs restreints par la loi."
+    },
+    {
+      "theme": "I. La métropolisation, un phénomène mondial",
+      "type": "cours",
+      "source": "Pourquoi Paris a-t-il peu de gratte-ciel ?",
+      "canonical": "Ils y sont restreints par des lois (règles d'urbanisme)",
+      "wrong": [
+        "Paris n'est pas sur un littoral, donc les gratte-ciel y sont inutiles",
+        "Le sol de Paris est un ancien marécage, trop mou pour les tours",
+        "Paris est une shrinking city, qui perd ses habitants",
+        "Paris n'est pas une ville-monde, son PUB est trop faible"
+      ],
+      "explanation": "Dans certaines métropoles, les gratte-ciel sont restreints par des lois, comme à Paris (règles d'urbanisme)."
+    },
+    {
+      "theme": "I. La métropolisation, un phénomène mondial",
+      "type": "cours",
+      "source": "Pourquoi y a-t-il beaucoup de gratte-ciel à Hong Kong ?",
+      "canonical": "Son territoire est très petit (baie et montagnes)",
+      "wrong": [
+        "Les gratte-ciel y sont restreints par la loi",
+        "Hong Kong est 1re du Global City Index",
+        "C'est une shrinking city",
+        "Ses polders sont sous le niveau de la mer"
+      ],
+      "explanation": "Beaucoup de gratte-ciel à Hong Kong, car le territoire est très petit (baie et montagnes)."
+    },
+    {
+      "theme": "I. La métropolisation, un phénomène mondial",
+      "type": "cours",
+      "source": "Dans quelle ville se trouve Burj Khalifa ?",
+      "canonical": "Dubaï",
+      "wrong": [
+        "Riyad",
+        "Hong Kong",
+        "Shanghai",
+        "Singapour"
+      ],
+      "explanation": "Burj Khalifa, à Dubaï : 825 m, environ 200 étages."
+    },
+    {
+      "theme": "I. La métropolisation, un phénomène mondial",
+      "type": "cours",
+      "source": "Quelle hauteur le cours donne-t-il pour Burj Khalifa ?",
+      "canonical": "825 m",
+      "wrong": [
+        "325 m",
+        "525 m",
+        "1 025 m",
+        "1 525 m"
+      ],
+      "explanation": "Burj Khalifa, à Dubaï : 825 m, environ 200 étages."
+    },
+    {
+      "theme": "I. La métropolisation, un phénomène mondial",
+      "type": "cours",
+      "source": "Combien d'étages le cours donne-t-il, environ, pour Burj Khalifa ?",
+      "canonical": "Environ 200",
+      "wrong": [
+        "Environ 50",
+        "Environ 100",
+        "Environ 400",
+        "Environ 1 000"
+      ],
+      "explanation": "Burj Khalifa, à Dubaï : 825 m, environ 200 étages."
+    },
+    {
+      "theme": "I. La métropolisation, un phénomène mondial",
+      "type": "cours",
+      "source": "Où sont situées la plupart des grandes métropoles ?",
+      "canonical": "Sur les littoraux",
+      "wrong": [
+        "Au cœur des continents",
+        "En montagne",
+        "Dans les déserts",
+        "Autour des lacs"
+      ],
+      "explanation": "La plupart des grandes métropoles sont situées sur les littoraux (pas Paris, Berlin, Moscou, Mexico...)."
+    },
+    {
+      "theme": "I. La métropolisation, un phénomène mondial",
+      "type": "cours",
+      "source": "Pourquoi la plupart des grandes métropoles sont-elles sur les littoraux ?",
+      "canonical": "Pour s'insérer dans les échanges mondiaux : la plupart des marchandises voyagent par la mer",
+      "wrong": [
+        "Pour profiter des plages et attirer le tourisme balnéaire du monde entier",
+        "Parce que les gratte-ciel sont interdits à l'intérieur des terres par la loi",
+        "Pour fuir les fortes températures de l'intérieur des continents",
+        "Parce que les polders gagnés sur la mer y sont moins chers que les terrains"
+      ],
+      "explanation": "Insertion dans les échanges mondiaux : 80 % des marchandises passent par voie maritime (porte-conteneurs)."
+    },
+    {
+      "theme": "I. La métropolisation, un phénomène mondial",
+      "type": "cours",
+      "source": "Quelle part des marchandises passe par voie maritime ?",
+      "canonical": "80 %",
+      "wrong": [
+        "20 %",
+        "40 %",
+        "50 %",
+        "100 %"
+      ],
+      "explanation": "80 % des marchandises passent par voie maritime, en porte-conteneurs."
+    },
+    {
+      "theme": "I. La métropolisation, un phénomène mondial",
+      "type": "cours",
+      "source": "Laquelle de ces grandes métropoles n'est PAS sur un littoral ?",
+      "canonical": "Mexico",
+      "wrong": [
+        "New York",
+        "Tokyo",
+        "Shanghai",
+        "Mumbai"
+      ],
+      "explanation": "Exceptions citées par le cours : Paris, Berlin, Moscou, Mexico..."
+    },
+    {
+      "theme": "I. La métropolisation, un phénomène mondial",
+      "type": "cours",
+      "source": "Laquelle de ces métropoles est citée par le cours comme exception, loin du littoral ?",
+      "canonical": "Moscou",
+      "wrong": [
+        "Los Angeles",
+        "Rio de Janeiro",
+        "Hong Kong",
+        "Lagos"
+      ],
+      "explanation": "Exceptions citées par le cours : Paris, Berlin, Moscou, Mexico..."
+    },
+    {
+      "theme": "II. Concentration des activités et des fonctions",
+      "type": "cours",
+      "source": "La métropolisation crée des quartiers :",
+      "canonical": "différenciés",
+      "wrong": [
+        "tous identiques",
+        "uniquement résidentiels",
+        "uniquement politiques",
+        "sans habitants"
+      ],
+      "explanation": "La métropolisation crée des quartiers différenciés : d'affaires, politiques, résidentiels, centrés sur les voies de communication, commerciaux."
+    },
+    {
+      "theme": "II. Concentration des activités et des fonctions",
+      "type": "cours",
+      "source": "Dans le domaine économique, les quartiers d'affaires concentrent :",
+      "canonical": "les sièges sociaux et les bourses",
+      "wrong": [
+        "les musées et les grandes installations sportives",
+        "les sièges d'institutions internationales",
+        "les pavillons des classes moyennes",
+        "les bidonvilles"
+      ],
+      "explanation": "Domaine économique : sièges sociaux et bourses. Culturel : musées, grandes installations sportives. Politique : sièges d'institutions internationales."
+    },
+    {
+      "theme": "II. Concentration des activités et des fonctions",
+      "type": "cours",
+      "source": "Musées et grandes installations sportives relèvent de quel domaine ?",
+      "canonical": "Le domaine culturel",
+      "wrong": [
+        "Le domaine économique",
+        "Le domaine politique",
+        "Le domaine résidentiel",
+        "Le domaine agricole"
+      ],
+      "explanation": "Domaine culturel : musées, grandes installations sportives."
+    },
+    {
+      "theme": "II. Concentration des activités et des fonctions",
+      "type": "cours",
+      "source": "Les sièges d'institutions internationales se trouvent dans :",
+      "canonical": "les quartiers politiques",
+      "wrong": [
+        "les nappes pavillonnaires",
+        "les technopoles",
+        "les espaces périurbains",
+        "les centres commerciaux"
+      ],
+      "explanation": "Domaine politique (quartiers politiques) : sièges d'institutions internationales, comme l'ONU à New York ou l'UNESCO à Paris."
+    },
+    {
+      "theme": "II. Concentration des activités et des fonctions",
+      "type": "cours",
+      "source": "Quelle ville accueille le siège de l'ONU ?",
+      "canonical": "New York",
+      "wrong": [
+        "Paris",
+        "Londres",
+        "Tokyo",
+        "Singapour"
+      ],
+      "explanation": "New York : siège de l'ONU. Paris : siège de l'UNESCO."
+    },
+    {
+      "theme": "II. Concentration des activités et des fonctions",
+      "type": "cours",
+      "source": "Quelle ville accueille le siège de l'UNESCO ?",
+      "canonical": "Paris",
+      "wrong": [
+        "New York",
+        "Londres",
+        "Rome",
+        "Singapour"
+      ],
+      "explanation": "Paris : siège de l'UNESCO. New York : siège de l'ONU."
+    },
+    {
+      "theme": "II. Concentration des activités et des fonctions",
+      "type": "cours",
+      "source": "Les nappes pavillonnaires sont :",
+      "canonical": "des quartiers résidentiels de pavillons uniformes, pour les classes moyennes",
+      "wrong": [
+        "des quartiers d'affaires couverts de gratte-ciel",
+        "des ensembles d'abris précaires en carton et en tôle",
+        "des parcs d'activités spécialisés dans les hautes technologies",
+        "des ensembles sécurisés fermés au grand public"
+      ],
+      "explanation": "Quartiers résidentiels : développement des « nappes pavillonnaires » (pavillons uniformes) pour les classes moyennes."
+    },
+    {
+      "theme": "II. Concentration des activités et des fonctions",
+      "type": "cours",
+      "source": "Combien d'étages, au maximum, dans les nappes pavillonnaires ?",
+      "canonical": "1 ou 2",
+      "wrong": [
+        "3 ou 4",
+        "Environ 10",
+        "Environ 50",
+        "Environ 200"
+      ],
+      "explanation": "Nappes pavillonnaires : 1 ou 2 étages maximum, pas de verticalité."
+    },
+    {
+      "theme": "II. Concentration des activités et des fonctions",
+      "type": "cours",
+      "source": "Qui peuple les quartiers centrés sur les voies de communication, comme les aéroports ?",
+      "canonical": "Les voyageurs, de manière temporaire",
+      "wrong": [
+        "Les classes moyennes, dans des pavillons",
+        "Les plus démunis, dans des bidonvilles",
+        "Les néo-ruraux",
+        "Les résidents aisés des gated communities"
+      ],
+      "explanation": "Les quartiers centrés sur les voies de communication sont peuplés de manière temporaire par les voyageurs."
+    },
+    {
+      "theme": "II. Concentration des activités et des fonctions",
+      "type": "cours",
+      "source": "Quelles formes d'aéroports le cours cite-t-il ?",
+      "canonical": "Circulaire, en barre, en arc de cercle",
+      "wrong": [
+        "Circulaire, en étoile, en croix",
+        "Carrée, en barre, en spirale",
+        "En étoile, en arc de cercle, en triangle",
+        "Circulaire, en spirale, en croix"
+      ],
+      "explanation": "Formes d'aéroports : circulaire, en barre (2 terminaux), en arc de cercle (terminaux perpendiculaires aux routes)."
+    },
+    {
+      "theme": "II. Concentration des activités et des fonctions",
+      "type": "cours",
+      "source": "Un aéroport « en barre » a :",
+      "canonical": "2 terminaux",
+      "wrong": [
+        "un seul terminal circulaire",
+        "des terminaux perpendiculaires aux routes",
+        "aucun terminal",
+        "un terminal par compagnie aérienne"
+      ],
+      "explanation": "En barre : 2 terminaux. En arc de cercle : terminaux perpendiculaires aux routes."
+    },
+    {
+      "theme": "II. Concentration des activités et des fonctions",
+      "type": "cours",
+      "source": "Dans les quartiers commerciaux, les bâtiments dépassent rarement :",
+      "canonical": "20 m",
+      "wrong": [
+        "5 m",
+        "100 m",
+        "200 m",
+        "500 m"
+      ],
+      "explanation": "Quartiers commerciaux : bâtiments généralement bas, dépassant rarement les 20 m."
+    },
+    {
+      "theme": "II. Concentration des activités et des fonctions",
+      "type": "cours",
+      "source": "Quel exemple le cours donne-t-il de quartier qui concentre des activités de haute technologie ?",
+      "canonical": "La Silicon Valley, à San Francisco",
+      "wrong": [
+        "Dharavi, à Mumbai",
+        "Shibuya, à Tokyo",
+        "Retiro, à Buenos Aires",
+        "Le siège de l'ONU, à New York"
+      ],
+      "explanation": "Quartiers spécifiques liés à la haute technologie, bâtiments bas : ex. Silicon Valley, San Francisco."
+    },
+    {
+      "theme": "II. Concentration des activités et des fonctions",
+      "type": "cours",
+      "source": "Un hub, c'est :",
+      "canonical": "un endroit où les flux se concentrent et se redistribuent",
+      "wrong": [
+        "un parc d'activités spécialisé dans les hautes technologies",
+        "un carrefour routier sans croisement à niveau",
+        "un bâtiment équipé pour accueillir des congrès",
+        "une étendue artificielle de terre gagnée sur l'eau"
+      ],
+      "explanation": "Hub : endroit où les flux se concentrent et se redistribuent. Les métropoles forment souvent un hub."
+    },
+    {
+      "theme": "II. Concentration des activités et des fonctions",
+      "type": "cours",
+      "source": "Parc d'activités spécialisé dans les hautes technologies : c'est...",
+      "canonical": "une technopole",
+      "wrong": [
+        "un hub",
+        "une ZAC",
+        "un centre des congrès",
+        "une gated community"
+      ],
+      "explanation": "Technopole : parc d'activités spécialisé dans les hautes technologies. Les métropoles en concentrent parfois une."
+    },
+    {
+      "theme": "II. Concentration des activités et des fonctions",
+      "type": "cours",
+      "source": "Dans les années 1970, pourquoi de nombreuses villes sont-elles en crise ?",
+      "canonical": "Par manque d'argent pour financer les dépenses urbaines",
+      "wrong": [
+        "À cause de la gestion de l'espace urbain par les populations aisées",
+        "À cause du départ de tous les habitants vers les campagnes",
+        "À cause de la construction coûteuse de polders",
+        "À cause de l'interdiction de l'exode rural en Europe"
+      ],
+      "explanation": "Années 1970 : crises par manque d'argent pour financer les dépenses urbaines. Aujourd'hui : crises dues à la gestion de l'espace urbain."
+    },
+    {
+      "theme": "II. Concentration des activités et des fonctions",
+      "type": "cours",
+      "source": "D'où viennent les crises urbaines aujourd'hui, d'après le cours ?",
+      "canonical": "De la gestion de l'espace urbain (ex. : monopole des populations aisées sur la ville-centre)",
+      "wrong": [
+        "Du manque d'argent pour financer les dépenses urbaines, comme dans les années 1970",
+        "Du départ de tous les habitants vers les campagnes (rurbanisation)",
+        "De l'interdiction des gratte-ciel dans les centres-villes",
+        "De la fermeture des aéroports et des centres des congrès"
+      ],
+      "explanation": "Aujourd'hui : crises dues à la gestion de l'espace urbain, comme le monopole des populations aisées sur la ville-centre."
+    },
+    {
+      "theme": "III.A Étalement et mobilités",
+      "type": "cours",
+      "source": "La consommation d'espace des villes est :",
+      "canonical": "en constante augmentation",
+      "wrong": [
+        "en baisse depuis 1950",
+        "stable depuis 1950",
+        "en baisse seulement dans les pays développés",
+        "la même partout"
+      ],
+      "explanation": "La consommation d'espace des villes est en constante augmentation."
+    },
+    {
+      "theme": "III.A Étalement et mobilités",
+      "type": "cours",
+      "source": "Le tissu urbain continu formé par les banlieues prend une forme :",
+      "canonical": "d'« auréole », de plus en plus large",
+      "wrong": [
+        "de ligne droite le long des routes",
+        "de damier régulier",
+        "d'étoile autour des aéroports",
+        "de cercle de plus en plus petit"
+      ],
+      "explanation": "Les banlieues forment un tissu urbain continu, beaucoup plus large que la ville-centre : une « auréole » de plus en plus large."
+    },
+    {
+      "theme": "III.A Étalement et mobilités",
+      "type": "cours",
+      "source": "Dans cette « auréole », plus les espaces sont proches de la ville-centre :",
+      "canonical": "plus ils sont bâtis",
+      "wrong": [
+        "moins ils sont bâtis",
+        "plus ils sont agricoles",
+        "moins ils sont peuplés",
+        "plus ils sont pauvres"
+      ],
+      "explanation": "Plus les espaces sont proches de la ville-centre, plus ils sont bâtis."
+    },
+    {
+      "theme": "III.A Étalement et mobilités",
+      "type": "cours",
+      "source": "La périphérie du tissu urbain, où alternent espaces ruraux et espaces urbains, s'appelle :",
+      "canonical": "les espaces périurbains",
+      "wrong": [
+        "la ville-centre",
+        "les quartiers d'affaires",
+        "les polders",
+        "les nappes pavillonnaires"
+      ],
+      "explanation": "Périphérie du tissu urbain = alternance entre espaces ruraux et espaces urbains = espaces périurbains."
+    },
+    {
+      "theme": "III.A Étalement et mobilités",
+      "type": "cours",
+      "source": "Depuis 1950, la consommation d'espace des métropoles augmente :",
+      "canonical": "plus vite que leur population",
+      "wrong": [
+        "moins vite que leur population",
+        "exactement comme leur population",
+        "seulement dans les pays en développement",
+        "seulement en Europe"
+      ],
+      "explanation": "La consommation d'espace augmente plus vite que la population : Mexico, surface × 10, population × 7 ; Paris, surface × 1,75, population × 1,25."
+    },
+    {
+      "theme": "III.A Étalement et mobilités",
+      "type": "cours",
+      "source": "À Mexico, de 1950 à aujourd'hui, la surface urbanisée a été multipliée par :",
+      "canonical": "10",
+      "wrong": [
+        "1,75",
+        "2",
+        "7",
+        "100"
+      ],
+      "explanation": "Mexico, de 1950 à aujourd'hui : surface urbanisée × 10, population × 7."
+    },
+    {
+      "theme": "III.A Étalement et mobilités",
+      "type": "cours",
+      "source": "À Mexico, de 1950 à aujourd'hui, la population a été multipliée par :",
+      "canonical": "7",
+      "wrong": [
+        "1,25",
+        "2",
+        "10",
+        "70"
+      ],
+      "explanation": "Mexico, de 1950 à aujourd'hui : surface urbanisée × 10, population × 7."
+    },
+    {
+      "theme": "III.A Étalement et mobilités",
+      "type": "cours",
+      "source": "À Paris, de 1950 à aujourd'hui, la surface urbanisée a été multipliée par :",
+      "canonical": "1,75",
+      "wrong": [
+        "1,25",
+        "7",
+        "10",
+        "17,5"
+      ],
+      "explanation": "Paris, de 1950 à aujourd'hui : surface urbanisée × 1,75, population × 1,25."
+    },
+    {
+      "theme": "III.A Étalement et mobilités",
+      "type": "cours",
+      "source": "À Paris, de 1950 à aujourd'hui, la population a été multipliée par :",
+      "canonical": "1,25",
+      "wrong": [
+        "1,75",
+        "7",
+        "10",
+        "12,5"
+      ],
+      "explanation": "Paris, de 1950 à aujourd'hui : surface urbanisée × 1,75, population × 1,25."
+    },
+    {
+      "theme": "III.A Étalement et mobilités",
+      "type": "cours",
+      "source": "Dans les pays développés, pourquoi l'espace consommé augmente-t-il plus vite que la population ?",
+      "canonical": "Peu de population en plus, mais beaucoup de métropolisation : la place est prise par des activités diversifiées",
+      "wrong": [
+        "Beaucoup de population, mais peu de métropolisation : les bidonvilles s'étendent sans réseaux urbains",
+        "Les citadins quittent les villes pour s'installer en masse dans les campagnes, loin de tout",
+        "Les gratte-ciel occupent toute la place disponible dans les centres-villes et les banlieues",
+        "L'exode rural est interdit, ce qui oblige les villes à construire des polders pour s'agrandir"
+      ],
+      "explanation": "Pays développés : peu de population (la place est occupée par autre chose), beaucoup de métropolisation (activités diversifiées)."
+    },
+    {
+      "theme": "III.A Étalement et mobilités",
+      "type": "cours",
+      "source": "Dans les pays en développement, pourquoi l'espace consommé augmente-t-il plus vite que la population ?",
+      "canonical": "Beaucoup de population (bidonvilles), mais peu de métropolisation (pas de réseaux urbains)",
+      "wrong": [
+        "Peu de population en plus, mais beaucoup de métropolisation : des activités diversifiées",
+        "Les pavillons des classes moyennes prennent toute la place",
+        "Les entrepôts et les centres commerciaux s'installent en banlieue",
+        "Les citadins partent vivre dans les villages"
+      ],
+      "explanation": "Pays en développement : beaucoup de population (bidonvilles), peu métropolisés (pas de réseaux urbains)."
+    },
+    {
+      "theme": "III.A Étalement et mobilités",
+      "type": "cours",
+      "source": "Dans les pays développés, quel « rêve » explique l'étalement urbain ?",
+      "canonical": "Le rêve du petit pavillon",
+      "wrong": [
+        "Le rêve de l'appartement en centre-ville",
+        "Le rêve du gratte-ciel",
+        "Le rêve de la ferme",
+        "Le rêve de la vie à l'étranger"
+      ],
+      "explanation": "Volonté de posséder un pavillon plutôt qu'un appartement : « le rêve du petit pavillon »."
+    },
+    {
+      "theme": "III.A Étalement et mobilités",
+      "type": "cours",
+      "source": "Dans les pays développés, où se concentrent désormais les activités industrielles et commerciales ?",
+      "canonical": "En banlieue, dans des bâtiments horizontaux (centres commerciaux, entrepôts...)",
+      "wrong": [
+        "En centre-ville, dans des gratte-ciel de bureaux (sièges sociaux, bourses...)",
+        "Dans les bidonvilles de périphérie, sans aucun réseau urbain",
+        "Uniquement sur des polders gagnés sur la mer, près des ports",
+        "Dans les quartiers politiques, près des institutions internationales"
+      ],
+      "explanation": "Les activités industrielles et commerciales se concentrent désormais en banlieue, dans des bâtiments horizontaux."
+    },
+    {
+      "theme": "III.A Étalement et mobilités",
+      "type": "cours",
+      "source": "Qu'est-ce qui permet aux travailleurs de séparer habitat et lieu de travail, pour plus de liberté ?",
+      "canonical": "L'arrivée des automobiles à faible coût",
+      "wrong": [
+        "La construction des polders",
+        "L'interdiction de l'exode rural",
+        "Les gated communities",
+        "La destruction des bidonvilles"
+      ],
+      "explanation": "Les infrastructures routières (échangeurs, autoroutes) et les automobiles à faible coût permettent de dissocier habitat et lieu de travail."
+    },
+    {
+      "theme": "III.A Étalement et mobilités",
+      "type": "cours",
+      "source": "Un échangeur, c'est :",
+      "canonical": "un carrefour routier sans croisement à niveau",
+      "wrong": [
+        "un endroit où les flux se concentrent et se redistribuent",
+        "une procédure d'urbanisme pour aménager des terrains",
+        "une gare qui relie la métropole au reste du monde",
+        "un rond-point en centre-ville"
+      ],
+      "explanation": "Échangeur : carrefour routier sans croisement à niveau."
+    },
+    {
+      "theme": "III.A Étalement et mobilités",
+      "type": "cours",
+      "source": "Que veut dire ZAC ?",
+      "canonical": "Zone d'aménagement concerté",
+      "wrong": [
+        "Zone d'activités commerciales",
+        "Zone d'accueil des citadins",
+        "Zone agricole contrôlée",
+        "Zone d'aéroport et de congrès"
+      ],
+      "explanation": "ZAC : zone d'aménagement concerté."
+    },
+    {
+      "theme": "III.A Étalement et mobilités",
+      "type": "cours",
+      "source": "Une ZAC (zone d'aménagement concerté) est :",
+      "canonical": "une procédure d'urbanisme qui permet à une collectivité publique d'aménager des terrains pour les céder à des constructeurs",
+      "wrong": [
+        "un ensemble immobilier sécurisé auquel le grand public ne peut pas accéder, pour des résidents souvent aisés",
+        "un parc d'activités spécialisé dans les hautes technologies, souvent en périphérie des métropoles",
+        "le découpage d'un territoire en espaces spécialisés dans une activité donnée (habitat, travail...)",
+        "une étendue artificielle de terre gagnée sur l'eau, pour y construire de nouveaux quartiers"
+      ],
+      "explanation": "ZAC : procédure d'urbanisme permettant à une collectivité publique d'aménager et d'équiper des terrains afin de les céder à des constructeurs publics ou privés, dans un projet global et cohérent."
+    },
+    {
+      "theme": "III.A Étalement et mobilités",
+      "type": "cours",
+      "source": "Dans les pays en développement, qu'apparaît-il en périphérie des villes ?",
+      "canonical": "D'immenses bidonvilles",
+      "wrong": [
+        "Des nappes pavillonnaires",
+        "Des technopoles",
+        "Des polders",
+        "Des quartiers d'affaires secondaires"
+      ],
+      "explanation": "Pays en développement : apparition d'immenses bidonvilles en périphérie des villes."
+    },
+    {
+      "theme": "III.A Étalement et mobilités",
+      "type": "cours",
+      "source": "En périphérie des villes, ensemble d'abris précaires en carton, en tôle et autres matériaux, où vivent les plus démunis : c'est...",
+      "canonical": "un bidonville (habitat informel)",
+      "wrong": [
+        "une nappe pavillonnaire (classes moyennes)",
+        "une gated community (quartier fermé)",
+        "un espace périurbain (rural et urbain)",
+        "une shrinking city (ville en déclin)"
+      ],
+      "explanation": "Bidonvilles (ou habitats informels, précaires) : ensemble d'abris précaires en carton, en tôle et autres matériaux, où vivent les plus démunis."
+    },
+    {
+      "theme": "III.A Étalement et mobilités",
+      "type": "cours",
+      "source": "D'après le cours, que manque-t-il aux bidonvilles ?",
+      "canonical": "Les réseaux urbains : eau, égouts, collecte des déchets",
+      "wrong": [
+        "Des habitants : peu de gens s'y installent",
+        "Un littoral : ils sont tous loin de la mer",
+        "Des voisins : ils sont toujours isolés de la ville",
+        "Des terrains : ils sont tous construits sur l'eau"
+      ],
+      "explanation": "Les bidonvilles n'ont pas de réseaux urbains (eau, égouts, collecte des déchets), pourtant de nombreuses personnes s'y installent."
+    },
+    {
+      "theme": "III.A Étalement et mobilités",
+      "type": "cours",
+      "source": "Sur quels terrains les bidonvilles s'installent-ils souvent ?",
+      "canonical": "Des terrains au départ inconstructibles (pentes qui s'éboulent, sous des couloirs aériens...)",
+      "wrong": [
+        "Des terrains achetés pour eux par la ville, puis équipés de réseaux urbains",
+        "Des ZAC aménagées et équipées par la collectivité, puis cédées aux habitants",
+        "Des polders construits pour eux, avec des déchets réutilisés et du béton",
+        "Les quartiers d'affaires du centre, près des sièges sociaux et des bourses"
+      ],
+      "explanation": "Les bidonvilles s'installent illégalement sur des territoires au départ inconstructibles : pentes qui s'éboulent, couloirs aériens trop bruyants..."
+    },
+    {
+      "theme": "III.A Étalement et mobilités",
+      "type": "cours",
+      "source": "Tous les bidonvilles sont-ils en périphérie des villes ?",
+      "canonical": "Non : certains s'installent en plein centre-ville",
+      "wrong": [
+        "Oui : ils sont toujours en périphérie des villes",
+        "Non : ils sont tous en plein centre-ville",
+        "Oui, sauf au Japon, où ils sont sur des polders",
+        "Non : ils sont tous dans les campagnes"
+      ],
+      "explanation": "Tous les bidonvilles ne sont pas en périphérie : Dharavi (Mumbai) ou celui de Retiro (Buenos Aires) sont en plein centre-ville."
+    },
+    {
+      "theme": "III.A Étalement et mobilités",
+      "type": "cours",
+      "source": "Le bidonville de Dharavi est :",
+      "canonical": "le plus grand bidonville du monde, à Mumbai, construit sur d'anciens marécages",
+      "wrong": [
+        "une favela de Rio de Janeiro, sorte de balcon avec vue sur la ville",
+        "le bidonville qui entoure Retiro, la gare principale de Buenos Aires",
+        "un quartier informel détruit par la ville de Mexico, sans reconstruction",
+        "une gated community du Venezuela, protégée par des gardes et des barbelés"
+      ],
+      "explanation": "Dharavi : le plus grand bidonville du monde, à Mumbai, construit sur d'anciens marécages, en plein centre-ville."
+    },
+    {
+      "theme": "III.A Étalement et mobilités",
+      "type": "cours",
+      "source": "Dans quelle ville se trouve le bidonville qui entoure la gare de Retiro ?",
+      "canonical": "Buenos Aires",
+      "wrong": [
+        "Rio de Janeiro",
+        "Mumbai",
+        "Mexico",
+        "Lima"
+      ],
+      "explanation": "Bidonville autour de Retiro, gare principale de Buenos Aires, « le Paris d'Amérique du Sud »."
+    },
+    {
+      "theme": "III.A Étalement et mobilités",
+      "type": "cours",
+      "source": "Quelle ville le cours surnomme-t-il « le Paris d'Amérique du Sud » ?",
+      "canonical": "Buenos Aires",
+      "wrong": [
+        "Rio de Janeiro",
+        "São Paulo",
+        "Lima",
+        "Mexico"
+      ],
+      "explanation": "Buenos Aires, « le Paris d'Amérique du Sud », avec ses bâtiments haussmanniens."
+    },
+    {
+      "theme": "III.A Étalement et mobilités",
+      "type": "cours",
+      "source": "Les favelas de Rio de Janeiro sont décrites comme :",
+      "canonical": "une sorte de balcon avec vue sur la ville",
+      "wrong": [
+        "un bidonville en plein centre, autour de la gare",
+        "le plus grand bidonville du monde",
+        "des quartiers fermés par des gardes et des barbelés",
+        "des quartiers construits sur un polder"
+      ],
+      "explanation": "Bidonvilles typiques d'Amérique du Sud, comme les favelas de Rio : une sorte de balcon avec vue sur la ville."
+    },
+    {
+      "theme": "III.A Étalement et mobilités",
+      "type": "cours",
+      "source": "Quelle ville le cours cite-t-il en exemple de destruction de bidonvilles sans reconstruction ?",
+      "canonical": "Mexico",
+      "wrong": [
+        "Paris",
+        "Tokyo",
+        "Buenos Aires",
+        "Rio de Janeiro"
+      ],
+      "explanation": "La municipalité peut détruire complètement les quartiers informels sans reconstruire derrière (ex. : Mexico)."
+    },
+    {
+      "theme": "III.A Étalement et mobilités",
+      "type": "cours",
+      "source": "Quand la ville détruit un bidonville sans rien reconstruire, que se passe-t-il en réalité ?",
+      "canonical": "Le problème éclate et devient plus dangereux : un groupe dispersé est plus difficile à surveiller",
+      "wrong": [
+        "Les gangs sont séparés et disparaissent définitivement du quartier",
+        "Tous les habitants sont relogés dans des pavillons neufs en périphérie",
+        "Le quartier devient une technopole spécialisée dans les hautes technologies",
+        "Les habitants retournent tous dans les campagnes d'où ils venaient"
+      ],
+      "explanation": "En théorie, cela sépare les gangs ; en réalité, cela éclate le problème et augmente sa dangerosité (problème de politique urbaine)."
+    },
+    {
+      "theme": "III.A Étalement et mobilités",
+      "type": "cours",
+      "source": "Quand les habitants d'un bidonville construisent eux-mêmes des bâtiments vivables et des réseaux, que peut faire la ville ?",
+      "canonical": "Officialiser le quartier et apporter des aides financières pour le maintenir",
+      "wrong": [
+        "Interdire l'exode rural, pour empêcher de nouvelles arrivées",
+        "Le vendre à des constructeurs privés, pour y bâtir des bureaux",
+        "L'entourer de gardes, de caméras et de barbelés",
+        "Le raser pour y construire un quartier d'affaires secondaire"
+      ],
+      "explanation": "Quand les habitants construisent des bâtiments vivables et des réseaux urbains, la ville peut officialiser le quartier et apporter des aides financières."
+    },
+    {
+      "theme": "III.A Étalement et mobilités",
+      "type": "cours",
+      "source": "En de rares occasions, la ville rase le bidonville pour :",
+      "canonical": "y construire de nouveaux bâtiments, parfois pour reloger les habitants",
+      "wrong": [
+        "y construire un aéroport et un centre des congrès",
+        "y créer un polder fait de déchets réutilisés et de béton",
+        "y installer un quartier d'affaires avec des sièges sociaux",
+        "y planter des cultures pour nourrir la ville"
+      ],
+      "explanation": "Rares occasions : la ville rase le bidonville pour y construire de nouveaux bâtiments, où les anciens habitants sont parfois relogés."
+    },
+    {
+      "theme": "III.B Nouveaux quartiers",
+      "type": "cours",
+      "source": "Pourquoi crée-t-on de nouveaux centres en dehors du centre-ville ?",
+      "canonical": "Le centre-ville est de plus en plus cher et de moins en moins accessible (embouteillages)",
+      "wrong": [
+        "Le centre-ville est réservé aux bidonvilles et aux habitats informels",
+        "Le centre-ville est construit sur un polder trop fragile pour de nouveaux bâtiments",
+        "Les gratte-ciel sont interdits partout dans les centres-villes du monde",
+        "Les habitants ont tous quitté la ville-centre pour les campagnes"
+      ],
+      "explanation": "Avant, les activités urbaines étaient en centre-ville ; les quartiers centraux sont de plus en plus chers et de moins en moins accessibles, d'où de nouveaux centres."
+    },
+    {
+      "theme": "III.B Nouveaux quartiers",
+      "type": "cours",
+      "source": "Quel exemple le cours donne-t-il de quartier d'affaires secondaire ?",
+      "canonical": "Shibuya, à Tokyo",
+      "wrong": [
+        "Dharavi, à Mumbai",
+        "La Silicon Valley, à San Francisco",
+        "Retiro, à Buenos Aires",
+        "Le centre de Detroit"
+      ],
+      "explanation": "Quartiers d'affaires secondaires (ex. : Shibuya) qui entourent le quartier d'affaires principal de Tokyo."
+    },
+    {
+      "theme": "III.B Nouveaux quartiers",
+      "type": "cours",
+      "source": "Autour de quoi les quartiers d'affaires secondaires se fixent-ils notamment ?",
+      "canonical": "Des gares qui relient la métropole au reste du monde",
+      "wrong": [
+        "Des bidonvilles installés sur d'anciens marécages",
+        "Des champs cultivés en bordure de la métropole",
+        "Des musées et des grandes installations sportives",
+        "Des sièges d'institutions internationales"
+      ],
+      "explanation": "Les quartiers d'affaires secondaires se fixent notamment autour des gares qui relient la métropole au reste du monde."
+    },
+    {
+      "theme": "III.B Nouveaux quartiers",
+      "type": "cours",
+      "source": "Un polder, c'est :",
+      "canonical": "une étendue artificielle de terre gagnée sur l'eau",
+      "wrong": [
+        "un carrefour routier sans croisement à niveau",
+        "une zone où alternent espaces ruraux et espaces urbains",
+        "un ancien marécage où s'installe un bidonville",
+        "un quartier construit autour d'un aéroport"
+      ],
+      "explanation": "Polder : étendue artificielle de terre gagnée sur l'eau, le plus souvent sous le niveau de la mer."
+    },
+    {
+      "theme": "III.B Nouveaux quartiers",
+      "type": "cours",
+      "source": "Le niveau d'un polder est le plus souvent :",
+      "canonical": "inférieur à celui de la mer",
+      "wrong": [
+        "supérieur à celui de la mer",
+        "égal à celui de la mer",
+        "à plus de 100 m d'altitude",
+        "le même que celui des montagnes voisines"
+      ],
+      "explanation": "Polder : le plus souvent, son niveau est inférieur à celui de la mer (sauf au Japon)."
+    },
+    {
+      "theme": "III.B Nouveaux quartiers",
+      "type": "cours",
+      "source": "À partir de quoi gagne-t-on des polders ?",
+      "canonical": "De marais, d'estuaires, de lacs ou de zones littorales",
+      "wrong": [
+        "De forêts et de montagnes défrichées et aplanies",
+        "De déserts irrigués à l'intérieur des continents",
+        "D'anciens bidonvilles rasés en périphérie",
+        "D'anciennes usines abandonnées en banlieue"
+      ],
+      "explanation": "Les polders sont gagnés à partir de marais, d'estuaires, de lacs ou de zones littorales."
+    },
+    {
+      "theme": "III.B Nouveaux quartiers",
+      "type": "cours",
+      "source": "Comment reconnaît-on un polder sur une carte ou une image ?",
+      "canonical": "Le dessin de son littoral est géométrique",
+      "wrong": [
+        "Son littoral est très découpé, comme un littoral naturel",
+        "Il est toujours au milieu des terres",
+        "Il est toujours entouré de montagnes",
+        "Il est toujours couvert de champs"
+      ],
+      "explanation": "Le dessin du littoral des polders est géométrique : plus facile à distinguer qu'un littoral naturel."
+    },
+    {
+      "theme": "III.B Nouveaux quartiers",
+      "type": "cours",
+      "source": "Au Japon, les polders sont :",
+      "canonical": "au-dessus du niveau de la mer, car faits de déchets réutilisés et de béton",
+      "wrong": [
+        "sous le niveau de la mer, comme partout ailleurs dans le monde",
+        "faits de sable et de terre agricole, pour y cultiver du riz",
+        "interdits par les règles d'urbanisme, comme les gratte-ciel",
+        "réservés aux bidonvilles, construits illégalement"
+      ],
+      "explanation": "Attention : au Japon, les polders sont au-dessus du niveau de la mer (déchets réutilisés et béton), pour soutenir de nouveaux bâtiments."
+    },
+    {
+      "theme": "III.B Nouveaux quartiers",
+      "type": "cours",
+      "source": "Pourquoi les polders japonais sont-ils faits de déchets réutilisés et de béton ?",
+      "canonical": "Pour soutenir de nouveaux bâtiments",
+      "wrong": [
+        "Pour y faire pousser du riz",
+        "Pour accueillir des bidonvilles",
+        "Pour faire baisser leur niveau",
+        "Pour attirer les touristes de l'urbex"
+      ],
+      "explanation": "Au Japon : déchets réutilisés et béton, pour soutenir de nouveaux bâtiments."
+    },
+    {
+      "theme": "III.B Nouveaux quartiers",
+      "type": "cours",
+      "source": "Que se passe-t-il autour des centres commerciaux de périphérie ?",
+      "canonical": "Des logements (surtout des pavillons) arrivent peu à peu, et ils rejoignent les banlieues de la métropole",
+      "wrong": [
+        "Des gratte-ciel de bureaux remplacent peu à peu les magasins et les parkings",
+        "Des bidonvilles s'installent illégalement sur les parkings, sans réseaux urbains",
+        "Les centres commerciaux ferment, et les terrains redeviennent des champs cultivés",
+        "Des aéroports s'installent à côté, avec des terminaux en arc de cercle"
+      ],
+      "explanation": "Arrivée progressive de logements (surtout des pavillons) : les centres commerciaux de périphérie rejoignent les banlieues de la métropole la plus proche."
+    },
+    {
+      "theme": "III.B Nouveaux quartiers",
+      "type": "cours",
+      "source": "Près des aéroports, l'arrivée d'un centre des congrès entraîne :",
+      "canonical": "hôtels, restaurants, habitations",
+      "wrong": [
+        "usines, entrepôts, autoroutes",
+        "musées, stades, bourses",
+        "bidonvilles et favelas",
+        "fermes et champs"
+      ],
+      "explanation": "Autour des aéroports, l'arrivée d'un centre des congrès entraîne hôtels, restaurants, habitations."
+    },
+    {
+      "theme": "III.B Nouveaux quartiers",
+      "type": "cours",
+      "source": "Bâtiment équipé pour accueillir des congrès et des événements professionnels : c'est...",
+      "canonical": "un centre des congrès",
+      "wrong": [
+        "un hub",
+        "une technopole",
+        "une bourse",
+        "un siège social"
+      ],
+      "explanation": "Centre des congrès : bâtiment équipé pour accueillir des congrès et des événements professionnels."
+    },
+    {
+      "theme": "III.B Nouveaux quartiers",
+      "type": "cours",
+      "source": "Le zonage, c'est :",
+      "canonical": "le découpage d'un territoire en espaces spécialisés dans une activité donnée",
+      "wrong": [
+        "l'installation de citadins dans de petits villages de campagne",
+        "la concentration de la richesse dans les grandes villes",
+        "la destruction des bidonvilles en périphérie",
+        "la construction de terres gagnées sur l'eau"
+      ],
+      "explanation": "Zonage : découpage d'un territoire en espaces spécialisés dans une activité donnée."
+    },
+    {
+      "theme": "III.B Nouveaux quartiers",
+      "type": "cours",
+      "source": "Les migrations pendulaires, ce sont :",
+      "canonical": "les déplacements journaliers (matin et soir) entre les zones d'habitat et de travail",
+      "wrong": [
+        "les départs définitifs des citadins vers les petits villages de campagne",
+        "les voyages des touristes qui viennent visiter les ruines des villes",
+        "les départs des habitants des campagnes vers les villes (exode rural)",
+        "les départs des habitants pendant les vacances, l'été et l'hiver"
+      ],
+      "explanation": "Migrations pendulaires : migrations journalières (matin et soir) entre les zones d'habitat et de travail des habitants d'une ville."
+    },
+    {
+      "theme": "III.B Nouveaux quartiers",
+      "type": "cours",
+      "source": "Pourquoi les migrations pendulaires augmentent-elles ?",
+      "canonical": "Les quartiers se spécialisent : on se déplace plus entre habitat et travail",
+      "wrong": [
+        "Parce que le télétravail se développe et oblige à se déplacer plus souvent",
+        "Parce que les villes perdent leurs habitants, qui partent vivre loin",
+        "Parce que les centres-villes deviennent moins chers et plus accessibles",
+        "Parce que les bidonvilles sont détruits et leurs habitants dispersés"
+      ],
+      "explanation": "Conséquence des nouveaux quartiers : zonage ; plus les quartiers se spécialisent, plus les déplacements entre zones résidentielles et de travail augmentent."
+    },
+    {
+      "theme": "III.B Nouveaux quartiers",
+      "type": "cours",
+      "source": "Comment veut-on réduire aujourd'hui les migrations pendulaires ?",
+      "canonical": "Par le télétravail ou des horaires plus libres",
+      "wrong": [
+        "En interdisant les voitures dans toute la métropole",
+        "En détruisant les banlieues les plus lointaines",
+        "En construisant des gratte-ciel de logements",
+        "En interdisant l'exode rural vers les villes"
+      ],
+      "explanation": "Aujourd'hui, on veut réduire les migrations pendulaires : télétravail, possibilité de choisir plus librement ses horaires."
+    },
+    {
+      "theme": "III.B Nouveaux quartiers",
+      "type": "cours",
+      "source": "Le télétravail et les horaires plus libres réduisent-ils la pollution ?",
+      "canonical": "Non : ils réduisent les embouteillages, mais les distances parcourues continuent d'augmenter",
+      "wrong": [
+        "Oui : la pollution a disparu, car on ne se déplace presque plus",
+        "Oui : les distances parcourues entre domicile et travail diminuent",
+        "Non : ils augmentent les embouteillages, car tout le monde part à la même heure",
+        "Oui, mais seulement à Rio, où les distances sont passées de 20 à 12 km"
+      ],
+      "explanation": "Réduction des embouteillages, mais pas de la pollution, car les distances parcourues continuent d'augmenter (Rio : 12 km en 2006, 20 km en 2026)."
+    },
+    {
+      "theme": "III.B Nouveaux quartiers",
+      "type": "cours",
+      "source": "À Rio de Janeiro, quelle est la distance domicile-travail en 2026, d'après le cours ?",
+      "canonical": "20 km",
+      "wrong": [
+        "5 km",
+        "12 km",
+        "15 km",
+        "50 km"
+      ],
+      "explanation": "À Rio, distance domicile-travail : 12 km en 2006, 15 km en 2016, 20 km en 2026."
+    },
+    {
+      "theme": "III.B Nouveaux quartiers",
+      "type": "cours",
+      "source": "À Rio de Janeiro, quelle était la distance domicile-travail en 2006, d'après le cours ?",
+      "canonical": "12 km",
+      "wrong": [
+        "2 km",
+        "15 km",
+        "20 km",
+        "30 km"
+      ],
+      "explanation": "À Rio, distance domicile-travail : 12 km en 2006, 15 km en 2016, 20 km en 2026."
+    },
+    {
+      "theme": "III.C Un espace urbain fragmenté",
+      "type": "cours",
+      "source": "Les grandes métropoles sont de plus en plus marquées par :",
+      "canonical": "de fortes inégalités de richesses",
+      "wrong": [
+        "une égalité parfaite entre les quartiers",
+        "la disparition des bidonvilles",
+        "une baisse de leur population",
+        "la fin des migrations pendulaires"
+      ],
+      "explanation": "Les grandes métropoles sont de plus en plus marquées par de fortes inégalités de richesses (ex. : Paris, mais surtout les métropoles émergentes comme Mumbai)."
+    },
+    {
+      "theme": "III.C Un espace urbain fragmenté",
+      "type": "cours",
+      "source": "À Mumbai, quelle part de la population vit en bidonville ?",
+      "canonical": "40 %",
+      "wrong": [
+        "4 %",
+        "10 %",
+        "58 %",
+        "80 %"
+      ],
+      "explanation": "Mumbai : 40 milliardaires, mais 40 % de la population en bidonville."
+    },
+    {
+      "theme": "III.C Un espace urbain fragmenté",
+      "type": "cours",
+      "source": "Combien de milliardaires le cours compte-t-il à Mumbai ?",
+      "canonical": "40",
+      "wrong": [
+        "Aucun",
+        "4",
+        "400",
+        "4 000"
+      ],
+      "explanation": "Mumbai : 40 milliardaires, mais 40 % de la population en bidonville."
+    },
+    {
+      "theme": "III.C Un espace urbain fragmenté",
+      "type": "cours",
+      "source": "Dans une métropole comme Mumbai, qu'est-ce qui est plus facile ?",
+      "canonical": "Assurer la survie des habitants, plutôt que réduire les inégalités",
+      "wrong": [
+        "Réduire les inégalités, plutôt qu'assurer la survie des habitants",
+        "Détruire tous les bidonvilles",
+        "Reloger tous les habitants des bidonvilles",
+        "Faire partir les milliardaires"
+      ],
+      "explanation": "À Mumbai, assurer la survie est plus facile que réduire les inégalités."
+    },
+    {
+      "theme": "III.C Un espace urbain fragmenté",
+      "type": "cours",
+      "source": "Où se regroupent les populations pauvres, spatialement ?",
+      "canonical": "Dans les quartiers les moins attractifs : vieux centres délabrés, banlieues lointaines",
+      "wrong": [
+        "Dans les quartiers d'affaires, près des sièges sociaux et des bourses",
+        "Dans les gated communities, protégées par des gardes et des caméras",
+        "Dans les quartiers les mieux reliés au reste du monde, près des gares",
+        "Dans les nappes pavillonnaires des classes moyennes, en banlieue proche"
+      ],
+      "explanation": "Les populations pauvres se regroupent dans les quartiers les moins attractifs : centres aux bâtiments anciens et délabrés, ou banlieues les plus lointaines, mal reliées au reste du monde."
+    },
+    {
+      "theme": "III.C Un espace urbain fragmenté",
+      "type": "cours",
+      "source": "La rurbanisation, c'est :",
+      "canonical": "l'installation de citadins dans de petits villages de campagne ou dans des lotissements en bordure de ces villages",
+      "wrong": [
+        "le départ des habitants des campagnes vers les grandes villes, pour y trouver du travail",
+        "la construction de gratte-ciel de logements dans les banlieues des métropoles",
+        "la transformation d'un bidonville en quartier officiel, avec des aides financières",
+        "le départ massif des habitants d'une ville vers une autre métropole plus attractive"
+      ],
+      "explanation": "Rurbanisation : installation de citadins dans de petits villages de campagne ou dans de petits lotissements en bordure de ces villages."
+    },
+    {
+      "theme": "III.C Un espace urbain fragmenté",
+      "type": "cours",
+      "source": "Depuis quand des habitants des métropoles s'installent-ils en zone rurale (rurbanisation) ?",
+      "canonical": "Depuis les années 1980",
+      "wrong": [
+        "Depuis 1900",
+        "Depuis 1950",
+        "Depuis 2010",
+        "Depuis le Covid"
+      ],
+      "explanation": "Des populations venant des métropoles s'installent en zone rurale depuis les années 1980, notamment dans les pays post-industrialisés."
+    },
+    {
+      "theme": "III.C Un espace urbain fragmenté",
+      "type": "cours",
+      "source": "La rurbanisation concerne notamment :",
+      "canonical": "les pays post-industrialisés",
+      "wrong": [
+        "les pays en développement",
+        "les pays où l'exode rural est interdit",
+        "les pays sans littoral",
+        "les pays d'Amérique du Sud"
+      ],
+      "explanation": "Rurbanisation depuis les années 1980, notamment dans les pays post-industrialisés."
+    },
+    {
+      "theme": "III.C Un espace urbain fragmenté",
+      "type": "cours",
+      "source": "Qu'est-ce qui distingue les néo-ruraux des rurbains ?",
+      "canonical": "Les néo-ruraux tentaient de se reconvertir, notamment dans des métiers agricoles",
+      "wrong": [
+        "Les néo-ruraux vivent dans des bidonvilles, en périphérie des villes",
+        "Les néo-ruraux viennent des campagnes et partent vivre en ville",
+        "Les néo-ruraux vivent dans des gated communities, fermées et protégées",
+        "Les néo-ruraux habitent en centre-ville, dans des immeubles anciens"
+      ],
+      "explanation": "Pendant le Covid, les néo-ruraux, contrairement aux rurbains, tentaient de se reconvertir, notamment dans des métiers agricoles."
+    },
+    {
+      "theme": "III.C Un espace urbain fragmenté",
+      "type": "cours",
+      "source": "À quelle période le cours parle-t-il de « néo-ruraux » ?",
+      "canonical": "Pendant le Covid",
+      "wrong": [
+        "Dans les années 1970",
+        "En 1978",
+        "En 1989",
+        "En 1950"
+      ],
+      "explanation": "Durant la période du Covid, les citadins partis à la campagne étaient appelés néo-ruraux."
+    },
+    {
+      "theme": "III.C Un espace urbain fragmenté",
+      "type": "cours",
+      "source": "Une gated community, c'est :",
+      "canonical": "un ensemble immobilier sécurisé, fermé au grand public, pour la sécurité et la tranquillité de résidents souvent aisés",
+      "wrong": [
+        "un ensemble d'abris précaires en carton et en tôle, en périphérie, où vivent les plus démunis",
+        "un quartier résidentiel de pavillons uniformes, de 1 ou 2 étages, pour les classes moyennes",
+        "un parc d'activités spécialisé dans les hautes technologies, comme la Silicon Valley",
+        "un quartier politique qui accueille les sièges d'institutions internationales, comme l'ONU"
+      ],
+      "explanation": "Gated communities : ensemble immobilier sécurisé auquel le grand public ne peut accéder, pour garantir plus de sécurité et de tranquillité aux résidents, souvent aisés."
+    },
+    {
+      "theme": "III.C Un espace urbain fragmenté",
+      "type": "cours",
+      "source": "Comment appelle-t-on les gated communities en Amérique du Sud ?",
+      "canonical": "Barrios cerrados",
+      "wrong": [
+        "Favelas",
+        "Shrinking cities",
+        "Polders",
+        "Hubs"
+      ],
+      "explanation": "Gated communities, aussi nommées « barrios cerrados » en Amérique du Sud."
+    },
+    {
+      "theme": "III.C Un espace urbain fragmenté",
+      "type": "cours",
+      "source": "Quel pays le cours cite-t-il en exemple de gated communities ?",
+      "canonical": "Le Venezuela",
+      "wrong": [
+        "Le Japon",
+        "La France",
+        "L'Allemagne",
+        "L'Inde"
+      ],
+      "explanation": "Au Venezuela, les populations à très haut niveau de vie sont rassemblées et protégées : gardes, caméras, barbelés..."
+    },
+    {
+      "theme": "III.C Un espace urbain fragmenté",
+      "type": "cours",
+      "source": "Dans certains pays, pourquoi les plus riches se regroupent-ils dans des gated communities ?",
+      "canonical": "La mixité sociale y est vue comme dangereuse, et non comme bénéfique",
+      "wrong": [
+        "La loi réserve les centres-villes aux populations les plus pauvres",
+        "Les banlieues sont beaucoup moins chères que la ville-centre",
+        "Ils veulent se reconvertir dans des métiers agricoles",
+        "Ils veulent habiter près des aéroports et des centres des congrès"
+      ],
+      "explanation": "Dans certains pays, la mixité sociale n'est pas vue comme bénéfique mais comme dangereuse."
+    },
+    {
+      "theme": "IV.A Les villes-monde",
+      "type": "cours",
+      "source": "Comment les géographes français appellent-ils les métropoles les plus influentes ?",
+      "canonical": "Des villes mondiales",
+      "wrong": [
+        "Des villes globales",
+        "Des shrinking cities",
+        "Des technopoles",
+        "Des hubs"
+      ],
+      "explanation": "Géographes français : villes mondiales. Géographes anglo-saxons : villes globales."
+    },
+    {
+      "theme": "IV.A Les villes-monde",
+      "type": "cours",
+      "source": "Comment les géographes anglo-saxons appellent-ils les métropoles les plus influentes ?",
+      "canonical": "Des villes globales",
+      "wrong": [
+        "Des villes mondiales",
+        "Des métropoles répulsives",
+        "Des mégapoles émergentes",
+        "Des hubs"
+      ],
+      "explanation": "Géographes anglo-saxons : villes globales. Géographes français : villes mondiales."
+    },
+    {
+      "theme": "IV.A Les villes-monde",
+      "type": "cours",
+      "source": "Une ville globale, c'est :",
+      "canonical": "une ville qui dirige l'économie mondiale grâce à son importance dans la mondialisation",
+      "wrong": [
+        "une ville rayonnant dans le monde entier par sa culture",
+        "une ville qui englobe à la fois ville mondiale et ville-monde",
+        "une ville qui a perdu une grande partie de sa population et de son rôle",
+        "une ville située sur un littoral, insérée dans les échanges maritimes"
+      ],
+      "explanation": "Ville globale : ville qui dirige l'économie mondiale grâce à son importance, notamment dans la mondialisation."
+    },
+    {
+      "theme": "IV.A Les villes-monde",
+      "type": "cours",
+      "source": "Une ville rayonnant par sa culture, c'est :",
+      "canonical": "une ville mondiale",
+      "wrong": [
+        "une ville globale",
+        "une ville-monde",
+        "une technopole",
+        "un hub"
+      ],
+      "explanation": "Ville mondiale : ville rayonnant par sa culture. Ville globale : l'économie. Ville-monde : les deux."
+    },
+    {
+      "theme": "IV.A Les villes-monde",
+      "type": "cours",
+      "source": "Une ville-monde :",
+      "canonical": "englobe ville globale et ville mondiale",
+      "wrong": [
+        "rayonne seulement par sa culture",
+        "dirige seulement l'économie mondiale",
+        "perd une grande partie de ses habitants",
+        "se trouve forcément dans un pays émergent"
+      ],
+      "explanation": "Ville-monde : englobe ville globale et ville mondiale (comme Paris)."
+    },
+    {
+      "theme": "IV.A Les villes-monde",
+      "type": "cours",
+      "source": "Quel exemple de ville-monde le cours donne-t-il ?",
+      "canonical": "Paris",
+      "wrong": [
+        "Milan",
+        "Bangkok",
+        "Detroit",
+        "Leipzig"
+      ],
+      "explanation": "Ville-monde, comme Paris. Milan et Bangkok ont un rayonnement limité, particulier."
+    },
+    {
+      "theme": "IV.A Les villes-monde",
+      "type": "cours",
+      "source": "Depuis quand distingue-t-on villes globales, villes mondiales et villes-monde ?",
+      "canonical": "Depuis les années 1990",
+      "wrong": [
+        "Depuis 1900",
+        "Depuis 1950",
+        "Depuis les années 1970",
+        "Depuis le Covid"
+      ],
+      "explanation": "Dès les années 1990 : ville globale, ville mondiale, ville-monde."
+    },
+    {
+      "theme": "IV.A Les villes-monde",
+      "type": "cours",
+      "source": "Les villes-monde représentent :",
+      "canonical": "le haut de la hiérarchie mondiale",
+      "wrong": [
+        "le bas de la hiérarchie mondiale",
+        "les villes en déclin",
+        "les villes des pays en développement",
+        "les villes sans gratte-ciel"
+      ],
+      "explanation": "Les villes-monde représentent le haut de la hiérarchie mondiale ; leur richesse est souvent démesurée."
+    },
+    {
+      "theme": "IV.A Les villes-monde",
+      "type": "cours",
+      "source": "Quel exemple montre la richesse démesurée des villes-monde ?",
+      "canonical": "Chaque année, Tokyo produit plus de richesse que l'Australie entière",
+      "wrong": [
+        "Chaque année, Paris produit plus de richesse que l'Europe entière",
+        "Chaque année, New York produit plus de richesse que la Chine entière",
+        "Chaque année, Londres produit plus de richesse que l'Afrique entière",
+        "Chaque année, Singapour produit plus de richesse que l'Asie entière"
+      ],
+      "explanation": "Chaque année, Tokyo produit plus de richesse que l'Australie entière."
+    },
+    {
+      "theme": "IV.A Les villes-monde",
+      "type": "cours",
+      "source": "Pourquoi Milan a-t-elle un rayonnement particulier ?",
+      "canonical": "C'est la deuxième capitale de la mode, derrière Paris",
+      "wrong": [
+        "C'est la capitale du tourisme",
+        "C'est l'ancienne capitale de l'automobile",
+        "Elle accueille le siège de l'ONU",
+        "Elle est 1re du Global City Index"
+      ],
+      "explanation": "Villes au rayonnement limité, particulier : Milan (2e capitale de la mode derrière Paris), Bangkok (capitale du tourisme)."
+    },
+    {
+      "theme": "IV.A Les villes-monde",
+      "type": "cours",
+      "source": "Pourquoi Bangkok est-elle la capitale du tourisme ?",
+      "canonical": "Elle sert d'escale pour les trajets vers l'Asie du Sud-Est",
+      "wrong": [
+        "Elle a plus de gratte-ciel que toutes les autres villes",
+        "C'est la deuxième capitale de la mode, derrière Paris",
+        "Elle accueille le siège de l'UNESCO et celui de l'ONU",
+        "Ses ruines attirent les amateurs d'urbex du monde entier"
+      ],
+      "explanation": "Bangkok : capitale du tourisme, car elle sert d'escale pour les trajets vers l'Asie du Sud-Est."
+    },
+    {
+      "theme": "IV.A Les villes-monde",
+      "type": "cours",
+      "source": "Pour l'instant, où sont situées toutes les villes-monde qui « dominent » notre époque ?",
+      "canonical": "Dans les pays développés",
+      "wrong": [
+        "Dans les pays en développement",
+        "En Amérique du Sud",
+        "En Afrique",
+        "Uniquement en Asie"
+      ],
+      "explanation": "Les villes-monde qui « dominent » notre époque sont toutes dans les pays développés (Tokyo, New York, Londres, Paris...) ; leurs PUB sont très élevés."
+    },
+    {
+      "theme": "IV.A Les villes-monde",
+      "type": "cours",
+      "source": "Laquelle de ces villes est une métropole émergente citée par le cours ?",
+      "canonical": "Johannesburg",
+      "wrong": [
+        "Londres",
+        "Tokyo",
+        "New York",
+        "Paris"
+      ],
+      "explanation": "Métropoles émergentes : São Paulo (Brésil), Shanghai (Chine), Johannesburg (Afrique du Sud), Singapour."
+    },
+    {
+      "theme": "IV.A Les villes-monde",
+      "type": "cours",
+      "source": "Laquelle de ces villes n'est PAS une métropole émergente citée par le cours ?",
+      "canonical": "Londres",
+      "wrong": [
+        "São Paulo",
+        "Shanghai",
+        "Johannesburg",
+        "Singapour"
+      ],
+      "explanation": "Londres est une ville-monde des pays développés. Émergentes : São Paulo, Shanghai, Johannesburg, Singapour."
+    },
+    {
+      "theme": "IV.A Les villes-monde",
+      "type": "cours",
+      "source": "Les métropoles dites « répulsives » sont des métropoles qui :",
+      "canonical": "ont perdu leur rôle mondial ou leur capacité d'attraction",
+      "wrong": [
+        "attirent de plus en plus d'habitants et d'entreprises",
+        "refusent d'accueillir les touristes et les événements",
+        "sont interdites aux plus pauvres par des barbelés",
+        "ont trop de gratte-ciel pour leur petit territoire"
+      ],
+      "explanation": "Certaines métropoles ont perdu leur rôle mondial ou leur capacité d'attraction : métropoles dites « répulsives »."
+    },
+    {
+      "theme": "IV.A Les villes-monde",
+      "type": "cours",
+      "source": "Les shrinking cities sont :",
+      "canonical": "des agglomérations qui ont connu une perte de population notable, lors du départ massif de leurs habitants",
+      "wrong": [
+        "des villes qui construisent de plus en plus de gratte-ciel pour gagner de la place",
+        "des villes construites sur des polders, dont la surface augmente chaque année",
+        "des villes dont la surface diminue à cause de la montée du niveau de la mer",
+        "des villes qui accueillent de plus en plus d'habitants venus des campagnes"
+      ],
+      "explanation": "Shrinking cities : agglomérations urbaines qui ont connu une perte de population notable lors du départ massif de leurs habitants (Detroit, Leipzig)."
+    },
+    {
+      "theme": "IV.A Les villes-monde",
+      "type": "cours",
+      "source": "Quelle ville était l'ancienne capitale de l'automobile, avec les usines Ford ?",
+      "canonical": "Detroit",
+      "wrong": [
+        "Leipzig",
+        "Chicago",
+        "Los Angeles",
+        "Milan"
+      ],
+      "explanation": "Detroit, ancienne capitale de l'automobile (usines Ford), est une shrinking city."
+    },
+    {
+      "theme": "IV.A Les villes-monde",
+      "type": "cours",
+      "source": "Dans quelle ville sont nés les premiers mouvements contestataires à l'origine de la chute du mur de Berlin ?",
+      "canonical": "Leipzig",
+      "wrong": [
+        "Berlin",
+        "Detroit",
+        "Prague",
+        "Moscou"
+      ],
+      "explanation": "Leipzig, où naquirent les premiers mouvements contestataires de 1989, fut ensuite abandonnée après la réunification : une shrinking city."
+    },
+    {
+      "theme": "IV.A Les villes-monde",
+      "type": "cours",
+      "source": "En quelle année le mur de Berlin est-il tombé ?",
+      "canonical": "1989",
+      "wrong": [
+        "1945",
+        "1978",
+        "1991",
+        "2001"
+      ],
+      "explanation": "Chute du mur de Berlin en 1989 ; Leipzig est ensuite abandonnée après la réunification."
+    },
+    {
+      "theme": "IV.A Les villes-monde",
+      "type": "cours",
+      "source": "Pourquoi l'entretien des shrinking cities est-il une préoccupation majeure ?",
+      "canonical": "Leurs infrastructures ont été construites pour une population plus nombreuse",
+      "wrong": [
+        "Elles sont construites sur des polders qui s'enfoncent sous la mer",
+        "Elles n'ont jamais eu de réseaux urbains (eau, égouts, déchets)",
+        "Leurs habitants sont trop nombreux pour leurs infrastructures",
+        "Les gratte-ciel y sont interdits par les règles d'urbanisme"
+      ],
+      "explanation": "Infrastructures construites pour une population plus nombreuse : leur entretien est une préoccupation majeure, d'où des paysages délabrés."
+    },
+    {
+      "theme": "IV.A Les villes-monde",
+      "type": "cours",
+      "source": "Quel nouveau type de tourisme le déclin des shrinking cities a-t-il créé ?",
+      "canonical": "Un tourisme centré autour de l'urbex",
+      "wrong": [
+        "Un tourisme centré autour des plages",
+        "Un tourisme centré autour de la mode",
+        "Un tourisme centré autour des congrès",
+        "Un tourisme centré autour des musées"
+      ],
+      "explanation": "Le déclin a créé un nouveau tourisme centré autour de l'urbex et de la photographie des ruines."
+    },
+    {
+      "theme": "IV.B Une compétition impitoyable",
+      "type": "cours",
+      "source": "Face à la compétition, les métropoles doivent constamment :",
+      "canonical": "renouveler leur attractivité",
+      "wrong": [
+        "réduire leur population",
+        "détruire leurs gratte-ciel",
+        "fermer leurs aéroports",
+        "s'éloigner des littoraux"
+      ],
+      "explanation": "Une compétition impitoyable : les métropoles doivent constamment renouveler leur attractivité."
+    },
+    {
+      "theme": "IV.B Une compétition impitoyable",
+      "type": "cours",
+      "source": "Lequel de ces moyens le cours ne cite-t-il PAS pour renouveler l'attractivité d'une métropole ?",
+      "canonical": "Interdire le tourisme",
+      "wrong": [
+        "Accueillir des événements au rayonnement international",
+        "Développer un marketing territorial",
+        "Miser sur le patrimoine historique",
+        "Développer une image de ville moderne"
+      ],
+      "explanation": "Moyens cités : événements internationaux, marketing territorial, patrimoine historique, image moderne, déplacement de la capitale, nouvelles infrastructures, transports électriques et mobilités douces."
+    },
+    {
+      "theme": "IV.B Une compétition impitoyable",
+      "type": "cours",
+      "source": "Quelle ville mise sur son patrimoine historique, d'après le cours ?",
+      "canonical": "Prague",
+      "wrong": [
+        "Riyad",
+        "Brasília",
+        "Detroit",
+        "Lagos"
+      ],
+      "explanation": "Les métropoles misent sur leur patrimoine historique (ex. : Prague)."
+    },
+    {
+      "theme": "IV.B Une compétition impitoyable",
+      "type": "cours",
+      "source": "Quelle est la capitale officielle du Brésil ?",
+      "canonical": "Brasília",
+      "wrong": [
+        "São Paulo",
+        "Rio de Janeiro",
+        "Buenos Aires",
+        "Lima"
+      ],
+      "explanation": "Brésil : capitale officielle Brasília, capitale économique São Paulo, capitale culturelle Rio de Janeiro."
+    },
+    {
+      "theme": "IV.B Une compétition impitoyable",
+      "type": "cours",
+      "source": "Quelle ville est la capitale économique du Brésil ?",
+      "canonical": "São Paulo",
+      "wrong": [
+        "Brasília",
+        "Rio de Janeiro",
+        "Buenos Aires",
+        "Lima"
+      ],
+      "explanation": "Brésil : capitale officielle Brasília, capitale économique São Paulo, capitale culturelle Rio de Janeiro."
+    },
+    {
+      "theme": "IV.B Une compétition impitoyable",
+      "type": "cours",
+      "source": "Quelle ville est la capitale culturelle du Brésil ?",
+      "canonical": "Rio de Janeiro",
+      "wrong": [
+        "Brasília",
+        "São Paulo",
+        "Buenos Aires",
+        "Lima"
+      ],
+      "explanation": "Brésil : capitale officielle Brasília, capitale économique São Paulo, capitale culturelle Rio de Janeiro."
+    },
+    {
+      "theme": "IV.B Une compétition impitoyable",
+      "type": "cours",
+      "source": "Quel exemple le cours donne-t-il d'un pays qui a déplacé sa capitale administrative ?",
+      "canonical": "Le Brésil",
+      "wrong": [
+        "Le Japon",
+        "La France",
+        "L'Italie",
+        "La Thaïlande"
+      ],
+      "explanation": "Certaines métropoles déplacent la capitale administrative (ex. : Brésil, capitale officielle Brasília)."
+    },
+    {
+      "theme": "IV.B Une compétition impitoyable",
+      "type": "cours",
+      "source": "Quelle ville a construit un aéroport grandiose pour améliorer son image ?",
+      "canonical": "Istanbul",
+      "wrong": [
+        "Prague",
+        "Leipzig",
+        "Lagos",
+        "Milan"
+      ],
+      "explanation": "Nouvelles infrastructures pour améliorer l'image : aéroport grandiose à Istanbul, métro automatique à Riyad."
+    },
+    {
+      "theme": "IV.B Une compétition impitoyable",
+      "type": "cours",
+      "source": "Quelle infrastructure le cours cite-t-il à Riyad ?",
+      "canonical": "Un métro automatique qui protège des fortes températures",
+      "wrong": [
+        "Un aéroport grandiose, pour améliorer son image",
+        "Le plus grand bidonville du monde, sur d'anciens marécages",
+        "Un polder fait de déchets réutilisés et de béton",
+        "Le siège de l'ONU, dans un quartier politique"
+      ],
+      "explanation": "À Riyad (Arabie saoudite), un métro automatique qui protège des fortes températures."
+    },
+    {
+      "theme": "IV.B Une compétition impitoyable",
+      "type": "cours",
+      "source": "Dans quel pays se trouve Riyad ?",
+      "canonical": "L'Arabie saoudite",
+      "wrong": [
+        "Les Émirats arabes unis",
+        "L'Égypte",
+        "La Turquie",
+        "L'Iran"
+      ],
+      "explanation": "Riyad, en Arabie saoudite. Dubaï (Burj Khalifa) est aux Émirats arabes unis."
+    },
+    {
+      "theme": "IV.B Une compétition impitoyable",
+      "type": "cours",
+      "source": "Les mobilités douces, ce sont :",
+      "canonical": "les modes de déplacement à faible, voire zéro, émission carbone",
+      "wrong": [
+        "les déplacements journaliers entre domicile et travail",
+        "les déplacements à vitesse réduite dans les centres-villes",
+        "les transports réservés aux touristes",
+        "les autoroutes et les échangeurs"
+      ],
+      "explanation": "Mobilités douces : ensemble des modes de déplacement à faible, voire zéro, émission carbone."
+    },
+    {
+      "theme": "IV.B Une compétition impitoyable",
+      "type": "cours",
+      "source": "Tous ces aménagements pour l'attractivité nécessitent :",
+      "canonical": "l'organisation de politiques urbaines",
+      "wrong": [
+        "la destruction des bidonvilles",
+        "la construction de polders",
+        "l'interdiction de l'exode rural",
+        "le départ des habitants"
+      ],
+      "explanation": "Tous ces aménagements nécessitent l'organisation de politiques urbaines."
+    },
+    {
+      "theme": "IV.B Une compétition impitoyable",
+      "type": "cours",
+      "source": "Pourquoi les politiques urbaines sont-elles difficiles à mettre en œuvre à Lagos ?",
+      "canonical": "La population augmente exponentiellement, plus vite que la ville ne peut agir",
+      "wrong": [
+        "La ville perd ses habitants, qui partent vers d'autres métropoles",
+        "Lagos n'a pas de littoral, donc pas d'échanges mondiaux",
+        "Les gratte-ciel y sont interdits par les règles d'urbanisme",
+        "Lagos est une ville-monde trop riche pour avoir besoin d'agir"
+      ],
+      "explanation": "Politiques urbaines plus difficiles là où la population augmente exponentiellement, plus vite que la ville ne peut agir (ex. : Lagos)."
+    },
+    {
+      "theme": "IV.B Une compétition impitoyable",
+      "type": "cours",
+      "source": "Les politiques urbaines, ce sont :",
+      "canonical": "les actions de l'État pour revaloriser les quartiers « sensibles » ou « prioritaires » et réduire les inégalités sociales entre territoires",
+      "wrong": [
+        "les procédures qui permettent à une collectivité d'aménager des terrains pour les céder à des constructeurs",
+        "le découpage d'un territoire en espaces spécialisés dans une activité donnée",
+        "les moyens de faire venir touristes et entreprises dans une métropole",
+        "la destruction des quartiers informels pour séparer les gangs"
+      ],
+      "explanation": "Politiques urbaines : ensemble d'actions de l'État visant à revaloriser certains quartiers urbains dits « sensibles » ou « prioritaires » et à réduire les inégalités sociales entre les territoires."
+    },
+    {
+      "theme": "Conclusion",
+      "type": "cours",
+      "source": "D'après la conclusion, pourquoi la métropolisation touche-t-elle tous les pays ?",
+      "canonical": "Les très grandes villes accroissent leur pouvoir de commandement sur les territoires nationaux",
+      "wrong": [
+        "Tous les pays ont d'immenses bidonvilles en périphérie de leurs villes",
+        "Toutes les grandes villes perdent leurs habitants au profit des campagnes",
+        "Tous les pays ont interdit l'exode rural pour garder leur main-d'œuvre",
+        "Toutes les métropoles sont sur un littoral, dans les échanges mondiaux"
+      ],
+      "explanation": "La métropolisation touche tous les pays, puisque les très grandes villes accroissent leur pouvoir de commandement sur les territoires nationaux."
+    },
+    {
+      "theme": "Conclusion",
+      "type": "cours",
+      "source": "D'après la conclusion, de quoi dépend la forme des paysages créés par la métropolisation ?",
+      "canonical": "Du niveau de développement des pays concernés",
+      "wrong": [
+        "Du climat et des températures du pays",
+        "Du nombre de gratte-ciel de chaque ville",
+        "De la distance entre la ville et la mer",
+        "De la langue parlée par les habitants"
+      ],
+      "explanation": "Les paysages de la métropolisation prennent des formes différentes selon le niveau de développement des pays concernés."
+    }
+  ]
+}

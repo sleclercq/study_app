@@ -49,6 +49,8 @@ python3 tools/check_qcm.py
 | 4e | Anglais - Verbes irréguliers de 4e | les verbes surlignés de la fiche |
 | 4e | Histoire - Le cours | flashcards du cahier : la question, la réponse, « tu avais la bonne réponse ? » ; les cartes ratées reviennent à la série suivante |
 | 1re | NSI - Introduction à Python | QCM à 5 réponses, 309 questions par chapitre : cours, « que donne ce code », « quel code donne ce résultat » |
+| 1re | Géographie - La métropolisation : définitions | 31 flashcards : le mot, on cherche la définition dans sa tête, puis la réponse du cahier |
+| 1re | Géographie - La métropolisation : QCM | 183 questions à 5 réponses sur tout le chapitre : chiffres, classements, carte des mégapoles, exemples |
 | 5e | Verbes latins | infinitif et présent de l'indicatif |
 | 5e | Verbes anglais irréguliers | base verbale, prétérit, participe passé |
 | 5e | Anglais - Phrases à trous | le verbe irrégulier dans la phrase |
