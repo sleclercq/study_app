@@ -1,0 +1,1941 @@
+{
+  "_notes": [
+    "=== SVT 1re, LA CELLULE VIVANTE : QCM - GUIDE DE MAINTENANCE ===",
+    "",
+    "Questions tirées du cours de SVT de 1re, chapitre 3 « Une structure complexe : la cellule vivante »",
+    "(polycopié et pages de manuel photographiés le 08/11/2026, rangés dans",
+    "data/_sources/svt/1re/, IMG_2532 à IMG_2538).",
+    "Les flashcards du même chapitre sont dans cellule_vivante.json.",
+    "",
+    "FORMAT (kind qcm) : chaque entrée de 'words' est une question.",
+    "  theme       : la partie du cours (un bloc par partie)",
+    "  type        : toujours « cours » (rien à exécuter)",
+    "  source      : la question",
+    "  canonical   : la bonne réponse ; wrong : exactement 4 mauvaises réponses",
+    "  explanation : affichée après la réponse",
+    "",
+    "UNIQUEMENT LES PARTIES MARQUÉES AU CRAYON sur les photos : blocs avec un coup de",
+    "crayon sur le côté gauche, passages entourés ou encadrés, mots soulignés. Le",
+    "surligneur seul ne compte pas. Le relevé des marques, page par page, est dans",
+    "data/_sources/svt/specs_cellule_vivante.md : le regarder avant d'ajouter une",
+    "question. Un nom non marqué (Schleiden, Schwann, 1838...) peut servir de contexte",
+    "dans une question, jamais de réponse à trouver.",
+    "",
+    "LES RÉPONSES SONT CELLES DU COURS, même quand une autre source dirait autrement,",
+    "pour ne jamais contredire ce qui a été donné. Écarts voulus, ne pas « corriger » :",
+    "microscopes électroniques mis au point vers 1950 (les premiers datent des années",
+    "1930) ; « mosaïque lipoprotéique fluide » (on lit aussi « mosaïque fluide ») ;",
+    "le grossissement des loupes compte-fils est masqué par le surligneur : rien dessus.",
+    "",
+    "AJOUTER DES QUESTIONS : les ajouter dans leur partie, lancer",
+    "python3 tools/build_site.py (il vérifie les 5 réponses), pousser. Une question",
+    "corrigée est une nouvelle question : sa progression repart de zéro."
+  ],
+  "slug": "svt_1re_cellule_vivante_qcm",
+  "name": "SVT - La cellule vivante : QCM",
+  "level": "1re",
+  "kind": "qcm",
+  "sort_order": 31,
+  "color": "#5a8f3c",
+  "button_label": "SVT - La cellule vivante\n(QCM, 5 réponses par question)",
+  "words": [
+    {
+      "theme": "Hooke et le microscope optique composé",
+      "type": "cours",
+      "source": "À quel siècle apparaissent les premiers microscopes, selon le cours ?",
+      "canonical": "Au XVIIe siècle",
+      "wrong": [
+        "Au XVe siècle",
+        "Au XVIe siècle",
+        "Au XVIIIe siècle",
+        "Au XIXe siècle"
+      ],
+      "explanation": "Les premiers microscopes, au XVIIe siècle, ont permis d'observer les premières cellules."
+    },
+    {
+      "theme": "Hooke et le microscope optique composé",
+      "type": "cours",
+      "source": "En quelle année Robert Hooke publie-t-il Micrographia ?",
+      "canonical": "1665",
+      "wrong": [
+        "1635",
+        "1703",
+        "1655",
+        "1765"
+      ],
+      "explanation": "En 1665, Robert Hooke (1635-1703) publie Micrographia."
+    },
+    {
+      "theme": "Hooke et le microscope optique composé",
+      "type": "cours",
+      "source": "Quelle est la nationalité de Robert Hooke ?",
+      "canonical": "Britannique",
+      "wrong": [
+        "Néerlandaise",
+        "Allemande",
+        "Française",
+        "Italienne"
+      ],
+      "explanation": "« Le britannique Robert Hooke »."
+    },
+    {
+      "theme": "Hooke et le microscope optique composé",
+      "type": "cours",
+      "source": "Quelles sont les dates de Robert Hooke ?",
+      "canonical": "1635-1703",
+      "wrong": [
+        "1632-1723",
+        "1665-1723",
+        "1635-1665",
+        "1605-1665"
+      ],
+      "explanation": "Robert Hooke (1635-1703). 1632-1723 : ce sont les dates de Leeuwenhoek."
+    },
+    {
+      "theme": "Hooke et le microscope optique composé",
+      "type": "cours",
+      "source": "Comment s'appelle l'ouvrage publié par Robert Hooke en 1665 ?",
+      "canonical": "Micrographia",
+      "wrong": [
+        "Microbiologia",
+        "Cellularia",
+        "Microscopia",
+        "Omnis cellula"
+      ],
+      "explanation": "Hooke publie Micrographia en 1665."
+    },
+    {
+      "theme": "Hooke et le microscope optique composé",
+      "type": "cours",
+      "source": "Lequel de ces sujets n'est PAS décrit dans Micrographia ?",
+      "canonical": "Une cellule d'amphibien",
+      "wrong": [
+        "Les rotations de Mars",
+        "Les rotations de Jupiter",
+        "L'œil d'une puce",
+        "L'aspect d'une coupe de liège"
+      ],
+      "explanation": "Hooke y décrit les rotations de Mars et de Jupiter, l'œil d'une puce et l'aspect d'une coupe de liège."
+    },
+    {
+      "theme": "Hooke et le microscope optique composé",
+      "type": "cours",
+      "source": "Avec quel instrument Hooke observe-t-il les rotations de Mars et de Jupiter ?",
+      "canonical": "La lunette astronomique",
+      "wrong": [
+        "Le microscope qu'il a mis au point",
+        "La loupe compte-fils",
+        "Le ballon d'eau",
+        "Le microscope optique simple"
+      ],
+      "explanation": "Mars et Jupiter sont observées à la lunette astronomique."
+    },
+    {
+      "theme": "Hooke et le microscope optique composé",
+      "type": "cours",
+      "source": "Avec quel instrument Hooke observe-t-il l'œil d'une puce et une coupe de liège ?",
+      "canonical": "Le microscope qu'il a mis au point",
+      "wrong": [
+        "La lunette astronomique",
+        "La loupe compte-fils",
+        "Un microscope de Leeuwenhoek",
+        "Un microscope à balayage"
+      ],
+      "explanation": "L'œil de puce et le liège sont observés grâce au microscope qu'il a mis au point."
+    },
+    {
+      "theme": "Hooke et le microscope optique composé",
+      "type": "cours",
+      "source": "Qui emploie pour la première fois le terme de « cellule » ?",
+      "canonical": "Robert Hooke",
+      "wrong": [
+        "Antoni Van Leeuwenhoek",
+        "Louis Pasteur",
+        "Jakob Schleiden",
+        "Theodor Schwann"
+      ],
+      "explanation": "Hooke emploie pour la première fois le terme de « cellule »."
+    },
+    {
+      "theme": "Hooke et le microscope optique composé",
+      "type": "cours",
+      "source": "De quelle langue vient le mot « cellule » ?",
+      "canonical": "Du latin",
+      "wrong": [
+        "Du grec",
+        "De l'anglais",
+        "Du néerlandais",
+        "De l'allemand"
+      ],
+      "explanation": "« Cellule » vient du latin cellula."
+    },
+    {
+      "theme": "Hooke et le microscope optique composé",
+      "type": "cours",
+      "source": "Que signifie le mot latin cellula ?",
+      "canonical": "Petite chambre",
+      "wrong": [
+        "Petite sphère",
+        "Petite paroi",
+        "Petit organe",
+        "Unité vivante"
+      ],
+      "explanation": "Cellula : petite chambre."
+    },
+    {
+      "theme": "Hooke et le microscope optique composé",
+      "type": "cours",
+      "source": "Que qualifie Hooke avec le terme de « cellule » ?",
+      "canonical": "Les cavités géométriques qu'il découvre dans le liège",
+      "wrong": [
+        "Les noyaux qu'il découvre dans les végétaux",
+        "Les facettes de l'œil d'une puce",
+        "Les fils qu'il compte dans les étoffes",
+        "Les microorganismes qu'il voit dans l'air"
+      ],
+      "explanation": "Le terme qualifie les cavités géométriques découvertes dans le liège."
+    },
+    {
+      "theme": "Hooke et le microscope optique composé",
+      "type": "cours",
+      "source": "En réalité, de quoi le liège est-il constitué ?",
+      "canonical": "De cellules mortes",
+      "wrong": [
+        "De cellules vivantes",
+        "De cristaux",
+        "De microorganismes",
+        "De cellules animales"
+      ],
+      "explanation": "Ce tissu est constitué de cellules mortes."
+    },
+    {
+      "theme": "Hooke et le microscope optique composé",
+      "type": "cours",
+      "source": "Qu'a réellement observé Hooke dans le liège ?",
+      "canonical": "La paroi de cellules mortes",
+      "wrong": [
+        "Le noyau de cellules mortes",
+        "Le noyau de cellules vivantes",
+        "Le cytoplasme de cellules vivantes",
+        "La membrane plasmique de cellules vivantes"
+      ],
+      "explanation": "C'est la paroi de ces cellules mortes qu'il a observée."
+    },
+    {
+      "theme": "Hooke et le microscope optique composé",
+      "type": "cours",
+      "source": "De quoi un microscope optique composé est-il constitué ?",
+      "canonical": "D'un assemblage de deux lentilles convexes",
+      "wrong": [
+        "D'une seule lentille biconvexe",
+        "De deux lentilles électromagnétiques",
+        "D'un canon à électrons et d'une lentille",
+        "D'une lampe à huile et d'une loupe compte-fils"
+      ],
+      "explanation": "Un microscope optique composé est un assemblage de deux lentilles convexes."
+    },
+    {
+      "theme": "Hooke et le microscope optique composé",
+      "type": "cours",
+      "source": "Comment s'appellent les deux lentilles d'un microscope optique composé ?",
+      "canonical": "Un oculaire et un objectif",
+      "wrong": [
+        "Un oculaire et un détecteur",
+        "Un objectif et une bobine",
+        "Une lentille condensatrice et un écran",
+        "Un tube optique et une vis"
+      ],
+      "explanation": "Les deux lentilles convexes : un oculaire et un objectif."
+    },
+    {
+      "theme": "Hooke et le microscope optique composé",
+      "type": "cours",
+      "source": "Que permet d'obtenir le microscope optique composé ?",
+      "canonical": "Une image agrandie de l'objet observé",
+      "wrong": [
+        "Une image 3D de la surface de l'objet",
+        "Une image de l'objet sur un écran fluorescent",
+        "Une image des molécules de l'objet",
+        "Une image réduite de l'objet observé"
+      ],
+      "explanation": "Il donne une image agrandie de l'objet observé."
+    },
+    {
+      "theme": "Hooke et le microscope optique composé",
+      "type": "cours",
+      "source": "Jusqu'à combien de fois environ le microscope de Hooke peut-il grossir les objets ?",
+      "canonical": "30 fois",
+      "wrong": [
+        "3 fois",
+        "200 fois",
+        "400 fois",
+        "1 000 fois"
+      ],
+      "explanation": "Celui de Hooke grossit jusqu'à 30 fois environ."
+    },
+    {
+      "theme": "Hooke et le microscope optique composé",
+      "type": "cours",
+      "source": "Quel est le défaut du microscope de Hooke ?",
+      "canonical": "Ses lentilles ont des défauts optiques qui nuisent à la qualité des images",
+      "wrong": [
+        "Sa lampe à huile chauffe trop et abîme l'échantillon observé",
+        "Son tube optique, trop court, empêche de grossir les objets",
+        "Sa vis de mise au point se dérègle à chaque observation",
+        "Son porte échantillon ne peut recevoir qu'une coupe de liège"
+      ],
+      "explanation": "Ses lentilles présentent des défauts optiques qui nuisent à la qualité des images."
+    },
+    {
+      "theme": "Hooke et le microscope optique composé",
+      "type": "cours",
+      "source": "À quoi sert la lampe à huile du microscope de Hooke ?",
+      "canonical": "À éclairer l'échantillon pour faciliter l'observation",
+      "wrong": [
+        "À chauffer l'échantillon pour le stériliser",
+        "À agrandir l'image de l'objet observé",
+        "À corriger les défauts optiques des lentilles",
+        "À faire la mise au point sur l'objet"
+      ],
+      "explanation": "La lampe à huile permet d'éclairer l'échantillon afin de faciliter l'observation."
+    },
+    {
+      "theme": "Hooke et le microscope optique composé",
+      "type": "cours",
+      "source": "Laquelle de ces pièces n'est PAS légendée sur le microscope de Hooke ?",
+      "canonical": "Le canon à électrons",
+      "wrong": [
+        "L'oculaire",
+        "Le tube optique",
+        "La vis de mise au point",
+        "Le porte échantillon"
+      ],
+      "explanation": "Légendes : oculaire, tube optique, vis de mise au point, objectif, porte échantillon. Le canon à électrons appartient aux microscopes électroniques."
+    },
+    {
+      "theme": "Hooke et le microscope optique composé",
+      "type": "cours",
+      "source": "Quels accessoires sont placés à côté du microscope de Hooke sur le document ?",
+      "canonical": "Une lampe à huile et un ballon d'eau",
+      "wrong": [
+        "Une lampe à huile et un miroir",
+        "Une lunette astronomique et une loupe",
+        "Un ballon à col de cygne et un détecteur",
+        "Une bobine de balayage et un écran"
+      ],
+      "explanation": "Le document légende une lampe à huile et un ballon d'eau."
+    },
+    {
+      "theme": "Leeuwenhoek et le microscope optique simple",
+      "type": "cours",
+      "source": "Quelle est la nationalité d'Antoni Van Leeuwenhoek ?",
+      "canonical": "Néerlandaise",
+      "wrong": [
+        "Britannique",
+        "Allemande",
+        "Française",
+        "Belge"
+      ],
+      "explanation": "« Le néerlandais Antoni Van Leeuwenhoek »."
+    },
+    {
+      "theme": "Leeuwenhoek et le microscope optique simple",
+      "type": "cours",
+      "source": "Quelles sont les dates de Leeuwenhoek ?",
+      "canonical": "1632-1723",
+      "wrong": [
+        "1635-1703",
+        "1665-1723",
+        "1632-1703",
+        "1605-1665"
+      ],
+      "explanation": "Antoni Van Leeuwenhoek (1632-1723). 1635-1703 : ce sont les dates de Hooke."
+    },
+    {
+      "theme": "Leeuwenhoek et le microscope optique simple",
+      "type": "cours",
+      "source": "Quel est le métier de Leeuwenhoek ?",
+      "canonical": "Drapier",
+      "wrong": [
+        "Botaniste",
+        "Zoologiste",
+        "Embryologiste",
+        "Opticien"
+      ],
+      "explanation": "Il est drapier de profession."
+    },
+    {
+      "theme": "Leeuwenhoek et le microscope optique simple",
+      "type": "cours",
+      "source": "Comment le cours présente-t-il Leeuwenhoek ?",
+      "canonical": "Comme l'un des précurseurs de la biologie cellulaire",
+      "wrong": [
+        "Comme l'auteur du livre Micrographia",
+        "Comme l'inventeur de la lunette astronomique",
+        "Comme l'inventeur de la théorie cellulaire",
+        "Comme l'adversaire de Pasteur à l'Académie"
+      ],
+      "explanation": "Il est l'un des précurseurs de la biologie cellulaire."
+    },
+    {
+      "theme": "Leeuwenhoek et le microscope optique simple",
+      "type": "cours",
+      "source": "Quel type de loupes Leeuwenhoek utilise-t-il sans doute ?",
+      "canonical": "Des loupes compte-fils",
+      "wrong": [
+        "Des loupes à huile",
+        "Des loupes à balayage",
+        "Des loupes à fluorescence",
+        "Des loupes astronomiques"
+      ],
+      "explanation": "Il utilise sans doute des loupes compte-fils."
+    },
+    {
+      "theme": "Leeuwenhoek et le microscope optique simple",
+      "type": "cours",
+      "source": "Pourquoi Leeuwenhoek utilise-t-il ces loupes ?",
+      "canonical": "Pour vérifier la qualité de ses étoffes",
+      "wrong": [
+        "Pour observer les rotations de Mars",
+        "Pour polir ses billes de verre",
+        "Pour observer des coupes de liège",
+        "Pour éclairer ses échantillons"
+      ],
+      "explanation": "Les loupes compte-fils lui servent à vérifier la qualité de ses étoffes."
+    },
+    {
+      "theme": "Leeuwenhoek et le microscope optique simple",
+      "type": "cours",
+      "source": "Combien de microscopes Leeuwenhoek fabrique-t-il ?",
+      "canonical": "Plus de 400",
+      "wrong": [
+        "Une trentaine",
+        "Environ 200",
+        "217 exactement",
+        "Plus de 4 000"
+      ],
+      "explanation": "Il construit lui-même ses microscopes : il en fera plus de 400."
+    },
+    {
+      "theme": "Leeuwenhoek et le microscope optique simple",
+      "type": "cours",
+      "source": "À quoi servent les microscopes de Leeuwenhoek, en plus de compter des fils ?",
+      "canonical": "À observer des milliers d'organismes",
+      "wrong": [
+        "À observer les rotations de Mars",
+        "À observer des coupes de liège mort",
+        "À détecter des molécules de tubuline",
+        "À stériliser des bouillons organiques"
+      ],
+      "explanation": "Ils ne servent pas seulement à compter des fils, mais aussi à observer des milliers d'organismes."
+    },
+    {
+      "theme": "Leeuwenhoek et le microscope optique simple",
+      "type": "cours",
+      "source": "À combien de genres différents appartiennent les organismes observés par Leeuwenhoek ?",
+      "canonical": "217",
+      "wrong": [
+        "30",
+        "200",
+        "400",
+        "2 000"
+      ],
+      "explanation": "Des milliers d'organismes appartenant à 217 genres différents au total."
+    },
+    {
+      "theme": "Leeuwenhoek et le microscope optique simple",
+      "type": "cours",
+      "source": "Quel type de microscope Leeuwenhoek utilise-t-il ?",
+      "canonical": "Un microscope optique simple",
+      "wrong": [
+        "Un microscope optique composé",
+        "Un microscope à fluorescence",
+        "Un microscope à transmission",
+        "Un microscope à balayage"
+      ],
+      "explanation": "Son microscope optique simple utilise une lentille biconvexe."
+    },
+    {
+      "theme": "Leeuwenhoek et le microscope optique simple",
+      "type": "cours",
+      "source": "Combien de lentilles et de quel type compte le microscope de Leeuwenhoek ?",
+      "canonical": "Une lentille biconvexe",
+      "wrong": [
+        "Deux lentilles convexes",
+        "Un oculaire et un objectif",
+        "Une lentille électromagnétique",
+        "Trois lentilles en verre"
+      ],
+      "explanation": "Une lentille biconvexe, là où le microscope composé en assemble deux."
+    },
+    {
+      "theme": "Leeuwenhoek et le microscope optique simple",
+      "type": "cours",
+      "source": "Jusqu'à combien de fois environ le microscope de Leeuwenhoek grossit-il les objets ?",
+      "canonical": "200 fois",
+      "wrong": [
+        "30 fois",
+        "217 fois",
+        "400 fois",
+        "1 000 fois"
+      ],
+      "explanation": "Il grossit les objets jusqu'à 200 fois environ."
+    },
+    {
+      "theme": "Leeuwenhoek et le microscope optique simple",
+      "type": "cours",
+      "source": "Qu'ont de remarquable les lentilles de Leeuwenhoek ?",
+      "canonical": "Elles présentent très peu de défauts optiques",
+      "wrong": [
+        "Elles sont entièrement électromagnétiques",
+        "Elles sont assemblées deux par deux",
+        "Elles sont recouvertes d'une couche de métal",
+        "Elles sont éclairées par une lampe à huile"
+      ],
+      "explanation": "Ses lentilles présentent très peu de défauts optiques."
+    },
+    {
+      "theme": "Leeuwenhoek et le microscope optique simple",
+      "type": "cours",
+      "source": "À quelle technique les lentilles de Leeuwenhoek doivent-elles leur qualité ?",
+      "canonical": "Le polissage de billes de verre",
+      "wrong": [
+        "Le moulage de verre fondu",
+        "Le dépôt d'une fine couche de métal",
+        "L'assemblage de deux lentilles convexes",
+        "Le chauffage des lentilles à la lampe à huile"
+      ],
+      "explanation": "Une technique de polissage de billes de verre de très haute qualité pour l'époque."
+    },
+    {
+      "theme": "Leeuwenhoek et le microscope optique simple",
+      "type": "cours",
+      "source": "Qu'a fait Leeuwenhoek de sa technique de polissage ?",
+      "canonical": "Il l'a gardée secrète",
+      "wrong": [
+        "Il l'a publiée dans un ouvrage",
+        "Il l'a présentée à l'Académie des sciences",
+        "Il l'a apprise de Robert Hooke",
+        "Il l'a enseignée à d'autres drapiers"
+      ],
+      "explanation": "Une technique « qu'il garda secrète »."
+    },
+    {
+      "theme": "Leeuwenhoek et le microscope optique simple",
+      "type": "cours",
+      "source": "Comparez les grossissements des microscopes de Hooke et de Leeuwenhoek.",
+      "canonical": "Hooke : 30 fois environ ; Leeuwenhoek : 200 fois environ",
+      "wrong": [
+        "Hooke : 200 fois environ ; Leeuwenhoek : 30 fois environ",
+        "Hooke : 30 fois environ ; Leeuwenhoek : 400 fois environ",
+        "Hooke : 217 fois environ ; Leeuwenhoek : 400 fois environ",
+        "Hooke et Leeuwenhoek : 30 fois environ tous les deux"
+      ],
+      "explanation": "Hooke : jusqu'à 30 fois environ. Leeuwenhoek : jusqu'à 200 fois environ."
+    },
+    {
+      "theme": "Les passages encadrés de la théorie cellulaire",
+      "type": "cours",
+      "source": "1838 : comment le noyau est-il décrit par Schleiden ?",
+      "canonical": "« Un organe élémentaire spécifique et sans doute universel des végétaux »",
+      "wrong": [
+        "« Un organe élémentaire spécifique et sans doute universel des animaux »",
+        "« Une petite chambre spécifique et sans doute universelle des végétaux »",
+        "« Un principe général de construction pour toutes les productions organiques »",
+        "« Une cavité géométrique spécifique et sans doute universelle des végétaux »"
+      ],
+      "explanation": "Le noyau est décrit comme « un organe élémentaire spécifique et sans doute universel des végétaux »."
+    },
+    {
+      "theme": "Les passages encadrés de la théorie cellulaire",
+      "type": "cours",
+      "source": "Complétez : « un organe élémentaire spécifique et sans doute universel... »",
+      "canonical": "... des végétaux",
+      "wrong": [
+        "... des animaux",
+        "... du vivant",
+        "... des microorganismes",
+        "... des cellules"
+      ],
+      "explanation": "« ... et sans doute universel des végétaux »."
+    },
+    {
+      "theme": "Les passages encadrés de la théorie cellulaire",
+      "type": "cours",
+      "source": "1839 : Schwann déduit de ses observations « qu'il existe... »",
+      "canonical": "... un principe général de construction pour toutes les productions organiques",
+      "wrong": [
+        "... un organe élémentaire spécifique pour toutes les productions organiques",
+        "... un principe général de division pour toutes les cellules animales",
+        "... un principe de génération spontanée pour toutes les cellules",
+        "... un principe général de construction pour les seuls tissus végétaux"
+      ],
+      "explanation": "« Qu'il existe un principe général de construction pour toutes les productions organiques »."
+    },
+    {
+      "theme": "Les passages encadrés de la théorie cellulaire",
+      "type": "cours",
+      "source": "D'après la citation de Schwann, le principe de construction de toutes les productions organiques est...",
+      "canonical": "... la formation de la cellule",
+      "wrong": [
+        "... la division du noyau",
+        "... la synthèse des protéines",
+        "... la génération spontanée",
+        "... l'assemblage des lipides"
+      ],
+      "explanation": "« Et ce principe de construction est la formation de la cellule »."
+    },
+    {
+      "theme": "Les passages encadrés de la théorie cellulaire",
+      "type": "cours",
+      "source": "Que signifie l'aphorisme omnis cellula e cellula ?",
+      "canonical": "Toute cellule naît d'une cellule",
+      "wrong": [
+        "Toute cellule contient un noyau",
+        "Tout être vivant est fait de cellules",
+        "La cellule est l'unité du vivant",
+        "Toute cellule naît de substance organique"
+      ],
+      "explanation": "Omnis cellula e cellula : toute cellule naît d'une cellule."
+    },
+    {
+      "theme": "Les passages encadrés de la théorie cellulaire",
+      "type": "cours",
+      "source": "Comment écrit-on en latin « toute cellule naît d'une cellule » ?",
+      "canonical": "Omnis cellula e cellula",
+      "wrong": [
+        "Omnis cellula in cellula",
+        "Cellula e omnis cellula",
+        "Una cellula e cellulis",
+        "Omnis vita e cellula"
+      ],
+      "explanation": "L'aphorisme est omnis cellula e cellula."
+    },
+    {
+      "theme": "Les passages encadrés de la théorie cellulaire",
+      "type": "cours",
+      "source": "« Toute cellule naît d'une cellule » : quel principe de la théorie cellulaire ce passage exprime-t-il ?",
+      "canonical": "Le troisième",
+      "wrong": [
+        "Le premier",
+        "Le deuxième",
+        "Le quatrième",
+        "Le cinquième"
+      ],
+      "explanation": "C'est le troisième principe de la théorie cellulaire (repère ③ au crayon)."
+    },
+    {
+      "theme": "Pasteur et les ballons à col de cygne",
+      "type": "cours",
+      "source": "Quelle théorie Louis Pasteur invalide-t-il en 1859-1864 ?",
+      "canonical": "La génération spontanée",
+      "wrong": [
+        "La théorie cellulaire",
+        "La division cellulaire",
+        "La mosaïque lipoprotéique fluide",
+        "La formation de la cellule"
+      ],
+      "explanation": "La théorie de la génération spontanée est invalidée par Louis Pasteur."
+    },
+    {
+      "theme": "Pasteur et les ballons à col de cygne",
+      "type": "cours",
+      "source": "Qui invalide la théorie de la génération spontanée ?",
+      "canonical": "Louis Pasteur",
+      "wrong": [
+        "Félix-Archimède Pouchet",
+        "Robert Hooke",
+        "Antoni Van Leeuwenhoek",
+        "Theodor Schwann"
+      ],
+      "explanation": "Elle est invalidée par Louis Pasteur."
+    },
+    {
+      "theme": "Pasteur et les ballons à col de cygne",
+      "type": "cours",
+      "source": "Avec qui Pasteur s'oppose-t-il dans cette controverse ?",
+      "canonical": "Félix-Archimède Pouchet",
+      "wrong": [
+        "Robert Hooke",
+        "Antoni Van Leeuwenhoek",
+        "Jakob Schleiden",
+        "Theodor Schwann"
+      ],
+      "explanation": "La controverse oppose Louis Pasteur à Félix-Archimède Pouchet."
+    },
+    {
+      "theme": "Pasteur et les ballons à col de cygne",
+      "type": "cours",
+      "source": "Où se déroule la controverse entre Pasteur et Pouchet ?",
+      "canonical": "À l'Académie des sciences",
+      "wrong": [
+        "À l'Académie de médecine",
+        "Au Collège de France",
+        "À la Sorbonne",
+        "À l'Institut Pasteur"
+      ],
+      "explanation": "Controverse « à l'Académie des sciences »."
+    },
+    {
+      "theme": "Pasteur et les ballons à col de cygne",
+      "type": "cours",
+      "source": "En quelles années Pasteur invalide-t-il la génération spontanée ?",
+      "canonical": "1859-1864",
+      "wrong": [
+        "1838-1839",
+        "1852-1855",
+        "1864-1869",
+        "1849-1854"
+      ],
+      "explanation": "1859-1864 : la théorie de la génération spontanée est invalidée."
+    },
+    {
+      "theme": "Pasteur et les ballons à col de cygne",
+      "type": "cours",
+      "source": "À quelle expérience Pasteur a-t-il recours, entre autres ?",
+      "canonical": "Les ballons à col de cygne",
+      "wrong": [
+        "Les ballons à col de canard",
+        "Les tubes à col de cygne",
+        "Les coupes de liège",
+        "Les billes de verre polies"
+      ],
+      "explanation": "Il aura recours, entre autres, à l'expérience des ballons à col de cygne."
+    },
+    {
+      "theme": "Pasteur et les ballons à col de cygne",
+      "type": "cours",
+      "source": "Qu'est-ce que le bouillon utilisé par Pasteur ?",
+      "canonical": "Un milieu liquide à substances organiques, où des microorganismes peuvent se développer",
+      "wrong": [
+        "Un milieu solide à substances organiques, où des microorganismes peuvent se développer",
+        "Un milieu liquide sans substance organique, où aucun microorganisme ne se développe",
+        "Un milieu liquide à substances minérales, qui détruit tous les microorganismes",
+        "Un milieu gazeux à substances organiques, où des microorganismes peuvent se développer"
+      ],
+      "explanation": "Le bouillon est un milieu liquide qui contient des substances organiques permettant le développement de microorganismes."
+    },
+    {
+      "theme": "Pasteur et les ballons à col de cygne",
+      "type": "cours",
+      "source": "Expérience 1 : comment le bouillon est-il stérilisé ?",
+      "canonical": "Par chauffage",
+      "wrong": [
+        "Par filtration",
+        "Par refroidissement",
+        "Par incubation",
+        "Par ajout d'anticorps"
+      ],
+      "explanation": "Bouillon stérilisé par chauffage."
+    },
+    {
+      "theme": "Pasteur et les ballons à col de cygne",
+      "type": "cours",
+      "source": "Expérience 1 : qu'obtient-on après l'incubation du bouillon stérile ?",
+      "canonical": "Un bouillon contaminé par des microorganismes",
+      "wrong": [
+        "Un bouillon qui reste stérile",
+        "Un bouillon sans aucune substance organique",
+        "Un bouillon qui s'est totalement évaporé",
+        "Un bouillon devenu fluorescent"
+      ],
+      "explanation": "Après incubation : bouillon contaminé par des microorganismes."
+    },
+    {
+      "theme": "Pasteur et les ballons à col de cygne",
+      "type": "cours",
+      "source": "Expérience 1 : d'où viennent les microorganismes qui contaminent le bouillon ?",
+      "canonical": "De l'air",
+      "wrong": [
+        "Du bouillon",
+        "Du verre",
+        "De la flamme",
+        "De l'eau"
+      ],
+      "explanation": "Le schéma indique « microorganismes de l'air »."
+    },
+    {
+      "theme": "Pasteur et les ballons à col de cygne",
+      "type": "cours",
+      "source": "Expérience 2 : que devient le bouillon stérile dans le ballon à col de cygne intact, après incubation ?",
+      "canonical": "Il reste stérile",
+      "wrong": [
+        "Il est contaminé",
+        "Il se détériore",
+        "Il s'évapore",
+        "Il devient fluorescent"
+      ],
+      "explanation": "Tant que le col est intact, le bouillon reste stérile."
+    },
+    {
+      "theme": "Pasteur et les ballons à col de cygne",
+      "type": "cours",
+      "source": "Expérience 2 : pourquoi le bouillon reste-t-il stérile ?",
+      "canonical": "La courbure inférieure du col emprisonne les microorganismes",
+      "wrong": [
+        "La partie supérieure du col est fermée par un bouchon",
+        "Le col de cygne empêche l'air d'atteindre le bouillon",
+        "Le col chauffé détruit les microorganismes de l'air",
+        "Le bouillon a été traité par des anticorps fluorescents"
+      ],
+      "explanation": "La courbure inférieure du col en forme de S emprisonne les microorganismes."
+    },
+    {
+      "theme": "Pasteur et les ballons à col de cygne",
+      "type": "cours",
+      "source": "Quelle est la forme du col du ballon de Pasteur, d'après le document ?",
+      "canonical": "En forme de S",
+      "wrong": [
+        "En forme de T",
+        "En forme de Y",
+        "En spirale",
+        "Tout droit"
+      ],
+      "explanation": "« La courbure inférieure du col en forme de S »."
+    },
+    {
+      "theme": "Pasteur et les ballons à col de cygne",
+      "type": "cours",
+      "source": "Où les microorganismes sont-ils piégés dans le ballon à col de cygne ?",
+      "canonical": "Dans la courbure inférieure du col",
+      "wrong": [
+        "Dans la partie supérieure du col",
+        "Au fond du bouillon",
+        "Sur la paroi extérieure du ballon",
+        "À la surface du bouillon"
+      ],
+      "explanation": "Les microorganismes sont piégés dans la courbure inférieure du col."
+    },
+    {
+      "theme": "Pasteur et les ballons à col de cygne",
+      "type": "cours",
+      "source": "Expérience 2 : quelle partie du col rompt-on ?",
+      "canonical": "La partie supérieure",
+      "wrong": [
+        "La partie inférieure",
+        "La courbure en forme de S",
+        "La base du col",
+        "Le col en entier"
+      ],
+      "explanation": "La rupture de la partie supérieure du col."
+    },
+    {
+      "theme": "Pasteur et les ballons à col de cygne",
+      "type": "cours",
+      "source": "Expérience 2 : que se passe-t-il après la rupture du col et l'incubation ?",
+      "canonical": "Les microorganismes pénètrent dans le flacon et le bouillon se détériore",
+      "wrong": [
+        "Les microorganismes restent piégés et le bouillon reste stérile",
+        "Les microorganismes piégés s'échappent et le bouillon reste stérile",
+        "Le bouillon s'évapore par le col rompu et le flacon reste vide",
+        "L'air détruit les microorganismes et le bouillon reste stérile"
+      ],
+      "explanation": "La rupture de la partie supérieure du col permet aux microorganismes de pénétrer dans le flacon ; le bouillon se détériore."
+    },
+    {
+      "theme": "Pasteur et les ballons à col de cygne",
+      "type": "cours",
+      "source": "Dans quel ordre se déroule l'expérience 2 ?",
+      "canonical": "Bouillon stérile, incubation (il reste stérile), rupture du col, incubation (il se détériore)",
+      "wrong": [
+        "Rupture du col, incubation (il se détériore), bouillon stérile, incubation (il reste stérile)",
+        "Bouillon stérile, rupture du col, incubation (il reste stérile), incubation (il se détériore)",
+        "Bouillon contaminé, incubation (il se détériore), rupture du col, chauffage (il redevient stérile)",
+        "Bouillon stérile, incubation (il se détériore), rupture du col, incubation (il redevient stérile)"
+      ],
+      "explanation": "Bouillon stérile dans le ballon à col de cygne, incubation : il reste stérile. Rupture du col, incubation : il se détériore."
+    },
+    {
+      "theme": "Pasteur et les ballons à col de cygne",
+      "type": "cours",
+      "source": "Que montre l'expérience du col de cygne contre la génération spontanée ?",
+      "canonical": "Le bouillon ne s'altère que si les microorganismes de l'air l'atteignent",
+      "wrong": [
+        "Le bouillon produit lui-même ses microorganismes pendant l'incubation",
+        "Le bouillon s'altère dès l'incubation, même si l'air n'y accède pas",
+        "Le chauffage crée les microorganismes qui contaminent le bouillon",
+        "Les microorganismes naissent de la substance organique du bouillon"
+      ],
+      "explanation": "Le col intact piège les microorganismes et le bouillon reste stérile ; col rompu, ils entrent et le bouillon se détériore."
+    },
+    {
+      "theme": "L'immunofluorescence (microscope à fluorescence)",
+      "type": "cours",
+      "source": "Dans cette technique, quelle molécule se lie à la molécule étudiée ?",
+      "canonical": "Un anticorps",
+      "wrong": [
+        "Un ribosome",
+        "Un chromosome",
+        "Un phospholipide",
+        "Un acide aminé"
+      ],
+      "explanation": "Étape 1 : liaison de l'anticorps (Ac) à la molécule étudiée."
+    },
+    {
+      "theme": "L'immunofluorescence (microscope à fluorescence)",
+      "type": "cours",
+      "source": "Que porte l'anticorps sur le schéma du document ?",
+      "canonical": "Un fluorochrome",
+      "wrong": [
+        "Un lysosome",
+        "Un phospholipide",
+        "Un ribosome",
+        "Un noyau"
+      ],
+      "explanation": "Le schéma légende le fluorochrome accroché à l'anticorps."
+    },
+    {
+      "theme": "L'immunofluorescence (microscope à fluorescence)",
+      "type": "cours",
+      "source": "Que reconnaît l'anticorps ?",
+      "canonical": "Une région de la molécule étudiée",
+      "wrong": [
+        "Toutes les molécules de la cellule",
+        "Le fluorochrome d'un autre anticorps",
+        "La paroi de la cellule étudiée",
+        "Le rayon lumineux qui l'éclaire"
+      ],
+      "explanation": "Le schéma légende la « région reconnue par l'Ac » sur la molécule étudiée."
+    },
+    {
+      "theme": "L'immunofluorescence (microscope à fluorescence)",
+      "type": "cours",
+      "source": "Qu'est-ce qui excite le fluorochrome ?",
+      "canonical": "Un rayon lumineux",
+      "wrong": [
+        "Un faisceau d'électrons",
+        "Un chauffage de la cellule",
+        "Un second anticorps",
+        "Une bobine de balayage"
+      ],
+      "explanation": "Un rayon lumineux excite le fluorochrome."
+    },
+    {
+      "theme": "L'immunofluorescence (microscope à fluorescence)",
+      "type": "cours",
+      "source": "Que fait le fluorochrome une fois excité ?",
+      "canonical": "Il émet une radiation lumineuse",
+      "wrong": [
+        "Il réémet des électrons",
+        "Il se détache de l'anticorps",
+        "Il détruit la molécule étudiée",
+        "Il absorbe le noyau de la cellule"
+      ],
+      "explanation": "Le fluorochrome émet une radiation lumineuse."
+    },
+    {
+      "theme": "L'immunofluorescence (microscope à fluorescence)",
+      "type": "cours",
+      "source": "Quelles sont, dans l'ordre, les deux étapes numérotées du document ?",
+      "canonical": "Liaison de l'anticorps à la molécule, puis observation et détection de la molécule",
+      "wrong": [
+        "Observation et détection de la molécule, puis liaison de l'anticorps à la molécule",
+        "Liaison de l'anticorps à la molécule, puis recouvrement par une fine couche de métal",
+        "Division de la cellule étudiée, puis liaison de l'anticorps à la membrane plasmique",
+        "Excitation de la molécule étudiée, puis destruction de l'anticorps par le rayon lumineux"
+      ],
+      "explanation": "① Liaison de l'Ac à la molécule étudiée. ② Observation microscopique et détection de la molécule étudiée."
+    },
+    {
+      "theme": "L'immunofluorescence (microscope à fluorescence)",
+      "type": "cours",
+      "source": "Avec quel microscope la cellule d'amphibien du document est-elle observée ?",
+      "canonical": "Le microscope optique à fluorescence",
+      "wrong": [
+        "Le microscope électronique à transmission",
+        "Le microscope électronique à balayage",
+        "Le microscope optique simple",
+        "Le microscope de Hooke"
+      ],
+      "explanation": "Cellule d'amphibien observée au MO à fluorescence."
+    },
+    {
+      "theme": "L'immunofluorescence (microscope à fluorescence)",
+      "type": "cours",
+      "source": "Quelle cellule le document montre-t-il, et à quel moment ?",
+      "canonical": "Une cellule d'amphibien, pendant la division cellulaire",
+      "wrong": [
+        "Une cellule d'amphibien, juste après sa mort",
+        "Un lymphocyte, pendant la réponse immunitaire",
+        "Une cellule de liège, pendant la division cellulaire",
+        "Une cellule de lapin, pendant la division cellulaire"
+      ],
+      "explanation": "Cellule d'amphibien observée pendant la division cellulaire."
+    },
+    {
+      "theme": "L'immunofluorescence (microscope à fluorescence)",
+      "type": "cours",
+      "source": "Quand une molécule fluorescente émet-elle une radiation lumineuse ?",
+      "canonical": "Quand on l'éclaire avec des radiations qu'elle peut absorber",
+      "wrong": [
+        "Quand on la chauffe au-dessus d'une lampe à huile",
+        "Quand on la bombarde avec un faisceau d'électrons",
+        "Quand on la recouvre d'une fine couche de métal",
+        "Quand elle se lie à un chromosome de la cellule"
+      ],
+      "explanation": "Une molécule fluorescente émet une radiation lumineuse quand on l'éclaire avec des radiations qu'elle peut absorber."
+    },
+    {
+      "theme": "L'immunofluorescence (microscope à fluorescence)",
+      "type": "cours",
+      "source": "Par combien d'anticorps fluorescents la cellule d'amphibien a-t-elle été traitée ?",
+      "canonical": "Deux",
+      "wrong": [
+        "Un",
+        "Trois",
+        "Quatre",
+        "Cinq"
+      ],
+      "explanation": "La cellule a été traitée avec deux anticorps fluorescents."
+    },
+    {
+      "theme": "L'immunofluorescence (microscope à fluorescence)",
+      "type": "cours",
+      "source": "Quelle molécule est reconnue par l'anticorps qui émet une couleur verte ?",
+      "canonical": "La tubuline",
+      "wrong": [
+        "L'actine",
+        "Le cholestérol",
+        "Le phospholipide",
+        "La chromatine"
+      ],
+      "explanation": "L'anticorps vert reconnaît les molécules de tubuline."
+    },
+    {
+      "theme": "L'immunofluorescence (microscope à fluorescence)",
+      "type": "cours",
+      "source": "Quelle molécule est reconnue par l'anticorps qui émet une couleur rouge ?",
+      "canonical": "L'actine",
+      "wrong": [
+        "La tubuline",
+        "Le cholestérol",
+        "Le phospholipide",
+        "La chromatine"
+      ],
+      "explanation": "L'anticorps rouge reconnaît les molécules d'actine."
+    },
+    {
+      "theme": "L'immunofluorescence (microscope à fluorescence)",
+      "type": "cours",
+      "source": "Que forment les molécules de tubuline ?",
+      "canonical": "Des câbles tirant les chromosomes",
+      "wrong": [
+        "Des filaments dans le cytoplasme",
+        "Une double couche dans la membrane",
+        "Des petites sphères dans la cellule",
+        "Des cavités géométriques dans la paroi"
+      ],
+      "explanation": "Les molécules de tubuline forment des câbles tirant les chromosomes."
+    },
+    {
+      "theme": "L'immunofluorescence (microscope à fluorescence)",
+      "type": "cours",
+      "source": "Que forment les molécules d'actine ?",
+      "canonical": "Des filaments dans le cytoplasme",
+      "wrong": [
+        "Des câbles tirant les chromosomes",
+        "Une double couche dans la membrane",
+        "Des petites sphères dans la cellule",
+        "Des cavités géométriques dans la paroi"
+      ],
+      "explanation": "Les molécules d'actine forment des filaments dans le cytoplasme."
+    },
+    {
+      "theme": "L'immunofluorescence (microscope à fluorescence)",
+      "type": "cours",
+      "source": "De quelle couleur apparaissent les chromosomes sur le document ?",
+      "canonical": "En violet",
+      "wrong": [
+        "En vert",
+        "En rouge",
+        "En bleu",
+        "En orange"
+      ],
+      "explanation": "Les chromosomes sont en violet."
+    },
+    {
+      "theme": "L'immunofluorescence (microscope à fluorescence)",
+      "type": "cours",
+      "source": "Sur la photo de la cellule d'amphibien, que montrent les pointillés ?",
+      "canonical": "L'emplacement de la membrane plasmique",
+      "wrong": [
+        "L'emplacement du noyau",
+        "L'emplacement des chromosomes",
+        "Le trajet des câbles de tubuline",
+        "Le trajet des filaments d'actine"
+      ],
+      "explanation": "La légende dit « emplacement de la membrane plasmique »."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "type": "cours",
+      "source": "Que signifie le sigle MET ?",
+      "canonical": "Microscope électronique à transmission",
+      "wrong": [
+        "Microscope électronique à balayage",
+        "Microscope à émission thermique",
+        "Microscope électromagnétique à tube",
+        "Microscope électronique à trois lentilles"
+      ],
+      "explanation": "MET : microscope électronique à transmission."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "type": "cours",
+      "source": "Que signifie le sigle MEB ?",
+      "canonical": "Microscope électronique à balayage",
+      "wrong": [
+        "Microscope électronique à transmission",
+        "Microscope électromagnétique à bobines",
+        "Microscope électronique à billes",
+        "Microscope à électrons biconvexe"
+      ],
+      "explanation": "MEB : microscope électronique à balayage."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "type": "cours",
+      "source": "Vers quelle date les microscopes électroniques sont-ils mis au point, selon le cours ?",
+      "canonical": "Vers 1950",
+      "wrong": [
+        "Vers 1665",
+        "Vers 1855",
+        "Vers 1900",
+        "Vers 2000"
+      ],
+      "explanation": "Les microscopes électroniques à transmission et à balayage sont mis au point vers 1950."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "type": "cours",
+      "source": "À quelle échelle les microscopes électroniques ont-ils perfectionné les connaissances des cellules ?",
+      "canonical": "À l'échelle moléculaire",
+      "wrong": [
+        "À l'échelle de l'organisme",
+        "À l'échelle du tissu",
+        "À l'échelle de l'organe",
+        "À l'échelle de l'œil nu"
+      ],
+      "explanation": "Ils ont perfectionné les connaissances des cellules à l'échelle moléculaire."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "type": "cours",
+      "source": "Qu'ont permis de mieux connaître les microscopes électroniques ?",
+      "canonical": "L'arrangement entre les molécules et la structure des organites",
+      "wrong": [
+        "Les rotations des planètes et la structure du liège",
+        "Le nombre de genres et la taille des organismes",
+        "Le développement des microorganismes dans le bouillon",
+        "La couleur des chromosomes et la fluorescence des anticorps"
+      ],
+      "explanation": "L'arrangement entre les molécules est plus facilement établi et la structure des organites mieux connue."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "type": "cours",
+      "source": "Quelle est la résolution maximale du microscope optique ?",
+      "canonical": "200 nm",
+      "wrong": [
+        "1 nm",
+        "0,1 nm",
+        "0,004 nm",
+        "2 000 nm"
+      ],
+      "explanation": "Microscope optique : résolution maximale 200 nm."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "type": "cours",
+      "source": "Quelle est la résolution maximale du microscope électronique à transmission (MET) ?",
+      "canonical": "0,1 nm",
+      "wrong": [
+        "1 nm",
+        "200 nm",
+        "0,004 nm",
+        "10 nm"
+      ],
+      "explanation": "MET : résolution maximale 0,1 nm."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "type": "cours",
+      "source": "Quelle est la résolution maximale du microscope électronique à balayage (MEB) ?",
+      "canonical": "1 nm",
+      "wrong": [
+        "0,1 nm",
+        "200 nm",
+        "0,004 nm",
+        "10 nm"
+      ],
+      "explanation": "MEB : résolution maximale 1 nm."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "type": "cours",
+      "source": "Classez les microscopes du moins précis au plus précis.",
+      "canonical": "MO < MEB < MET",
+      "wrong": [
+        "MO < MET < MEB",
+        "MEB < MO < MET",
+        "MET < MEB < MO",
+        "MEB < MET < MO"
+      ],
+      "explanation": "MO (200 nm) < MEB (1 nm) < MET (0,1 nm) : plus la distance est petite, plus le microscope est précis."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "type": "cours",
+      "source": "Lequel de ces microscopes distingue les points les plus proches ?",
+      "canonical": "Le microscope électronique à transmission",
+      "wrong": [
+        "Le microscope électronique à balayage",
+        "Le microscope optique",
+        "Le microscope optique à fluorescence",
+        "Le microscope de Leeuwenhoek"
+      ],
+      "explanation": "Le MET a la meilleure résolution : 0,1 nm."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "type": "cours",
+      "source": "Qu'est-ce que le pouvoir de résolution d'un microscope ?",
+      "canonical": "La distance minimale séparant deux points discernables",
+      "wrong": [
+        "La distance maximale séparant deux points discernables",
+        "Le nombre de fois qu'il grossit les objets observés",
+        "La longueur d'onde maximale de son rayonnement",
+        "La distance entre son objectif et son oculaire"
+      ],
+      "explanation": "Pouvoir de résolution R : distance minimale séparant deux points discernables."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "type": "cours",
+      "source": "À quoi le pouvoir de résolution R est-il proportionnel ?",
+      "canonical": "À la longueur d'onde du rayonnement",
+      "wrong": [
+        "Au nombre de lentilles du microscope",
+        "Au grossissement de l'oculaire",
+        "À l'épaisseur de l'échantillon",
+        "À la taille de l'écran utilisé"
+      ],
+      "explanation": "R est proportionnel à la longueur d'onde du rayonnement."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "type": "cours",
+      "source": "Quelle est la longueur d'onde minimale d'un rayonnement électronique ?",
+      "canonical": "0,004 nm",
+      "wrong": [
+        "0,1 nm",
+        "1 nm",
+        "200 nm",
+        "0,04 nm"
+      ],
+      "explanation": "Elle est de 0,004 nm minimum pour un rayonnement électronique."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "type": "cours",
+      "source": "Dans le microscope optique, à quel flux l'échantillon est-il soumis ?",
+      "canonical": "Un flux de photons",
+      "wrong": [
+        "Un flux d'électrons",
+        "Un flux d'anticorps",
+        "Un flux de phospholipides",
+        "Un flux de métal"
+      ],
+      "explanation": "L'échantillon est soumis à un flux de photons provenant d'une source de lumière."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "type": "cours",
+      "source": "Par quelles lentilles passe le flux de photons dans le microscope optique ?",
+      "canonical": "Deux lentilles en verre : un objectif et un oculaire",
+      "wrong": [
+        "Deux lentilles électromagnétiques : un objectif et un oculaire",
+        "Une seule lentille biconvexe en verre poli",
+        "Deux lentilles en verre : un condenseur et un détecteur",
+        "Trois lentilles électromagnétiques et un écran"
+      ],
+      "explanation": "Il passe par deux lentilles en verre : un objectif et un oculaire."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "type": "cours",
+      "source": "Où se forme l'image dans le microscope optique ?",
+      "canonical": "Dans l'œil humain",
+      "wrong": [
+        "Sur un écran fluorescent",
+        "Sur un détecteur",
+        "Sur un porte échantillon",
+        "Dans le canon à électrons"
+      ],
+      "explanation": "Les lentilles vont permettre de former une image dans l'œil humain."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "type": "cours",
+      "source": "Par quoi le MET remplace-t-il les photons ?",
+      "canonical": "Par des électrons",
+      "wrong": [
+        "Par des protons",
+        "Par des atomes de métal",
+        "Par des anticorps",
+        "Par des rayons lumineux"
+      ],
+      "explanation": "Le MET remplace les photons par des électrons."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "type": "cours",
+      "source": "Par quoi le MET remplace-t-il les lentilles en verre ?",
+      "canonical": "Par des lentilles électromagnétiques",
+      "wrong": [
+        "Par des lentilles biconvexes",
+        "Par des billes de verre polies",
+        "Par des bobines de balayage",
+        "Par des écrans fluorescents"
+      ],
+      "explanation": "Le MET remplace les lentilles en verre par des lentilles électromagnétiques."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "type": "cours",
+      "source": "Dans le MET, que fait le rayonnement électronique face à l'échantillon ?",
+      "canonical": "Il traverse l'échantillon",
+      "wrong": [
+        "Il balaye la surface de l'échantillon",
+        "Il recouvre l'échantillon de métal",
+        "Il excite les fluorochromes de l'échantillon",
+        "Il s'arrête à la surface de l'échantillon"
+      ],
+      "explanation": "Le rayonnement électronique traverse l'échantillon."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "type": "cours",
+      "source": "Par quels phénomènes le rayonnement est-il modifié en traversant l'échantillon dans le MET ?",
+      "canonical": "Réflexion, diffraction, réfraction",
+      "wrong": [
+        "Réflexion, fluorescence, absorption",
+        "Fluorescence, diffraction, émission",
+        "Absorption, émission, réfraction",
+        "Excitation, fluorescence, balayage"
+      ],
+      "explanation": "Il est modifié par des phénomènes physiques : réflexion, diffraction, réfraction."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "type": "cours",
+      "source": "Dans le MET, où l'image se forme-t-elle ?",
+      "canonical": "Sur un écran fluorescent",
+      "wrong": [
+        "Dans l'œil humain",
+        "Sur un détecteur",
+        "Dans le canon à électrons",
+        "Sur les bobines de balayage"
+      ],
+      "explanation": "Une partie du rayonnement est dirigée vers un écran (écran fluorescent sur le schéma) pour y former une image."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "type": "cours",
+      "source": "Dans le MET, comment la qualité de l'image est-elle améliorée ?",
+      "canonical": "Par le passage au travers d'autres lentilles",
+      "wrong": [
+        "Par le dépôt d'une fine couche de métal",
+        "Par le passage dans un ballon d'eau",
+        "Par l'éclairage d'une lampe à huile",
+        "Par l'ajout d'anticorps fluorescents"
+      ],
+      "explanation": "La qualité de l'image est améliorée lors du passage au travers d'autres lentilles."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "type": "cours",
+      "source": "Dans le MEB, que fait le faisceau d'électrons ?",
+      "canonical": "Il balaye l'échantillon",
+      "wrong": [
+        "Il traverse l'échantillon",
+        "Il stérilise l'échantillon",
+        "Il colore l'échantillon",
+        "Il découpe l'échantillon"
+      ],
+      "explanation": "Dans le MEB, un faisceau d'électrons balaye l'échantillon."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "type": "cours",
+      "source": "Dans le MEB, comment l'échantillon est-il préparé au préalable ?",
+      "canonical": "Il est recouvert d'une fine couche de métal",
+      "wrong": [
+        "Il est traité par des anticorps fluorescents",
+        "Il est stérilisé dans un bouillon chauffé",
+        "Il est poli comme une bille de verre",
+        "Il est éclairé par une lampe à huile"
+      ],
+      "explanation": "L'échantillon a été au préalable recouvert d'une fine couche de métal."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "type": "cours",
+      "source": "Dans le MEB, à quoi sert la fine couche de métal ?",
+      "canonical": "À faire réémettre par l'échantillon les électrons qui l'atteignent",
+      "wrong": [
+        "À faire traverser l'échantillon par tous les électrons reçus",
+        "À protéger l'échantillon de tous les électrons qui l'atteignent",
+        "À colorer en rouge et en vert les molécules de l'échantillon",
+        "À remplacer les lentilles électromagnétiques du microscope"
+      ],
+      "explanation": "Cela permet à l'échantillon de réémettre les électrons qui l'atteignent."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "type": "cours",
+      "source": "Dans le MEB, qu'est-ce qui capte les électrons réémis ?",
+      "canonical": "Un détecteur",
+      "wrong": [
+        "Un oculaire",
+        "L'œil humain",
+        "Un objectif",
+        "Un écran fluorescent"
+      ],
+      "explanation": "Les électrons réémis sont captés par un détecteur."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "type": "cours",
+      "source": "Quelle image le MEB permet-il de reconstituer ?",
+      "canonical": "Une image 3D de la surface de l'échantillon",
+      "wrong": [
+        "Une image 3D de l'intérieur de l'échantillon",
+        "Une image en coupe de l'échantillon",
+        "Une image fluorescente des molécules",
+        "Une image dans l'œil humain"
+      ],
+      "explanation": "Le détecteur permet de reconstituer une image 3D de sa surface."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "type": "cours",
+      "source": "Sur le schéma, quelle pièce ne se trouve que dans le MEB ?",
+      "canonical": "Les bobines de balayage",
+      "wrong": [
+        "Le canon à électrons",
+        "La lentille condensatrice",
+        "L'échantillon",
+        "La lampe"
+      ],
+      "explanation": "Les bobines de balayage n'existent que sur le schéma du MEB."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "type": "cours",
+      "source": "Sur le schéma, quelle est la source du rayonnement dans le MET et le MEB ?",
+      "canonical": "Le canon à électrons",
+      "wrong": [
+        "La lampe à huile",
+        "Le détecteur",
+        "Les bobines de balayage",
+        "L'écran fluorescent"
+      ],
+      "explanation": "Le MET et le MEB ont un canon à électrons, là où le microscope optique a une lampe."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "type": "cours",
+      "source": "Sur le schéma, quelle pièce se retrouve dans les trois microscopes ?",
+      "canonical": "La lentille condensatrice",
+      "wrong": [
+        "Le canon à électrons",
+        "La lampe",
+        "L'oculaire",
+        "Le détecteur"
+      ],
+      "explanation": "La lentille condensatrice figure sur les trois schémas."
+    },
+    {
+      "theme": "Les organites de la cellule animale",
+      "type": "cours",
+      "source": "Quel organite est le lieu de la production de l'énergie pour les travaux cellulaires ?",
+      "canonical": "La mitochondrie",
+      "wrong": [
+        "Le noyau",
+        "Le ribosome",
+        "Le lysosome",
+        "Le réticulum endoplasmique"
+      ],
+      "explanation": "La mitochondrie M : lieu de la production de l'énergie pour les travaux cellulaires."
+    },
+    {
+      "theme": "Les organites de la cellule animale",
+      "type": "cours",
+      "source": "Quel est le rôle de la mitochondrie ?",
+      "canonical": "Produire l'énergie pour les travaux cellulaires",
+      "wrong": [
+        "Assembler les acides aminés en protéines",
+        "Fabriquer les lipides de la cellule",
+        "Porter les ribosomes de la cellule",
+        "Contenir le patrimoine génétique"
+      ],
+      "explanation": "Lieu de la production de l'énergie pour les travaux cellulaires."
+    },
+    {
+      "theme": "Les organites de la cellule animale",
+      "type": "cours",
+      "source": "Où se trouvent les chromosomes, avec le patrimoine génétique ?",
+      "canonical": "Dans le noyau",
+      "wrong": [
+        "Dans la mitochondrie",
+        "Dans le lysosome",
+        "Dans le ribosome",
+        "Dans le réticulum endoplasmique"
+      ],
+      "explanation": "Le noyau N : chromosomes avec le patrimoine génétique."
+    },
+    {
+      "theme": "Les organites de la cellule animale",
+      "type": "cours",
+      "source": "Que contient le noyau ?",
+      "canonical": "Les chromosomes, avec le patrimoine génétique",
+      "wrong": [
+        "Les ribosomes, avec les acides aminés",
+        "Les lysosomes, avec les vésicules",
+        "Les mitochondries, avec l'énergie",
+        "Les phospholipides, avec le cholestérol"
+      ],
+      "explanation": "Le noyau N : chromosomes avec le patrimoine génétique."
+    },
+    {
+      "theme": "Les organites de la cellule animale",
+      "type": "cours",
+      "source": "Quel organite porte les ribosomes ou bien sert à la fabrication des lipides ?",
+      "canonical": "Le réticulum endoplasmique",
+      "wrong": [
+        "La mitochondrie",
+        "Le noyau",
+        "Le lysosome",
+        "La membrane plasmique"
+      ],
+      "explanation": "Le réticulum endoplasmique RE porte les ribosomes ou bien sert à la fabrication des lipides."
+    },
+    {
+      "theme": "Les organites de la cellule animale",
+      "type": "cours",
+      "source": "Quelles sont les deux fonctions du réticulum endoplasmique ?",
+      "canonical": "Porter les ribosomes ou fabriquer des lipides",
+      "wrong": [
+        "Porter les chromosomes ou fabriquer de l'énergie",
+        "Porter les lysosomes ou fabriquer des acides aminés",
+        "Porter les mitochondries ou fabriquer du cholestérol",
+        "Porter les vésicules ou fabriquer des chromosomes"
+      ],
+      "explanation": "RE : porte les ribosomes ou bien sert à la fabrication des lipides."
+    },
+    {
+      "theme": "Les organites de la cellule animale",
+      "type": "cours",
+      "source": "Comment le cours décrit-il les vésicules ?",
+      "canonical": "De petites sphères de divers types",
+      "wrong": [
+        "De grands sacs de lipides aplatis",
+        "Des câbles tirant les chromosomes",
+        "Des filaments du cytoplasme",
+        "Des assembleurs d'acides aminés"
+      ],
+      "explanation": "Des vésicules V (petites sphères) de divers types."
+    },
+    {
+      "theme": "Les organites de la cellule animale",
+      "type": "cours",
+      "source": "Que sont certaines vésicules, d'après le cours ?",
+      "canonical": "Des lysosomes",
+      "wrong": [
+        "Des ribosomes",
+        "Des mitochondries",
+        "Des chromosomes",
+        "Des noyaux"
+      ],
+      "explanation": "Certaines vésicules sont des lysosomes L."
+    },
+    {
+      "theme": "Les organites de la cellule animale",
+      "type": "cours",
+      "source": "Quel est le rôle du ribosome ?",
+      "canonical": "Assembler des acides aminés lors de la synthèse des protéines",
+      "wrong": [
+        "Assembler des lipides lors de la fabrication de la membrane",
+        "Produire l'énergie nécessaire aux travaux cellulaires",
+        "Contenir le patrimoine génétique de la cellule",
+        "Transporter les chromosomes pendant la division"
+      ],
+      "explanation": "Ribosome R : assembleur d'acides aminés lors de la synthèse des protéines."
+    },
+    {
+      "theme": "Les organites de la cellule animale",
+      "type": "cours",
+      "source": "Que synthétise le ribosome en assemblant des acides aminés ?",
+      "canonical": "Des protéines",
+      "wrong": [
+        "Des lipides",
+        "Des chromosomes",
+        "Des phospholipides",
+        "Du cholestérol"
+      ],
+      "explanation": "Le ribosome assemble les acides aminés lors de la synthèse des protéines."
+    },
+    {
+      "theme": "Les organites de la cellule animale",
+      "type": "cours",
+      "source": "À partir de quoi les protéines sont-elles synthétisées ?",
+      "canonical": "À partir du patrimoine génétique",
+      "wrong": [
+        "À partir des lipides de la membrane",
+        "À partir de l'énergie du lysosome",
+        "À partir du cholestérol de la membrane",
+        "À partir des molécules exogènes"
+      ],
+      "explanation": "Synthèse des protéines à partir du patrimoine génétique."
+    },
+    {
+      "theme": "Les organites de la cellule animale",
+      "type": "cours",
+      "source": "Sur le schéma de la cellule animale, que désigne la lettre R ?",
+      "canonical": "Le ribosome",
+      "wrong": [
+        "Le réticulum endoplasmique",
+        "Le noyau",
+        "Le lysosome",
+        "La mitochondrie"
+      ],
+      "explanation": "R : ribosome. RE : réticulum endoplasmique."
+    },
+    {
+      "theme": "Les organites de la cellule animale",
+      "type": "cours",
+      "source": "Sur le schéma de la cellule animale, que désigne la lettre L ?",
+      "canonical": "Un lysosome",
+      "wrong": [
+        "Un ribosome",
+        "Une mitochondrie",
+        "Le noyau",
+        "La membrane plasmique"
+      ],
+      "explanation": "L : lysosome."
+    },
+    {
+      "theme": "Les organites de la cellule animale",
+      "type": "cours",
+      "source": "Sur le schéma de la cellule animale, que désignent les lettres MP ?",
+      "canonical": "La membrane plasmique",
+      "wrong": [
+        "La mitochondrie",
+        "La molécule protéique",
+        "Le microscope à photons",
+        "La mosaïque de phospholipides"
+      ],
+      "explanation": "MP : membrane plasmique."
+    },
+    {
+      "theme": "La membrane plasmique et les échanges",
+      "type": "cours",
+      "source": "Quelles molécules forment la double couche de la membrane plasmique ?",
+      "canonical": "De phospholipides et de cholestérol",
+      "wrong": [
+        "De phospholipides et d'acides aminés",
+        "De cholestérol et de glucides",
+        "De tubuline et de phospholipides",
+        "D'actine et de cholestérol"
+      ],
+      "explanation": "La membrane plasmique est constituée de phospholipides et de cholestérol."
+    },
+    {
+      "theme": "La membrane plasmique et les échanges",
+      "type": "cours",
+      "source": "Comment les phospholipides et le cholestérol sont-ils disposés ?",
+      "canonical": "En double couche",
+      "wrong": [
+        "En simple couche",
+        "En triple couche",
+        "En petites sphères",
+        "En câbles"
+      ],
+      "explanation": "Ils sont disposés en double couche."
+    },
+    {
+      "theme": "La membrane plasmique et les échanges",
+      "type": "cours",
+      "source": "Quelles parties des molécules de la membrane s'associent entre elles ?",
+      "canonical": "Les pôles ou queues hydrophobes",
+      "wrong": [
+        "Les têtes hydrophiles",
+        "Les têtes hydrophobes",
+        "Les queues hydrophiles",
+        "Les parties protéiques"
+      ],
+      "explanation": "Les pôles ou queues hydrophobes de ces molécules s'associent."
+    },
+    {
+      "theme": "La membrane plasmique et les échanges",
+      "type": "cours",
+      "source": "Où se trouvent les têtes hydrophiles des molécules de la membrane ?",
+      "canonical": "Vers l'extérieur de la membrane",
+      "wrong": [
+        "Au centre de la double couche",
+        "Contre les queues hydrophiles",
+        "À l'intérieur du noyau",
+        "Dans le réticulum endoplasmique"
+      ],
+      "explanation": "L'association des queues permet de laisser les têtes hydrophiles vers l'extérieur de la membrane."
+    },
+    {
+      "theme": "La membrane plasmique et les échanges",
+      "type": "cours",
+      "source": "Quelle est la partie hydrophobe des phospholipides ?",
+      "canonical": "La queue",
+      "wrong": [
+        "La tête",
+        "Le canal",
+        "La tête et la queue",
+        "Aucune de leurs parties"
+      ],
+      "explanation": "Pôles ou queues hydrophobes, têtes hydrophiles."
+    },
+    {
+      "theme": "La membrane plasmique et les échanges",
+      "type": "cours",
+      "source": "Quelle est la partie hydrophile des phospholipides ?",
+      "canonical": "La tête",
+      "wrong": [
+        "La queue",
+        "Le canal",
+        "La tête et la queue",
+        "Aucune de leurs parties"
+      ],
+      "explanation": "Pôles ou queues hydrophobes, têtes hydrophiles."
+    },
+    {
+      "theme": "La membrane plasmique et les échanges",
+      "type": "cours",
+      "source": "Quelles molécules s'insèrent entre les lipides de la membrane plasmique ?",
+      "canonical": "Des molécules protéiques",
+      "wrong": [
+        "Des acides aminés isolés",
+        "Des chromosomes",
+        "Des ribosomes",
+        "Des fluorochromes"
+      ],
+      "explanation": "Entre les lipides de la membrane plasmique s'insèrent de nombreuses molécules protéiques."
+    },
+    {
+      "theme": "La membrane plasmique et les échanges",
+      "type": "cours",
+      "source": "Que présentent parfois les protéines enchâssées dans la membrane ?",
+      "canonical": "Des parties qui « dépassent » dans l'un et/ou l'autre des compartiments",
+      "wrong": [
+        "Des queues hydrophobes tournées vers l'extérieur de la cellule",
+        "Des têtes hydrophiles associées au centre de la double couche",
+        "Des chromosomes qui portent le patrimoine génétique de la cellule",
+        "Des couches de métal qui réémettent les électrons reçus"
+      ],
+      "explanation": "Ces protéines présentent parfois des parties qui « dépassent » dans l'un et/ou l'autre des compartiments."
+    },
+    {
+      "theme": "La membrane plasmique et les échanges",
+      "type": "cours",
+      "source": "Quelle structure ont certaines protéines de la membrane ?",
+      "canonical": "Une structure de canal",
+      "wrong": [
+        "Une structure en S",
+        "Une structure en double couche",
+        "Une structure de câble",
+        "Une structure de petite sphère"
+      ],
+      "explanation": "Certaines protéines ont une structure de canal."
+    },
+    {
+      "theme": "La membrane plasmique et les échanges",
+      "type": "cours",
+      "source": "Quel nom donne-t-on au modèle de la membrane plasmique dans le cours ?",
+      "canonical": "Mosaïque lipoprotéique fluide",
+      "wrong": [
+        "Mosaïque phospholipidique rigide",
+        "Double couche protéique rigide",
+        "Structure lipidique cristalline",
+        "Paroi lipoprotéique fluide"
+      ],
+      "explanation": "On parle de mosaïque lipoprotéique fluide."
+    },
+    {
+      "theme": "La membrane plasmique et les échanges",
+      "type": "cours",
+      "source": "Pourquoi parle-t-on de mosaïque lipoprotéique fluide ?",
+      "canonical": "Parce que toutes ces molécules se déplacent au cours du temps",
+      "wrong": [
+        "Parce que la membrane est constituée uniquement d'eau",
+        "Parce que seules les protéines se déplacent au cours du temps",
+        "Parce que les molécules de la membrane restent immobiles",
+        "Parce que la membrane laisse tout passer librement"
+      ],
+      "explanation": "Toutes ces molécules se déplacent au cours du temps."
+    },
+    {
+      "theme": "La membrane plasmique et les échanges",
+      "type": "cours",
+      "source": "Dans la mosaïque lipoprotéique fluide, quelles molécules se déplacent au cours du temps ?",
+      "canonical": "Toutes ces molécules",
+      "wrong": [
+        "Seulement les protéines",
+        "Seulement les phospholipides",
+        "Seulement le cholestérol",
+        "Aucune de ces molécules"
+      ],
+      "explanation": "« Toutes ces molécules se déplacent au cours du temps » : le passage entouré au crayon."
+    },
+    {
+      "theme": "La membrane plasmique et les échanges",
+      "type": "cours",
+      "source": "Sur les images du cours, quelle couleur représente les protéines ?",
+      "canonical": "Le bleu",
+      "wrong": [
+        "L'orange",
+        "Le rouge",
+        "Le vert",
+        "Le violet"
+      ],
+      "explanation": "En bleu sur la photo du haut, les protéines sont présentes et insérées dans la membrane plasmique."
+    },
+    {
+      "theme": "La membrane plasmique et les échanges",
+      "type": "cours",
+      "source": "Sur les images du cours, que représente l'orange ?",
+      "canonical": "La bicouche de phospholipides",
+      "wrong": [
+        "Les protéines en canal",
+        "Le dioxygène",
+        "Le cholestérol seul",
+        "Le milieu réactionnel aqueux"
+      ],
+      "explanation": "On voit en orange la bicouche de phospholipides doués de mobilité."
+    },
+    {
+      "theme": "La membrane plasmique et les échanges",
+      "type": "cours",
+      "source": "Sur les images du cours, que symbolisent les petites bulles ?",
+      "canonical": "Le dioxygène",
+      "wrong": [
+        "Les lysosomes",
+        "Les acides aminés",
+        "Le cholestérol",
+        "Les protéines"
+      ],
+      "explanation": "Les petites bulles symbolisent le dioxygène."
+    },
+    {
+      "theme": "La membrane plasmique et les échanges",
+      "type": "cours",
+      "source": "Grâce à quoi se réalisent les échanges entre la cellule et son milieu ?",
+      "canonical": "Grâce aux propriétés de la membrane plasmique",
+      "wrong": [
+        "Grâce aux propriétés de la paroi de liège",
+        "Grâce à l'énergie contenue dans le noyau",
+        "Grâce au polissage des lentilles du microscope",
+        "Grâce aux chromosomes tirés par la tubuline"
+      ],
+      "explanation": "Des échanges nécessaires se réalisent entre la cellule et son milieu grâce aux propriétés de la membrane plasmique."
+    },
+    {
+      "theme": "La membrane plasmique et les échanges",
+      "type": "cours",
+      "source": "Comment le cours décrit-il l'intérieur de la cellule ?",
+      "canonical": "Un milieu réactionnel aqueux",
+      "wrong": [
+        "Un milieu solide et inerte",
+        "Un milieu gazeux et stérile",
+        "Un milieu sec et cristallin",
+        "Un milieu vide et immobile"
+      ],
+      "explanation": "L'intérieur de la cellule est un milieu réactionnel aqueux."
+    },
+    {
+      "theme": "La membrane plasmique et les échanges",
+      "type": "cours",
+      "source": "Entre quelles molécules se produisent les réactions biochimiques de la cellule ?",
+      "canonical": "Les molécules déjà présentes et celles venant du milieu extérieur",
+      "wrong": [
+        "Les molécules exogènes uniquement, jamais celles déjà présentes",
+        "Les molécules déjà présentes uniquement, sans aucun apport extérieur",
+        "Les molécules de la paroi et celles de la lentille du microscope",
+        "Les anticorps et les fluorochromes ajoutés par l'observateur"
+      ],
+      "explanation": "Des réactions biochimiques entre les molécules déjà présentes et celles qui proviennent du milieu extérieur."
+    },
+    {
+      "theme": "La membrane plasmique et les échanges",
+      "type": "cours",
+      "source": "Qu'est-ce qui apporte l'énergie nécessaire au fonctionnement cellulaire ?",
+      "canonical": "Le métabolisme",
+      "wrong": [
+        "Le cholestérol",
+        "Le patrimoine génétique",
+        "La double couche",
+        "Le dioxygène seul"
+      ],
+      "explanation": "Le métabolisme apporte l'énergie nécessaire au fonctionnement cellulaire."
+    },
+    {
+      "theme": "La membrane plasmique et les échanges",
+      "type": "cours",
+      "source": "Que peuvent provoquer certaines molécules exogènes ?",
+      "canonical": "Des troubles dans le fonctionnement cellulaire",
+      "wrong": [
+        "La formation d'une nouvelle membrane plasmique",
+        "La production d'énergie par les mitochondries",
+        "La disparition de tous les chromosomes du noyau",
+        "L'apparition spontanée de nouvelles cellules"
+      ],
+      "explanation": "Certaines molécules exogènes peuvent aussi provoquer des troubles dans le fonctionnement cellulaire."
+    },
+    {
+      "theme": "La membrane plasmique et les échanges",
+      "type": "cours",
+      "source": "Quelle controverse concerne les virus, d'après la remarque du cours ?",
+      "canonical": "Leur appartenance au monde vivant",
+      "wrong": [
+        "Leur découverte par Robert Hooke",
+        "Leur présence dans le noyau",
+        "Leur observation au microscope optique",
+        "Leur naissance par génération spontanée"
+      ],
+      "explanation": "Les virus font l'objet d'une controverse quant à leur appartenance au monde vivant."
+    },
+    {
+      "theme": "La membrane plasmique et les échanges",
+      "type": "cours",
+      "source": "Sur quoi repose la controverse concernant les virus ?",
+      "canonical": "Leurs caractéristiques fonctionnelles et métaboliques",
+      "wrong": [
+        "Leurs caractéristiques optiques et lumineuses",
+        "Leur taille et leur couleur au microscope",
+        "Leur nombre et leur répartition dans le monde",
+        "Leur date et leur lieu de découverte"
+      ],
+      "explanation": "De par leurs caractéristiques fonctionnelles et métaboliques, les virus font l'objet d'une controverse."
+    },
+    {
+      "theme": "La membrane plasmique et les échanges",
+      "type": "cours",
+      "source": "À quoi les virus contribuent-ils souvent ?",
+      "canonical": "Aux dysfonctionnements cellulaires",
+      "wrong": [
+        "À la production d'énergie cellulaire",
+        "À la synthèse des lipides membranaires",
+        "À la stérilisation des milieux cellulaires",
+        "Au bon fonctionnement du métabolisme"
+      ],
+      "explanation": "Ils contribuent souvent aux dysfonctionnements cellulaires."
+    }
+  ]
+}

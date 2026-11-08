@@ -1,0 +1,267 @@
+{
+  "_notes": [
+    "=== SVT 1re, LA CELLULE VIVANTE : FLASHCARDS - GUIDE DE MAINTENANCE ===",
+    "",
+    "Cartes tirées du cours de SVT de 1re, chapitre 3 « Une structure complexe : la cellule vivante »",
+    "(polycopié et pages de manuel photographiés le 08/11/2026, rangés dans",
+    "data/_sources/svt/1re/, IMG_2532 à IMG_2538).",
+    "Le QCM du même chapitre est dans cellule_vivante_qcm.json.",
+    "",
+    "FORMAT (kind flashcard) : chaque entrée de 'words' est une carte.",
+    "  theme     : la partie du cours ; l'écran de choix coche une partie entière",
+    "  source    : la notion ou la question",
+    "  canonical : la réponse du cours, montrée quand l'enfant la demande",
+    "  L'enfant cherche la réponse dans sa tête, la regarde et dit s'il l'avait",
+    "  (oui / non). Une carte « non » revient à la série suivante.",
+    "",
+    "UNIQUEMENT LES PARTIES MARQUÉES AU CRAYON sur les photos : blocs avec un coup de",
+    "crayon sur le côté gauche, passages entourés ou encadrés, mots soulignés. Le",
+    "surligneur seul ne compte pas. Le relevé des marques, page par page, est dans",
+    "data/_sources/svt/specs_cellule_vivante.md : le regarder avant d'ajouter une",
+    "question. Un nom non marqué (Schleiden, Schwann, 1838...) peut servir de contexte",
+    "dans une question, jamais de réponse à trouver.",
+    "",
+    "LES RÉPONSES SONT CELLES DU COURS, même quand une autre source dirait autrement,",
+    "pour ne jamais contredire ce qui a été donné. Écarts voulus, ne pas « corriger » :",
+    "microscopes électroniques mis au point vers 1950 (les premiers datent des années",
+    "1930) ; « mosaïque lipoprotéique fluide » (on lit aussi « mosaïque fluide ») ;",
+    "le grossissement des loupes compte-fils est masqué par le surligneur : rien dessus.",
+    "",
+    "AJOUTER OU CORRIGER : ne jamais changer le slug. Une carte corrigée repart de",
+    "zéro (c'est une nouvelle carte), les autres gardent leur historique."
+  ],
+  "slug": "svt_1re_cellule_vivante_flashcards",
+  "name": "SVT - La cellule vivante : flashcards",
+  "level": "1re",
+  "kind": "flashcard",
+  "sort_order": 30,
+  "color": "#5a8f3c",
+  "button_label": "SVT - La cellule vivante\n(flashcards : la question, puis la réponse)",
+  "words": [
+    {
+      "theme": "Hooke et le microscope optique composé",
+      "source": "Les premiers microscopes : à quel siècle ?",
+      "canonical": "Au XVIIe siècle."
+    },
+    {
+      "theme": "Hooke et le microscope optique composé",
+      "source": "Que publie Robert Hooke en 1665 ?",
+      "canonical": "Micrographia, un ouvrage où il décrit les rotations de Mars et de Jupiter (lunette astronomique), l'œil d'une puce et l'aspect d'une coupe de liège (microscope)."
+    },
+    {
+      "theme": "Hooke et le microscope optique composé",
+      "source": "D'où vient le mot « cellule » ?",
+      "canonical": "Du latin cellula, « petite chambre ».\nHooke l'emploie pour la première fois pour qualifier les cavités géométriques qu'il découvre dans le liège."
+    },
+    {
+      "theme": "Hooke et le microscope optique composé",
+      "source": "Qu'a réellement observé Hooke dans le liège ?",
+      "canonical": "La paroi de cellules mortes : le liège est un tissu constitué de cellules mortes."
+    },
+    {
+      "theme": "Hooke et le microscope optique composé",
+      "source": "Microscope optique composé",
+      "canonical": "Un assemblage de deux lentilles convexes, un oculaire et un objectif, grâce auquel on obtient une image agrandie de l'objet observé."
+    },
+    {
+      "theme": "Hooke et le microscope optique composé",
+      "source": "Le microscope de Hooke : son grossissement et sa limite",
+      "canonical": "Il grossit jusqu'à 30 fois environ, mais ses lentilles présentent des défauts optiques qui nuisent à la qualité des images."
+    },
+    {
+      "theme": "Hooke et le microscope optique composé",
+      "source": "Rôle de la lampe à huile",
+      "canonical": "Éclairer l'échantillon afin de faciliter l'observation."
+    },
+    {
+      "theme": "Hooke et le microscope optique composé",
+      "source": "Les pièces légendées du microscope de Hooke",
+      "canonical": "Oculaire, tube optique, vis de mise au point, objectif, porte échantillon.\nÀ côté : lampe à huile et ballon d'eau."
+    },
+    {
+      "theme": "Leeuwenhoek et le microscope optique simple",
+      "source": "Qui est Antoni Van Leeuwenhoek ?",
+      "canonical": "Un néerlandais (1632-1723), drapier de profession, l'un des précurseurs de la biologie cellulaire."
+    },
+    {
+      "theme": "Leeuwenhoek et le microscope optique simple",
+      "source": "Comment Leeuwenhoek en vient-il aux microscopes ?",
+      "canonical": "Il utilise sans doute des loupes compte-fils pour vérifier la qualité de ses étoffes, puis commence à construire lui-même des microscopes."
+    },
+    {
+      "theme": "Leeuwenhoek et le microscope optique simple",
+      "source": "Combien de microscopes construit-il et qu'observe-t-il ?",
+      "canonical": "Plus de 400. Ils servent à compter des fils, mais aussi à observer des milliers d'organismes appartenant à 217 genres différents."
+    },
+    {
+      "theme": "Leeuwenhoek et le microscope optique simple",
+      "source": "Microscope optique simple de Leeuwenhoek",
+      "canonical": "Une lentille biconvexe, qui grossit les objets jusqu'à 200 fois environ."
+    },
+    {
+      "theme": "Leeuwenhoek et le microscope optique simple",
+      "source": "Pourquoi les lentilles de Leeuwenhoek ont-elles très peu de défauts ?",
+      "canonical": "Grâce à une technique de polissage de billes de verre de très haute qualité pour l'époque, qu'il garda secrète."
+    },
+    {
+      "theme": "Les passages encadrés de la théorie cellulaire",
+      "source": "1838 : comment Schleiden décrit-il le noyau ?",
+      "canonical": "« Un organe élémentaire spécifique et sans doute universel des végétaux »."
+    },
+    {
+      "theme": "Les passages encadrés de la théorie cellulaire",
+      "source": "1839 : que déduit Schwann ?",
+      "canonical": "« Qu'il existe un principe général de construction pour toutes les productions organiques ; et ce principe de construction est la formation de la cellule »."
+    },
+    {
+      "theme": "Les passages encadrés de la théorie cellulaire",
+      "source": "« Omnis cellula e cellula »",
+      "canonical": "Toute cellule naît d'une cellule.\nC'est l'aphorisme du troisième principe de la théorie cellulaire."
+    },
+    {
+      "theme": "Pasteur et les ballons à col de cygne",
+      "source": "Qui invalide la théorie de la génération spontanée, et quand ?",
+      "canonical": "Louis Pasteur, en 1859-1864, au terme de la controverse qui l'oppose à Félix-Archimède Pouchet à l'Académie des sciences."
+    },
+    {
+      "theme": "Pasteur et les ballons à col de cygne",
+      "source": "Le bouillon de l'expérience de Pasteur",
+      "canonical": "Un milieu liquide qui contient des substances organiques permettant le développement de microorganismes."
+    },
+    {
+      "theme": "Pasteur et les ballons à col de cygne",
+      "source": "Expérience 1 : le déroulement et le résultat",
+      "canonical": "Le bouillon est stérilisé par chauffage. Après incubation, il est contaminé par des microorganismes de l'air."
+    },
+    {
+      "theme": "Pasteur et les ballons à col de cygne",
+      "source": "Expérience 2 : pourquoi le bouillon reste-t-il stérile dans le ballon à col de cygne ?",
+      "canonical": "La courbure inférieure du col, en forme de S, emprisonne les microorganismes."
+    },
+    {
+      "theme": "Pasteur et les ballons à col de cygne",
+      "source": "Expérience 2 : que se passe-t-il quand on rompt le col ?",
+      "canonical": "La rupture de la partie supérieure du col permet aux microorganismes de pénétrer dans le flacon : après incubation, le bouillon se détériore."
+    },
+    {
+      "theme": "L'immunofluorescence (microscope à fluorescence)",
+      "source": "Les deux étapes de la détection d'une molécule par fluorescence",
+      "canonical": "1. Liaison de l'anticorps, porteur d'un fluorochrome, à la molécule étudiée.\n2. Observation microscopique et détection de la molécule : un rayon lumineux excite le fluorochrome, qui émet une radiation lumineuse."
+    },
+    {
+      "theme": "L'immunofluorescence (microscope à fluorescence)",
+      "source": "Quand une molécule fluorescente émet-elle une radiation lumineuse ?",
+      "canonical": "Quand on l'éclaire avec des radiations qu'elle peut absorber."
+    },
+    {
+      "theme": "L'immunofluorescence (microscope à fluorescence)",
+      "source": "Tubuline (cellule d'amphibien en division)",
+      "canonical": "Reconnue par l'anticorps qui émet une couleur verte. Ses molécules forment des câbles tirant les chromosomes (en violet)."
+    },
+    {
+      "theme": "L'immunofluorescence (microscope à fluorescence)",
+      "source": "Actine (cellule d'amphibien en division)",
+      "canonical": "Reconnue par l'anticorps qui émet une couleur rouge. Ses molécules forment des filaments dans le cytoplasme."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "source": "Résolution maximale de chaque microscope",
+      "canonical": "MO : 200 nm. MEB : 1 nm. MET : 0,1 nm.\nDu moins précis au plus précis : MO < MEB < MET."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "source": "Pouvoir de résolution R d'un microscope",
+      "canonical": "La distance minimale séparant deux points discernables. Il est proportionnel à la longueur d'onde du rayonnement."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "source": "Longueur d'onde minimale d'un rayonnement électronique",
+      "canonical": "0,004 nm."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "source": "Principe du microscope optique (MO)",
+      "canonical": "L'échantillon est soumis à un flux de photons provenant d'une source de lumière. Celui-ci passe par deux lentilles en verre, un objectif et un oculaire, qui forment une image dans l'œil humain."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "source": "Principe du microscope électronique à transmission (MET)",
+      "canonical": "Il remplace les photons par des électrons et les lentilles en verre par des lentilles électromagnétiques. Le rayonnement traverse l'échantillon, il est modifié (réflexion, diffraction, réfraction), puis une partie est dirigée vers un écran pour former une image."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "source": "Principe du microscope électronique à balayage (MEB)",
+      "canonical": "Un faisceau d'électrons balaye l'échantillon, recouvert au préalable d'une fine couche de métal. L'échantillon réémet les électrons, captés par un détecteur qui reconstitue une image 3D de sa surface."
+    },
+    {
+      "theme": "Microscope optique, MET et MEB",
+      "source": "Ce qu'apportent les microscopes électroniques mis au point vers 1950",
+      "canonical": "Ils perfectionnent les connaissances des cellules à l'échelle moléculaire : l'arrangement entre les molécules est plus facilement établi et la structure des organites mieux connue."
+    },
+    {
+      "theme": "Les organites de la cellule animale",
+      "source": "Mitochondrie (M)",
+      "canonical": "Lieu de la production de l'énergie pour les travaux cellulaires."
+    },
+    {
+      "theme": "Les organites de la cellule animale",
+      "source": "Noyau (N)",
+      "canonical": "Il contient les chromosomes, avec le patrimoine génétique."
+    },
+    {
+      "theme": "Les organites de la cellule animale",
+      "source": "Réticulum endoplasmique (RE)",
+      "canonical": "Il porte les ribosomes ou bien sert à la fabrication des lipides."
+    },
+    {
+      "theme": "Les organites de la cellule animale",
+      "source": "Vésicules (V)",
+      "canonical": "De petites sphères de divers types ; certaines sont des lysosomes (L)."
+    },
+    {
+      "theme": "Les organites de la cellule animale",
+      "source": "Ribosome (R)",
+      "canonical": "L'assembleur d'acides aminés lors de la synthèse des protéines à partir du patrimoine génétique."
+    },
+    {
+      "theme": "La membrane plasmique et les échanges",
+      "source": "De quoi la membrane plasmique est-elle constituée ?",
+      "canonical": "De phospholipides et de cholestérol disposés en double couche, entre lesquels s'insèrent de nombreuses molécules protéiques."
+    },
+    {
+      "theme": "La membrane plasmique et les échanges",
+      "source": "Queues hydrophobes et têtes hydrophiles",
+      "canonical": "Les pôles ou queues hydrophobes s'associent, ce qui laisse les têtes hydrophiles vers l'extérieur de la membrane."
+    },
+    {
+      "theme": "La membrane plasmique et les échanges",
+      "source": "Les protéines de la membrane",
+      "canonical": "Elles sont enchâssées dans la membrane et présentent parfois des parties qui « dépassent » dans l'un et/ou l'autre des compartiments. Certaines ont une structure de canal."
+    },
+    {
+      "theme": "La membrane plasmique et les échanges",
+      "source": "Mosaïque lipoprotéique fluide",
+      "canonical": "Le nom donné à la membrane plasmique, car toutes ces molécules se déplacent au cours du temps."
+    },
+    {
+      "theme": "La membrane plasmique et les échanges",
+      "source": "L'intérieur de la cellule",
+      "canonical": "Un milieu réactionnel aqueux où se produisent de multiples réactions biochimiques entre les molécules déjà présentes et celles qui proviennent du milieu extérieur."
+    },
+    {
+      "theme": "La membrane plasmique et les échanges",
+      "source": "Le métabolisme",
+      "canonical": "Il résulte de ces réactions et apporte l'énergie nécessaire au fonctionnement cellulaire, caractéristique du monde vivant."
+    },
+    {
+      "theme": "La membrane plasmique et les échanges",
+      "source": "Molécules exogènes",
+      "canonical": "Certaines peuvent provoquer des troubles dans le fonctionnement cellulaire."
+    },
+    {
+      "theme": "La membrane plasmique et les échanges",
+      "source": "Les virus (la remarque du cours)",
+      "canonical": "De par leurs caractéristiques fonctionnelles et métaboliques, ils font l'objet d'une controverse quant à leur appartenance au monde vivant. Ils contribuent souvent aux dysfonctionnements cellulaires."
+    }
+  ]
+}

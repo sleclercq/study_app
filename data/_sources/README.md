@@ -27,6 +27,9 @@ histoire/4e/IMG_5994                   cahier d'histoire, chapitre 1, les exerci
 geographie/1re/IMG_6079..6093          cahier de géographie, chapitre 2 (la métropolisation), sans IMG_6091
                                        = geographie/metropolisation.json et metropolisation_qcm.json
 geographie/specs_metropolisation.md    la leçon transcrite, les doutes du cahier et les décisions prises
+svt/1re/IMG_2532..2538                 cours de SVT, chapitre 3 (la cellule vivante), annoté au crayon
+                                       = svt/cellule_vivante.json et cellule_vivante_qcm.json
+svt/specs_cellule_vivante.md           le relevé des marques au crayon, page par page, et les décisions prises
 ```
 
 Convention : un dossier par matière ; pour les carnets, un dossier daté par
