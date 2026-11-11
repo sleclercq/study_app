@@ -1,0 +1,244 @@
+{
+  "_notes": [
+    "=== LATIN 4e, VOCABULAIRE CHTHONIEN - GUIDE DE MAINTENANCE ===",
+    "",
+    "Transcription de l'encadré « Vocabulaire à apprendre » de la fiche",
+    "Séquence 3 (Catabase), séance 3 : photo data/_sources/latin/4e/IMG_6142.heic.",
+    "Seul l'encadré est repris, pas l'exercice « Me exerceo » en dessous.",
+    "",
+    "CHOIX DE TRANSCRIPTION",
+    "  - La réponse affichée est l'énoncé complet de la fiche (bellum, i, n.),",
+    "    mais le nominatif seul suffit (alt_target) : taper le génitif et le genre",
+    "    sur un téléphone serait pénible. Les verbes acceptent aussi l'infinitif.",
+    "  - Plusieurs sens sur la fiche (poena : la peine, le châtiment) : la question",
+    "    français -> latin montre la ligne entière ; dans l'autre sens, un seul des",
+    "    sens suffit (alt_source).",
+    "  - monstrum : la fiche dit « les monstres » ; monstrum est un singulier,",
+    "    la réponse est « le monstre » et « les monstres » est accepté.",
+    "  - inferi : la fiche dit « n. pl. », c'est un masculin pluriel (inferi, orum,",
+    "    m. pl.) ; corrigé, l'énoncé de la fiche reste accepté.",
+    "  - Majuscules : la fiche en met à chaque mot ; ici seulement Elysium (nom",
+    "    propre). La comparaison ignore les majuscules de toute façon.",
+    "",
+    "AJOUTER UNE SÉANCE : ajouter les mots à la fin avec un nouveau thème.",
+    "L'historique des mots déjà présents est conservé."
+  ],
+  "slug": "latin_vocab_chthonien",
+  "name": "Latin - Vocabulaire chthonien",
+  "level": "4e",
+  "kind": "vocab",
+  "sort_order": 50,
+  "color": "#4a7c59",
+  "button_label": "Latin - Vocabulaire chthonien\n(séquence 3, français ⇄ latin)",
+  "description": "L'encadré « Vocabulaire à apprendre » de la séquence 3 (Catabase), séance 3 : 20 mots, noms et verbes des Enfers.",
+  "source_language": "Français",
+  "target_language": "Latin",
+  "source_lang_code": "fr",
+  "target_lang_code": "",
+  "canonical_prompt": "Traduis en latin : « {source} »",
+  "reverse_prompt": "Traduis en français : « {canonical} »",
+  "words": [
+    {
+      "theme": "Noms",
+      "source": "la guerre",
+      "canonical": "bellum, i, n.",
+      "alt_target": [
+        "bellum"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Noms",
+      "source": "le dieu",
+      "canonical": "deus, i, m.",
+      "alt_target": [
+        "deus"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Noms",
+      "source": "le maître",
+      "canonical": "dominus, i, m.",
+      "alt_target": [
+        "dominus"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Noms",
+      "source": "les Champs Élysées",
+      "canonical": "Elysium, ii, n.",
+      "alt_target": [
+        "Elysium"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Noms",
+      "source": "le fils",
+      "canonical": "filius, i, m.",
+      "alt_target": [
+        "filius"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Noms",
+      "source": "les Enfers",
+      "canonical": "inferi, orum, m. pl.",
+      "alt_target": [
+        "inferi",
+        "inferi, orum, n. pl."
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Noms",
+      "source": "le chemin",
+      "canonical": "iter, itineris, n.",
+      "alt_target": [
+        "iter"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Noms",
+      "source": "le lieu",
+      "canonical": "locus, i, m.",
+      "alt_target": [
+        "locus"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Noms",
+      "source": "les âmes des morts",
+      "canonical": "manes, ium, m. pl.",
+      "alt_target": [
+        "manes"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Noms",
+      "source": "le monstre",
+      "canonical": "monstrum, i, n.",
+      "alt_source": [
+        "les monstres"
+      ],
+      "alt_target": [
+        "monstrum"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Noms",
+      "source": "la mort",
+      "canonical": "mors, mortis, f.",
+      "alt_target": [
+        "mors"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Noms",
+      "source": "la nuit",
+      "canonical": "nox, noctis, f.",
+      "alt_target": [
+        "nox"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Noms",
+      "source": "le danger",
+      "canonical": "periculum, i, n.",
+      "alt_target": [
+        "periculum"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Noms",
+      "source": "la peine, le châtiment",
+      "canonical": "poena, ae, f.",
+      "alt_source": [
+        "la peine",
+        "le châtiment"
+      ],
+      "alt_target": [
+        "poena"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Noms",
+      "source": "le royaume",
+      "canonical": "regnum, i, n.",
+      "alt_target": [
+        "regnum"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Noms",
+      "source": "le jugement, la sentence",
+      "canonical": "sententia, ae, f.",
+      "alt_source": [
+        "le jugement",
+        "la sentence"
+      ],
+      "alt_target": [
+        "sententia"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Noms",
+      "source": "l'esclave",
+      "canonical": "servus, i, m.",
+      "alt_target": [
+        "servus"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Noms",
+      "source": "l'ombre, l'âme des morts",
+      "canonical": "umbra, ae, f.",
+      "alt_source": [
+        "l'ombre",
+        "l'âme des morts"
+      ],
+      "alt_target": [
+        "umbra"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Verbes",
+      "source": "descendre",
+      "canonical": "descendo, is, ere",
+      "alt_target": [
+        "descendo",
+        "descendere"
+      ],
+      "forms": []
+    },
+    {
+      "theme": "Verbes",
+      "source": "punir, châtier",
+      "canonical": "punio, is, ire",
+      "alt_source": [
+        "punir",
+        "châtier"
+      ],
+      "alt_target": [
+        "punio",
+        "punire"
+      ],
+      "forms": []
+    }
+  ]
+}

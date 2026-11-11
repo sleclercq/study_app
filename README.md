@@ -48,6 +48,7 @@ python3 tools/check_qcm.py
 | 4e | Allemand - Rattrapage 6e et 5e | les 980 mots du manuel, en mode progressif (boîtes de Leitner) |
 | 4e | Anglais - Verbes irréguliers de 4e | les verbes surlignés de la fiche |
 | 4e | Histoire - Le cours | flashcards du cahier : la question, la réponse, « tu avais la bonne réponse ? » ; les cartes ratées reviennent à la série suivante |
+| 4e | Latin - Vocabulaire chthonien | l'encadré de la séquence 3 (Catabase), 20 mots dans les deux sens ; le nominatif suffit, l'énoncé complet est montré à la correction |
 | 1re | NSI - Introduction à Python | QCM à 5 réponses, 309 questions par chapitre : cours, « que donne ce code », « quel code donne ce résultat » |
 | 1re | Géographie - La métropolisation : définitions | 31 flashcards : le mot, on cherche la définition dans sa tête, puis la réponse du cahier |
 | 1re | Géographie - La métropolisation : QCM | 183 questions à 5 réponses sur tout le chapitre : chiffres, classements, carte des mégapoles, exemples |
